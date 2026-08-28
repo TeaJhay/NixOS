@@ -158,15 +158,15 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   };
 
   # Enable rustdesk 
-  systemd.user.services.rustdesk = {
-    description = "RustDesk remote desktop client";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --tray";
-      Restart = "on-failure";
-    };
+systemd.user.services.rustdesk = {
+  description = "RustDesk remote desktop client";
+  wantedBy = [ "default.target" ];
+  serviceConfig = {
+    ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --tray";
+    Restart = "on-failure";
+    Environment = "DISPLAY=:0";
   };
+};
 
   # Enable Firefox 
   programs.firefox.enable = true;
