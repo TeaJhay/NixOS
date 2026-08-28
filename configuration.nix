@@ -121,7 +121,8 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     lsd
     zsh-nix-shell
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    yazi  
+    yazi
+    rustdesk-flutter
   ];
 
 
@@ -129,32 +130,45 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 #       │      Applications       │
 #       └─────────────────────────┘ 
 
-  # Enable Firefox
-programs.zsh = {
-  enable = true;
-  enableCompletion = true;
-  autosuggestions.enable = true;
-  syntaxHighlighting.enable = true;
-
-  shellAliases = {
-    ll = "ls -l";
-    edit = "sudo -e";
-    update = "sudo nixos-rebuild switch";
-  };
-  
-  ohMyZsh = {
+  # Enable zsh 
+  programs.zsh = {
     enable = true;
-    plugins = [
-      "git"
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  
+    shellAliases = {
+      ll = "ls -l";
+      edit = "sudo -e";
+      update = "sudo nixos-rebuild switch";
+    };
+    
+    ohMyZsh = {
+      enable = true;
+      plugins = [
+        "git"
+      ];
+    };
+  
+    histSize = 10000;
+    histFile = "$HOME/.zsh_history";
+    setOptions = [
+      "HIST_IGNORE_ALL_DUPS"
     ];
   };
 
-  histSize = 10000;
-  histFile = "$HOME/.zsh_history";
-  setOptions = [
-    "HIST_IGNORE_ALL_DUPS"
-  ];
-};
+  # Enable rustdesk 
+  systemd.user.services.rustdesk = {
+    description = "RustDesk remote desktop client";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --tray";
+      Restart = "on-failure";
+    };
+  };
+
+  # Enable Firefox 
   programs.firefox.enable = true;
 #  programs.yazi.enable = true;
   # Enable Hyprland
