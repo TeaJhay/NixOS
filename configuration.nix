@@ -122,7 +122,6 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     zsh-nix-shell
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     yazi
-    rustdesk-flutter
   ];
 
 
@@ -157,17 +156,6 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     ];
   };
 
-  # Enable rustdesk 
-systemd.user.services.rustdesk = {
-  description = "RustDesk remote desktop client";
-  wantedBy = [ "default.target" ];
-  serviceConfig = {
-    ExecStart = "${pkgs.rustdesk-flutter}/bin/rustdesk --tray";
-    Restart = "on-failure";
-    Environment = "DISPLAY=:0";
-  };
-};
-
   # Enable Firefox 
   programs.firefox.enable = true;
 #  programs.yazi.enable = true;
@@ -179,6 +167,7 @@ systemd.user.services.rustdesk = {
     withUWSM = false;
     xwayland.enable = true;
   };
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Optional, hint Electron apps to use Wayland:
 
   # Enable noctalia-greeter
