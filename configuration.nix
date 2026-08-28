@@ -118,6 +118,8 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     unstable.noctalia-greeter
     fastfetch
     fzf
+    lsd
+    zsh-nix-shell
   ];
 
 
@@ -140,8 +142,8 @@ programs.zsh = {
   
   ohMyZsh = {
     enable = true;
-    theme = "agnosterzak";
     plugins = [
+      "nix-shell"
       "git"
     ];
   };
