@@ -20,8 +20,8 @@
   # Enable nix command flakes
   nix.settings = {
     experimental-features = [ 
-      nix-command 
-      flakes
+      "nix-command" 
+      "flakes"
     ];
 #   substituters = ["https://hyprland.cachix.org"];
 #   trusted-substituters = ["https://hyprland.cachix.org"];
