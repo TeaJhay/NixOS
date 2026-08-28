@@ -1,7 +1,6 @@
 {
   description = "My NixOS config";
 
- 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05"; # NixOS release channel
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # NixOS unstable channel
@@ -41,8 +40,9 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  # Replaced long destructuring with clean inputs mapping
-outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, ... }:
+
+
+outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, ... }: # Replaced long destructuring with clean inputs mapping
     let
       system = "x86_64-linux";
 
