@@ -88,7 +88,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 
   users.users.teajhay = {
     isNormalUser = true;
-    description = "Teejay Anderson";
+    description = "Tea with a side of Jhay";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
