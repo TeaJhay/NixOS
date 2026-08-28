@@ -120,6 +120,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     fzf
     lsd
     zsh-nix-shell
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
 
@@ -143,7 +144,6 @@ programs.zsh = {
   ohMyZsh = {
     enable = true;
     plugins = [
-      "nix-shell"
       "git"
     ];
   };
