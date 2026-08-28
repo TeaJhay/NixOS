@@ -90,6 +90,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     isNormalUser = true;
     description = "Tea with a side of Jhay";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    shell = zsh;
     packages = with pkgs; [
       tree
     ];
