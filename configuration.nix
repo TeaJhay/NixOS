@@ -1,7 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
+#  
+#
+#
+#       ┌─────────────────────────┐
+#       │     Configuration       │
+#       └─────────────────────────┘
+#  I understand this page.
 { config, lib, pkgs, inputs, ... }:
 
 
@@ -17,9 +23,9 @@
       nix-command 
       flakes
     ];
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+#   substituters = ["https://hyprland.cachix.org"];
+#   trusted-substituters = ["https://hyprland.cachix.org"];
+#   trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     # Required so non-root users are allowed to use the above substituter/keys.
     # Use @wheel for all sudo users, or list your username explicitly.
     trusted-users = ["root" "@wheel"];
@@ -47,9 +53,10 @@
   # Set your time zone.
   time.timeZone = "Australia/Brisbane";
 
+  
   # Enable sound.
   security.rtkit.enable = true;
-  services.pipewire = {
+  services.pipewire = { # Enable sound.
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -158,7 +165,7 @@
   };
 
   # Optional, hint Electron apps to use Wayland:
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
 
 
