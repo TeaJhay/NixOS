@@ -90,7 +90,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     isNormalUser = true;
     description = "Tea with a side of Jhay";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    shell = zsh;
+    shell = pgks.zsh;
     packages = with pkgs; [
       tree
     ];
@@ -125,7 +125,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 
   # Enable Firefox
   programs.firefox.enable = true;
-
+  programs.yazi.enable = true;
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
