@@ -121,6 +121,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     lsd
     zsh-nix-shell
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    yazi  
   ];
 
 
@@ -155,7 +156,7 @@ programs.zsh = {
   ];
 };
   programs.firefox.enable = true;
-  programs.yazi.enable = true;
+#  programs.yazi.enable = true;
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
