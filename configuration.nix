@@ -116,6 +116,8 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     gh
     unstable.noctalia
     unstable.noctalia-greeter
+    fastfetch
+    fzf
   ];
 
 
@@ -124,7 +126,32 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 #       └─────────────────────────┘ 
 
   # Enable Firefox
-  programs.zsh.enable = true;
+programs.zsh = {
+  enable = true;
+  enableCompletion = true;
+  autosuggestions.enable = true;
+  syntaxHighlighting.enable = true;
+
+  shellAliases = {
+    ll = "ls -l";
+    edit = "sudo -e";
+    update = "sudo nixos-rebuild switch";
+  };
+  
+  ohMyZsh = {
+    enable = true;
+    theme = "agnosterzak";
+    plugins = [
+      "git"
+    ];
+  };
+
+  histSize = 10000;
+  histFile = "$HOME/.zsh_history";
+  setOptions = [
+    "HIST_IGNORE_ALL_DUPS"
+  ];
+};
   programs.firefox.enable = true;
   programs.yazi.enable = true;
   # Enable Hyprland
