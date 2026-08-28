@@ -45,7 +45,7 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
   
   # Define your hostname.
-  networking.hostName = "NixOSVM"; 
+  networking.hostName = "nixos"; 
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -159,7 +159,7 @@
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = pkgs.unstable.xdg-desktop-portal-hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     withUWSM = false;
     xwayland.enable = true;
   };
