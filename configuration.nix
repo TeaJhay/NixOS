@@ -14,8 +14,9 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     ./hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
     inputs.nixos-hardware.nixosModules.common-gpu-amd
-    inputs.nixos-hardware.nixosModules.gigabyte-b650  
+    inputs.nixos-hardware.nixosModules.gigabyte-b650 
   ];
 
   nix.settings = {        
@@ -38,7 +39,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   boot.supportedFilesystems = [ "btrfs" ];
   
 #       ┌─────────────────────────┐
-#       │       Boot/Kernel       │
+#       │   Boot/Kernel/Graphics  │
 #       └─────────────────────────┘
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -75,7 +76,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 5900 ];
+  #networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -147,8 +148,9 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   
     shellAliases = {
       ll = "ls -l";
-      edit = "sudo -e";
-      update = "sudo nixos-rebuild switch";
+      edit = "sudo -E nvim";
+      update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos --show-trace";
+      nmtui="env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui"
     };
     
     ohMyZsh = {
