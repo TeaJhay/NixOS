@@ -7,8 +7,8 @@
 #       │       Select Disk       │
 #       └─────────────────────────┘
 
-
-    device = "/dev/disk/by-id/nvme-CT1000T500SSD8_242649A0A283";
+    device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
+#    device = "/dev/disk/by-id/nvme-CT1000T500SSD8_242649A0A283";
     type = "disk";
     content = {
       partitions = {
@@ -62,9 +62,9 @@
                 mountOptions = [ "subvol=@snapshots" ];
                 mountpoint = "/snapshots";
               };
-              "/@home" = {
+              "/@persistent/@home" = {
                 mountOptions = [ 
-                  "subvol=@home"
+                  "subvol=/@persistent/@home"
                   "compress=zstd"
                 ];
                 mountpoint = "/persistent/home";
