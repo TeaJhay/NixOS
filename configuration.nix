@@ -12,6 +12,10 @@
 system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
     ./hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
+    inputs.nixos-hardware.nixosModules.gigabyte-b650  
   ];
 
   nix.settings = {        
@@ -34,12 +38,17 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   boot.supportedFilesystems = [ "btrfs" ];
   
 #       ┌─────────────────────────┐
-#       │           Boot          │
+#       │       Boot/Kernel       │
 #       └─────────────────────────┘
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_zen; # Use zen OR latest kernel.
-
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelParams = [
+    "video=DP-1:1920x1080@60"
+    "video=HDMI-A-1:3840x2160@120"
+  ];
+  services.lact.enable = true;
 #       ┌─────────────────────────┐
 #       │       Networking        │
 #       └─────────────────────────┘
