@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # --- Config ---------------------------------------------------------------
-FLAKE_TARGET=".#nixos"
-FLAKE_DIR="."
+FLAKE_DIR="/tmp/nixos"
+FLAKE_TARGET="${FLAKE_DIR}#nixos"
 ROOT_PARTLABEL="/dev/disk/by-partlabel/disk-main-root"
 SWAP_PARTLABEL="/dev/disk/by-partlabel/disk-main-swap"
 MOUNTPOINT="/mnt"
