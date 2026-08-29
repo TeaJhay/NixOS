@@ -6,10 +6,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # NixOS unstable channel
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # NixOS hardware channel
-    preservation = {
-      url = "github:nix-community/preservation";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    preservation.url = "github:nix-community/preservation";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -92,10 +89,14 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
               overlay-chaotic
             ];
           }
-          inputs.noctalia-greeter.nixosModules.default
           ./configuration.nix
-          disko.nixosModules.disko
-          preservation.nixosModules.preservation
+          inputs.noctalia-greeter.nixosModules.default
+          
+          inputs.disko.nixosModules.disko
+          ./disko.nix
+          
+          inputs.preservation.nixosModules.preservation
+          ./ephemera.nix
         ];
       };
     };
