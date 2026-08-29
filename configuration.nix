@@ -107,6 +107,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 
   users.users.teajhay = {
     isNormalUser = true;
+    initialPassword = "changeme";
     description = "Tea with a side of Jhay";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
