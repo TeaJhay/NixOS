@@ -10,17 +10,17 @@
 
   fileSystems = {
     # --- Local ext4 drives ---
-    "/home/teajhay/Games" = {
-      device = "/dev/disk/by-uuid/cac8f1d0-0418-4eb9-a5b9-2b6ecf1adfd7";
-      fsType = "ext4";
-      options = [ "defaults" "noatime" "acl" ];
-    };
-
-    "/media/Linux Games" = {
-      device = "/dev/disk/by-uuid/dbf5efdd-db81-4e78-b634-b1104ff4d8fb";
-      fsType = "ext4";
-      options = [ "defaults" "noatime" "acl" ];
-    };
+#    "/home/teajhay/Games" = {
+#      device = "/dev/disk/by-uuid/cac8f1d0-0418-4eb9-a5b9-2b6ecf1adfd7";
+#      fsType = "ext4";
+#      options = [ "defaults" "noatime" "acl" ];
+#    };
+#
+#    "/media/Linux Games" = {
+#      device = "/dev/disk/by-uuid/dbf5efdd-db81-4e78-b634-b1104ff4d8fb";
+#      fsType = "ext4";
+#      options = [ "defaults" "noatime" "acl" ];
+#    };
 
     # --- Network (NFS) mounts ---
     "/mnt/Storage" = {
