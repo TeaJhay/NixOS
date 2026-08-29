@@ -31,7 +31,19 @@
           type = "EF00";
         };
 
+#       ┌─────────────────────────┐
+#       │      Swap Partition     │
+#       └─────────────────────────┘
 
+        swap = {
+          content = {
+            resumeDevice = true;
+            type = "swap";
+          };
+          name = "swap";
+          priority = 2;
+          size = "32G";
+        };
 
 #       ┌─────────────────────────┐
 #       │  Root BTRFS Filesystem  │
@@ -88,19 +100,7 @@
           size = "100%";
         };
 
-#       ┌─────────────────────────┐
-#       │      Swap Partition     │
-#       └─────────────────────────┘
 
-        swap = {
-          content = {
-            resumeDevice = true;
-            type = "swap";
-          };
-          name = "swap";
-          priority = 2;
-          size = "32G";
-        };
       };
       type = "gpt";
     };
