@@ -94,11 +94,13 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, ... }: # 
           }
           inputs.noctalia-greeter.nixosModules.default
           ./configuration.nix
-          #./disko.nix
-          #inputs.disko.nixosModules.disko
-          #inputs.preservation.nixosModules.preservation
+          
+          disko.nixosModules.disko
+          ./disko.nix
+          
+          preservation.nixosModules.preservation
+          ./ephemera.nix
         ];
       };
     };
 }
-
