@@ -30,6 +30,12 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="]; # Required so non-root users are allowed to use the above substituter/keys.
     trusted-users = ["root" "@wheel"]; # Use @wheel for all sudo users, or list your username explicitly.
   };
+  
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -47,8 +53,8 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   boot.kernelPackages = pkgs.linuxPackages_zen; # Use zen OR latest kernel.
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelParams = [
-    "video=DP-1:1920x1080@60"
-    "video=HDMI-A-1:3840x2160@120"
+  #  "video=DP-1:1920x1080@60"
+  #  "video=HDMI-A-1:3840x2160@120"
   ];
   services.lact.enable = true;
 #       ┌─────────────────────────┐
