@@ -151,7 +151,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
       ll = "ls -l";
       edit = "sudo -E nvim";
       update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos --show-trace";
-      nmtui="env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui"
+      nmtui="env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
     
     ohMyZsh = {
