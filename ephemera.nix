@@ -1,35 +1,31 @@
-{ config, lib, pkgs, ...}:
-
-{
-
+{ config, lib, pkgs, inputs, ... }: {
 
 #       ┌─────────────────────────┐
 #       │       impermanence      │
 #       └─────────────────────────┘
-
-             # Remove the current ephemeral root.
+  
   boot.initrd.postResumeCommands = lib.mkAfter ''
-      mkdir -p /btrfs
-  
-      mount -t btrfs -o subvolid=5 /dev/disk/by-partlabel/root /btrfs
-  
-      btrfs subvolume delete /btrfs/@void
-  
-      btrfs subvolume snapshot /btrfs/@void-blank /btrfs/@void
-  
-      umount /btrfs
-    '';      # Recreate it from the pristine installation state.
+    mkdir /btrfs_tmp
+    mount /dev/disk/by-partlabel/root /btrfs_tmp
 
+    # Delete everything inside @void safely by re-creating it
+    if [ -e /btrfs_tmp/@void ]; then
+        echo "Wiping @void root subvolume..."
+        btrfs subvolume delete /btrfs_tmp/@void
+    fi
+    
+    echo "Restoring pristine @void subvolume..."
+    btrfs subvolume create /btrfs_tmp/@void
+
+    umount /btrfs_tmp
+  '';
 #       ┌─────────────────────────┐
 #       │       Preservation      │
 #       └─────────────────────────┘
 
   preservation = {
-    # the module doesn't do anything unless it is enabled
     enable = true;
-
     preserveAt."/persistent" = {
-
       # preserve system directories
       directories = [
         "/etc/secureboot"
@@ -41,16 +37,10 @@
         "/var/log"
         { directory = "/var/lib/nixos"; inInitrd = true; }
       ];
-
-      # preserve system files
       files = [
         { file = "/etc/machine-id"; inInitrd = true; how = "symlink"; configureParent = true; }
         { file = "/etc/ssh/ssh_host_rsa_key"; how = "symlink"; configureParent = true; }
         { file = "/etc/ssh/ssh_host_ed25519_key"; how = "symlink"; configureParent = true; }
-
-        # creates a symlink on the volatile root
-        # creates an empty directory on the persistent volume, i.e. /persistent/var/lib/systemd
-        # does not create an empty file at the symlink's target (would require `createLinkTarget = true`)
         { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true; }
       ];
     };
