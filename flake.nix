@@ -54,7 +54,7 @@
 
 
 
-outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, ... }: # Replaced long destructuring with clean inputs mapping
+outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, ... }: # Replaced long destructuring with clean inputs mapping
     let
       system = "x86_64-linux";
 
