@@ -1,10 +1,24 @@
 { inputs, ... }: {
-  imports = [ inputs.disko.nixosModules.disko ];
+  imports = [inputs.disko.nixosModules.disko];
   disko.devices.disk.main = {
+    
+
+#       ┌─────────────────────────┐
+#       │       Select Disk       │
+#       └─────────────────────────┘
+
+
     device = "/dev/disk/by-id/nvme-CT1000T500SSD8_242649A0A283";
     type = "disk";
     content = {
       partitions = {
+        
+
+#       ┌─────────────────────────┐
+#       │  Efi System Partition   │
+#       └─────────────────────────┘
+
+
         ESP = {
           content = {
             format = "vfat";
@@ -16,6 +30,14 @@
           size = "1G";
           type = "EF00";
         };
+
+
+
+#       ┌─────────────────────────┐
+#       │  Root BTRFS Filesystem  │
+#       └─────────────────────────┘
+
+
         root = {
           content = {
             extraArgs = [ "-f" ];
@@ -65,6 +87,11 @@
           priority = 3;
           size = "100%";
         };
+
+#       ┌─────────────────────────┐
+#       │      Swap Partition     │
+#       └─────────────────────────┘
+
         swap = {
           content = {
             resumeDevice = true;
