@@ -28,6 +28,7 @@
           };
           name = "ESP";
           size = "1G";
+          priority = 1;
           type = "EF00";
         };
 
