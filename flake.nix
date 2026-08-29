@@ -6,6 +6,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # NixOS unstable channel
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # NixOS hardware channel
+    disko.url = "github:nix-community/disko";
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -86,6 +87,7 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, ... }: # 
           }
           inputs.noctalia-greeter.nixosModules.default
           ./configuration.nix
+          ./disko.nix
         ];
       };
     };
