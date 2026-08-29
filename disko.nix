@@ -20,6 +20,7 @@
     content.type = "gpt";
     content.partitions.esp = {
       name = "ESP";
+      priority = 1;
       size = "1G";
       type = "EF00";
       content = {
