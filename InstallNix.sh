@@ -9,6 +9,9 @@ SWAP_PARTLABEL="/dev/disk/by-partlabel/disk-main-swap"
 MOUNTPOINT="/mnt"
 # ---------------------------------------------------------------------------
 
+echo ">>> Allowing root to trust the flake repo (avoids libgit2 ownership check failures under sudo)..."
+sudo git config --global --add safe.directory "${FLAKE_DIR}"
+
 echo ">>> Generating hardware-configuration.nix for this machine..."
 sudo nixos-generate-config --no-filesystems --dir /tmp/hwconf-scratch
 sudo cp /tmp/hwconf-scratch/hardware-configuration.nix "${FLAKE_DIR}/hardware-configuration.nix"
