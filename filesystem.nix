@@ -10,7 +10,7 @@
 
   fileSystems = {
     # --- Local ext4 drives ---
-    "/home/teejay/Games" = {
+    "/home/teajhay/Games" = {
       device = "/dev/disk/by-uuid/cac8f1d0-0418-4eb9-a5b9-2b6ecf1adfd7";
       fsType = "ext4";
       options = [ "defaults" "noatime" "acl" ];
@@ -29,19 +29,19 @@
       options = [ "soft" "noatime" "rw" "x-systemd.automount" "noauto" ];
     };
 
-    "/home/teejay/Downloads" = {
+    "/home/teajhay/Downloads" = {
       device = "10.0.1.200:/mnt/Jormungandr/Desktop/Documents/Downloads";
       fsType = "nfs";
       options = [ "soft" "noatime" "rw" "x-systemd.automount" "noauto" ];
     };
 
-    "/home/teejay/Documents" = {
+    "/home/teajhay/Documents" = {
       device = "10.0.1.200:/mnt/Jormungandr/Desktop/Documents/Documents";
       fsType = "nfs";
       options = [ "soft" "noatime" "rw" "x-systemd.automount" "noauto" ];
     };
 
-    "/home/teejay/Pictures" = {
+    "/home/teajhay/Pictures" = {
       device = "10.0.1.200:/mnt/Jormungandr/Desktop/Pictures";
       fsType = "nfs";
       options = [ "soft" "noatime" "rw" "x-systemd.automount" "noauto" ];
