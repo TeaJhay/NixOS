@@ -58,6 +58,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   #  "video=DP-1:1920x1080@60"
   #  "video=HDMI-A-1:3840x2160@120"
   ];
+  boot.initrd.systemd.dbus.enable = true;
   services.lact.enable = true;
 #       ┌─────────────────────────┐
 #       │       Networking        │
