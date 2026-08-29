@@ -6,14 +6,14 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # NixOS unstable channel
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # NixOS hardware channel
-    preservation = {
-      url = "github:nix-community/preservation";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+   # preservation = {
+   #   url = "github:nix-community/preservation";
+   #   inputs.nixpkgs.follows = "nixpkgs";
+   # };
+   # disko = {
+   #   url = "github:nix-community/disko";
+   #   inputs.nixpkgs.follows = "nixpkgs";
+   # };
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -94,9 +94,9 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, ... }: # 
           }
           inputs.noctalia-greeter.nixosModules.default
           ./configuration.nix
-          ./disko.nix
-          inputs.disko.nixosModules.disko
-          inputs.preservation.nixosModules.preservation
+          #./disko.nix
+          #inputs.disko.nixosModules.disko
+          #inputs.preservation.nixosModules.preservation
         ];
       };
     };
