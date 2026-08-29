@@ -98,7 +98,7 @@
           };
           name = "root";
           priority = 3;
-          size = "100%";
+          size = "50G";
         };
 
 
