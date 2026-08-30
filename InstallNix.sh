@@ -41,11 +41,10 @@ for item in "$SRC_DIR"/*; do
     
     ln -s  -- "$TARGET_DIR"/hardware-configuration.nix "$SRC_DIR"
 
-cd /etc/nixos/
 
 echo "This would now run the rebuild and switch script"
 
-sudo nixos-rebuild switch --flake .#nixos
+cd /etc/nixos/ | sudo nixos-rebuild switch --flake .#nixos
 
 done
 
