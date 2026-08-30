@@ -52,38 +52,38 @@ lsblk -o NAME,SIZE,MODEL "$(readlink -f "$DISK")"
 read -rp "Type YES to continue: " confirm
 [[ "${confirm,,}" == "yes" ]] || { echo "Aborted."; exit 1; }
 
-echo "== Phase 1: partition + format only =="
-sudo nix --extra-experimental-features "nix-command flakes" run \
-  --refresh \
-  github:nix-community/disko/latest -- \
-  --flake "$LOCAL_DIR#nixos" \
-  --mode destroy,format,mount \
-#  --disk main "$DISK" \
-
-echo "== Enabling swap + raising live-session store size =="
-SWAP_PART=$(lsblk -no PATH,FSTYPE "$DISK" | awk '$2=="swap"{print $1; exit}')
-
-if [[ -z "$SWAP_PART" ]]; then
-  echo "No swap partition found on $DISK — skipping swapon"
-elif swapon --show | grep -q "$SWAP_PART"; then
-  echo "Swap already active on $SWAP_PART"
-else
-  sudo swapon "$SWAP_PART"
-fi
-
-sudo mount -o remount,size=20G /nix/.rw-store
-free -h
-
-
-
-echo "Made it through the disko and swap. Proceed?"
-read -rp "Type YES to continue: " confirm
-[[ "${confirm,,}" == "yes" ]] || { echo "Aborted."; exit 1; }
+#echo "== Phase 1: partition + format only =="
+#sudo nix --extra-experimental-features "nix-command flakes" run \
+#  --refresh \
+#  github:nix-community/disko/latest -- \
+#  --flake "$LOCAL_DIR#nixos" \
+#  --mode destroy,format,mount \
+##  --disk main "$DISK" \
+#
+#echo "== Enabling swap + raising live-session store size =="
+#SWAP_PART=$(lsblk -no PATH,FSTYPE "$DISK" | awk '$2=="swap"{print $1; exit}')
+#
+#if [[ -z "$SWAP_PART" ]]; then
+#  echo "No swap partition found on $DISK — skipping swapon"
+#elif swapon --show | grep -q "$SWAP_PART"; then
+#  echo "Swap already active on $SWAP_PART"
+#else
+#  sudo swapon "$SWAP_PART"
+#fi
+#
+#sudo mount -o remount,size=20G /nix/.rw-store
+#free -h
+#
+#
+#
+#echo "Made it through the disko and swap. Proceed?"
+#read -rp "Type YES to continue: " confirm
+#[[ "${confirm,,}" == "yes" ]] || { echo "Aborted."; exit 1; }
 
 
 echo "== Phase 2: build + install (swap already active) =="
 
-sudo nix --extra-experimental-features "nix-command flakes" --accept-flake-config --show-trace run \
+sudo -E nix --extra-experimental-features "nix-command flakes" --accept-flake-config --show-trace run \
   --extra-substituters "https://hyprland.cachix.org" \
   --extra-trusted-public-keys "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" \
   github:nix-community/disko/latest#disko-install -- \
