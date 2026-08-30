@@ -26,6 +26,9 @@
           mkdir -p /mnt
           mount /dev/disk/by-partlabel/disk-main-root /mnt
           btrfs subvolume snapshot /mnt/@void /mnt/@snapshots/@boot-$(date +%Y-%m-%d_%H-%M-%S)
+          for sub in $(btrfs subvolume list -o /mnt/@void 2>/dev/null | awk '{print $NF}' | sort -r); do
+            btrfs subvolume delete "/mnt/$sub" || true
+          done
           btrfs subvolume delete /mnt/@void
           btrfs subvolume snapshot /mnt/@void-blank /mnt/@void
           umount /mnt
