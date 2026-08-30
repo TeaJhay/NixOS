@@ -65,7 +65,7 @@
       size = "12G";
       content = {
         resumeDevice = true;
-        type = "SWAP";
+        type = "swap";
       };
     };
   };
