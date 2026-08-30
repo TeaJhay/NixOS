@@ -79,7 +79,7 @@ read -rp "Type YES to continue: " confirm
 
 echo "== Phase 2: build + install (swap already active) =="
 
-sudo nix --extra-experimental-features "nix-command flakes" --accept-flake-config run \
+sudo nix --extra-experimental-features "nix-command flakes" --accept-flake-config --show-trace run \
   github:nix-community/disko/latest#disko-install -- \
   --flake "$LOCAL_DIR#nixos" \
   --mode mount \
