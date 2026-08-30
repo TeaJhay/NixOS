@@ -11,8 +11,8 @@ read -rp "Type YES to continue: " confirm
 
 sudo nix --extra-experimental-features "nix-command flakes" run github:nix-community/disko/latest#disko-install -- \
   --flake .#nixos \
-  --write-efi-boot-entries \
-  --no-reboot
+  --mode format \
+  --write-efi-boot-entries 
 
 echo "Creating pristine @void-blank snapshot..."
 sudo mount -o subvol=/ /dev/disk/by-partlabel/disk-main-root /mnt
