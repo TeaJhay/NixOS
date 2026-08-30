@@ -77,7 +77,7 @@
        # creates a symlink on the volatile root
         # creates an empty directory on the persistent volume, i.e. /persistent/var/lib/systemd
         # does not create an empty file at the symlink's target (would require `createLinkTarget = true`)
-        { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true;
+        { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true; };
       ];
       users = {
         teajhay = {
