@@ -60,12 +60,12 @@
       };
     };
     content.partitions.swap = {
-      name = "swap";
+      name = "SWAP";
       priority = 2;
       size = "12G";
       content = {
         resumeDevice = true;
-        type = "swap";
+        type = "SWAP";
       };
     };
   };
