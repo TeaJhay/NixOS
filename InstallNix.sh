@@ -44,7 +44,7 @@ for item in "$SRC_DIR"/*; do
     ln -s  -- "$TARGET_DIR"/hardware-configuration.nix "$SRC_DIR"
 
 
-nixos-rebuild switch --flake .#nixos
+nixos-rebuild switch --flake
 
 done
 
