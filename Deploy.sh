@@ -11,7 +11,7 @@ lsblk -o NAME,SIZE,MODEL "$(readlink -f "$DISK")"
 read -rp "Type YES to continue: " confirm
 [[ "$confirm" == "YES" ]] || { echo "Aborted."; exit 1; }
 
-sudo nix --extra-experimental-features "nix-command flakes" run github:nix-community/disko/latest#disko-install -- \
+sudo nix --show-trace --extra-experimental-features "nix-command flakes" run github:nix-community/disko/latest#disko-install -- \
   --flake .#nixos \
   --mode format \
   --write-efi-boot-entries 
