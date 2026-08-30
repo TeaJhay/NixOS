@@ -38,6 +38,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+disko="destroy,format,mount"
 LOCAL_DIR="$(cd "$(dirname "$(realpath "$0")")" && pwd)"
 sudo git config --global --add safe.directory "$LOCAL_DIR"
 
@@ -51,7 +52,7 @@ read -rp "Type YES to continue: " confirm
 echo "== Phase 1: partition + format only =="
 sudo nix --extra-experimental-features "nix-command flakes" run \
   github:nix-community/disko/latest -- \
-  --mode disko \
+  --mode "$disko" \
   --disk main "$DISK" \
   "$LOCAL_DIR/disko.nix"
 
@@ -63,7 +64,7 @@ echo "== Phase 2: build + install (swap already active) =="
 sudo nix --extra-experimental-features "nix-command flakes" run \
   github:nix-community/disko/latest#disko-install -- \
   --flake "$LOCAL_DIR#nixos" \
-  --mode mount \
+  --mode $disko \
   --disk main "$DISK" \
   --write-efi-boot-entries
 
