@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
-export NIX_CONFIG="experimental-features = nix-command flakes"
+LOCAL_DIR="$(cd "$(dirname "$(realpath "$0")")" && pwd)"
+
+sudo git config --global --add safe.directory "$LOCAL_DIR"
 
 DISK="/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"  # match disko.nix
 
