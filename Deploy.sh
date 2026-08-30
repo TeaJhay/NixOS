@@ -78,6 +78,10 @@ read -rp "Type YES to continue: " confirm
 
 
 echo "== Phase 2: build + install (swap already active) =="
+
+grep -qxF "accept-flake-config = true" /etc/nix/nix.conf 2>/dev/null || \
+  echo "accept-flake-config = true" | sudo tee -a /etc/nix/nix.conf
+
 sudo nix --extra-experimental-features "nix-command flakes" run \
   github:nix-community/disko/latest#disko-install -- \
   --flake "$LOCAL_DIR#nixos" \
