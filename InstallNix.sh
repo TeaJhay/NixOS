@@ -2,52 +2,44 @@
 set -euo pipefail
 
 # --- Config ---------------------------------------------------------------
-FLAKE_DIR="/tmp/nixos"
-FLAKE_TARGET="${FLAKE_DIR}#nixos"
-ROOT_PARTLABEL="/dev/disk/by-partlabel/disk-main-root"
-SWAP_PARTLABEL="/dev/disk/by-partlabel/disk-main-swap"
-MOUNTPOINT="/mnt"
-# ---------------------------------------------------------------------------
+TARGET_DIR="/etc/nixos"
+TARGET_FILE="/etc/nixos/configuration.nix"
+SCRIPT_NAME="$(basename "$0")"
+SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-echo ">>> Allowing root to trust the flake repo (avoids libgit2 ownership check failures under sudo)..."
-sudo git config --global --add safe.directory "${FLAKE_DIR}"
+# 1. Remove the specific file (only if it's a regular file or symlink, never a dir)
+if [ -e "$TARGET_FILE" ] || [ -L "$TARGET_FILE" ]; then
+    if [ -d "$TARGET_FILE" ] && [ ! -L "$TARGET_FILE" ]; then
+        echo "Refusing to remove $TARGET_FILE: it's a directory, not a file" >&2
+        exit 1
+    fi
+    rm -f -- "$TARGET_FILE"
+fi
 
-echo ">>> Generating hardware-configuration.nix for this machine..."
-sudo nixos-generate-config --no-filesystems --dir /tmp/hwconf-scratch
-sudo cp /tmp/hwconf-scratch/hardware-configuration.nix "${FLAKE_DIR}/hardware-configuration.nix"
-sudo chown "$(id -u):$(id -g)" "${FLAKE_DIR}/hardware-configuration.nix"
-sudo rm -rf /tmp/hwconf-scratch
+# 2. Symlink everything from the current dir (except this script) into /etc/xx,
+#    without touching anything else already in that directory
+shopt -s dotglob nullglob
+for item in "$SRC_DIR"/*; do
+    name="$(basename "$item")"
 
-echo ">>> Staging hardware-configuration.nix with git (required for flakes to see it)..."
-git -C "${FLAKE_DIR}" add hardware-configuration.nix
+    # skip the script itself
+    [ "$name" = "$SCRIPT_NAME" ] && continue
 
-echo ">>> Formatting and mounting disk via disko..."
-sudo nix --extra-experimental-features "nix-command flakes" \
-  run 'github:nix-community/disko/latest' -- \
-  --mode disko \
-  --flake "${FLAKE_TARGET}" \
-  --root-mountpoint "${MOUNTPOINT}"
+    dest="$TARGET_DIR/$name"
 
-echo ">>> Activating swap for extra headroom during the build..."
-sudo swapon "${SWAP_PARTLABEL}"
+    if [ -e "$dest" ] || [ -L "$dest" ]; then
+        if [ -L "$dest" ]; then
+            # refresh our own old symlink
+            rm -f -- "$dest"
+        else
+            echo "Skipping $name: $dest already exists and is not a symlink" >&2
+            continue
+        fi
+    fi
 
-echo ">>> Redirecting build tmp dir onto the target SSD (avoids filling the live ISO's tmpfs)..."
-sudo mkdir -p "${MOUNTPOINT}/tmp-install"
-export TMPDIR="${MOUNTPOINT}/tmp-install"
+    ln -s -- "$item" "$dest"
+done
 
-echo ">>> Running nixos-install (TMPDIR=${TMPDIR})..."
-sudo TMPDIR="${TMPDIR}" nixos-install --flake "${FLAKE_TARGET}" --root "${MOUNTPOINT}"
+cd /etc/nixos/
 
-echo ">>> Install finished. Cleaning up build tmp dir..."
-sudo rm -rf "${MOUNTPOINT}/tmp-install"
-
-echo ">>> Taking blank @void snapshot for impermanence rollback..."
-sudo mount -o subvol=/ "${ROOT_PARTLABEL}" "${MOUNTPOINT}"
-sudo btrfs subvolume snapshot "${MOUNTPOINT}/@void" "${MOUNTPOINT}/@void-blank"
-sudo umount "${MOUNTPOINT}"
-
-echo ">>> Deactivating swap..."
-sudo swapoff "${SWAP_PARTLABEL}"
-
-echo ">>> Done. @void-blank created. Reboot when ready:"
-echo "    sudo reboot"
+echo "This would now run the rebuild and switch script"
