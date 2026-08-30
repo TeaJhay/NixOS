@@ -41,7 +41,7 @@ for item in "$SRC_DIR"/*; do
 
     ln -s -- "$item" "$dest"
     
-nixos-rebuild switch --flake
+nixos-rebuild switch --show-trace --flake
 
 done
 
