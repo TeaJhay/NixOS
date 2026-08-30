@@ -7,12 +7,11 @@
     enable = true; # this enabled systemd support in stage1 - required for the below setup
     services.rollback = {
       description = "Rollback BTRFS root subvolume to a pristine state";
-      wantedBy = ["initrd.target"];
-      # No LUKS in this config, so no cryptsetup unit to wait on.
-      # Just make sure udev has settled so the by-partlabel symlink exists.
-      after = ["systemd-udev-settle.service"];
-      # Before mounting the system root (/sysroot) during the early boot process
-      before = ["sysroot.mount"];
+      wantedBy = [ "initrd.target" ];
+      before = [ "sysroot.mount" ]; # or whatever mounts depend on it
+      after = [ "systemd-udev-settle.service" ];
+      requires = [ "systemd-udev-settle.service" ];
+      # or, more targeted:
       unitConfig.DefaultDependencies = "no";
       serviceConfig.Type = "oneshot";
       script = ''
