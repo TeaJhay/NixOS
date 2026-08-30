@@ -46,7 +46,7 @@ DISK="/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0"  # match disko.nix
 echo "About to WIPE and install to: $DISK"
 lsblk -o NAME,SIZE,MODEL "$(readlink -f "$DISK")"
 read -rp "Type YES to continue: " confirm
-[[ "$confirm" == "YES" ]] || { echo "Aborted."; exit 1; }
+[[ "${confirm,,}" == "yes" ]] || { echo "Aborted."; exit 1; }
 
 echo "== Phase 1: partition + format only =="
 sudo nix --extra-experimental-features "nix-command flakes" run \
@@ -74,7 +74,7 @@ free -h
 
 echo "Made it through the disko and swap. Proceed?"
 read -rp "Type YES to continue: " confirm
-[[ "$confirm" == "yes" ]] || { echo "Aborted."; exit 1; }
+[[ "${confirm,,}" == "yes" ]] || { echo "Aborted."; exit 1; }
 
 
 echo "== Phase 2: build + install (swap already active) =="
