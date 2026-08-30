@@ -14,7 +14,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     ./hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
     ./filesystem.nix
     ./disko.nix
-#    ./ephemera.nix
+    ./ephemera.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
@@ -162,7 +162,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
       ll = "ls -l";
       gitbeam = "git commit -a -m 'edits' && git push";
       edit = "sudo -E nvim";
-      update = "sudo nixos-rebuild switch --flake /etc/nixos/#nixos --show-trace";
+      update = "sudo nixos-rebuild switch --show-trace --flake /etc/nixos/#nixos";
       nmtui="env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
     
