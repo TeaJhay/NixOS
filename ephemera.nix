@@ -64,14 +64,14 @@
         "/var/lib/systemd/rfkill"
         "/var/lib/systemd/timers"
         "/var/log"
-        { directory = "/var/lib/nixos"; inInitrd = true; };
+        { directory = "/var/lib/nixos"; inInitrd = true; }
       ];
       files = [
       # enable after first boot
-      # { file = "/etc/machine-id"; inInitrd = true; how = "symlink"; configureParent = true; };
-        { file = "/etc/ssh/ssh_host_rsa_key"; how = "symlink"; configureParent = true; };
-        { file = "/etc/ssh/ssh_host_ed25519_key"; how = "symlink"; configureParent = true; };
-        { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true; };
+      # { file = "/etc/machine-id"; inInitrd = true; how = "symlink"; configureParent = true; }
+        { file = "/etc/ssh/ssh_host_rsa_key"; how = "symlink"; configureParent = true; }
+        { file = "/etc/ssh/ssh_host_ed25519_key"; how = "symlink"; configureParent = true; }
+        { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true; }
       ];
     };
   };
