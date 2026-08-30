@@ -11,7 +11,7 @@
 {
 system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
-    ./hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
+#    ./hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
     ./filesystem.nix
 #    ./disko.nix
 #    ./ephemera.nix
