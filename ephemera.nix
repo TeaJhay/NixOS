@@ -25,9 +25,7 @@
         script = ''
           mkdir -p /mnt
           mount /dev/disk/by-partlabel/disk-main-root /mnt
-          for sub in $(btrfs subvolume list -o /mnt/@void 2>/dev/null | awk '{print $NF}' | sort -r); do
-             btrfs subvolume delete "/mnt/$sub" || true
-          done
+          btrfs subvolume snapshot /mnt/@void /mnt/@snapshots/@boot-$(date +%Y-%m-%d_%H-%M-%S)
           btrfs subvolume delete /mnt/@void
           btrfs subvolume snapshot /mnt/@void-blank /mnt/@void
           umount /mnt
@@ -61,7 +59,6 @@
       # { file = "/etc/machine-id"; inInitrd = true; how = "symlink"; configureParent = true; }
         { file = "/etc/ssh/ssh_host_rsa_key"; how = "symlink"; configureParent = true; }
         { file = "/etc/ssh/ssh_host_ed25519_key"; how = "symlink"; configureParent = true; }
-        { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true; }
         "/var/lib/usbguard/rules.conf"
        
        # creates a symlink on the volatile root
