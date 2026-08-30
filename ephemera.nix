@@ -63,7 +63,7 @@
         "/var/lib/systemd/coredump"
         "/var/lib/systemd/rfkill"
         "/var/lib/systemd/timers"
-        "/var/log"
+        "/var/logo"
         { directory = "/var/lib/nixos"; inInitrd = true; }
       ];
       files = [
@@ -72,7 +72,36 @@
         { file = "/etc/ssh/ssh_host_rsa_key"; how = "symlink"; configureParent = true; }
         { file = "/etc/ssh/ssh_host_ed25519_key"; how = "symlink"; configureParent = true; }
         { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true; }
+        "/var/lib/usbguard/rules.conf"
+       
+       # creates a symlink on the volatile root
+        # creates an empty directory on the persistent volume, i.e. /persistent/var/lib/systemd
+        # does not create an empty file at the symlink's target (would require `createLinkTarget = true`)
+        { file = "/var/lib/systemd/random-seed"; how = "symlink"; inInitrd = true; configureParent = true;
       ];
+      users = {
+        teajhay = {
+          commonMountOptions = [
+          "x-gvfs-hide"
+          ];
+          directories = [
+            { directory = ".ssh"; mode = "0700"; }
+            ".local/state/nvim"
+            ".mozilla"
+            ".thunderbird"
+
+          ];
+          files = [
+            ".histfile"
+          ];
+        };
+        root = {
+          # specify user home when it is not `/home/${user}`
+          home = "/root";
+          directories = [
+            { directory = ".ssh"; mode = "0700"; }
+        };
+      };
     };
   };
 }
