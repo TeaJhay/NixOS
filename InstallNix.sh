@@ -16,6 +16,8 @@ if [ -e "$TARGET_FILE" ] || [ -L "$TARGET_FILE" ]; then
     rm -f -- "$TARGET_FILE"
 fi
 
+mv "@TARGET_DIR"/hardware-configuration.nix "$SRC_DIR"
+
 # 2. Symlink everything from the current dir (except this script) into /etc/xx,
 #    without touching anything else already in that directory
 shopt -s dotglob nullglob
@@ -42,10 +44,7 @@ for item in "$SRC_DIR"/*; do
     ln -s  -- "$TARGET_DIR"/hardware-configuration.nix "$SRC_DIR"
 
 
-echo "This would now run the rebuild and switch script"
-
-sudo git -C /etc/nixos add -A
-sudo nixos-rebuild switch --flake /etc/nixos#nixos
+nixos-rebuild switch --flake .#nixos
 
 done
 
