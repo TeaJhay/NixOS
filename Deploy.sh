@@ -50,6 +50,7 @@ read -rp "Type YES to continue: " confirm
 
 echo "== Phase 1: partition + format only =="
 sudo nix --extra-experimental-features "nix-command flakes" run \
+  --refresh \
   github:nix-community/disko/latest -- \
   --flake "$LOCAL_DIR#nixos" \
   --mode destroy,format,mount \
