@@ -43,3 +43,4 @@ done
 cd /etc/nixos/
 
 echo "This would now run the rebuild and switch script"
+echo "sudo nixos-rebuild switch --flake .#nixos"
