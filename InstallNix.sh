@@ -41,9 +41,6 @@ for item in "$SRC_DIR"/*; do
 
     ln -s -- "$item" "$dest"
     
-    ln -s  -- "$TARGET_DIR"/hardware-configuration.nix "$SRC_DIR"
-
-
 nixos-rebuild switch --flake
 
 done
