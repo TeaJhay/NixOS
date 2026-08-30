@@ -95,4 +95,5 @@
       };
     };
   };
+  fileSystems."/persistent/home".neededForBoot = true; # Required for impermanence persistence
 }
