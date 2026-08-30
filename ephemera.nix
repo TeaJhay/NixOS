@@ -22,7 +22,8 @@
         # Mount the BTRFS top-level (subvolid=5), not @void itself,
         # so we can see @void and @void-blank as siblings and
         # delete/recreate one from the other.
-        mount -t btrfs -o subvol=/ /dev/disk/by-partlabel/disk-main-root /mnt
+        #mount -t btrfs -o subvol=/ /dev/disk/by-partlabel/disk-main-root /mnt
+        mount -o rw,subvol=/ /dev/disk/by-partlabel/disk-main-root /mnt
 
         # While we're tempted to just delete @void and create
         # a new snapshot from @void-blank, @void is already
