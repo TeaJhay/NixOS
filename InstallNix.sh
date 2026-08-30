@@ -13,12 +13,16 @@ if [ -e "$TARGET_FILE" ] || [ -L "$TARGET_FILE" ]; then
         echo "Refusing to remove $TARGET_FILE: it's a directory, not a file" >&2
         exit 1
     fi
+    sudo nixos-generate-config --no-filesystems --force
+    mv "$TARGET_DIR"/hardware-configuration.nix "$SRC_DIR"
+# logic to detect if in /persistent/home or not?
+
     rm -f -- "$TARGET_DIR"/*
 fi
 
 # 2. Symlink everything from the current dir (except this script) into /etc/xx,
 #    without touching anything else already in that directory
-shopt -s dotglob nullglob
+shopt -s nullglob
 for item in "$SRC_DIR"/*; do
     name="$(basename "$item")"
 
