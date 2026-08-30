@@ -80,13 +80,14 @@ read -rp "Type YES to continue: " confirm
 echo "== Phase 2: build + install (swap already active) =="
 
 sudo nix --extra-experimental-features "nix-command flakes" --accept-flake-config --show-trace run \
+  --extra-substituters "https://hyprland.cachix.org" \
+  --extra-trusted-public-keys "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" \
   github:nix-community/disko/latest#disko-install -- \
   --flake "$LOCAL_DIR#nixos" \
   --option store "local?root=/mnt" \
   --mode mount \
   --disk main "$DISK" \
   --write-efi-boot-entries
-
 echo "== Creating pristine @void-blank snapshot =="
 sudo mount -o subvol=/ /dev/disk/by-partlabel/disk-main-root /mnt
 sudo btrfs subvolume snapshot -r /mnt/@void /mnt/@void-blank
