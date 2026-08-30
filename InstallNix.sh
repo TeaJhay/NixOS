@@ -13,8 +13,6 @@ if [ -e "$TARGET_FILE" ] || [ -L "$TARGET_FILE" ]; then
         echo "Refusing to remove $TARGET_FILE: it's a directory, not a file" >&2
         exit 1
     fi
-    sudo nixos-generate-config --no-filesystems --force
-    mv "$TARGET_DIR"/hardware-configuration.nix "$SRC_DIR"
     rm -f -- "$TARGET_DIR"/*
 fi
 
