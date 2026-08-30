@@ -43,8 +43,7 @@ for item in "$SRC_DIR"/*; do
 
 
 echo "This would now run the rebuild and switch script"
-
-cd /etc/nixos/ | sudo nixos-rebuild switch --flake .#nixos
+sudo nixos-rebuild switch --flake /etc/nixos#nixos
 
 done
 
