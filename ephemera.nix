@@ -100,6 +100,7 @@
           home = "/root";
           directories = [
             { directory = ".ssh"; mode = "0700"; }
+          ];
         };
       };
     };
