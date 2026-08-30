@@ -53,7 +53,7 @@ sudo nix --extra-experimental-features "nix-command flakes" run \
   github:nix-community/disko/latest -- \
   --mode destroy,format,mount \
   --disk main "$DISK" \
-  -- "$LOCAL_DIR/disko.nix"
+  "$LOCAL_DIR/disko.nix"
 
 echo "== Enabling swap for the build step =="
 sudo swapon /dev/disk/by-partlabel/disk-main-swap
