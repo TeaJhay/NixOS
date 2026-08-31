@@ -186,23 +186,23 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 #  programs.firefox.enable = true;
 #  programs.yazi.enable = true;
   # Enable Hyprland
-  programs.hyprland = {
-    enable = false;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    withUWSM = false;
-    xwayland.enable = true;
-  };
+#  programs.hyprland = {
+#    enable = false;
+#    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+#    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+#    withUWSM = false;
+#    xwayland.enable = true;
+#  };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Optional, hint Electron apps to use Wayland:
 
   # Enable noctalia-greeter
-  programs.noctalia-greeter = {
-    enable = false;
-    settings = {
-      session.default = "hyprland";
-    };
-  };
+#  programs.noctalia-greeter = {
+#    enable = false;
+#    settings = {
+#      session.default = "hyprland";
+#    };
+#  };
 
 
 }
