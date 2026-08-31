@@ -35,6 +35,14 @@
                 ];
                 mountpoint = "/persistent";
               };
+              "/@home" = {
+                mountOptions = [
+                  "subvol=@home"
+                  "compress=zstd"
+                  "noatime"
+                ];
+                mountpoint = "/persistent/home";
+              };
               "/@snapshots" = {
                 mountOptions = [ "subvol=@snapshots" ];
                 mountpoint = "/snapshots";
