@@ -109,7 +109,8 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   users.users.teajhay = {
     home = "/home/teajhay";
     isNormalUser = true;
-    initialPassword = "changeme";
+    hashedPasswordFile = "/persistent/passwords/user/linux";
+    #initialPassword = "changeme";
     description = "Tea with a side of Jhay";
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
@@ -126,25 +127,25 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     ripgrep
-  #  fd
-  #  unzip
-  #  nodejs
-  #  gcc
-  #  python3
-  #  gnumake
-  #  kitty
-  # tuigreet
-  #  greetd
-  #  gh
-  #  unstable.noctalia
-  #  unstable.noctalia-greeter
-  #  fastfetch
-  #  fzf
-  #  lsd
-  #  zsh-nix-shell
-  #  inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-  #  yazi
-  #  vesktop
+    fd
+    unzip
+    nodejs
+    gcc
+    python3
+    gnumake
+    kitty
+   tuigreet
+    greetd
+    gh
+    unstable.noctalia
+    unstable.noctalia-greeter
+    fastfetch
+    fzf
+    lsd
+    zsh-nix-shell
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    yazi
+    vesktop
   ];
 
 
@@ -184,25 +185,25 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 
   # Enable Firefox 
 #  programs.firefox.enable = true;
-#  programs.yazi.enable = true;
+  programs.yazi.enable = true;
   # Enable Hyprland
-#  programs.hyprland = {
-#    enable = false;
-#    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-#    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-#    withUWSM = false;
-#    xwayland.enable = true;
-#  };
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    withUWSM = false;
+    xwayland.enable = true;
+  };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Optional, hint Electron apps to use Wayland:
 
   # Enable noctalia-greeter
-#  programs.noctalia-greeter = {
-#    enable = false;
-#    settings = {
-#      session.default = "hyprland";
-#    };
-#  };
+  programs.noctalia-greeter = {
+    enable = true;
+    settings = {
+      session.default = "hyprland";
+    };
+  };
 
 
 }
