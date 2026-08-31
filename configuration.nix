@@ -14,7 +14,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     ./hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
     ./filesystem.nix
     ./disko.nix
-#   ./ephemera.nix
+   ./ephemera.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
