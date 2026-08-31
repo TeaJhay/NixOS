@@ -71,7 +71,6 @@
         {
           file = "/etc/machine-id";
           inInitrd = true;
-          how = "symlink;"
         }
       ];
       users.teajhay = {
