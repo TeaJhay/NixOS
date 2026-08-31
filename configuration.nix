@@ -126,25 +126,25 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     ripgrep
-    fd
-    unzip
-    nodejs
-    gcc
-    python3
-    gnumake
-    kitty
-    tuigreet
-    greetd
-    gh
-    unstable.noctalia
-    unstable.noctalia-greeter
-    fastfetch
-    fzf
-    lsd
-    zsh-nix-shell
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    yazi
-    vesktop
+  #  fd
+  #  unzip
+  #  nodejs
+  #  gcc
+  #  python3
+  #  gnumake
+  #  kitty
+  # tuigreet
+  #  greetd
+  #  gh
+  #  unstable.noctalia
+  #  unstable.noctalia-greeter
+  #  fastfetch
+  #  fzf
+  #  lsd
+  #  zsh-nix-shell
+  #  inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+  #  yazi
+  #  vesktop
   ];
 
 
@@ -183,11 +183,11 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   };
 
   # Enable Firefox 
-  programs.firefox.enable = true;
+#  programs.firefox.enable = true;
 #  programs.yazi.enable = true;
   # Enable Hyprland
   programs.hyprland = {
-    enable = true;
+    enable = false;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     withUWSM = false;
@@ -198,7 +198,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 
   # Enable noctalia-greeter
   programs.noctalia-greeter = {
-    enable = true;
+    enable = false;
     settings = {
       session.default = "hyprland";
     };
