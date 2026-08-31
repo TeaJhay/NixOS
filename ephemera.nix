@@ -3,15 +3,15 @@
 #       │       impermanence      │
 #       └─────────────────────────┘
 
-  boot = {
-    initrd = {
-      availableKernelModules = [
-        "nvme"
-        "xhci_pci"
-        "ahci"
-        "usb_storage"
-        "sd_mod"
-      ];
+#  boot = {
+  #  initrd = {
+ #     availableKernelModules = [
+  #      "nvme"
+   #     "xhci_pci"
+    #    "ahci"
+     #   "usb_storage"
+      #  "sd_mod"
+     # ];
       #systemd.services.rollback-void = {
        # after = [ "dev-disk-by\\x2dpartlabel-disk\\x2dmain\\x2droot.device" ];
        # before = [ "sysroot.mount" ];
@@ -37,14 +37,14 @@
         #unitConfig.DefaultDependencies = "no";
         #wantedBy = [ "initrd.target" ];
       #};
-    };
-  };
+   # };
+ # };
 #       ┌─────────────────────────┐
 #       │       Preservation      │
 #       └─────────────────────────┘
 
-  boot.tmp.cleanOnBoot = true;
-  boot.tmp.useTmpfs = false;
+ # boot.tmp.cleanOnBoot = true;
+ # boot.tmp.useTmpfs = false;
   preservation = {
     enable = true;
     preserveAt."/persistent" = {
@@ -79,8 +79,7 @@
           commonMountOptions = [
           "x-gvfs-hide"
           ];
-          directories = [
-            { directory = ".ssh"; mode = "0700"; }
+          directories = [        
             ".local/state/nvim"
             ".mozilla"
             ".thunderbird"
