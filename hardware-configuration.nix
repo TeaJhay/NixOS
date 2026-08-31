@@ -41,8 +41,9 @@ boot = {
         wantedBy = [ "initrd.target" ];
       };
     };
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  kernelModules = [ "kvm-intel" ];
+  extraModulePackages = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+};
 }
