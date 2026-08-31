@@ -43,18 +43,23 @@
 #       │       Preservation      │
 #       └─────────────────────────┘
 
+  boot.tmp.cleanOnBoot = true;
+  boot.tmp.useTmpfs = false;
   preservation = {
     enable = true;
     preserveAt."/persistent" = {
       # preserve system directories
       directories = [
+        "/etc/nixos"
+        "/etc/ssh"
+        "/var/lib/flatpak"
         "/etc/secureboot"
         "/var/lib/bluetooth"
         "/var/lib/fwupd"
         "/var/lib/systemd/coredump"
         "/var/lib/systemd/rfkill"
         "/var/lib/systemd/timers"
-        "/var/logo"
+        "/var/log"
         { directory = "/var/lib/nixos"; inInitrd = true; }
       ];
       files = [
@@ -79,6 +84,41 @@
             ".local/state/nvim"
             ".mozilla"
             ".thunderbird"
+          ".cache/bat"
+          ".config/Epic"
+          ".config/Signal"
+          ".config/easyeffects"
+          ".config/halloy"
+          ".config/heroic"
+          ".config/jj/repos"
+          ".config/libreoffice"
+          ".config/mozilla"
+          ".config/obs-studio"
+          ".config/obsidian"
+          ".config/spotify"
+          ".config/vesktop"
+          ".config/vicinae"
+          ".java"
+          ".local/share/PrismLauncher"
+          ".local/share/Steam"
+          ".local/share/Terraria"
+          ".local/share/applications"
+          ".local/share/com.edde746.plezy"
+          ".local/share/direnv"
+          ".local/share/fish"
+          ".local/share/flatpak"
+          ".local/share/heroic"
+          ".local/share/icons"
+          ".local/share/keyrings"
+          ".local/share/nvim"
+          ".local/share/qalculate"
+          ".local/share/robrix"
+          ".local/share/vicinae"
+          ".local/share/zoxide"
+          ".local/state/wireplumber"
+          ".ssh"
+          ".steam"
+          ".var/app"
 
           ];
           files = [
@@ -96,4 +136,6 @@
     };
   };
   fileSystems."/persistent/home".neededForBoot = true; # Required for impermanence persistence
+  security.sudo.extraConfig = "Defaults lecture=never";
+  systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
 }
