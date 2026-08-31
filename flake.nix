@@ -50,10 +50,16 @@
   };
 
 
-#  nixConfig = {
-#    extra-substituters = [ "https://hyprland.cachix.org" ];
-#    extra-trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-#  };
+  nixConfig = {
+    extra-substituters = [ 
+        "https://hyprland.cachix.org" 
+        "https://noctalia.cachix.org"
+];
+    extra-trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" 
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    ];
+  };
 
 
 outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, ... }: # Replaced long destructuring with clean inputs mapping
