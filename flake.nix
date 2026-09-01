@@ -92,6 +92,7 @@
         };
       };
     in {
+      findFiles = import ./findFiles.nix {inherit (nixpkgs-lib) lib;};
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit inputs; };
