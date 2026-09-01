@@ -1,5 +1,5 @@
 {self, inputs, lib, ...}: let
-findFiles = import ./findFiles.nix {inherit lib;}; 
+  inherit (findFiles) findFiles;
 in
 {
   hjem = {
