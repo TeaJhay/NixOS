@@ -47,6 +47,9 @@
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     };
+    findFiles = {
+      url = "github:Michael-C-Buckley/findFiles.nix";
+    };
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
@@ -92,7 +95,6 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
         };
       };
     in {
-    	findFiles = import ./findFiles.nix {inherit (nixpkgs-lib) lib;};
 	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit self inputs; };
@@ -106,6 +108,7 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
           }
           ./configuration.nix
           inputs.hjem.nixosModules.default
+	  ./hjem.nix
           inputs.noctalia-greeter.nixosModules.default
           inputs.disko.nixosModules.disko
           ./disko.nix
