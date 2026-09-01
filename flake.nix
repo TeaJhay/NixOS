@@ -2,6 +2,7 @@
   description = "My NixOS config";
 
   inputs = {
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05"; # NixOS release channel
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # NixOS unstable channel
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
@@ -62,7 +63,12 @@
   };
 
 
-outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, ... }: # Replaced long destructuring with clean inputs mapping
+#outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, ... }: # Replaced long destructuring with clean inputs mapping
+
+  outputs = inputs:{
+    
+    findFiles = import ./findFiles.nix {inherit (nixpkgs-lib) lib;};
+    
     let
       system = "x86_64-linux";
 
@@ -101,11 +107,10 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
             ];
           }
           ./configuration.nix
+          inputs.hjem.nixosModules.default
           inputs.noctalia-greeter.nixosModules.default
-          
           inputs.disko.nixosModules.disko
           ./disko.nix
-          
           inputs.preservation.nixosModules.preservation
           ./ephemera.nix
         ];
