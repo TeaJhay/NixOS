@@ -92,7 +92,8 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
         };
       };
     in {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    	findFiles = import ./findFiles.nix {inherit (nixpkgs-lib) lib;};
+	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit self inputs; };
         modules = [
