@@ -172,7 +172,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
       gitbeam = "git commit -a -m 'edits' && git push";
       edit = "sudo -E nvim";
       update-pers="sudo nixos-rebuild switch --show-trace --flake /persistent/home/NixOS#nixos";
-      update = "sudo nixos-rebuild switch --show-trace --flake /etc/nixos/#nixos";
+      update = "sudo nixos-rebuild switch --show-trace --flake .#nixos";
       nmtui="env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
     
