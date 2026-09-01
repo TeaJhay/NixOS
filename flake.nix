@@ -65,10 +65,7 @@
 
 #outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, ... }: # Replaced long destructuring with clean inputs mapping
 
-  outputs = inputs:{
-    
-    findFiles = import ./findFiles.nix {inherit (nixpkgs-lib) lib;};
-    
+  outputs = inputs:
     let
       system = "x86_64-linux";
 
