@@ -136,10 +136,11 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     unzip
     nodejs
     gcc
+    nixd
     python3
     gnumake
     kitty
-   tuigreet
+   # tuigreet  # Add to TUI-based host
     greetd
     gh
     unstable.noctalia
@@ -190,7 +191,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 
   # Enable Firefox 
 #  programs.firefox.enable = true;
-  programs.yazi.enable = true;
+#  programs.yazi.enable = true;
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
