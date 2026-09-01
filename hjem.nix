@@ -1,6 +1,6 @@
-{self, inputs, findFiles, ...}: let
-  inherit findFiles;
-in  
+{self, inputs, lib, ...}: let
+findFiles = import ./findFiles.nix {inherit lib;}; 
+in
 {
   hjem = {
     clobberByDefault = true; 
