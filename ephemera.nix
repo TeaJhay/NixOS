@@ -55,7 +55,6 @@
     enable = true;
     preserveAt."/persistent" = {
       directories = [
-        "/etc/nixos"
         "/etc/ssh"
         "/var/lib/flatpak"
         "/var/lib/sbctl"
@@ -64,6 +63,12 @@
         {
           directory = "/var/lib/nixos";
           inInitrd = true;
+        }
+        {
+          directory = "/etc/nixos/";
+          user = "teajhay";
+          group = "wheel";
+          mode = "u=rwx,g=rwx,o=rx";
         }
       ];
 
