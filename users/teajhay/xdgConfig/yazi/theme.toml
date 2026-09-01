@@ -1,0 +1,37 @@
+
+[flavor]
+use = "tokyonight-night"
+dark = "tokyonight-night"
+light = "tokyonight-day"
+[indicator]
+parent = { fg = "#b31423",  bg = "#292e42" }
+current = { fg = "#b31423", bg = "#292e42" }
+preview = { fg = "#b31423",  bg = "#292e42" }
+
+
+[filetype]
+rules = [
+  # Images
+  { mime = "image/*", fg = "#e0af68" },
+
+  # Media
+  { mime = "{audio,video}/*", fg = "#bb9af7" },
+
+  # Archives
+  { mime = "application/*zip", fg = "#f7768e" },
+  { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#f7768e" },
+
+  # Documents
+  { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#7dcfff" },
+
+  # Empty files
+  # { mime = "inode/x-empty", fg = "#f7768e" },
+
+  # Special files
+  { url = "*", is = "orphan", bg = "#f7768e" },
+  { url = "*", is = "exec", fg = "#9ece6a" },
+
+  # Fallback
+  { url = "*/", fg = "#2959aa" },
+  { url = "*", fg = "#7aa2f7" },
+]
