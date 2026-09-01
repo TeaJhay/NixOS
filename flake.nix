@@ -91,11 +91,10 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
           overlays = [ chaotic.overlays.default ];
         };
       };
-      findFiles = import ./findFiles.nix {inherit (nixpkgs-lib) lib;};
     in {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit self inputs  findFiles; };
+        specialArgs = { inherit self inputs; };
         modules = [
           {
             nixpkgs.overlays = [
