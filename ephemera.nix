@@ -65,7 +65,7 @@
           inInitrd = true;
         }
         {
-          directory = "/etc/nixos/";
+          directory = "/etc/nixos";
           user = "teajhay";
           group = "wheel";
           mode = "u=rwx,g=rwx,o=rx";
