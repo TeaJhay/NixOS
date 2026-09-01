@@ -63,9 +63,9 @@
   };
 
 
-#outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, ... }: # Replaced long destructuring with clean inputs mapping
-
-  outputs = inputs:
+outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, nixpkgs-lib, self, ... }: # Replaced long destructuring with clean inputs mapping
+    
+    
     let
       system = "x86_64-linux";
 
@@ -91,11 +91,11 @@
           overlays = [ chaotic.overlays.default ];
         };
       };
-    in {
       findFiles = import ./findFiles.nix {inherit (nixpkgs-lib) lib;};
+    in {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit self inputs  findFiles; };
         modules = [
           {
             nixpkgs.overlays = [
