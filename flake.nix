@@ -108,7 +108,7 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
           }
           ./configuration.nix
           inputs.hjem.nixosModules.default
-	  ./hjem.nix
+	        ./hjem-discovery.nix
           inputs.noctalia-greeter.nixosModules.default
           inputs.disko.nixosModules.disko
           ./disko.nix

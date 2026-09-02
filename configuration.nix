@@ -15,7 +15,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     ./filesystem.nix
     ./disko.nix
     ./ephemera.nix
-    ./hjem.nix
+    ./hjem-discovery.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
@@ -112,6 +112,10 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 #       │          Users          │
 #       └─────────────────────────┘
 
+
+  NixBeast.users.enabled = [
+  "teajhay"
+  ];
   users.users.teajhay = {
     home = "/home/teajhay";
     isNormalUser = true;
