@@ -15,6 +15,11 @@ in
       xdg.config.files = findFiles "${self}/users/teajhay/xdgConfig";
       # xdg.state.files  = findFiles "${self}/users/teajhay/xdgState";
       # xdg.data.files   = findFiles "${self}/users/teajhay/xdgData";
+    files = {
+      ".zshrc".source = "${self}/users/teajhay/xdgConfig/.zshrc"
+      
+    }
+
     };
   };
 }
