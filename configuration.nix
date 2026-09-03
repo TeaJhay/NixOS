@@ -12,15 +12,16 @@
 system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
     ./hosts/hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
-    ./hosts/filesystem.nix
-    ./hosts/disko.nix
-    ./options/ephemera.nix
-    ./options/hjem-discovery.nix
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
-    inputs.nixos-hardware.nixosModules.common-gpu-amd
-    inputs.nixos-hardware.nixosModules.gigabyte-b650 
+    ./hosts/filesystem.nix # importing nfs shares
+    ./hosts/disko.nix # disk partitions
+    ./options/ephemera.nix # Impermanence and Preservation
+    ./options/hjem-discovery.nix # Hjem linking and auto-discovering with findFiles
+    ./options/flatpak.nix
+    inputs.nixos-hardware.nixosModules.common-cpu-amd # common AMD cpu settings
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate # Common AMD cpu pstate settings
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower # Replaces kernel sensing with zen power
+    inputs.nixos-hardware.nixosModules.common-gpu-amd # gpu settings
+    inputs.nixos-hardware.nixosModules.gigabyte-b650 # motherboard fix
   ];
 
   nix.settings = {        
@@ -50,8 +51,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
-  # Enable supported filesystems
-  boot.supportedFilesystems = [ "btrfs" ];
+
   
 #       ┌─────────────────────────┐
 #       │   Boot/Kernel/Graphics  │
@@ -64,7 +64,6 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   #  "video=DP-1:1920x1080@60"
   #  "video=HDMI-A-1:3840x2160@120"
   ];
-  boot.initrd.systemd.dbus.enable = true;
   services.lact.enable = true;
 #       ┌─────────────────────────┐
 #       │       Networking        │
@@ -157,6 +156,8 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     yazi
     vesktop
+    unstable.stremio-linux-shell
+    prismlauncher
   ];
 
 
@@ -164,6 +165,24 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 #       │      Applications       │
 #       └─────────────────────────┘ 
 
+
+nixpkgs.overlays = [
+    (final: prev: {
+      prismlauncher = prev.prismlauncher.override {
+        # 1. Provide all the Java versions you need for different Minecraft versions
+        jdks = with prev; [
+          temurin-bin-8   # For old Minecraft versions (1.7 - 1.12)
+          temurin-bin-17  # For Minecraft 1.17 - 1.20
+          temurin-bin-21  # For Minecraft 1.20.5+
+          final.unstable.temurin-bin-26
+        ];
+      };
+    })
+  ];
+
+
+
+  services.flatpak.enable = true;
   # Enable zsh 
   programs.zsh = {
     enable = true;
