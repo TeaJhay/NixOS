@@ -1,0 +1,2402 @@
+{
+  "change_serial": 860,
+  "entries": [
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 607,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "thats one way to get ostree-like functionality",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788084598775,
+        "icon": null,
+        "id": 404,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_861a8ece8f3b644716fc972c40f0aa0a.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788084592775,
+        "summary": "⁨an idiot™⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 609,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "That's the important signal: if older generations (different kernel, different initrd, different config) also produce a blank cursor, this isn't a",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788084879180,
+        "icon": null,
+        "id": 405,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_f1cfecac23cf5d8b7217defe92f8bfda.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788084873180,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 611,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788085269270,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 406,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_d4b3b97395c074c827aad45ddebc7a09.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788085259270,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 613,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788089816402,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 407,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_d4b3b97395c074c827aad45ddebc7a09.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788089806402,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 615,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788090582822,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 408,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_d4b3b97395c074c827aad45ddebc7a09.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788090572822,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 617,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788090780264,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 409,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_d4b3b97395c074c827aad45ddebc7a09.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788090770264,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 619,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788090949646,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 410,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_d4b3b97395c074c827aad45ddebc7a09.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788090939646,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 621,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "⁨@TeaJhay⁩ what is problemo",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788092785452,
+        "icon": null,
+        "id": 411,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_45cf008408c2394b225641f3db8439f0.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788092779452,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 623,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "did u comment out machine-id?",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788093478056,
+        "icon": null,
+        "id": 412,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_45cf008408c2394b225641f3db8439f0.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788093472056,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 628,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/lib/vesktop/vesktop (part of Vesktop) has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788160328918,
+        "icon": "vesktop",
+        "id": 415,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788160322918,
+        "summary": "Application Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 630,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/bin/hyprpwcenter has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788161773299,
+        "icon": "tools-report-bug",
+        "id": 416,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788161767299,
+        "summary": "Service Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 635,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/bin/hyprpwcenter has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788162478801,
+        "icon": "tools-report-bug",
+        "id": 418,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788162472801,
+        "summary": "Service Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 643,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "prism launcher",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788166681362,
+        "icon": null,
+        "id": 421,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_8b7be13977143cda95107247af87bbbc.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788166675362,
+        "summary": "⁨RealCat⁩ (⁨#hyprland-issues⁩, ⁨Hyprland⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 645,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788167404981,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 422,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788167394981,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 647,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788167472226,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 423,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788167462226,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 649,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788167628059,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 424,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788167618059,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 661,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788173346470,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 429,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788173336470,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 663,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788173932009,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 430,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788173922009,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 665,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788174104329,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 431,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788174094329,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 667,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "oh",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788174705610,
+        "icon": null,
+        "id": 432,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_02858d2b8491263efd5697db13bcb0d6.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788174699610,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 677,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788175262542,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 436,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788175252542,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 685,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "oh right",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788176446959,
+        "icon": null,
+        "id": 439,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_02858d2b8491263efd5697db13bcb0d6.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788176440959,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 687,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "Bruh I didn't saw ur massage but I used this command and it getting downloading rn : bash -c \"$(curl -fsSL https://raw.githubusercontent.com/ilyamiro/imperative-dots/master/install.sh)\"",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788177550923,
+        "icon": null,
+        "id": 440,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_730657a9afa3a711e2fcb56c1dafc117.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788177544923,
+        "summary": "⁨ZONEX⁩ (⁨#hyprland-issues⁩, ⁨Hyprland⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 689,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "why don't you combine them and use nixos-anywhere?",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788178169978,
+        "icon": null,
+        "id": 441,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_79ce11fb6ac78923d5acd250fa7773f5.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788178163978,
+        "summary": "⁨𝔻𝕖𝕟𝕟𝕚𝕤⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 691,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "yeah honestly try the void-blank in disko like I did\nrun this command after u clone ur repo ⁨`disko --mode destroy,format,mount --flake .#host`⁩\nthen this ⁨`sudo nixos-install --root /mnt --flake .#host`⁩",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788179753146,
+        "icon": null,
+        "id": 442,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_02858d2b8491263efd5697db13bcb0d6.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788179747146,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 693,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "# The next stages of the Galactic War have been declassified. \n\nReview the updated content roadmap for Major Update 7.0 and planned deployments through December.\n\nNew fronts, missions, enemies, Warbonds, events and more await. Prepare accordingly.\n\n@here",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788180825356,
+        "icon": null,
+        "id": 443,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_c291eade1bce35294e8bc4ab6fd14561.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788180819356,
+        "summary": "⁨HELLDIVERS™ Official Discord #hd2-announcements⁩ (⁨#general⁩, ⁨Text Channels⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 707,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788186657938,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 448,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_fa59da93542dd9fa0ea6a323a6279c76.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788186647938,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 711,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "Ah, that explains it — if there's no imports = [ ./flake-parts.nix ]; anywhere, then it's not being pulled in through the module system's imports",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788213015081,
+        "icon": null,
+        "id": 451,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_388bf0f47aa01c89cb99ea80ed9c3d6e.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788213009081,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 713,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/lib/vesktop/vesktop (part of Vesktop) has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788246199436,
+        "icon": "vesktop",
+        "id": 453,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788246193436,
+        "summary": "Application Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 722,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "I'm using ⁨`unstable-small`⁩ but I think grim hasn't changed for long, and I used comma(⁨`,`⁩) for wayshot which means it probably is the latest from ⁨`unstable`⁩ too",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788250278185,
+        "icon": null,
+        "id": 459,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_3af5c952d7556b6a7dbe6cac3afc0aa7.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788250272185,
+        "summary": "⁨Neubulae⁩ (⁨#hyprland-issues⁩, ⁨Hyprland⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 724,
+      "notification": {
+        "actions": [],
+        "app_name": "vesktop",
+        "body": "Reacted ⁨😭⁩ to you \"⁨false, USDC was not that high on the 26th - this is bullshit⁩\"",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788259854971,
+        "icon": null,
+        "id": 465,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_1139831081f49ac57f889a57719a9936.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788259848971,
+        "summary": "⁨choco 👾⁩ (⁨#nix-nixos⁩, ⁨Hyprland Cathedral⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 727,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "if you dont quote it its still an absolute path but since paths in nix are its own special thing with context they are not allowed in this way in flakes normally since its not pure (if reference something outside of your flake, its not guaranteed to be reproducible anymore). Quoted nix will treat them as strings and ignore that they are impure i think",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788260197211,
+        "icon": null,
+        "id": 466,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a511593ba17eea73d4deaa51def5c444.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788260191211,
+        "summary": "⁨Lorkas⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 729,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "and this source path is not relative to home but relative to the file it was mentioned in. \nif i have a nix file at ⁨`/home/alice/nixfiles/foo.nix`⁩ in which i reference a path ⁨`./some/bar.text`⁩ then its gonna expect that file to exist at ⁨`/home/alice/nixfiles/some/bar.text`⁩",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788260439006,
+        "icon": null,
+        "id": 467,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a511593ba17eea73d4deaa51def5c444.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788260433006,
+        "summary": "⁨Lorkas⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 736,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "This means hjem.nix is being evaluated as a NixOS module, and it's trying to use self (the flake's own output set — useful for referencing paths i",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788267064259,
+        "icon": null,
+        "id": 470,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a223e6aa94c3e84fd4a1438d2150c7bc.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788267058259,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 738,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "can always just pay for the official one",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788267186266,
+        "icon": null,
+        "id": 471,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_ce05e5dd18e6df5fc4916b0d8b36e966.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788267180266,
+        "summary": "⁨Bauls Deep⁩ (⁨#hyprland-general⁩, ⁨Hyprland⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 740,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "That's the infinite recursion right there. In Nix, let ... in bindings are implicitly recursive — every name defined in a let block can see every",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788267203646,
+        "icon": null,
+        "id": 472,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a223e6aa94c3e84fd4a1438d2150c7bc.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788267197646,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 742,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "This means findFiles isn't actually defined as a name in the let block scope that surrounds specialArgs — inherit inputs findFiles; only works",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788267302707,
+        "icon": null,
+        "id": 473,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a223e6aa94c3e84fd4a1438d2150c7bc.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788267296707,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 744,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "This is the same category of issue as before, just for self this time. Some module (likely hjem.nix, which asks for `{ inputs, self, findFiles, ..",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788267361094,
+        "icon": null,
+        "id": 474,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a223e6aa94c3e84fd4a1438d2150c7bc.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788267355094,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 746,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/lib/vesktop/vesktop (part of Vesktop) has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788273800221,
+        "icon": "vesktop",
+        "id": 476,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788273794221,
+        "summary": "Application Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 748,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "# B-Boy mode: Activated. 🤸‍♂️ ⁨@Game News⁩\n\n\"Analysis of rhythmic oscillations complete. Motor functions synchronized flawlessly with the hip-hop tempo. Destroy organic life protocol temporarily suspended. Re-routing coordinates to the East Coast. New directive: dominate breakdance.\"\n\nShow them how it's done and bring it back old-school style with Ultron's B-Boy Prime costume, appearing for the first time in Marvel Rivals Season 9!\n\n📅 Available: Friday, September 4, 2026 at 12:00 PM!\n\nEnter the cypher alone and reign the streets as a legend. 💥",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788274836394,
+        "icon": null,
+        "id": 477,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_862ea27e878774af3bc257a920f00e28.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788274830224,
+        "summary": "⁨Mocha⁩ (⁨#🎮┃game-news⁩, ⁨──── NEWS ────⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 750,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/lib/vesktop/vesktop (part of Vesktop) has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788297605379,
+        "icon": "vesktop",
+        "id": 479,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788297599379,
+        "summary": "Application Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 752,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "Did you track it with git?",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788298542375,
+        "icon": null,
+        "id": 480,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_c3032a7946b7c7a5e614cedd847abb0f.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788298536375,
+        "summary": "⁨Ever Changing Critter⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 757,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788298910891,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 482,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a4a30fc930cb8df56a4203d54484e985.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788298900891,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 759,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "does a rebuild switch work now?",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788299073765,
+        "icon": null,
+        "id": 483,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_57b89ad9aea58c642d9f5f6b5c2949f9.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788299067765,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 761,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "Reacted ⁨:hesrightyouknow:⁩ to you \"⁨https://klipy.com/gifs/avatar-the-last-airbender-89⁩\"",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788299401847,
+        "icon": null,
+        "id": 484,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_6d2d7a78262e00576a22743d3543b46d.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788299395847,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨Hyprland Cathedral⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 763,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "but what does authing every boot mean",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788299791597,
+        "icon": null,
+        "id": 485,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_57b89ad9aea58c642d9f5f6b5c2949f9.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788299785597,
+        "summary": "⁨Connor⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 765,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788299900151,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 486,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_a4a30fc930cb8df56a4203d54484e985.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788299890151,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 771,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "definitely not, 99% of makefiles (at least for general open source projects) dont mess with that stuff, if the end user wants to enable it that's on them",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788342717830,
+        "icon": null,
+        "id": 491,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_4b28bce044b56443e4db907a19570abd.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788342711830,
+        "summary": "⁨eriedaberrie many syllables⁩ (⁨#mmmmmmmmicrowave⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 775,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788345213875,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 493,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_7eb9156c37cb97ac50d31e95a51e6755.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788345203875,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 781,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "Well will we ever be able to solve this?",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788349870832,
+        "icon": null,
+        "id": 496,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_0e7f6c8105555c4908e08f18f13825d4.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788349864832,
+        "summary": "⁨Cool Atlantis⁩ (⁨#gaming⁩, ⁨Extra⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 786,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "That error usually means Nix hit an = where it expected an expression to already be finished — often because something just above line 56 isn't term",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788352804184,
+        "icon": null,
+        "id": 497,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_ea62c4599c3eaa207b54d83ed2868c6e.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788352798184,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 790,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "🚨 The daily theme is now **bioluminescent dragon** 🚨 @here",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788385345768,
+        "icon": null,
+        "id": 500,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_0aba68472bbd1872a5b8fabb86655725.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788385339768,
+        "summary": "⁨Ancient Chaos (Support Manager)⁩ (⁨#daily-theme⁩, ⁨Themed Image Gen⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 792,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "You can split this cleanly, but there's one dependency to solve first: NixBeast.users.available's default needs availableUsers, and that's compute",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788385598218,
+        "icon": null,
+        "id": 501,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_412d5ec5a4a6515e9b3da0d601dc7a77.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788385592218,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 794,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "That warning means config.hjem.users ended up empty at eval time — which tells us enabledUsers produced an empty list, or (more likely, based on h",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788386267981,
+        "icon": null,
+        "id": 502,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_412d5ec5a4a6515e9b3da0d601dc7a77.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788386261981,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 796,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/lib/vesktop/vesktop (part of Vesktop) has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788419468395,
+        "icon": "vesktop",
+        "id": 504,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788419462335,
+        "summary": "Application Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 798,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "Sent a voice message",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788420319642,
+        "icon": null,
+        "id": 505,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_bbe62be5a3c49f4c51865744f6fe306b.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788420313642,
+        "summary": "⁨Akio_Kititsa⁩ (⁨#tech-talk⁩, ⁨Extra⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 800,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "Good — that actually worked once you used starship init bash (your nix-shell dropped you into bash, not zsh — that's why starship init zsh p",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788420804046,
+        "icon": null,
+        "id": 506,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_8146cdfb5ab7c1989eaff264507ce10d.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788420798046,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": true
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 811,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788422621188,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 511,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_f804543ceda64ec10f0673b4b25d415a.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788422611188,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 813,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "i dont use pk10 either",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788422791250,
+        "icon": null,
+        "id": 512,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_d7ebac100b28fe8a6c220cda5de5df1f.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788422785250,
+        "summary": "⁨Bauls Deep⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 816,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/lib/drkonqi-coredump-launcher has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788424563412,
+        "icon": "tools-report-bug",
+        "id": 513,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788424557412,
+        "summary": "Service Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 817,
+      "notification": {
+        "actions": [
+          "default",
+          "Action"
+        ],
+        "app_name": "Shelly",
+        "body": "338 updates available",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788424563912,
+        "icon": "shelly",
+        "id": 515,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788424557912,
+        "summary": "Updates available",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 819,
+      "notification": {
+        "actions": [
+          "1",
+          "Details"
+        ],
+        "app_name": "Crash Reporting System",
+        "body": "/usr/lib/vesktop/vesktop (part of Vesktop) has encountered a fatal error and was closed.",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788424572320,
+        "icon": "vesktop",
+        "id": 516,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1788424566320,
+        "summary": "Application Crash",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 824,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "ne kitty one ?",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788427558395,
+        "icon": null,
+        "id": 518,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_330016421adddb9fa2b990cf81afff06.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788427552395,
+        "summary": "⁨Bauls Deep⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 828,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "you can take inspiration from my dotfiles aswell im also abusing it feeding shit into it",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788427676679,
+        "icon": null,
+        "id": 520,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_330016421adddb9fa2b990cf81afff06.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788427670679,
+        "summary": "⁨Bauls Deep⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 831,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "Blank (not boxes) usually means one of two things: the font doesn't have these glyphs at all, or the characters are getting mangled somewhere in the c",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788427834885,
+        "icon": null,
+        "id": 521,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_98d2ad8af7029ec6f2558162afc6f250.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788427828885,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 833,
+      "notification": {
+        "actions": [
+          "default",
+          "Activate"
+        ],
+        "app_name": "Firefox",
+        "body": "Right, that's expected — kitty.boss only exists inside kitty's embedded Python interpreter, not your system Python. You can't import it standalone l",
+        "category": null,
+        "desktop_entry": "firefox",
+        "expiry_wall_ms": 1788428610499,
+        "icon": null,
+        "id": 522,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_98d2ad8af7029ec6f2558162afc6f250.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788428604499,
+        "summary": "Claude responded",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 835,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "nah it was the kde distro which uses ubuntu",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788429710941,
+        "icon": null,
+        "id": 523,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_f56ced93615aeff4d877162c7afeceb1.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788429704941,
+        "summary": "⁨Abrahem⁩ (⁨#mmmmmmmmicrowave⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 837,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "never ever in a million years",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788429767449,
+        "icon": null,
+        "id": 524,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_f56ced93615aeff4d877162c7afeceb1.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788429761449,
+        "summary": "⁨Abrahem⁩ (⁨#mmmmmmmmicrowave⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 839,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "9 minutes to start /dev/disk/by-uuid",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788430077243,
+        "icon": null,
+        "id": 525,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_c4e62309fd8ba0a9fae3fcd2e444298b.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788430071243,
+        "summary": "⁨#1 caelestia hater⁩ (⁨#mmmmmmmmicrowave⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 844,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "welcome to nixos",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788439782126,
+        "icon": null,
+        "id": 527,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_f23558239405138437e7b3cbb10408f0.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788439776126,
+        "summary": "⁨Bauls Deep⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 851,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "# Greetings, Helldivers! There is a new survey in ⁨⁩ \nPlease fill it out and we will remove the link once it's full!",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788443321563,
+        "icon": null,
+        "id": 530,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_70b948f8c2778d6aa6aea46650f58d45.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788443315563,
+        "summary": "⁨HELLDIVERS™ Official Discord #hd2-announcements⁩ (⁨#general⁩, ⁨Text Channels⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 853,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "yeah looks the module forces the config",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788443637736,
+        "icon": null,
+        "id": 531,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_0c545a8a5e4d1201d683cc721a4f7594.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788443631736,
+        "summary": "⁨Cotton Candy⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 858,
+      "notification": {
+        "actions": [
+          "action1",
+          "Open",
+          "action2",
+          "Delete"
+        ],
+        "app_name": "notify-send",
+        "body": " Captured by Swappy",
+        "category": null,
+        "desktop_entry": null,
+        "expiry_wall_ms": 1788444757773,
+        "icon": "/home/teejay/.config/swaync/icons/picture.png",
+        "id": 533,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_2586bcea86d415ab72dca29919c14692.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788444747773,
+        "summary": " Screenshot:",
+        "timeout": 10000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "closed_by_call",
+      "event_serial": 860,
+      "notification": {
+        "actions": [
+          "default",
+          "View"
+        ],
+        "app_name": "vesktop",
+        "body": "nice, take it at your pace",
+        "category": null,
+        "desktop_entry": "vesktop",
+        "expiry_wall_ms": 1788445303397,
+        "icon": null,
+        "id": 534,
+        "image_data": {
+          "bits_per_sample": 8,
+          "channels": 4,
+          "has_alpha": true,
+          "height": 96,
+          "image_file": "i_0c545a8a5e4d1201d683cc721a4f7594.webp",
+          "row_stride": 384,
+          "width": 96
+        },
+        "origin": "external",
+        "received_wall_ms": 1788445297397,
+        "summary": "⁨Cotton Candy⁩ (⁨#nix-nixos⁩, ⁨general⁩)",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    }
+  ],
+  "next_id": 535,
+  "version": 2
+}
