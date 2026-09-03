@@ -6,8 +6,9 @@
 #       └─────────────────────────┘
 #  I understand this page... sometimes
 { config, lib, pkgs, inputs, ... }:
-
-
+let
+  userConfig = ./users/teajhay;
+in 
 {
 system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
@@ -127,7 +128,6 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
       tree
     ];
   };
-
 #       ┌─────────────────────────┐
 #       │         Packages        │
 #       └─────────────────────────┘ 
@@ -181,7 +181,14 @@ nixpkgs.overlays = [
   ];
 
 
-
+programs.starship = {
+    enable = true;
+    settings = lib.mkMerge [
+      (builtins.fromTOML
+        (builtins.readFile "${userConfig}/.config/starship/tokyo-night.toml"
+      ))
+    ];
+  };
   services.flatpak.enable = true;
   # Enable zsh 
   programs.zsh = {
