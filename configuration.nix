@@ -92,8 +92,8 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   };
 
   # Open ports in the firewall.
-  #networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 2049 22 ];
+  networking.firewall.allowedUDPPorts = [ 2049 22];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
