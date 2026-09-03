@@ -2,6 +2,7 @@
   description = "My NixOS config";
 
   inputs = {
+    nix-flatpak.url = "github:gmodena/nix-flatpak"; # unstable branch. Use github:gmodena/nix-flatpak/?ref=<tag> to pin releases.
     nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05"; # NixOS release channel
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # NixOS unstable channel
@@ -66,7 +67,7 @@
   };
 
 
-outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, nixpkgs-lib, self, ... }: # Replaced long destructuring with clean inputs mapping
+outputs = inputs@{ nix-flatpak, nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, nixpkgs-lib, self, ... }: # Replaced long destructuring with clean inputs mapping
     
     
     let
@@ -114,6 +115,8 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
           ./hosts/disko.nix
           inputs.preservation.nixosModules.preservation
           ./options/ephemera.nix
+          nix-flatpak.nixosModules.nix-flatpak
+          ./options/flatpak.nix
         ];
       };
     };

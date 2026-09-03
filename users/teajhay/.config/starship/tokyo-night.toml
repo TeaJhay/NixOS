@@ -1,0 +1,108 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[░▒▓](#780612)\
+[](bg:#2959aa fg:#800814)\
+$os\
+[](bg:#7aa2f7 fg:#2959aa)\
+$directory\
+[](fg:#7aa2f7 bg:#5a3e8e)\
+$git_branch\
+$git_status\
+[](fg:#5a3e8e bg:#212736)\
+$nodejs\
+$bun\
+$rust\
+$golang\
+$php\
+[](fg:#212736 bg:#1d2230)\
+$time\
+[](fg:#1d2230)\
+\n$character"""
+[directory]
+style = "fg:#2959aa bg:#769ff0"
+format = "[ $path]($style)"
+truncation_length = 2
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#394260"
+format = '[[ $symbol $branch ](fg:#769ff0 bg:#5a3e8e)]($style)'
+
+[git_status]
+style = "bg:#394260"
+format = '[[($all_status$ahead_behind)](fg:#769ff0 bg:#5a3e8e)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[bun]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[php]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[ $time](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[cmd_duration]
+format = "took [$duration]($style) " # Text format to print in prompt
+style = "bold yellow"             # Prompt color styling
+show_notifications = true        # Notify via OS if a command runs very long
+
+
+[os]
+style = "bg:#2959aa fg:#090c0c"
+format = "[$symbol ]($style)"
+disabled = false
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+AOSC = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
+NixOS = ""

@@ -1,5 +1,8 @@
 { inputs, ... }: {
   imports = [ inputs.disko.nixosModules.disko ];
+    # Enable supported filesystems
+  boot.supportedFilesystems = [ "btrfs" ];
+# partitions
   disko.devices.disk.main = {
     content = {
       partitions = {
