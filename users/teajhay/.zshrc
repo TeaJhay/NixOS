@@ -3,10 +3,11 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnosterzak"
+#ZSH_THEME="agnosterzak"
 
 source $ZSH/oh-my-zsh.sh
 
+eval "$(starship init zsh)"
 # Check archlinux plugin commands here
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/archlinux
 
