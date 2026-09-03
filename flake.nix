@@ -108,12 +108,12 @@ outputs = inputs@{ nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, pr
           }
           ./configuration.nix
           inputs.hjem.nixosModules.default
-	        ./hjem-discovery.nix
+	        ./options/hjem-discovery.nix
           inputs.noctalia-greeter.nixosModules.default
           inputs.disko.nixosModules.disko
-          ./disko.nix
+          ./hosts/disko.nix
           inputs.preservation.nixosModules.preservation
-          ./ephemera.nix
+          ./options/ephemera.nix
         ];
       };
     };

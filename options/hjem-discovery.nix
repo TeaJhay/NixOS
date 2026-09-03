@@ -31,7 +31,7 @@ let
 enabledUsers = config.NixBeast.users.enabled; # set enabledUsers tothe option for users enabled, imported after from ./options/default.nix, which gets set to the available users anyways. Possibly set this to use the declare users in config 
   invalidUsers = lib.filter (u: !(lib.elem u availableUsers)) enabledUsers; # filters invalid users by removing the enabled users from the list of availableUsers 
 in {
-  imports = [./options/default.nix]; # imports options used by enabledUsers
+  imports = ["${self}/options/default.nix"]; # imports options used by enabledUsers
   config = mkMerge [ # mergs functions and results for use together
     {
       _module.args = {

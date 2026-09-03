@@ -11,11 +11,11 @@
 {
 system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
-    ./hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
-    ./filesystem.nix
-    ./disko.nix
-    ./ephemera.nix
-    ./hjem-discovery.nix
+    ./hosts/hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
+    ./hosts/filesystem.nix
+    ./hosts/disko.nix
+    ./options/ephemera.nix
+    ./options/hjem-discovery.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
