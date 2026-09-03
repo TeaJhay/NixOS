@@ -104,12 +104,6 @@
           ".ssh"
           ".steam"
           ".var/app"
-          "Desktop"
-          "Documents"
-          "Downloads"
-          "Music"
-          "Pictures"
-          "Videos"
         ];
         files = [
         ".gitconfig"
