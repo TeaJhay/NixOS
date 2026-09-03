@@ -1,0 +1,47 @@
+=== gpu-screen-recorder recording 2026-08-24 19:03:04 ===
+gsr info: gsr_capture_portal_get_restore_token_from_cache: no restore token found in cache or failed to load (/home/teejay/.config/gpu-screen-recorder/restore_token)
+gsr info: gsr_capture_portal_setup_dbus: CreateSession
+gsr info: gsr_capture_portal_setup_dbus: SelectSources
+gsr warning: gsr_dbus_screencast_select_sources: cursor mode metadata is not available, using cursor mode embedded instead
+gsr info: gsr_capture_portal_setup_dbus: Start
+gsr info: gsr_capture_portal_save_restore_token: saved restore token to cache ()
+gsr info: gsr_capture_portal_setup_dbus: OpenPipeWireRemote
+gsr info: gsr_capture_portal_setup_dbus: desktop portal setup finished
+gsr info: gsr_capture_portal_setup: setting up pipewire
+gsr info: pipewire: server version: 1.6.8
+gsr info: pipewire: library version: 1.6.8
+gsr info: pipewire: header version: 1.6.8
+gsr info: pipewire: stream 0x55b66032c9a0 previous state: "unconnected", new state: "connecting" (error: none)
+gsr info: gsr_capture_portal_setup: pipewire setup finished
+gsr info: gsr_capture_portal_start: waiting for pipewire negotiation
+gsr info: pipewire: stream 0x55b66032c9a0 previous state: "connecting", new state: "paused" (error: none)
+gsr info: pipewire: negotiated format:
+gsr info: pipewire:    Format: 12 (Spa:Enum:VideoFormat:BGRA)
+gsr info: pipewire:    Modifier: 0x0
+gsr info: pipewire:    Size: 3840x2160
+gsr info: pipewire:    Framerate: 0/1
+gsr info: pipewire: negotiated format:
+gsr info: pipewire:    Format: 12 (Spa:Enum:VideoFormat:BGRA)
+gsr info: pipewire:    Modifier: 0x200000028a37f04
+gsr info: pipewire:    Size: 3840x2160
+gsr info: pipewire:    Framerate: 0/1
+gsr info: pipewire: stream 0x55b66032c9a0 previous state: "paused", new state: "streaming" (error: none)
+gsr error: gsr_pipewire_video_create_egl_image_with_fallback: failed to create egl image with modifier 0x200000028a37f04, renegotiating with a different modifier
+gsr info: pipewire: stream 0x55b66032c9a0 previous state: "streaming", new state: "paused" (error: none)
+gsr info: pipewire: negotiated format:
+gsr info: pipewire:    Format: 12 (Spa:Enum:VideoFormat:BGRA)
+gsr info: pipewire:    Modifier: 0x200000028a37f04
+gsr info: pipewire:    Size: 3840x2160
+gsr info: pipewire:    Framerate: 0/1
+gsr info: pipewire: negotiated format:
+gsr info: pipewire:    Format: 12 (Spa:Enum:VideoFormat:BGRA)
+gsr info: pipewire:    Modifier: 0x200000028a01f04
+gsr info: pipewire:    Size: 3840x2160
+gsr info: pipewire:    Framerate: 0/1
+gsr info: pipewire: stream 0x55b66032c9a0 previous state: "paused", new state: "streaming" (error: none)
+gsr info: gsr_capture_portal_start: pipewire negotiation finished
+[av1_vaapi @ 0x55b660323340] ignoring invalid SAR: 0/0
+/home/teejay/Videos/Recordings/recording_20260824_190304.mp4
+[libopus @ 0x55b660991100] 1 frames left in the queue on closing
+gsr info: pipewire: stream 0x55b66032c9a0 previous state: "streaming", new state: "paused" (error: none)
+gsr info: pipewire: stream 0x55b66032c9a0 previous state: "paused", new state: "unconnected" (error: none)

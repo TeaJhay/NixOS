@@ -1,0 +1,24 @@
+{
+  "Applications": [
+    "/usr/share/applications/Alacritty.desktop",
+    "/home/teejay/.local/share/applications/kitty.desktop",
+    "/home/teejay/.local/share/applications/org.xfce.mousepad.desktop",
+    "/usr/share/applications/nvim.desktop",
+    "/usr/share/applications/com.github.th-ch.youtube-music.desktop",
+    "/usr/share/applications/io.missioncenter.MissionCenter.desktop",
+    "/usr/share/applications/com.saivert.pwvucontrol.desktop",
+    "/home/teejay/.local/share/applications/vesktop.desktop",
+    "/home/teejay/.local/share/applications/org.pulseaudio.pavucontrol.desktop",
+    "/var/lib/flatpak/exports/share/applications/com.stremio.Stremio.Devel.desktop",
+    "/usr/share/applications/gparted.desktop",
+    "/usr/share/applications/vncviewer.desktop",
+    "/usr/share/applications/org.remmina.Remmina.desktop",
+    "/usr/share/applications/rustdesk.desktop",
+    "/usr/share/applications/virt-manager.desktop",
+    "/home/teejay/.local/share/applications/btop.desktop",
+    "/usr/share/applications/remote-viewer.desktop",
+    "/usr/share/applications/code.desktop",
+    "/usr/share/applications/org.kde.discover.desktop",
+    "/home/teejay/.local/share/applications/nwg-displays.desktop"
+  ]
+}
