@@ -103,6 +103,7 @@
           ".local/state/wireplumber"
           ".local/state/noctalia"
           ".ssh"
+          ".secrets"
           ".steam"
           ".var/app"
         ];

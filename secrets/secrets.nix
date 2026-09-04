@@ -8,8 +8,8 @@
       "/home/teajhay/.secrets/id_ed25519" # You can also use SSH keys
     ]; 
     recipientAliases = {
-      teajhay = "age1vujfnw9h7nypxcj02078266p27t7lrlvz97tq7vzmmp9nkgjqceqlc8mrd"; # Your age recipient (public key)
-      ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICzGkL28+ce29nwATfti4KggQojZQRDbmWGmNqskOxKG"; # Or your SSH public key
+      teajhay = "age1n0n7ml9drkk25uq7z0pz0avdnhdyxdwr470l8necmlrfyahudsaq274z9c"; # Your age recipient (public key)
+      ssh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAJCp+y5me7/CLNNgVd8YYvyrWm1+7ZD7ztIS/cvJpIN nix-secrets"; # Or your SSH public key
     };
 
     # Add your secrets here...
