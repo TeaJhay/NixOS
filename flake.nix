@@ -127,6 +127,8 @@ outputs = inputs@{ nix-flatpak, nixpkgs, nixpkgs-unstable, nixpkgs-master, chaot
           ./options/ephemera.nix
           nix-flatpak.nixosModules.nix-flatpak
           ./options/flatpak.nix
+          inputs.nix-secrets.nixosModules.default
+          ./secrets/secrets.nix
         ];
       };
     };
