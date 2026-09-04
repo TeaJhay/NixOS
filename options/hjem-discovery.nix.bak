@@ -1,8 +1,8 @@
 { config, self, inputs, lib, pkgs, ... }:
 let
   inherit (inputs.findFiles) findFiles;
-  inherit (lib) mkIf mkMerge listToAttrs map;
-
+  inherit (lib) mkIf mkMerge listToAttrs map mapAttrs;
+  impureDir = "/persistent/home/teajhay/nixos/users";
   usersDir = "${self}/users";  # Where users and their data is stored!
   userEntries = builtins.readDir usersDir; # Returns the contents of the users directory and if it's a file or directory
   # Could be combined, but then you can't use usersDir as a single path
@@ -15,8 +15,26 @@ let
       && builtins.pathExists (usersDir + "/${u}/user.nix")) # A path with a certain file or folder in the usersDir must exist
     (builtins.attrNames userEntries); #List to filter from
 
+  toStringSources = files:
+    mapAttrs (_: file: file // { source = toString file.source; }) files;
 
- 
+  # Per-user impure dots dir (as a string), findFiles'd and stringified,
+  # or {} if that user has no impure dots dir yet.
+  getImpureDots = username: let
+    impureDots = impureDir + "/${username}";
+  in
+    if builtins.pathExists impureDots
+    then toStringSources (findFiles impureDots)
+    else {};
+
+ getImpureAbs = username: let
+   absDots = usersDir + "/${username}/";
+  in
+    if builtins.pathExists absDots
+    then toStringSources (findFiles absDots)
+    else {};
+
+
   # This is basically the template for what folders to search in, and if they exist use findFiles to list each file. These get merged in the users default.nix or equivalent
   getUserDotfiles = username: let # declares the function "getUserDotfiles" and parameter "username"
     dotfilesDir = usersDir + "/${username}/"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
@@ -35,7 +53,7 @@ in {
   config = mkMerge [ # mergs functions and results for use together
     {
       _module.args = {
-        inherit getUserDotfiles availableUsers;
+        inherit getUserDotfiles getImpureDots availableUsers;
       };
     }
     (mkIf (enabledUsers != []) {
@@ -58,7 +76,11 @@ in {
             user = username;
             directory = config.users.users.${username}.home;
             files = getUserDotfiles username;
-            impure.enable = true;
+            impure = {
+              enable = true;
+              dotsDir = getImpureAbs username;
+              dotsDirImpure = getImpureDots username;
+            };
           };
         })
         enabledUsers # the list of users it'll map hjem options for
