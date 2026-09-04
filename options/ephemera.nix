@@ -101,6 +101,7 @@
           ".local/share/vicinae"
           ".local/share/zoxide"
           ".local/state/wireplumber"
+          ".local/state/noctalia"
           ".ssh"
           ".steam"
           ".var/app"

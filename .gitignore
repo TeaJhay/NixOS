@@ -1,3 +1,4 @@
 flake.lock # flake lock file
 .*.%tmp
 README.md
+keys.txt

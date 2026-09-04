@@ -1,4 +1,4 @@
-{ config, self, inputs, lib, ... }:
+{ config, self, inputs, lib, pkgs, ... }:
 let
   inherit (inputs.findFiles) findFiles;
   inherit (lib) mkIf mkMerge listToAttrs map;
@@ -28,7 +28,7 @@ let
 
 
 
-enabledUsers = config.NixBeast.users.enabled; # set enabledUsers tothe option for users enabled, imported after from ./options/default.nix, which gets set to the available users anyways. Possibly set this to use the declare users in config 
+  enabledUsers = config.NixBeast.users.enabled; # set enabledUsers tothe option for users enabled, imported after from ./options/default.nix, which gets set to the available users anyways. Possibly set this to use the declare users in config 
   invalidUsers = lib.filter (u: !(lib.elem u availableUsers)) enabledUsers; # filters invalid users by removing the enabled users from the list of availableUsers 
 in {
   imports = ["${self}/options/default.nix"]; # imports options used by enabledUsers
@@ -47,7 +47,9 @@ in {
             + "Available: ${lib.toString availableUsers}";
         }
       ];
-      hjem.users = listToAttrs ( 
+      hjem = {
+        extraModules = [inputs.hjem-impure.hjemModules.default];
+        users = listToAttrs ( 
         map # uses list from the mkMerge to map to values, since this is for hjem this will map the following options for each hjerm user!
         (username: {
           name = username;
@@ -56,12 +58,13 @@ in {
             user = username;
             directory = config.users.users.${username}.home;
             files = getUserDotfiles username;
+            impure.enable = true;
           };
         })
         enabledUsers # the list of users it'll map hjem options for
       );
-
-      hjem.clobberByDefault = true;
+      clobberByDefault = true;
+    };
   })
   ];
 }

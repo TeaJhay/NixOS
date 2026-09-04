@@ -9,6 +9,7 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master"; # NixOS hardware channel
     preservation.url = "github:nix-community/preservation";
+    nix-secrets.url = "github:unnamed-systems/nix-secrets";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,11 +20,20 @@
     };
     noctalia-greeter = {
       url = "github:noctalia-dev/noctalia-greeter";
-      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
     };
     hjem = {
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hjem-impure = {
+      url = "github:Rexcrazy804/hjem-impure";
+      # these are only required for internal tests,
+      # hence you can set em to nothing
+      inputs.nixpkgs.follows = "";
+      inputs.hjem.follows = "";
     };
     update = {
       url = "github:ryantm/nixpkgs-update";
