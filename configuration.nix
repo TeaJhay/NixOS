@@ -23,6 +23,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower # Replaces kernel sensing with zen power
     inputs.nixos-hardware.nixosModules.common-gpu-amd # gpu settings
     inputs.nixos-hardware.nixosModules.gigabyte-b650 # motherboard fix
+    inputs.nix-secrets.nixosModules.default
   ];
 
   nix.settings = {        
@@ -112,7 +113,10 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 #       │          Users          │
 #       └─────────────────────────┘
 
-
+  # imports the hjemModule
+  hjem.extraModules = [inputs.hjem-impure.hjemModules.default];
+  # enable hjem-impure
+  hjem.users.teajhay.impure.enable = true;
   NixBeast.users.enabled = [
   "teajhay"
   ];
@@ -147,8 +151,9 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
    # tuigreet  # Add to TUI-based host
     greetd
     gh
-    unstable.noctalia
-    unstable.noctalia-greeter
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default
+#    unstable.noctalia-greeter
     fastfetch
     fzf
     lsd
@@ -158,9 +163,13 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     vesktop
     unstable.stremio-linux-shell
     prismlauncher
+    starship
   ];
 
-
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+    STARSHIP_CONFIG = "/persistent/home/teajhay/nixos/users/teajhay/.config/starship/starship.toml";
+  };
 #       ┌─────────────────────────┐
 #       │      Applications       │
 #       └─────────────────────────┘ 
@@ -181,14 +190,14 @@ nixpkgs.overlays = [
   ];
 
 
-programs.starship = {
-    enable = true;
-    settings = lib.mkMerge [
-      (builtins.fromTOML
-        (builtins.readFile "${userConfig}/.config/starship/tokyo-night.toml"
-      ))
-    ];
-  };
+#programs.starship = {
+#    enable = true;
+#    settings = lib.mkMerge [
+#      (builtins.fromTOML
+#        (builtins.readFile "/home/teajhay/.config/starship/starship.toml"
+#      ))
+#    ];
+#  };
   services.flatpak.enable = true;
   # Enable zsh 
   programs.zsh = {
@@ -241,7 +250,10 @@ programs.starship = {
       session.default = "hyprland";
     };
   };
-
+ # programs.noctalia = {
+ #   enable = true;
+ #   recommendedServices.enable = false;
+ # };
 
 }
 
