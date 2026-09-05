@@ -168,7 +168,7 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
 
   environment.sessionVariables = {
     EDITOR = "nvim";
-    STARSHIP_CONFIG = "/persistent/home/teajhay/nixos/users/teajhay/.config/starship/starship.toml";
+    STARSHIP_CONFIG = "/persistent/home/teajhay/nixos/users/teajhay/xdg/.config/starship/starship.toml";
   };
 #       ┌─────────────────────────┐
 #       │      Applications       │

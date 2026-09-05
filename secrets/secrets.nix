@@ -3,6 +3,7 @@
   security.nix-secrets = {
     enable = true;
     storage = "${self}/secrets"; # Relative path to your `secrets` (copied to /nix/store)
+    storagePath = "/persistent/home/teajhay/nixos/secrets/"; # Absolute path to your `secrets` (copied to /nix/store)
     identityPaths = [   
       "/home/teajhay/.secrets/keys.txt" # Path to your age private key
       "/home/teajhay/.secrets/id_ed25519" # You can also use SSH keys
@@ -15,8 +16,15 @@
     # Add your secrets here...
     secrets = {
       password.recipients = [ "teajhay" ];
-      signingKey.recipients = [ "ssh" ];
-      addres.recipients = [ "teajhay" ];
+      "noctalia/address".recipients = [ "teajhay" ];
+    };
+    templates = {
+      "Noctalia/address".content = ''
+      {
+        "location": {
+          "address": "${config.security.nix-secrets.secrets."noctalia/address".templateKey}",
+        };
+    '';
     };
   };
 }
