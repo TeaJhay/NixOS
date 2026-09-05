@@ -1,8 +1,8 @@
 { inputs, ... }: {
   imports = [ inputs.disko.nixosModules.disko ];
-    # Enable supported filesystems
+  # Enable supported filesystems
   boot.supportedFilesystems = [ "btrfs" ];
-# partitions
+  # partitions
   disko.devices.disk.main = {
     content = {
       partitions = {
@@ -58,6 +58,15 @@
                 ];
                 mountpoint = "/";
               };
+#              "/@games" = {
+#                mountOptions = [
+#                  "subvol=@games"
+#                  "compress=zstd"
+#                  "noatime"
+#                  "discard=async"
+#                ];
+#                mountpoint = "/games";
+#              };
               "/@void-blank" = {
                 mountOptions = [ "subvol=@void-blank" ];
               };
@@ -81,7 +90,7 @@
       type = "gpt";
     };
     device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
-#    device = "/dev/disk/by-id/nvme-CT1000T500SSD8_242649A0A283";
+    #    device = "/dev/disk/by-id/nvme-CT1000T500SSD8_242649A0A283";
     type = "disk";
   };
   fileSystems."/nix".neededForBoot = true;
