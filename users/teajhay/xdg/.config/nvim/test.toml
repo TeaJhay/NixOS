@@ -1,0 +1,12 @@
+{ config, pkgs, ... }:
+
+let
+  toml = pkgs.formats.toml { };
+in {
+  xdg.configFile."noctalia/test.toml".source =
+    toml.generate "noctalia-settings" {
+      location = {
+        address = "${config.security.nix-secrets.secrets."noctalia/address".path}";
+      };
+    };
+}

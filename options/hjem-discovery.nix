@@ -15,23 +15,22 @@ let
       && builtins.pathExists (usersDir + "/${u}/user.nix")) # A path with a certain file or folder in the usersDir must exist
     (builtins.attrNames userEntries); #List to filter from
 
-
  
   # This is basically the template for what folders to search in, and if they exist use findFiles to list each file. These get merged in the users default.nix or equivalent
   getUserDotfiles = username: let # declares the function "getUserDotfiles" and parameter "username"
-    dotfilesDir = usersDir + "/${username}/"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
+    dotfilesDir = usersDir + "/${username}/xdg/"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
   in
     if builtins.pathExists dotfilesDir # checks if the path exists
     then findFiles dotfilesDir # uses findFiles to return every file in the users dotfiles directory
     else {};
 
-
-
-
   enabledUsers = config.NixBeast.users.enabled; # set enabledUsers tothe option for users enabled, imported after from ./options/default.nix, which gets set to the available users anyways. Possibly set this to use the declare users in config 
   invalidUsers = lib.filter (u: !(lib.elem u availableUsers)) enabledUsers; # filters invalid users by removing the enabled users from the list of availableUsers 
 in {
-  imports = ["${self}/options/default.nix"]; # imports options used by enabledUsers
+  imports = [
+  "${self}/options/default.nix"
+  (inputs.import-tree "${self}/programs")
+  ]; # imports options used by enabledUsers
   config = mkMerge [ # mergs functions and results for use together
     {
       _module.args = {

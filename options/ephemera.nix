@@ -80,6 +80,7 @@
       ];
       users.teajhay = {
         directories = [
+          ".config/noctalia"
           ".config/jj/repos"
           ".config/mozilla"
           ".config/spotify"
