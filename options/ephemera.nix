@@ -1,9 +1,14 @@
-{ config, lib, pkgs, inputs, ... }: {
-#       ┌─────────────────────────┐
-#       │       impermanence      │
-#       └─────────────────────────┘
+{
+  lib,
+  pkgs,
+  ...
+}:
+{
+  #       ┌─────────────────────────┐
+  #       │       impermanence      │
+  #       └─────────────────────────┘
 
- boot = {
+  boot = {
     initrd = {
       availableKernelModules = [
         "nvme"
@@ -45,11 +50,11 @@
   fileSystems."/nix".neededForBoot = true;
   fileSystems."/persistent".neededForBoot = true;
   fileSystems."/persistent/home".neededForBoot = true;
-#       ┌─────────────────────────┐
-#       │       Preservation      │
-#       └─────────────────────────┘
+  #       ┌─────────────────────────┐
+  #       │       Preservation      │
+  #       └─────────────────────────┘
 
- boot.tmp.cleanOnBoot = true;
+  boot.tmp.cleanOnBoot = true;
   boot.tmp.useTmpfs = false;
   preservation = {
     enable = true;
@@ -80,7 +85,6 @@
       ];
       users.teajhay = {
         directories = [
-          ".config/noctalia"
           ".config/jj/repos"
           ".config/mozilla"
           ".config/spotify"
@@ -109,11 +113,11 @@
           ".var/app"
         ];
         files = [
-        ".gitconfig"
+          ".gitconfig"
         ];
       };
     };
   };
   security.sudo.extraConfig = "Defaults lecture=never";
-  systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
+  systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
 }

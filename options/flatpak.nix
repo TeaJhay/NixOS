@@ -1,5 +1,6 @@
-{pkgs, config, self, ... }:
-{  # ... your config
+{ ... }:
+{
+  # ... your config
 
   # Configure nix-flatpak
   services.flatpak = {

@@ -52,10 +52,10 @@
       url = "github:Krutonium/BetterFanController";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-#    nur = {
-#      url = "github:nix-community/NUR";
-#      # inputs.nixpkgs.follows = "nixpkgs"; NUR does not.
-#    };
+    #    nur = {
+    #      url = "github:nix-community/NUR";
+    #      # inputs.nixpkgs.follows = "nixpkgs"; NUR does not.
+    #    };
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     };
@@ -65,22 +65,31 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-
   nixConfig = {
-    extra-substituters = [ 
-        "https://hyprland.cachix.org" 
-        "https://noctalia.cachix.org"
-];
+    extra-substituters = [
+      "https://hyprland.cachix.org"
+      "https://noctalia.cachix.org"
+    ];
     extra-trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" 
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 
+  outputs =
+    inputs@{
+      nix-flatpak,
+      nixpkgs,
+      nixpkgs-unstable,
+      nixpkgs-master,
+      chaotic,
+      disko,
+      preservation,
+      nixpkgs-lib,
+      self,
+      ...
+    }: # Replaced long destructuring with clean inputs mapping
 
-outputs = inputs@{ nix-flatpak, nixpkgs, nixpkgs-unstable, nixpkgs-master, chaotic, disko, preservation, nixpkgs-lib, self, ... }: # Replaced long destructuring with clean inputs mapping
-    
-    
     let
       system = "x86_64-linux";
 
@@ -94,7 +103,7 @@ outputs = inputs@{ nix-flatpak, nixpkgs, nixpkgs-unstable, nixpkgs-master, chaot
       };
 
       overlay-unstable = mkChannelOverlay "unstable" nixpkgs-unstable;
-      overlay-master   = mkChannelOverlay "master" nixpkgs-master;
+      overlay-master = mkChannelOverlay "master" nixpkgs-master;
 
       # Chaotic-Nyx isn't its own nixpkgs — it's an *overlay* meant to sit on
       # top of nixpkgs-unstable. So we build a pkgs set with their overlay
@@ -106,8 +115,9 @@ outputs = inputs@{ nix-flatpak, nixpkgs, nixpkgs-unstable, nixpkgs-master, chaot
           overlays = [ chaotic.overlays.default ];
         };
       };
-    in {
-	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    in
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit self inputs; };
         modules = [
@@ -120,7 +130,7 @@ outputs = inputs@{ nix-flatpak, nixpkgs, nixpkgs-unstable, nixpkgs-master, chaot
           }
           ./configuration.nix
           inputs.hjem.nixosModules.default
-	        ./options/hjem-discovery.nix
+          ./options/hjem-discovery.nix
           inputs.noctalia-greeter.nixosModules.default
           inputs.disko.nixosModules.disko
           ./hosts/disko.nix

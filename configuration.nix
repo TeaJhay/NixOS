@@ -4,13 +4,15 @@
 #       ┌─────────────────────────┐
 #       │     Configuration       │
 #       └─────────────────────────┘
-#  I understand this page... sometimes
-{ config, lib, pkgs, inputs, ... }:
-let
-  userConfig = ./users/teajhay;
-in 
+#  I am starting to understand! Wipe time!
 {
-system.stateVersion = "26.05"; # DO NOT TOUCH
+  pkgs,
+  inputs,
+  ...
+}:
+
+{
+  system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
     ./hosts/hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
     ./hosts/filesystem.nix # importing nfs shares
@@ -26,22 +28,28 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     inputs.nix-secrets.nixosModules.default
   ];
 
-  nix.settings = {        
-    experimental-features = [ "nix-command" "flakes"];
-    substituters = ["https://hyprland.cachix.org"];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    substituters = [ "https://hyprland.cachix.org" ];
     trusted-substituters = [
       "https://hyprland.cachix.org"
       "https://noctalia.cachix.org"
     ];
-    trusted-public-keys = [ 
+    trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
     # Required so non-root users are allowed to use the above substituter/keys.
     # Use @wheel for all sudo users, or list your username explicitly.
-    trusted-users = ["root" "@wheel"];
+    trusted-users = [
+      "root"
+      "@wheel"
+    ];
   };
-  
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -53,23 +61,22 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
-
-  
-#       ┌─────────────────────────┐
-#       │   Boot/Kernel/Graphics  │
-#       └─────────────────────────┘
+  #       ┌─────────────────────────┐
+  #       │   Boot/Kernel/Graphics  │
+  #       └─────────────────────────┘
   boot.loader.systemd-boot.enable = true;
+  boot.initrd.systemd.emergencyAccess = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_zen; # Use zen OR latest kernel.
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelParams = [
-  #  "video=DP-1:1920x1080@60"
-  #  "video=HDMI-A-1:3840x2160@120"
+    #  "video=DP-1:1920x1080@60"
+    #  "video=HDMI-A-1:3840x2160@120"
   ];
   services.lact.enable = true;
-#       ┌─────────────────────────┐
-#       │       Networking        │
-#       └─────────────────────────┘
+  #       ┌─────────────────────────┐
+  #       │       Networking        │
+  #       └─────────────────────────┘
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true; # Configure network connections interactively with nmcli or nmtui.
@@ -83,42 +90,50 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
       PasswordAuthentication = true;
       PermitRootLogin = "yes";
       KbdInteractiveAuthentication = true;
-      };
+    };
   };
 
-  programs.mtr.enable = true;   # Some programs need SUID wrappers, can be configured further or are
-  programs.gnupg.agent = {      # started in user sessions.
+  programs.mtr.enable = true; # Some programs need SUID wrappers, can be configured further or are
+  programs.gnupg.agent = {
+    # started in user sessions.
     enable = true;
     enableSSHSupport = true;
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 2049 22 ];
-  networking.firewall.allowedUDPPorts = [ 2049 22];
+  networking.firewall.allowedTCPPorts = [
+    2049
+    22
+  ];
+  networking.firewall.allowedUDPPorts = [
+    2049
+    22
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-#       ┌─────────────────────────┐
-#       │          Sound          │
-#       └─────────────────────────┘ 
+  #       ┌─────────────────────────┐
+  #       │          Sound          │
+  #       └─────────────────────────┘
 
   security.rtkit.enable = true;
-  services.pipewire = { # Enable sound.
+  services.pipewire = {
+    # Enable sound.
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-#       ┌─────────────────────────┐
-#       │          Users          │
-#       └─────────────────────────┘
+  #       ┌─────────────────────────┐
+  #       │          Users          │
+  #       └─────────────────────────┘
 
   # imports the hjemModule
-  hjem.extraModules = [inputs.hjem-impure.hjemModules.default];
+  hjem.extraModules = [ inputs.hjem-impure.hjemModules.default ];
   # enable hjem-impure
   hjem.users.teajhay.impure.enable = true;
   NixBeast.users.enabled = [
-  "teajhay"
+    "teajhay"
   ];
   users.users.teajhay = {
     home = "/home/teajhay";
@@ -126,18 +141,23 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     hashedPasswordFile = "/persistent/passwords/user/linux";
     #initialPassword = "changeme";
     description = "Tea with a side of Jhay";
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
     packages = with pkgs; [
       tree
     ];
   };
-#       ┌─────────────────────────┐
-#       │         Packages        │
-#       └─────────────────────────┘ 
+  #       ┌─────────────────────────┐
+  #       │         Packages        │
+  #       └─────────────────────────┘
 
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    nixfmt
+    nil
     ripgrep
     git
     fd
@@ -148,12 +168,12 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     python3
     gnumake
     kitty
-   # tuigreet  # Add to TUI-based host
+    # tuigreet  # Add to TUI-based host
     greetd
     gh
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default
-#    unstable.noctalia-greeter
+    #    unstable.noctalia-greeter
     fastfetch
     fzf
     lsd
@@ -170,58 +190,56 @@ system.stateVersion = "26.05"; # DO NOT TOUCH
     EDITOR = "nvim";
     STARSHIP_CONFIG = "/persistent/home/teajhay/nixos/users/teajhay/xdg/.config/starship/starship.toml";
   };
-#       ┌─────────────────────────┐
-#       │      Applications       │
-#       └─────────────────────────┘ 
+  #       ┌─────────────────────────┐
+  #       │      Applications       │
+  #       └─────────────────────────┘
 
-
-nixpkgs.overlays = [
+  nixpkgs.overlays = [
     (final: prev: {
       prismlauncher = prev.prismlauncher.override {
         # 1. Provide all the Java versions you need for different Minecraft versions
         jdks = with prev; [
-          temurin-bin-8   # For old Minecraft versions (1.7 - 1.12)
-          temurin-bin-17  # For Minecraft 1.17 - 1.20
-          temurin-bin-21  # For Minecraft 1.20.5+
+          temurin-bin-8 # For old Minecraft versions (1.7 - 1.12)
+          temurin-bin-17 # For Minecraft 1.17 - 1.20
+          temurin-bin-21 # For Minecraft 1.20.5+
           final.unstable.temurin-bin-26
         ];
       };
     })
   ];
 
-
-#programs.starship = {
-#    enable = true;
-#    settings = lib.mkMerge [
-#      (builtins.fromTOML
-#        (builtins.readFile "/home/teajhay/.config/starship/starship.toml"
-#      ))
-#    ];
-#  };
+  #programs.starship = {
+  #    enable = true;
+  #    settings = lib.mkMerge [
+  #      (builtins.fromTOML
+  #        (builtins.readFile "/home/teajhay/.config/starship/starship.toml"
+  #      ))
+  #    ];
+  #  };
   services.flatpak.enable = true;
-  # Enable zsh 
+  # Enable zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-  
+
     shellAliases = {
       ll = "ls -l";
       gitbeam = "git commit -a -m 'edits' && git push";
       edit = "sudo -E nvim";
-      update-pers="sudo nixos-rebuild switch --show-trace --flake /persistent/home/NixOS#nixos";
+      update-pers = "sudo nixos-rebuild switch --show-trace --flake /persistent/home/NixOS#nixos";
       update = "sudo nixos-rebuild switch --show-trace --flake ./#nixos";
-      nmtui="env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
+      nmtui = "env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
-    
+
     ohMyZsh = {
       enable = true;
       plugins = [
         "git"
       ];
     };
-  
+
     histSize = 10000;
     histFile = "$HOME/.zsh_history";
     setOptions = [
@@ -229,14 +247,15 @@ nixpkgs.overlays = [
     ];
   };
 
-  # Enable Firefox 
-#  programs.firefox.enable = true;
-#  programs.yazi.enable = true;
+  # Enable Firefox
+  #  programs.firefox.enable = true;
+  #  programs.yazi.enable = true;
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     withUWSM = false;
     xwayland.enable = true;
   };
@@ -250,10 +269,9 @@ nixpkgs.overlays = [
       session.default = "hyprland";
     };
   };
- # programs.noctalia = {
- #   enable = true;
- #   recommendedServices.enable = false;
- # };
+  # programs.noctalia = {
+  #   enable = true;
+  #   recommendedServices.enable = false;
+  # };
 
 }
-
