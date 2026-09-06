@@ -77,6 +77,8 @@ in
               directory = config.users.users.${username}.home;
               files = getUserDotfiles username;
               impure.enable = true;
+              impure.dotsDir = usersDir + "/${username}/xdg";
+              impure.dotsDirImpure = "/persistent/home/${username}/nixos/users/${username}/xdg";
             };
           }) enabledUsers # the list of users it'll map hjem options for
         );

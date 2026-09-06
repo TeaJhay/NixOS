@@ -86,6 +86,7 @@
       users.teajhay = {
         directories = [
           ".config/jj/repos"
+          ".config/zen"
           ".config/mozilla"
           ".config/spotify"
           ".config/vesktop"
@@ -108,6 +109,7 @@
           ".local/state/wireplumber"
           ".local/state/noctalia"
           ".ssh"
+          ".thunderbird"
           ".secrets"
           ".steam"
           ".var/app"
