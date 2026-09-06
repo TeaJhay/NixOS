@@ -92,7 +92,6 @@
       KbdInteractiveAuthentication = true;
     };
   };
-
   programs.mtr.enable = true; # Some programs need SUID wrappers, can be configured further or are
   programs.gnupg.agent = {
     # started in user sessions.
@@ -159,7 +158,6 @@
     nixfmt
     nil
     ripgrep
-    git
     fd
     unzip
     nodejs
@@ -185,11 +183,26 @@
     prismlauncher
     starship
     zoxide
+    age
   ];
+  fonts.enableDefaultPackages = true;
+  fonts.packages = with pkgs; [
+    ibm-plex
+    nerd-fonts.iosevka
+  ];
+
+  fonts.fontconfig = {
+    defaultFonts = {
+      serif = [ "ibm-plex" ];
+      sansSerif = [ "ibm-plex" ];
+      monospace = [ "nerd-fonts.iosevka" ];
+    };
+  };
 
   environment.sessionVariables = {
     EDITOR = "nvim";
-    STARSHIP_CONFIG = "/persistent/home/teajhay/nixos/users/teajhay/xdg/.config/starship/starship.toml";
+    STARSHIP_CONFIG = "/home/teajhay/.config/starship/starship.toml";
+    NIXOS_CONFIG = "/persistent/home/teajhay/nixos/";
   };
   #       ┌─────────────────────────┐
   #       │      Applications       │
@@ -209,6 +222,16 @@
     })
   ];
 
+
+  programs.git = {
+    enable = true;
+    config = {
+      user = {
+        name= "Teajhay";
+      };
+    };
+  };
+  programs.thunderbird.enable = true;
   #programs.starship = {
   #    enable = true;
   #    settings = lib.mkMerge [
@@ -230,7 +253,7 @@
       gitbeam = "git commit -a -m 'edits' && git push";
       edit = "sudo -E nvim";
       update-pers = "sudo nixos-rebuild switch --show-trace --flake /persistent/home/NixOS#nixos";
-      update = "sudo nixos-rebuild switch --show-trace --flake ./#nixos";
+      update = "sudo nixos-rebuild switch --show-trace --flake #nixos";
       nmtui = "env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
 

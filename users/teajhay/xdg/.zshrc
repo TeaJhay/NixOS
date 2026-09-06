@@ -1,12 +1,16 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+
 export ZSH="$HOME/.oh-my-zsh"
 
+source $ZSH/plugins/zsh-defer/zsh-defer.plugin.zsh
+
+zsh-defer source $ZSH/oh-my-zsh.sh
+
 #ZSH_THEME="agnosterzak"
-
-source $ZSH/oh-my-zsh.sh
-
+# Disable security check for faster startup
+ZSH_DISABLE_COMPFIX="true"
 # Check archlinux plugin commands here
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/archlinux
 
@@ -40,3 +44,4 @@ export PATH="$PATH:/home/teejay/.local/bin"
 export PATH=$PATH:/home/teejay/.spicetify
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+

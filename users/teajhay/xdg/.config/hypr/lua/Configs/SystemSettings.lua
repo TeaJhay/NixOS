@@ -95,7 +95,7 @@ hl.config({
         numlock_by_default = true,
         left_handed = false,
         follow_mouse = 1,
-        float_switch_override_focus = false,
+        float_switch_override_focus = 0,
         touchpad = {
             disable_while_typing = true,
             natural_scroll = true,
