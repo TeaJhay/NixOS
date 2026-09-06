@@ -248,8 +248,8 @@
     ];
   };
 
-  # Enable Firefox
-  #  programs.firefox.enable = true;
+  #Enable Firefox
+  programs.firefox.enable = true;
   #  programs.yazi.enable = true;
   # Enable Hyprland
   programs.hyprland = {
