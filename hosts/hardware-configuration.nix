@@ -5,20 +5,14 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
-boot = {
-    initrd = {
-      availableKernelModules = [
-        "uhci_hcd"
-        "ehci_pci"
-        "ahci"
-        "virtio_scsi"
-        "sd_mod"
-        "sr_mod"
-      ];
-    };
-  kernelModules = [ "kvm-intel" ];
-};
+
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "uas" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

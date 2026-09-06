@@ -21,7 +21,9 @@
         {
             "type": "kernel",
             "key": " ",
-            "keyColor": "yellow"
+            "keyColor": "yellow",
+            "format": "Hyprkernel {release}"
+
         },
         {
             "type": "wm",
