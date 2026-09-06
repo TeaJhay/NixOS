@@ -7,7 +7,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(starship init zsh)"
 # Check archlinux plugin commands here
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/archlinux
 
@@ -39,3 +38,5 @@ setopt appendhistory
 export PATH="$PATH:/home/teejay/.local/bin"
 
 export PATH=$PATH:/home/teejay/.spicetify
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"

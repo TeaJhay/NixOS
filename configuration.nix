@@ -184,6 +184,7 @@
     unstable.stremio-linux-shell
     prismlauncher
     starship
+    zoxide
   ];
 
   environment.sessionVariables = {
