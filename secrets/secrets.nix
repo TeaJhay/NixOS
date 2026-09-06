@@ -24,7 +24,7 @@
       githubSSH = {
         recipients = [ "teajhay" ];
         owner = "teajhay";
-        mode = "0400";
+        mode = "0600";
       };
       githubGPG = {
         recipients = [ "teajhay" ];
