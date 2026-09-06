@@ -1,27 +1,24 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
 command_timeout = 2000
-
+#$hostname\
+#$username\
+#[ ](fg:color_bg2 bg:color_bg2)\
 format = """
 [](fg:color_bg1)\
 $os\
 [ ](fg:color_bg1 bg:color_bg2)\
-$username\
-$hostname\
-[ ](fg:color_bg2 bg:color_bg2)\
 $directory\
 [ ](fg:color_bg2 bg:color_bg3)\
 $git_branch\
 $git_status\
-[ ](fg:color_bg3 bg:color_bg4)\
 $c\
 $dotnet\
 $java\
 $kotlin\
 $nodejs\
-[ ](fg:color_bg4 bg:color_bg5)\
+[ ](fg:color_bg3 bg:color_bg5)\
 $cmd_duration\
-[ ](fg:color_bg5)\
 \n$character\
 """
 
@@ -61,18 +58,24 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:color_bg3 fg:color_blue"
+style = "bg:color_bg3 fg:color_red"
 format = "[$symbol $branch]($style)"
 
 [git_status]
+style = "bold bg:color_bg3 fg:color_red"
+format = '([ $all_status$ahead_behind]($style))'
+# Keep your existing commit status configurations
 ahead = "⇡${count}"
 behind = "⇣${count}"
-deleted = ""
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-format = '[( $all_status$ahead_behind)]($style)'
-style = "bold bg:color_bg3 fg:color_red"
+# Add ${count} to the file status indicators
+modified = "⚑${count}"
+untracked = "!${count}"
+staged = "+${count}"
+deleted = "${count}"
 
 [hostname]
+disabled = true
 format = "[@$hostname]($style)"
 ssh_only = true
 ssh_symbol = " "
@@ -84,7 +87,7 @@ style = "bg:color_bg1 fg:color_white"
 disabled = false
 
 [username]
-disabled = false
+disabled = true
 format = "[$user]($style)"
 show_always = false
 style_root = "bg:color_bg2 fg:color_red"
