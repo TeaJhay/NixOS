@@ -11,6 +11,7 @@
     preservation.url = "github:nix-community/preservation";
     nix-secrets.url = "github:unnamed-systems/nix-secrets";
     import-tree.url = "github:denful/import-tree";
+    niqspkgs.url = "github:diniamo/niqspkgs";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

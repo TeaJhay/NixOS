@@ -33,7 +33,7 @@ hl.monitor({
   scale = 1.5,
   cm = "wide",
   bitdepth = 10,
-  vrr = 2,
+  vrr = 3,
   --disabled = true,
  -- sdrbrightness = 0.7,
  -- sdrsaturation = 0.3,

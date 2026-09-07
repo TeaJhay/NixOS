@@ -177,13 +177,17 @@
     lsd
     zsh-nix-shell
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    yazi
+    unstable.yazi
     vesktop
     unstable.stremio-linux-shell
     prismlauncher
     starship
     zoxide
     age
+    hyprcursor
+    unstable.pear-desktop
+    quickshell
+    qt6.qtwayland
   ];
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
