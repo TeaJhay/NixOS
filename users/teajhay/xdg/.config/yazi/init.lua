@@ -54,7 +54,7 @@ require("bunny"):setup({
     { key = { "l", "b" }, path = "~/.local/bin",   desc = "Local bin"    },
     { key = { "l", "t" }, path = "~/.local/state", desc = "Local state"  },
     { key = { "h", "r" }, path = "/persistent/home/teajhay/nixos", desc = "Nix config"},
-    { key = { "h", "y" }, path = "/persistent/home/teajhay/nixos/users/teajhay/.config", desc = "Nix user config" },
+    { key = { "h", "y" }, path = "/persistent/home/teajhay/nixos/users/teajhay/xdg/.config", desc = "Nix user config" },
     -- key and path attributes are required, desc is optional
   },
   desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
