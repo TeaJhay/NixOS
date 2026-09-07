@@ -10,8 +10,8 @@
     storage = "${self}/secrets"; # Relative path to your `secrets` (copied to /nix/store)
     storagePath = "/persistent/home/teajhay/nixos/secrets/"; # Absolute path to your `secrets` (copied to /nix/store)
     identityPaths = [
-      "/home/teajhay/.ssh/keys.txt" # Path to your age private key
-      "/home/teajhay/.ssh/id_ed25519" # You can also use SSH keys
+      "/persistent/home/teajhay/.ssh/keys.txt" # Path to your age private key
+      "/persistent/home/teajhay/.ssh/id_ed25519" # You can also use SSH keys
     ];
     recipientAliases = {
       teajhay = "age1n0n7ml9drkk25uq7z0pz0avdnhdyxdwr470l8necmlrfyahudsaq274z9c"; # Your age recipient (public key)
