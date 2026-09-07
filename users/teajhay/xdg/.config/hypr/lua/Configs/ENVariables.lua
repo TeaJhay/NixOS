@@ -84,10 +84,6 @@ hl.env("QT_SCALE_FACTOR", 1)
 
 -- https://wiki.hyprland.org/Hypr-Ecosystem/hyprcursor/
 
-hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Ice")
-
-hl.env("HYPRCURSOR_SIZE", 24)
-
 --## firefox ###
 
 hl.env("MOZ_ENABLE_WAYLAND", 1)
