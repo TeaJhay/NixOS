@@ -27,7 +27,7 @@
     inputs.nixos-hardware.nixosModules.gigabyte-b650 # motherboard fix
     inputs.nix-secrets.nixosModules.default
   ];
-
+  nixpkgs.config.allowUnfree = true;
   nix.settings = {
     experimental-features = [
       "nix-command"
@@ -179,7 +179,6 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     unstable.yazi
     vesktop
-    unstable.stremio-linux-shell
     prismlauncher
     starship
     zoxide
@@ -195,11 +194,12 @@
     nerd-fonts.iosevka
   ];
 
+
   fonts.fontconfig = {
     defaultFonts = {
-      serif = [ "ibm-plex" ];
-      sansSerif = [ "ibm-plex" ];
-      monospace = [ "nerd-fonts.iosevka" ];
+      serif = [ "IBM Plex Serif" ];
+      sansSerif = [ "IBM Plex Sans" ];
+      monospace = [ "Iosevka Nerd Font" ]; 
     };
   };
 
