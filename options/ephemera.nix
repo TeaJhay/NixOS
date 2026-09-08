@@ -109,8 +109,8 @@
           ".local/state/wireplumber"
           ".local/state/noctalia"
           ".ssh"
+          ".gnupg"
           ".thunderbird"
-          ".secrets"
           ".steam"
           ".var/app"
         ];
