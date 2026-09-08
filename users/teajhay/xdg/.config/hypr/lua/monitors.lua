@@ -33,7 +33,7 @@ hl.monitor({
   scale = 1.5,
   cm = "wide",
   bitdepth = 10,
-  vrr = 3,
+  vrr = 0,
   --disabled = true,
  -- sdrbrightness = 0.7,
  -- sdrsaturation = 0.3,
@@ -52,6 +52,7 @@ hl.monitor({
 hl.config({
     render = {
         cm_auto_hdr = 2,
-        direct_scanout = 1,
+        direct_scanout = 2,
+        keep_unmodified_copy = 0,
     },
 })

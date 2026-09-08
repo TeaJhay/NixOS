@@ -78,22 +78,34 @@
   #       │       Networking        │
   #       └─────────────────────────┘
 
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true; # Configure network connections interactively with nmcli or nmtui.
   time.timeZone = "Australia/Brisbane"; # Set your time zone.
-  
 networking = {
-  interfaces.enp10s0 = {
-    ipv4.addresses = [{
-      address = "10.0.0.100";
-      prefixLength = 8;
-    }];
-  };
-  defaultGateway = {
-    address = "10.0.0.1";
-    interface = "enp10s0";
+  hostName = "NixBeast";
+
+  networkmanager = {
+    enable = true;
+    insertNameservers = [ "10.0.1.101" "1.1.1.1" ];
+
+    ensureProfiles.profiles = {
+      "enp10s0" = {
+        connection = {
+          id = "enp10s0";
+          type = "ethernet";
+          interface-name = "enp10s0";
+        };
+        ipv4 = {
+          method = "manual";
+          addresses = "10.0.0.100/24";
+          gateway = "10.0.0.1";
+        };
+        ethernet = {
+          wake-on-lan = 1; # magic packet; see note below
+        };
+      };
+    };
   };
 };
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -204,6 +216,7 @@ networking = {
     swappy
     grim
     wl-clipboard
+    playerctl
   ];
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
@@ -242,6 +255,8 @@ networking = {
       };
     })
   ];
+  programs.gamemode.enable = true;
+  programs.steam.enable = true;
 
 
   programs.git = {

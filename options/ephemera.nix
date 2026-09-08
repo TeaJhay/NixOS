@@ -116,7 +116,10 @@
         ];
         files = [
           ".gitconfig"
-          ".config/mimeapps.list"
+          {
+          file = ".config/mimeapps.list";
+          how = "symlink";
+          }
         ];
       };
     };
