@@ -302,9 +302,9 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --pause")
 
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --pause"), { locked = true })
 
-hl.bind("xf86AudioNext", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --nxt"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --nxt"), { locked = true })
 
-hl.bind("xf86AudioPrev", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --prv"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --prv"), { locked = true })
 
 hl.bind("xf86audiostop", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --stop"), { locked = true })
 
