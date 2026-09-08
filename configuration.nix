@@ -81,7 +81,19 @@
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true; # Configure network connections interactively with nmcli or nmtui.
   time.timeZone = "Australia/Brisbane"; # Set your time zone.
-
+  
+networking = {
+  interfaces.enp10s0 = {
+    ipv4.addresses = [{
+      address = "10.0.0.100";
+      prefixLength = 8;
+    }];
+  };
+  defaultGateway = {
+    address = "10.0.0.1";
+    interface = "enp10s0";
+  };
+};
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -187,6 +199,11 @@
     unstable.pear-desktop
     quickshell
     qt6.qtwayland
+    libnotify
+    slurp
+    swappy
+    grim
+    wl-clipboard
   ];
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
