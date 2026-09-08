@@ -91,7 +91,6 @@
           ".config/spotify"
           ".config/vesktop"
           ".config/gh"
-          ".config/mimeapps.list"
           ".java"
           ".local/share/PrismLauncher"
           ".local/share/Steam"
@@ -117,6 +116,7 @@
         ];
         files = [
           ".gitconfig"
+          ".config/mimeapps.list"
         ];
       };
     };
