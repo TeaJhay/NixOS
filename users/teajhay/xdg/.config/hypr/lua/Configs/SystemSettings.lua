@@ -144,7 +144,7 @@ hl.config({
         -- vfr = true     # Not supported past v0.54.3
         --vrr = 0,
         -- Disabling by default causes MPV to black screen when maximixes 
-        --vrr = 0,disabled, 1, alweays on, 2, only on when fullscreen
+        -- vrr = 3, --,disabled, 1, alweays on, 2, only on when fullscreen
         mouse_move_enables_dpms = true,
         enable_swallow = false,
         swallow_regex = "^(kitty)$",
