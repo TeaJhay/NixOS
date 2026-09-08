@@ -14,7 +14,7 @@ QS_OVERVIEW_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/quickshell/overview"
 # 1) Prefer Quickshell when installed and configured
 if command -v qs >/dev/null 2>&1 && [ -d "$QS_OVERVIEW_DIR" ]; then
   # Try Quickshell via IPC (works if QS is running and listening)
-  if pgrep -x qs >/dev/null 2>&1; then
+  if pgrep -x .quickshell-wra >/dev/null 2>&1; then
     if qs ipc -c overview call overview toggle >/dev/null 2>&1; then
       exit 0
     fi
