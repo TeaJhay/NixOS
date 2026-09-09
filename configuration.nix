@@ -121,6 +121,13 @@ networking = {
     # started in user sessions.
     enable = true;
     enableSSHSupport = true;
+
+    settings = {
+      default-cache-ttl = 28800;
+      max-cache-ttl = 28800;
+      default-cache-ttl-ssh = 28800;
+      max-cache-ttl-ssh = 28800;
+    };
   };
 
   # Open ports in the firewall.
