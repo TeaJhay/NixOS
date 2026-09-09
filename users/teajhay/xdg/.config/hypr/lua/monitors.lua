@@ -18,7 +18,7 @@
 ---@module 'hl'
 
 hl.monitor({
-  output = "DP-3",
+  output = "DP-5",
   mode = "1920x1080@60.0",
   position = "0x0",
   scale = 1,
@@ -49,10 +49,16 @@ hl.monitor({
 
 --}
 
+--hl.config({
+--    debug = {
+--        overlay = true,
+--        vfr = false,  -- disable VFR so the fps counter shows accurate numbers
+--    }
+--})
+
 hl.config({
     render = {
         cm_auto_hdr = 2,
         direct_scanout = 2,
-        keep_unmodified_copy = 0,
     },
 })
