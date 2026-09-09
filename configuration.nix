@@ -289,7 +289,7 @@ networking = {
       gitbeam = "git commit -a -m 'edits' && git push";
       edit = "sudo -E nvim";
       update-pers = "sudo nixos-rebuild switch --show-trace --flake /persistent/home/NixOS#nixos";
-      update = "sudo nixos-rebuild switch --show-trace --flake #nixos";
+      update = "sudo nixos-rebuild switch --show-trace --flake #NixBeast";
       nmtui = "env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
 
