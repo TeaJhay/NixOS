@@ -88,7 +88,7 @@
           ".config/jj/repos"
           ".config/zen"
           ".config/mozilla"
-          ".config/spotify"
+          ".config/Youtube Music"
           ".config/vesktop"
           ".config/gh"
           ".java"
