@@ -224,7 +224,18 @@ networking = {
     grim
     wl-clipboard
     playerctl
+    krita
+    hyprpicker
+    tesseract
+    tesseract-data-eng
+    zbar
+    imagemagick
+    jq
+    stat
+    mpv
+    translate-shell
   ];
+
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
     ibm-plex
