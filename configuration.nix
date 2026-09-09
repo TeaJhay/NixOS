@@ -225,13 +225,12 @@ networking = {
     wl-clipboard
     playerctl
     krita
+    bitwarden-cli
     hyprpicker
     tesseract
-    tesseract-data-eng
     zbar
     imagemagick
     jq
-    stat
     mpv
     translate-shell
   ];
@@ -326,7 +325,7 @@ networking = {
   };
 
   #Enable Firefox
-  programs.firefox.enable = true;
+  #programs.firefox.enable = true;
   #  programs.yazi.enable = true;
   # Enable Hyprland
   programs.hyprland = {
