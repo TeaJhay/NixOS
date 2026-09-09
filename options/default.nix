@@ -1,4 +1,4 @@
-{ lib, availableUsers, config, ... }:
+{ lib, availableUsers, ... }:
 
 {
   options.NixBeast.users.enabled = lib.mkOption {
