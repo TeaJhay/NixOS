@@ -118,7 +118,7 @@
       };
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.NixBeast = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit self inputs; };
         modules = [
