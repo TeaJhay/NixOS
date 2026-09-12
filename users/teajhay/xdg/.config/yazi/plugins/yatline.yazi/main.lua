@@ -90,8 +90,9 @@ Yatline.config = {
 	section_separator = { open = "", close = "" },
 	part_separator = { open = "", close = "" },
 	inverse_separator = { open = "", close = "" },
-
-	padding = { inner = 1, outer = 1 },
+  line_cap = { head = "", tail = ""},
+	
+  padding = { inner = 1, outer = 1 },
 
 	style_a = {
 		bg = "white",
@@ -828,7 +829,7 @@ function Yatline.line.get:tabs(side)
 
 		local separator_style = { bg = nil, fg = nil }
 		if i == cx.tabs.idx then
-			local tab = connect_padding(text, ComponentType.A, in_side)
+			local tab =  connect_padding(text, ComponentType.A, in_side)
 			set_mode_style(cx.tabs[i].mode)
 			set_component_style(tab, ComponentType.A)
 
@@ -1280,16 +1281,26 @@ local function config_line(side, in_side)
 		section_b_line_components = reverse_order(section_b_line_components)
 		section_c_line_components = reverse_order(section_c_line_components)
 	end
-
-	-- Combines components of section into single components.
-	local section_a_line = ui.Line(section_a_line_components)
+ 
+  -- Combines components of section into single components.
+  local section_head = ui.Line(ui.Span(Yatline.config.line_cap.head))
+  local section_tail = ui.Line(ui.Span(Yatline.config.line_cap.tail))
+  local section_a_line = ui.Line(section_a_line_components)
 	local section_b_line = ui.Line(section_b_line_components)
 	local section_c_line = ui.Line(section_c_line_components)
 
-	if in_side == Side.LEFT then
-		return ui.Line({ section_a_line, section_b_line, section_c_line })
+-- Styles line caps to match section A
+  local reversed_style_a = { fg = Yatline.config.style_a.bg, bg = "reset" }
+  apply_style_table(section_head, reversed_style_a)
+  apply_style_table(section_tail, reversed_style_a)
+  
+
+
+
+  if in_side == Side.LEFT then
+		return ui.Line({section_head, section_a_line, section_b_line, section_c_line })
 	else
-		return ui.Line({ section_c_line, section_b_line, section_a_line })
+		return ui.Line({ section_c_line, section_b_line, section_a_line, section_tail })
 	end
 end
 

@@ -53,7 +53,7 @@
     "orderRightLeft": false,
     "orderBottomUp": false,
     "previewsEnabled": true,
-    "previewMode": "live",
+    "previewMode": "event",
     "includeInactiveMonitorPreviews": true,
     "previewRecaptureDelayMs": 60,
     "showSpecialWorkspaces": true,
