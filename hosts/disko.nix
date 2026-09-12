@@ -2,7 +2,13 @@
   imports = [ inputs.disko.nixosModules.disko ];
   # Enable supported filesystems
   boot.supportedFilesystems = [ "btrfs" ];
-  # partitions
+  # Swap
+  zramSwap = {
+    enable = true;
+    algorithm = "lz4";
+    memoryPercent = 150;
+  };
+  # Partitions
   disko.devices.disk.main = {
     content = {
       partitions = {
@@ -77,15 +83,15 @@
           priority = 3;
           size = "100%";
         };
-        swap = {
-          content = {
-            resumeDevice = true;
-            type = "swap";
-          };
-          name = "swap";
-          priority = 2;
-          size = "12G";
-        };
+#        swap = {
+#          content = {
+#            resumeDevice = true;
+#            type = "swap";
+#          };
+#          name = "swap";
+#          priority = 2;
+#          size = "32G";
+#        };
       };
       type = "gpt";
     };

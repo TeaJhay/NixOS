@@ -28,6 +28,14 @@
 
 local scriptsDir = "os.getenv(\"HOME\")/.config/hypr/scripts"
 
+
+
+
+
+   hl.permission({ binary = "/usr/bin/quickshell", type = "screencopy", mode = "allow" })
+
+
+
 hl.config({
     dwindle = {
         --pseudotile = false    # Not supported 0.55+

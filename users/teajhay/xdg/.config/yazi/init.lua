@@ -64,11 +64,35 @@ require("bunny"):setup({
   fuzzy_cmd = "fzf", -- Fuzzy searching command, default is "fzf"
 })
 
+local function get_mode_bg()
+  local mode = cx.active.mode
+  if mode.is_select then
+    return Yatline.config.style_a.bg_mode.select
+  elseif mode.is_unset then
+    return Yatline.config.style_a.bg_mode.un_set
+  else
+    return Yatline.config.style_a.bg_mode.normal
+  end
+end
+
+local function left_cap()
+  local span = ui.Span("\u{e0b6}"):fg(get_mode_bg()) -- left half-circle
+  return ui.Line({ span })
+end
+
+local function right_cap()
+  local span = ui.Span("\u{e0b4}"):fg(get_mode_bg()) -- right half-circle
+  return ui.Line({ span })
+end
 
 require("yatline"):setup({
-	section_separator = { open = "", close = "" },
-	inverse_separator = { open = "", close = "" },
-	part_separator = { open = "", close = "" },
+	section_separator = { open = "", close = "" },
+	inverse_separator = { open = "", close = "" },
+
+  separator_open  = "", -- Left round cap (Glyph e0b6)
+  separator_close = "", -- Right round cap (Glyph e0b4)
+
+
 
 	style_a = {
 		fg = catppuccin_palette.mantle,
