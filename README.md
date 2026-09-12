@@ -39,32 +39,42 @@
 ├── configuration.nix -- Base config, maybe not even needed?
 ├── flake.lock
 ├── flake.nix
-├── hosts
+├── Hosts
 │   └── machineName (NixBeast)
 │       ├── disko.nix -- Root, boot and swap partitions.
 │       ├── filesystem.nix -- NFS shares and extra drives
 │       └── hardware-configuration.nix -- Hardware config minus filesystem
+│
 ├── InstallNix.sh -- Installer/helper script
-├── learning -- Learning directory, playing with nix configs and modules
+│
+├── Learning -- Learning directory, playing with nix configs and modules
 │   ├── hjem-discovery.nix 
 │   ├── hjem.nix
 │   └── starship.nix
-├── options -- Big features/implementations.
+│
+├── Options -- Big features/implementations.
 │   ├── default.nix -- move to config for each user? Enabled hjem-discovery users
 │   ├── ephemera.nix -- Impermanence/Preservation. Preserve files and configure rollback of @void
 │   ├── flatpak.nix -- Add flatpaks, should be user based. Moved to programs.
 │   └── hjem-discovery.nix -- Hjem management and auto-discovery of a user's files found in users/$Username/xdg/ and links to .local, .config and etc.
-├── programs -- Nix configs for programs. Ideally everything should be here with a users configs. Maybe move to a user folder?
+│
+├── Profiles -- Nix configs for apps that might be edited or configurations changed often, where constant rebuilds would be inconvenient
+│   └── NVF  -- Rafware, Neovim but nix and better!
+│
+│
+├── Programs -- Nix configs for programs. Ideally everything should be here with a users configs. Maybe move to a user folder?
 │   ├── hyprland
 │   │   └── cursor.nix
 │   ├── noctalia.nix
 │   └── noctalia.nix.bak
-├── secrets -- Secrets management
+│
+├── Secrets -- Secrets management
 │   ├── githubGPG.enc
 │   ├── githubSSH.enc
 │   ├── password.enc
 │   └── secrets.nix
-└── users -- Users folder. Each users name, a nix file to mark them as "valid" and their dots.
+│
+└── Users -- Users folder. Each users name, a nix file to mark them as "valid" and their dots.
     └── teajhay
         ├── user.nix
         └── xdg
