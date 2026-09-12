@@ -22,7 +22,7 @@
     ./options/flatpak.nix
     inputs.nixos-hardware.nixosModules.common-cpu-amd # common AMD cpu settings
     inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate # Common AMD cpu pstate settings
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower # Replaces kernel sensing with zen power
+  #  inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower # Replaces kernel sensing with zenpower - out of date
     inputs.nixos-hardware.nixosModules.common-gpu-amd # gpu settings
     inputs.nixos-hardware.nixosModules.gigabyte-b650 # motherboard fix
     inputs.nix-secrets.nixosModules.default
@@ -116,6 +116,7 @@ networking = {
       KbdInteractiveAuthentication = true;
     };
   };
+  services.udisks2.enable = true;
   programs.mtr.enable = true; # Some programs need SUID wrappers, can be configured further or are
   programs.gnupg.agent = {
     # started in user sessions.
@@ -201,8 +202,6 @@ networking = {
     greetd
     gh
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default
-    #    unstable.noctalia-greeter
     fastfetch
     fzf
     lsd
@@ -216,7 +215,7 @@ networking = {
     age
     hyprcursor
     unstable.pear-desktop
-    quickshell
+    unstable.quickshell
     qt6.qtwayland
     libnotify
     slurp
@@ -233,6 +232,10 @@ networking = {
     jq
     mpv
     translate-shell
+    udiskie
+    lyx
+    btop
+    lazyssh
   ];
 
   fonts.enableDefaultPackages = true;

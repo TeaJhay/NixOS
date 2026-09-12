@@ -13,7 +13,7 @@ local LuaScripts = os.getenv("HOME") .. "/.config/hypr/lua/LuaScripts"
 hl.on("hyprland.start", function()
     hl.exec_cmd("sleep 7 && vesktop --ozone-platform-hint=auto --start-minimized")
 
-    --hl.exec_cmd("hyprpm reload")
+    hl.exec_cmd("udiskie")
     hl.exec_cmd("steam -silent")
     hl.exec_cmd("xrandr --output HDMI-A-1 --primary")
     --hl.exec_cmd("/usr/lib/pam_kwallet_init")

@@ -49,7 +49,8 @@ prepend_keymap = [
     "yank",
   ], desc = "yank files and copy to clipboard" },
   { on = "A", run = "create --dir", desc = "Create a dir" },
-  { on = "'", run = "plugin bunny", desc = "Start bunny.yazi"}  
+  { on = "'", run = "plugin bunny", desc = "Start bunny.yazi"},
+  { on   = [ "g", "i"] ,run  = "plugin lazygit", desc = "run lazygit"}
 ]
 
 append_keymap = [

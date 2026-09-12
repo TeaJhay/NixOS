@@ -12,6 +12,10 @@
     nix-secrets.url = "github:unnamed-systems/nix-secrets";
     import-tree.url = "github:denful/import-tree";
     niqspkgs.url = "github:diniamo/niqspkgs";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -87,6 +91,8 @@
       disko,
       preservation,
       nixpkgs-lib,
+      nvf,
+      niqspkgs,
       self,
       ...
     }: # Replaced long destructuring with clean inputs mapping

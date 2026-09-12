@@ -53,8 +53,9 @@ preview = { bg = "#292e42" }
 
 [status]
 overall = { fg = "#c0caf5", bg = "#16161e" }
-sep_left = { open = "", close = "" }
-sep_right = { open = "", close = "" }
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
 
 # Permissions
 perm_type = { fg = "#7aa2f7" }
