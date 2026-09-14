@@ -492,33 +492,33 @@ hl.window_rule({
 
 -- workspaces
 
-hl.workspace_rule({
-    workspace = "1",
-    monitor = "DP-3",
-    default = true,
-})
-
-hl.workspace_rule({
-   workspace = "2",
-   monitor = "HDMI-A-1",
-   default = true,
-})
+--hl.workspace_rule({
+--    workspace = "1",
+--    monitor = "DP-3",
+--    default = true,
+--})
 --
-----workspace = 3
+--hl.workspace_rule({
+--   workspace = "2",
+--   monitor = "HDMI-A-1",
+--   default = true,
+--})
+----
+------workspace = 3
+----
+------workspace = 4
+----
+------workspace = 5
+----
+--hl.workspace_rule({
+--    workspace = "6",
+--    monitor = "DP-3",
+--})
 --
-----workspace = 4
---
-----workspace = 5
---
-hl.workspace_rule({
-    workspace = "6",
-    monitor = "DP-3",
-})
-
-hl.workspace_rule({
-    workspace = "7",
-    monitor = "HDMI-A-1",
-})
+--hl.workspace_rule({
+--    workspace = "7",
+--    monitor = "HDMI-A-1",
+--})
 
 --workspace = 8
 

@@ -236,6 +236,7 @@ networking = {
     lyx
     btop
     lazyssh
+    loupe
   ];
 
   fonts.enableDefaultPackages = true;
