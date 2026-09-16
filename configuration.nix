@@ -16,30 +16,10 @@
   imports = [
     ./hosts/NixBeast # import hardware-configuration (partitions) and other configs.
     ./Modules/Filesystem
-    ./Modules/Packages
+  #./Modules/Packages
   ];
   nixpkgs.config.allowUnfree = true;
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-substituters = [
-      "https://hyprland.cachix.org"
-      "https://noctalia.cachix.org"
-    ];
-    trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-    ];
-    # Required so non-root users are allowed to use the above substituter/keys.
-    # Use @wheel for all sudo users, or list your username explicitly.
-    trusted-users = [
-      "root"
-      "@wheel"
-    ];
-  };
+
 
   nix.gc = {
     automatic = true;
@@ -168,9 +148,6 @@ networking = {
       "networkmanager"
     ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      tree
-    ];
   };
   #       ┌─────────────────────────┐
   #       │         Packages        │
@@ -189,21 +166,15 @@ networking = {
     nixd
     python3
     gnumake
-    kitty
     # tuigreet  # Add to TUI-based host
     greetd
     gh
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     fastfetch
     fzf
     lsd
     zsh-nix-shell
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    unstable.yazi
-    vesktop
     prismlauncher
     starship
-    zoxide
     age
     hyprcursor
     unstable.pear-desktop
@@ -226,8 +197,6 @@ networking = {
     translate-shell
     udiskie
     lynx
-    btop
-    lazyssh
     loupe
   ];
 
@@ -334,17 +303,5 @@ networking = {
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Optional, hint Electron apps to use Wayland:
-
-  # Enable noctalia-greeter
-  programs.noctalia-greeter = {
-    enable = true;
-    settings = {
-      session.default = "hyprland";
-    };
-  };
-  # programs.noctalia = {
-  #   enable = true;
-  #   recommendedServices.enable = false;
-  # };
 
 }
