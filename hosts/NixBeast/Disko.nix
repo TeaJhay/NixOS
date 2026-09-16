@@ -64,15 +64,15 @@
                 ];
                 mountpoint = "/";
               };
-#              "/@games" = {
-#                mountOptions = [
-#                  "subvol=@games"
-#                  "compress=zstd"
-#                  "noatime"
-#                  "discard=async"
-#                ];
-#                mountpoint = "/games";
-#              };
+              #"/@games" = {
+              #  mountOptions = [
+              #    "subvol=@games"
+              #    "compress=zstd"
+              #    "noatime"
+              #    "discard=async"
+              #  ];
+              #  mountpoint = "/games";
+              #};
               "/@void-blank" = {
                 mountOptions = [ "subvol=@void-blank" ];
               };
@@ -83,15 +83,15 @@
           priority = 3;
           size = "100%";
         };
-#        swap = {
-#          content = {
-#            resumeDevice = true;
-#            type = "swap";
-#          };
-#          name = "swap";
-#          priority = 2;
-#          size = "32G";
-#        };
+        #swap = {
+        #  content = {
+        #    resumeDevice = true;
+        #    type = "swap";
+        #  };
+        #  name = "swap";
+        #  priority = 2;
+        #  size = "32G";
+        #};
       };
       type = "gpt";
     };
