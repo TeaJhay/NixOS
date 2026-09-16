@@ -83,6 +83,7 @@
 BEAUTIFUL PEOPLE:
 
 - [Jet and findFiles!](https://github.com/Michael-C-Buckley/findFiles.nix)
+- [Jet and his Dots!](https://github.com/Michael-C-Buckley/nixos)
 - [Squirrel and automation!](https://github.com/SquirrelModeller/squirrel-nixos)
 - [Connor being tech support!](https://github.com/eConnah/nix-dots)
 - [Fazzi and Hyprcursor](https://gitlab.com/fazzi/nixohess)
