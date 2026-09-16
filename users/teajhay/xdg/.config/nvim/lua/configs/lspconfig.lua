@@ -7,7 +7,7 @@ vim.lsp.config("nil_ls", {
   settings = {
     ["nil"] = {
       formatting = {
-        command = { "nixfmt" }, -- or "nixfmt-rfc-style"
+        command = { "alejandra" }, -- or "nixfmt-rfc-style"
       },
     },
   },
