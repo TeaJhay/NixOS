@@ -46,8 +46,8 @@ let
 in
 {
   imports = [
-    "${self}/options/default.nix"
-    (inputs.import-tree "${self}/programs")
+    "${self}/Modules/default.nix"
+    (inputs.import-tree "${self}/users/teajhay/programs")
   ]; # imports options used by enabledUsers
   config = mkMerge [
     # mergs functions and results for use together

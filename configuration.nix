@@ -14,18 +14,9 @@
 {
   system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
-    ./hosts/hardware-configuration.nix # import hardware-configuration (partitions) and other configs.
-    ./hosts/filesystem.nix # importing nfs shares
-    ./hosts/disko.nix # disk partitions
-    ./options/ephemera.nix # Impermanence and Preservation
-    ./options/hjem-discovery.nix # Hjem linking and auto-discovering with findFiles
-    ./options/flatpak.nix
-    inputs.nixos-hardware.nixosModules.common-cpu-amd # common AMD cpu settings
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate # Common AMD cpu pstate settings
-  #  inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower # Replaces kernel sensing with zenpower - out of date
-    inputs.nixos-hardware.nixosModules.common-gpu-amd # gpu settings
-    inputs.nixos-hardware.nixosModules.gigabyte-b650 # motherboard fix
-    inputs.nix-secrets.nixosModules.default
+    ./hosts/NixBeast # import hardware-configuration (partitions) and other configs.
+    ./Modules/Filesystem
+    ./Modules/Packages
   ];
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
@@ -188,6 +179,7 @@ networking = {
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nixfmt
+    alejandra
     nil
     ripgrep
     fd
@@ -233,7 +225,7 @@ networking = {
     mpv
     translate-shell
     udiskie
-    lyx
+    lynx
     btop
     lazyssh
     loupe

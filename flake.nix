@@ -12,10 +12,13 @@
     nix-secrets.url = "github:unnamed-systems/nix-secrets";
     import-tree.url = "github:denful/import-tree";
     niqspkgs.url = "github:diniamo/niqspkgs";
+   # matugen = {  # doesn't work, fails to build. Sucks to zuck?
+   #   url = "github:/InioX/Matugen";
+   # };
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      };
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -137,16 +140,15 @@
           }
           ./configuration.nix
           inputs.hjem.nixosModules.default
-          ./options/hjem-discovery.nix
           inputs.noctalia-greeter.nixosModules.default
           inputs.disko.nixosModules.disko
-          ./hosts/disko.nix
+          #./hosts/disko.nix
           inputs.preservation.nixosModules.preservation
-          ./options/ephemera.nix
           nix-flatpak.nixosModules.nix-flatpak
-          ./options/flatpak.nix
+          #./options/flatpak.nix
           inputs.nix-secrets.nixosModules.default
           ./secrets/secrets.nix
+          #inputs.matugen.nixosModules.default
         ];
       };
     };

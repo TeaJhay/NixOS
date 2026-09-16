@@ -73,7 +73,7 @@
           directory = "/etc/nixos";
           user = "teajhay";
           group = "wheel";
-          mode = "u=rwx,g=rwx,o=rx";
+          mode = "0775";
         }
       ];
 
