@@ -93,6 +93,7 @@
       chaotic,
       disko,
       preservation,
+      nixos-hardware,
       nixpkgs-lib,
       nvf,
       niqspkgs,
