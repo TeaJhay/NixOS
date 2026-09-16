@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{inputs, pkgs, ... }:
 {
   nix.settings = {
     trusted-substituters = [
