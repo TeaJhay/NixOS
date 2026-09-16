@@ -12,7 +12,6 @@
 }:
 
 {
-  system.stateVersion = "26.05"; # DO NOT TOUCH
   imports = [
     ./hosts/NixBeast # import hardware-configuration (partitions) and other configs.
     ./Modules/Filesystem

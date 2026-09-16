@@ -14,4 +14,5 @@ in
     nixos-hardware.nixosModules.common-gpu-amd # gpu settings
     nixos-hardware.nixosModules.gigabyte-b650 # motherboard fix
   ];
+  system.stateVersion = "26.05"; # DO NOT TOUCH
 }
