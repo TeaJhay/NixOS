@@ -21,6 +21,7 @@
     # Add your secrets here...
     secrets = {
       password.recipients = [ "teajhay" ];
+      #teajhay-password.recipients = [ "teajhay" ]; # Per user passwords? but I don't need to have every users secrets on every users machien, only the actual enabledUsers.
       githubSSH = {
         recipients = [ "teajhay" ];
         owner = "teajhay";
@@ -35,4 +36,18 @@
       #password.recipients = [ "teajhay" ];
     };
   };
+
+  programs.gnupg.agent = {
+    # started in user sessions.
+    enable = true;
+    enableSSHSupport = true;
+
+    settings = {
+      default-cache-ttl = 28800;
+      max-cache-ttl = 28800;
+      default-cache-ttl-ssh = 28800;
+      max-cache-ttl-ssh = 28800;
+    };
+  };
+
 }

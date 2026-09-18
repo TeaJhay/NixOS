@@ -24,7 +24,7 @@ let
         u:
         userEntries.${u} # uses the contents of the usersDir
         == "directory" # Must be a directory
-        && builtins.pathExists (usersDir + "/${u}/user.nix")
+        && builtins.pathExists (usersDir + "/${u}/default.nix")
       ) # A path with a certain file or folder in the usersDir must exist
       (builtins.attrNames userEntries); # List to filter from
 
@@ -41,20 +41,25 @@ let
     else
       { };
 
-  enabledUsers = config.NixBeast.users.enabled; # set enabledUsers tothe option for users enabled, imported after from ./options/default.nix, which gets set to the available users anyways. Possibly set this to use the declare users in config
+  enabledUsers = config.Host.users.enabled; # set enabledUsers tothe option for users enabled, imported after from ./options/default.nix, which gets set to the available users anyways. Possibly set this to use the declare users in config
   invalidUsers = lib.filter (u: !(lib.elem u availableUsers)) enabledUsers; # filters invalid users by removing the enabled users from the list of availableUsers
 in
 {
   imports = [
-    "${self}/Modules/default.nix"
     (inputs.import-tree "${self}/users/teajhay/programs")
-  ]; # imports options used by enabledUsers
+    ../../users/teajhay
+  ]
+  ++ map (username: "${self}/users/${username}") availableUsers; # imports options used by enabledUsers
   config = mkMerge [
     # mergs functions and results for use together
     {
       _module.args = {
         inherit getUserDotfiles availableUsers;
       };
+
+      Host.users = lib.genAttrs availableUsers (name: {
+        enable = lib.mkDefault (lib.elem name enabledUsers);
+      });
     }
     (mkIf (enabledUsers != [ ]) {
       assertions = [
