@@ -8,6 +8,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }:
 
@@ -15,10 +16,7 @@
   imports = [
     ./hosts/NixBeast # import hardware-configuration (partitions) and other configs.
     ./Modules/Filesystem
-  #./Modules/Packages
   ];
-  nixpkgs.config.allowUnfree = true;
-
 
   nix.gc = {
     automatic = true;
@@ -26,128 +24,31 @@
     options = "--delete-older-than 14d";
   };
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  #       ┌─────────────────────────┐
-  #       │   Boot/Kernel/Graphics  │
-  #       └─────────────────────────┘
-  boot.loader.systemd-boot.enable = true;
-  boot.initrd.systemd.emergencyAccess = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen; # Use zen OR latest kernel.
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelParams = [
-    #  "video=DP-1:1920x1080@60"
-    #  "video=HDMI-A-1:3840x2160@120"
-  ];
-  services.lact.enable = true;
-  #       ┌─────────────────────────┐
-  #       │       Networking        │
-  #       └─────────────────────────┘
-
-  time.timeZone = "Australia/Brisbane"; # Set your time zone.
-networking = {
-  hostName = "NixBeast";
-
-  networkmanager = {
-    enable = true;
-    insertNameservers = [ "10.0.1.101" "1.1.1.1" ];
-
-    ensureProfiles.profiles = {
-      "enp10s0" = {
-        connection = {
-          id = "enp10s0";
-          type = "ethernet";
-          interface-name = "enp10s0";
-        };
-        ipv4 = {
-          method = "manual";
-          addresses = "10.0.0.100/24";
-          gateway = "10.0.0.1";
-        };
-        ethernet = {
-          wake-on-lan = 1; # magic packet; see note below
-        };
-      };
-    };
-  };
-};
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PasswordAuthentication = true;
-      PermitRootLogin = "yes";
-      KbdInteractiveAuthentication = true;
-    };
-  };
   services.udisks2.enable = true;
-  programs.mtr.enable = true; # Some programs need SUID wrappers, can be configured further or are
-  programs.gnupg.agent = {
-    # started in user sessions.
-    enable = true;
-    enableSSHSupport = true;
 
-    settings = {
-      default-cache-ttl = 28800;
-      max-cache-ttl = 28800;
-      default-cache-ttl-ssh = 28800;
-      max-cache-ttl-ssh = 28800;
-    };
-  };
-
-  # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [
-    2049
-    22
-  ];
-  networking.firewall.allowedUDPPorts = [
-    2049
-    22
-  ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  #       ┌─────────────────────────┐
-  #       │          Sound          │
-  #       └─────────────────────────┘
-
-  security.rtkit.enable = true;
-  services.pipewire = {
-    # Enable sound.
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
   #       ┌─────────────────────────┐
   #       │          Users          │
   #       └─────────────────────────┘
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # imports the hjemModule
   hjem.extraModules = [ inputs.hjem-impure.hjemModules.default ];
-  # enable hjem-impure
-  hjem.users.teajhay.impure.enable = true;
-  NixBeast.users.enabled = [
-    "teajhay"
-  ];
-  users.users.teajhay = {
-    home = "/home/teajhay";
-    isNormalUser = true;
-    hashedPasswordFile = "/persistent/passwords/user/linux";
-    #initialPassword = "changeme";
-    description = "Tea with a side of Jhay";
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh;
-  };
+  # security.nix-secrets.secrets.password.neededForUsers = true;
+  # users.users.teajhay = {
+  #   home = "/home/teajhay";
+  #   isNormalUser = true;
+  #   hashedPasswordFile = config.security.nix-secrets.secrets.password.path;
+  #   #initialPassword = "changeme";
+  #   description = "Tea with a side of Jhay";
+  #   extraGroups = [
+  #     "wheel"
+  #     "networkmanager"
+  #   ]; # Enable ‘sudo’ for the user.
+  #   shell = pkgs.zsh;
+  # };
   #       ┌─────────────────────────┐
   #       │         Packages        │
   #       └─────────────────────────┘
@@ -205,12 +106,11 @@ networking = {
     nerd-fonts.iosevka
   ];
 
-
   fonts.fontconfig = {
     defaultFonts = {
       serif = [ "IBM Plex Serif" ];
       sansSerif = [ "IBM Plex Sans" ];
-      monospace = [ "Iosevka Nerd Font" ]; 
+      monospace = [ "Iosevka Nerd Font" ];
     };
   };
 
@@ -239,12 +139,11 @@ networking = {
   programs.gamemode.enable = true;
   programs.steam.enable = true;
 
-
   programs.git = {
     enable = true;
     config = {
       user = {
-        name= "Teajhay";
+        name = "Teajhay";
       };
     };
   };
@@ -287,6 +186,5 @@ networking = {
       "HIST_IGNORE_ALL_DUPS"
     ];
   };
-
 
 }
