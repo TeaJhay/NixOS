@@ -1,7 +1,10 @@
 { inputs, ... }: {
   imports = [ inputs.disko.nixosModules.disko ];
   # Enable supported filesystems
-  boot.supportedFilesystems = [ "btrfs" ];
+  boot.supportedFilesystems = [
+    "btrfs"
+    "nfs"
+  ];
   # Swap
   zramSwap = {
     enable = true;
@@ -99,6 +102,82 @@
     #    device = "/dev/disk/by-id/nvme-CT1000T500SSD8_242649A0A283";
     type = "disk";
   };
-  fileSystems."/nix".neededForBoot = true;
-  fileSystems."/persistent".neededForBoot = true;
+
+  services.rpcbind.enable = true;
+  fileSystems = {
+    "/nix".neededForBoot = true;
+    "/persistent".neededForBoot = true;
+
+    #       ┌─────────────────────────┐
+    #       │   Local (ext4) Drives   │
+    #       └─────────────────────────┘
+    
+    #"/home/teajhay/Games" = {
+    #  device = "/dev/disk/by-uuid/cac8f1d0-0418-4eb9-a5b9-2b6ecf1adfd7";
+    #  fsType = "ext4";
+    #  options = [
+    #    "defaults"
+    #    "noatime"
+    #    "acl"
+    #  ];
+    #};
+    #"/media/Linux Games" = {
+    #  device = "/dev/disk/by-uuid/dbf5efdd-db81-4e78-b634-b1104ff4d8fb";
+    #  fsType = "ext4";
+    #  options = [
+    #    "defaults"
+    #    "noatime"
+    #    "acl"
+    #  ];
+    #};
+
+    #       ┌─────────────────────────┐
+    #       │  Network (NFS) Mounts   │
+    #       └─────────────────────────┘
+   
+    "/mnt/Storage" = {
+      device = "10.0.1.200:/mnt/Jormungandr/Desktop/Documents";
+      fsType = "nfs";
+      options = [
+        "soft"
+        "rw"
+        "x-systemd.automount"
+        "noauto"
+      ];
+    };
+
+    "/home/teajhay/Downloads" = {
+      device = "10.0.1.200:/mnt/Jormungandr/Desktop/Documents/Downloads";
+      fsType = "nfs";
+      options = [
+        "soft"
+        "rw"
+        "x-systemd.automount"
+        "noauto"
+      ];
+    };
+
+    "/home/teajhay/Documents" = {
+      device = "10.0.1.200:/mnt/Jormungandr/Desktop/Documents/Documents";
+      fsType = "nfs";
+      options = [
+        "soft"
+        "rw"
+        "x-systemd.automount"
+        "noauto"
+      ];
+    };
+
+    "/home/teajhay/Pictures" = {
+      device = "10.0.1.200:/mnt/Jormungandr/Desktop/Pictures";
+      fsType = "nfs";
+      options = [
+        "soft"
+        "rw"
+        "x-systemd.automount"
+        "noauto"
+      ];
+    };
+  };
+
 }
