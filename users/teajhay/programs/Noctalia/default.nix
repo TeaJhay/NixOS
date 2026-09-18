@@ -1,5 +1,9 @@
-{inputs, pkgs, ... }:
+{ ... }:
 {
+  imports = [
+    ./config.nix
+  ];
+
   nix.settings = {
     trusted-substituters = [
       "https://noctalia.cachix.org"
@@ -14,10 +18,6 @@
       "@wheel"
     ];
   };
-
-  environment.systemPackages = with pkgs; [
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
 
   programs.noctalia-greeter = {
     enable = true;
