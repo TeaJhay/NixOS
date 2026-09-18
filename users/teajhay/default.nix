@@ -10,8 +10,8 @@ let
 in
 {
   imports = [
-    ./programs/Hyprland/cursor.nix
-    ./programs/Noctalia/noctalia.nix
+    ./programs/Noctalia
+    ./programs/Hyprland
   ];
   options.Host.users."${user}".enable = lib.mkEnableOption "the ${user} user profile";
   config = lib.mkIf cfg.enable {

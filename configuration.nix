@@ -98,6 +98,9 @@
     udiskie
     lynx
     loupe
+    libimobiledevice
+    ifuse
+
   ];
 
   fonts.enableDefaultPackages = true;
@@ -122,6 +125,8 @@
   #       ┌─────────────────────────┐
   #       │      Applications       │
   #       └─────────────────────────┘
+
+  services.usbmuxd.enable = true;
 
   nixpkgs.overlays = [
     (final: prev: {

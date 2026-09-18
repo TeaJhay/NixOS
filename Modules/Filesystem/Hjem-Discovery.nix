@@ -46,8 +46,6 @@ let
 in
 {
   imports = [
-    (inputs.import-tree "${self}/users/teajhay/programs")
-    ../../users/teajhay
   ]
   ++ map (username: "${self}/users/${username}") availableUsers; # imports options used by enabledUsers
   config = mkMerge [
