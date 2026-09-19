@@ -6,5 +6,6 @@
     "Core"
     "Flatpak"
     "PrismLauncher"
+    "Gaming"
   ];
 }

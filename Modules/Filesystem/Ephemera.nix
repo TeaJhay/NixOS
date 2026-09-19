@@ -47,9 +47,11 @@
     ];
   };
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  fileSystems."/nix".neededForBoot = true;
-  fileSystems."/persistent".neededForBoot = true;
-  fileSystems."/persistent/home".neededForBoot = true;
+  fileSystems = {
+    "/nix".neededForBoot = true;
+    "/persistent".neededForBoot = true;
+    "/persistent/home".neededForBoot = true;
+  };
   #       ┌─────────────────────────┐
   #       │       Preservation      │
   #       └─────────────────────────┘
@@ -105,16 +107,26 @@
           ".local/state/wireplumber"
           ".local/state/noctalia"
           ".ssh"
-          ".gnupg"
+          ".config/yazi/flavors/noctalia.yazi"
+          {
+            directory = ".gnupg";
+            user = "teajhay";
+            group = "wheel";
+            mode = "0775";
+          }
           ".thunderbird"
           ".steam"
           ".var/app"
+          ".config/millennium"
+          ".local/share/millennium"
+          ".local/share/heroic"
+          ".config/heroic"
         ];
         files = [
           ".gitconfig"
           {
-          file = ".config/mimeapps.list";
-          how = "symlink";
+            file = ".config/mimeapps.list";
+            how = "symlink";
           }
         ];
       };

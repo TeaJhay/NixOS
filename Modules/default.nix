@@ -3,9 +3,12 @@
 {
   options.NixBeast.users.enabled = lib.mkOption {
     type = lib.types.listOf lib.types.str;
-    default = [];
+    default = [ ];
     description = "List of user profiles to enable on this host";
-    example = [ "squirrel" "guest" ];
+    example = [
+      "squirrel"
+      "guest"
+    ];
   };
 
   options.NixBeast.users.available = lib.mkOption {

@@ -12,9 +12,10 @@
     nix-secrets.url = "github:unnamed-systems/nix-secrets";
     import-tree.url = "github:denful/import-tree";
     niqspkgs.url = "github:diniamo/niqspkgs";
-   # matugen = {  # doesn't work, fails to build. Sucks to zuck?
-   #   url = "github:/InioX/Matugen";
-   # };
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    # matugen = {  # doesn't work, fails to build. Sucks to zuck?
+    #   url = "github:/InioX/Matugen";
+    # };
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -137,6 +138,7 @@
               overlay-unstable
               overlay-master
               overlay-chaotic
+              inputs.millennium.overlays.default
             ];
           }
           ./configuration.nix

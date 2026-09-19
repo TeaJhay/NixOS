@@ -68,6 +68,8 @@
     loupe
     libimobiledevice
     ifuse
+    jujutsu
+    jjui
   ];
 
   #       ┌─────────────────────────┐
@@ -75,8 +77,6 @@
   #       └─────────────────────────┘
 
 
-  programs.gamemode.enable = true;
-  programs.steam.enable = true;
 
   programs.git = {
     enable = true;
