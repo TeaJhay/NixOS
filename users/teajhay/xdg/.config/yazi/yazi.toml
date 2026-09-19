@@ -11,7 +11,7 @@ folder = [
   { run = 'nvim %s', block = true, desc = "neovim", for = "linux" },
   { run = 'kitty --detach nvim %s', orphan = true, desc = "neovim (detached)", for = "linux" },
   { run = 'lazygit -p %s', block = true, desc = "lazygit", for = "linux" },
-  { run = 'codium %S', orphan = true, desc = "vscodium", for = "linux" },
+  { run = 'nvf %s', orphan = true, desc = "NVF", for = "linux" },
   { run = 'kitty %S', orphan = true, desc = "kitty", for = "linux" },
   { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
 ]
@@ -20,8 +20,7 @@ text = [
   { run = '${EDITOR:-nvim} %s', block = true, desc = "$EDITOR", for = "linux" },
   { run = 'nvim %s', block = true, desc = "neovim", for = "linux" },
   { run = 'kitty --detach nvim %s', orphan = true, desc = "neovim (detached)", for = "linux" },
-  { run = 'codium %S', orphan = true, desc = "vscodium", for = "linux" },
-  { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
+  { run = 'nvf %s', orphan = true, desc = "NVF", for = "linux" },
 ]
 
 document = [

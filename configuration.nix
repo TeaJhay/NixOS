@@ -7,7 +7,6 @@
 #  I am starting to understand! Wipe time!
 {
   pkgs,
-  inputs,
   ...
 }:
 
