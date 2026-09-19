@@ -2,6 +2,7 @@
   pkgs,
   config,
   lib,
+  inputs,
   ...
 }:
 let
@@ -10,9 +11,10 @@ let
 in
 {
   imports = [
-    ./programs/Noctalia
-    ./programs/Hyprland
-    ./programs/OpenLinkHub
+    (inputs.import-tree ./programs)
+    #./programs/Noctalia
+    #./programs/Hyprland
+    #./programs/OpenLinkHub
   ];
   options.Host.users."${user}".enable = lib.mkEnableOption "the ${user} user profile";
   config = lib.mkIf cfg.enable {
@@ -29,17 +31,19 @@ in
       ];
       shell = pkgs.zsh;
     };
-    fonts.enableDefaultPackages = true;
-    fonts.packages = with pkgs; [
-      ibm-plex
-      nerd-fonts.iosevka
-    ];
+    fonts = {
+      enableDefaultPackages = true;
+      packages = with pkgs; [
+        ibm-plex
+        nerd-fonts.iosevka
+      ];
 
-    fonts.fontconfig = {
-      defaultFonts = {
-        serif = [ "IBM Plex Serif" ];
-        sansSerif = [ "IBM Plex Sans" ];
-        monospace = [ "Iosevka Nerd Font" ];
+      fontconfig = {
+        defaultFonts = {
+          serif = [ "IBM Plex Serif" ];
+          sansSerif = [ "IBM Plex Sans" ];
+          monospace = [ "Iosevka Nerd Font" ];
+        };
       };
     };
 
