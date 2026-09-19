@@ -1,8 +1,26 @@
 {
   inputs,
+  pkgs,
   ...
 }:
 {
+  # required packages for Noctalia + plugins
+  environment.systemPackages = with pkgs; [
+    hyprpicker
+    tesseract
+    zbar
+    imagemagick
+    jq
+    mpv
+    translate-shell
+    libnotify
+    slurp
+    swappy
+    grim
+    wl-clipboard
+  ];
+
+  # config via hjem module.
   hjem = {
     extraModules = [
       inputs.noctalia.hjemModules.default
