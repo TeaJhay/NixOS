@@ -29,5 +29,25 @@ in
       ];
       shell = pkgs.zsh;
     };
+    fonts.enableDefaultPackages = true;
+    fonts.packages = with pkgs; [
+      ibm-plex
+      nerd-fonts.iosevka
+    ];
+
+    fonts.fontconfig = {
+      defaultFonts = {
+        serif = [ "IBM Plex Serif" ];
+        sansSerif = [ "IBM Plex Sans" ];
+        monospace = [ "Iosevka Nerd Font" ];
+      };
+    };
+
+    environment.sessionVariables = {
+      EDITOR = "nvim";
+      STARSHIP_CONFIG = "/home/teajhay/.config/starship/starship.toml";
+      NIXOS_CONFIG = "/persistent/home/teajhay/nixos/";
+    };
+
   };
 }

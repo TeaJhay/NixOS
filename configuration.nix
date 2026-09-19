@@ -32,22 +32,6 @@
     "nix-command"
     "flakes"
   ];
-
-  # imports the hjemModule
-  hjem.extraModules = [ inputs.hjem-impure.hjemModules.default ];
-  # security.nix-secrets.secrets.password.neededForUsers = true;
-  # users.users.teajhay = {
-  #   home = "/home/teajhay";
-  #   isNormalUser = true;
-  #   hashedPasswordFile = config.security.nix-secrets.secrets.password.path;
-  #   #initialPassword = "changeme";
-  #   description = "Tea with a side of Jhay";
-  #   extraGroups = [
-  #     "wheel"
-  #     "networkmanager"
-  #   ]; # Enable ‘sudo’ for the user.
-  #   shell = pkgs.zsh;
-  # };
   #       ┌─────────────────────────┐
   #       │         Packages        │
   #       └─────────────────────────┘
@@ -87,25 +71,6 @@
     ifuse
   ];
 
-  fonts.enableDefaultPackages = true;
-  fonts.packages = with pkgs; [
-    ibm-plex
-    nerd-fonts.iosevka
-  ];
-
-  fonts.fontconfig = {
-    defaultFonts = {
-      serif = [ "IBM Plex Serif" ];
-      sansSerif = [ "IBM Plex Sans" ];
-      monospace = [ "Iosevka Nerd Font" ];
-    };
-  };
-
-  environment.sessionVariables = {
-    EDITOR = "nvim";
-    STARSHIP_CONFIG = "/home/teajhay/.config/starship/starship.toml";
-    NIXOS_CONFIG = "/persistent/home/teajhay/nixos/";
-  };
   #       ┌─────────────────────────┐
   #       │      Applications       │
   #       └─────────────────────────┘
