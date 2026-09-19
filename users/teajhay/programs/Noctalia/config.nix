@@ -103,6 +103,7 @@
                   members = [
                     "ram"
                     "cpu"
+                    "power_profile"
                   ];
                   opacity = 1;
                   padding = 6;
@@ -153,7 +154,7 @@
           brightness = {
             enable_ddcutil = true;
           };
-          config_version = 13;
+          config_version = 14;
           control_center = {
             calendar = {
               show_week_numbers = true;
@@ -255,7 +256,7 @@
               };
               lock-and-suspend = {
                 action = "lock_and_suspend";
-                enabled = true;
+                enabled = false;
                 timeout = 1200;
               };
               screen-off = {
@@ -490,7 +491,7 @@
             community_palette = "Garnet";
             custom_palette = "Bloody-night";
             pure_black_dark = true;
-            source = "custom";
+            source = "wallpaper";
             templates = {
               builtin_ids = [ "btop" ];
               community_ids = [
@@ -499,21 +500,13 @@
                 "steam"
               ];
             };
-            wallpaper_scheme = "dysfunctional";
+            wallpaper_scheme = "vibrant";
           };
           wallpaper = {
             default = {
               path = "/home/teajhay/Pictures/wallpapers/Dreamy-Aesthetic-Home-Under-Moonlight.png";
             };
             directory = "/home/teajhay/Pictures/wallpapers/";
-            favorite = [
-              {
-                builtin_palette = "Ayu";
-                palette_source = "builtin";
-                path = "/home/teajhay/Pictures/wallpapers/3d-door.jpg";
-                theme_mode = "dark";
-              }
-            ];
             last = {
               path = "/home/teajhay/Pictures/wallpapers/Dreamy-Aesthetic-Home-Under-Moonlight.png";
             };
