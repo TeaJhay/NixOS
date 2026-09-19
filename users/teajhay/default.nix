@@ -12,6 +12,7 @@ in
   imports = [
     ./programs/Noctalia
     ./programs/Hyprland
+    ./programs/OpenLinkHub
   ];
   options.Host.users."${user}".enable = lib.mkEnableOption "the ${user} user profile";
   config = lib.mkIf cfg.enable {
