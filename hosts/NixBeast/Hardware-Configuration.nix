@@ -5,6 +5,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -13,18 +14,29 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "ahci"
-    "usbhid"
-    "uas"
-    "sd_mod"
-  ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "ahci"
+        "usbhid"
+        "uas"
+        "sd_mod"
+      ];
+      kernelModules = [ "amdgpu" ];
+      systemd.emergencyAccess = true;
+    };
+    kernelParams = [ ];
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
+    kernelPackages = pkgs.linuxPackages_zen; # Use zen OR latest kernel.
+  };
+  system.stateVersion = "26.05"; # DO NOT TOUCH
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

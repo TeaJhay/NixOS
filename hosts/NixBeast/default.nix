@@ -21,20 +21,7 @@ in
     nixos-hardware.nixosModules.gigabyte-b650 # motherboard fix
   ];
 
-  system.stateVersion = "26.05"; # DO NOT TOUCH
-
-  boot = {
-    loader.systemd-boot.enable = true;
-    initrd.systemd.emergencyAccess = true;
-    loader.efi.canTouchEfiVariables = true;
-    kernelPackages = pkgs.linuxPackages_zen; # Use zen OR latest kernel.
-    initrd.kernelModules = [ "amdgpu" ];
-    kernelParams = [
-      #"video=DP-1:1920x1080@60"
-      #"video=HDMI-A-1:3840x2160@120"
-    ];
-  };
-
+  services.power-profiles-daemon.enable = true;
   services.lact.enable = true;
 
   #       ┌─────────────────────────┐
