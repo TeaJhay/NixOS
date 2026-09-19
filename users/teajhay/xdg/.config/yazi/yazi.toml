@@ -16,7 +16,7 @@ folder = [
 ]
 
 text = [
-{ run = 'nvf %s', block = true, desc = "NVF", for = "linux" },
+  { run = 'nvf %s', block = true, desc = "NVF", for = "linux" },
   { run = '${EDITOR:-nvim} %s', block = true, desc = "$EDITOR", for = "linux" },
   { run = 'nvim %s', block = true, desc = "neovim", for = "linux" },
   { run = 'kitty --detach nvim %s', orphan = true, desc = "neovim (detached)", for = "linux" },

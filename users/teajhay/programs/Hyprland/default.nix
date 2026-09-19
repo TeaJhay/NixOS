@@ -1,8 +1,8 @@
 { inputs, pkgs, ... }:
 {
-  imports = [
-    ./cursor.nix
-  ];
+  #imports = [
+  #  ./cursor.nix
+  #];
   nix.settings = {
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-substituters = [

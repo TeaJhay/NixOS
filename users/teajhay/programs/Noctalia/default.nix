@@ -1,8 +1,8 @@
 { ... }:
 {
-  imports = [
-    ./config.nix
-  ];
+  #imports = [
+  #  ./config.nix
+  #];
 
   nix.settings = {
     trusted-substituters = [
