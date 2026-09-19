@@ -3,7 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 #       ┌─────────────────────────┐
 #       │     Configuration       │
-#       └─────────────────────────┘
+# └─────────────────────────┘
 #  I am starting to understand! Wipe time!
 {
   pkgs,
@@ -23,6 +23,7 @@
     options = "--delete-older-than 14d";
   };
 
+  services.usbmuxd.enable = true;
   services.udisks2.enable = true;
   #       ┌─────────────────────────┐
   #       │          Users          │
@@ -64,41 +65,26 @@
     nixd
     python3
     gnumake
-    # tuigreet  # Add to TUI-based host
     greetd
     gh
     fastfetch
     fzf
     lsd
     zsh-nix-shell
-    prismlauncher
     starship
     age
     hyprcursor
     unstable.pear-desktop
     unstable.quickshell
     qt6.qtwayland
-    libnotify
-    slurp
-    swappy
-    grim
-    wl-clipboard
     playerctl
     krita
     bitwarden-cli
-    hyprpicker
-    tesseract
-    zbar
-    imagemagick
-    jq
-    mpv
-    translate-shell
     udiskie
     lynx
     loupe
     libimobiledevice
     ifuse
-
   ];
 
   fonts.enableDefaultPackages = true;
@@ -124,21 +110,7 @@
   #       │      Applications       │
   #       └─────────────────────────┘
 
-  services.usbmuxd.enable = true;
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      prismlauncher = prev.prismlauncher.override {
-        # 1. Provide all the Java versions you need for different Minecraft versions
-        jdks = with prev; [
-          temurin-bin-8 # For old Minecraft versions (1.7 - 1.12)
-          temurin-bin-17 # For Minecraft 1.17 - 1.20
-          temurin-bin-21 # For Minecraft 1.20.5+
-          final.unstable.temurin-bin-26
-        ];
-      };
-    })
-  ];
   programs.gamemode.enable = true;
   programs.steam.enable = true;
 
