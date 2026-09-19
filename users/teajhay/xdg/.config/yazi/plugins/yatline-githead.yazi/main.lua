@@ -101,7 +101,7 @@ return {
 
 			local left_border = config.branch_borders:sub(1, 1)
 			local right_border = config.branch_borders:sub(2, 2)
-
+      local cap = ""
 			local branch_string = ""
 
 			if config.branch_symbol == "" then
@@ -113,6 +113,7 @@ return {
 			local branch_prefix = config.branch_prefix == "" and "" or config.branch_prefix .. " "
 
 			return {
+        {cap},
 				{ branch_prefix, nil },
 				{ branch_string, theme.branch_color },
 			}
