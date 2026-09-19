@@ -28,8 +28,8 @@
 <br clear="left"/>
 
 ### To-Do list:
-- [✓] Cleaner directory structure
-- [✓] Move to individual package lists rather than a united one.
+- [x] Cleaner directory structure
+- [x] Move to individual package lists rather than a united one.
 - [ ] Move dots and keys to declarative configs and secrets.
 - [ ] Look into Hjem-Rum modules
 - [ ] Fix yazi githead, needs middle cap 
