@@ -3,8 +3,8 @@
   imports = [
   ]
   ++ map (n: "${self}/Modules/Packages/${n}.nix") [
-    "core"
-    "flatpak"
+    "Core"
+    "Flatpak"
     "PrismLauncher"
   ];
 }
