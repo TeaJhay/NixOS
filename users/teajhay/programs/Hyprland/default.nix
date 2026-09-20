@@ -30,4 +30,9 @@
     xwayland.enable = true;
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1"; # Optional, hint Electron apps to use Wayland:
+
+  environment.systemPackages = with pkgs; [
+    hyprcursor
+    playerctl
+  ];
 }
