@@ -3,7 +3,7 @@
 -- Manual review may be needed for complex directives
 
 ---@module 'hl'
-
+-- luacheck: globals hl vim, max_line_length 200
 -- ==================================================
 
 --  KoolDots (2026)
@@ -29,34 +29,22 @@ local UserScripts = os.getenv("HOME") .. "/.config/hypr/UserScripts"
 -- settings for User defaults apps - set your default terminal and file manager on this file
 
 -- source = $UserConfigs/01-UserDefaults.conf -> requires manual conversion
-UserDefaults = require("lua/UserConfigs/01-UserDefaults")
+local UserDefaults = require("lua/UserConfigs/01-UserDefaults")
 
---TODO: convert $UserConfigs/01-UserDefaults.conf to .lua and use require()
 
 --### STANDARD ####
 
 -- Common shortcuts
 
---bindr = $mainMod, $mainMod_L, exec, pkill rofi || rofi -show drun -modi drun,filebrowser,run,window # Super Key to Launch rofi menu
 
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 
-
---hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("pkill rofi || true && rofi -show drun -modi drun"))
-
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("xdg-open \"https://\""))
-
---hl.bind("SUPER + A", function()
---    hl.plugin.hymission.toggle()
---end)
 
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(ScriptsDir .. "/OverviewToggle.sh"))
 
 -- toggles quickshell or ags overview (tries QS first, falls back to AGS)
 
---bindd = $mainMod, A, Ags overview, exec, pkill rofi || true && ags -t 'overview' # desktop overview (if installed)
-
---bindd = $mainMod, A, Quickshell overview, global, quickshell:overviewToggle # desktop overview (if installed)
 
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(UserDefaults.term))
 
@@ -94,7 +82,8 @@ hl.bind(mainMod .. " + ALT + V", hl.dsp.exec_cmd(ScriptsDir .. "/ClipManager.sh"
 
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd(ScriptsDir .. "/RofiThemeSelector.sh"))
 
-hl.bind(mainMod .. " + CTRL + SHIFT + R", hl.dsp.exec_cmd("pkill rofi || true && " .. ScriptsDir .. "/RofiThemeSelector-modified.sh"))
+hl.bind(mainMod .. " + CTRL + SHIFT + R",
+  hl.dsp.exec_cmd("pkill rofi || true && " .. ScriptsDir .. "/RofiThemeSelector-modified.sh"))
 
 hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_cmd(ScriptsDir .. "/Kitty_themes.sh"))
 
@@ -104,11 +93,8 @@ hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(UserScripts .. "/RainbowBorde
 
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.exec_cmd(ScriptsDir .. "/Toggle-Active-Window-Audio.sh"))
 
-hl.bind("ALT + SHIFT + S", hl.dsp.exec_cmd(ScriptsDir .. "/hyprshot.sh -m region -o " .. os.getenv("HOME") .. "/Pictures/Screenshots"))
 
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
-
-hl.bind(mainMod .. " + CTRL + F", hl.dsp.window.fullscreen())
 
 hl.bind(mainMod .. " + SPACE", hl.dsp.window.float())
 
@@ -131,11 +117,6 @@ hl.bind(mainMod .. " + ALT + mouse_down", hl.dsp.exec_cmd(
 
 -- Waybar / Bar related
 
-hl.bind(mainMod .. " + CTRL + ALT + B", hl.dsp.exec_cmd("pkill -SIGUSR1 waybar"))
-
-hl.bind(mainMod .. " + CTRL + B", hl.dsp.exec_cmd(ScriptsDir .. "/WaybarStyles.sh"))
-
-hl.bind(mainMod .. " + ALT + B", hl.dsp.exec_cmd(ScriptsDir .. "/WaybarLayout.sh"))
 
 -- Night light toggle (Hyprsunset)
 
@@ -154,15 +135,15 @@ hl.bind("CTRL + ALT + W", hl.dsp.exec_cmd(UserScripts .. "/WallpaperRandom.sh"))
 --bindd = $mainMod CTRL, O, Toggle active window opacity, setprop, active opaque toggle
 
 hl.bind(mainMod .. " + CTRL + O", function()
-    hl.dispatch(hl.dsp.window.set_prop({
-        prop = "opaque",
-        value = "toggle"
-    }))
+  hl.dispatch(hl.dsp.window.set_prop({
+    prop = "opaque",
+    value = "toggle"
+  }))
 
-    hl.dispatch(hl.dsp.window.set_prop({
-        prop = "no_dim",
-        value = "toggle"
-    }))
+  hl.dispatch(hl.dsp.window.set_prop({
+    prop = "no_dim",
+    value = "toggle"
+  }))
 end)
 
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.exec_cmd(ScriptsDir .. "/KeyBinds.sh"))
@@ -171,18 +152,24 @@ hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(ScriptsDir .. "/Animations.sh
 
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(UserScripts .. "/ZshChangeTheme.sh"))
 
-hl.bind("ALT_L + SHIFT_L", hl.dsp.exec_cmd(ScriptsDir .. "/KeyboardLayout.sh switch"), { locked = true, non_consuming = true })
+hl.bind("ALT_L + SHIFT_L", hl.dsp.exec_cmd(ScriptsDir .. "/KeyboardLayout.sh switch"),
+  { locked = true, non_consuming = true })
 
-hl.bind("SHIFT_L + ALT_L", hl.dsp.exec_cmd(ScriptsDir .. "/Tak0-Per-Window-Switch.sh"), { locked = true, non_consuming = true })
+hl.bind("SHIFT_L + ALT_L", hl.dsp.exec_cmd(ScriptsDir .. "/Tak0-Per-Window-Switch.sh"),
+  { locked = true, non_consuming = true })
 
 hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd(UserScripts .. "/RofiCalc.sh"))
 
 -- Move current workspaces to monitors (left, right, up, down)
 
-hl.bind(mainMod .. " + CTRL + F9",hl.dsp.workspace.move({ monitor = "l" }), { description = "Move current workspaces to left monitor"})
-hl.bind(mainMod .. " + CTRL + F10",hl.dsp.workspace.move({ monitor = "r" }), { description = "Move current workspaces to right monitor"})
-hl.bind(mainMod .. " + CTRL + F11",hl.dsp.workspace.move({ monitor = "u" }), { description = "Move current workspaces to upper monitor"})
-hl.bind(mainMod .. " + CTRL + F12",hl.dsp.workspace.move({ monitor = "d" }), { description = "Move current workspaces to lower monitor"})
+hl.bind(mainMod .. " + CTRL + F9", hl.dsp.workspace.move({ monitor = "l" }),
+  { description = "Move current workspaces to left monitor" })
+hl.bind(mainMod .. " + CTRL + F10", hl.dsp.workspace.move({ monitor = "r" }),
+  { description = "Move current workspaces to right monitor" })
+hl.bind(mainMod .. " + CTRL + F11", hl.dsp.workspace.move({ monitor = "u" }),
+  { description = "Move current workspaces to upper monitor" })
+hl.bind(mainMod .. " + CTRL + F12", hl.dsp.workspace.move({ monitor = "d" }),
+  { description = "Move current workspaces to lower monitor" })
 
 
 --### SYSTEM ####
@@ -238,7 +225,7 @@ hl.bind(mainMod .. " + ALT + " .. 3, hl.dsp.exec_cmd(ScriptsDir .. "/ChangeLayou
 
 hl.bind(mainMod .. " + ALT + " .. 4, hl.dsp.exec_cmd(ScriptsDir .. "/ChangeLayout.sh monocle"))
 
--- Scrolling Layout 
+-- Scrolling Layout
 
 hl.bind(mainMod .. " + SHIFT + period", hl.dsp.layout("move +col"))
 
@@ -264,18 +251,18 @@ hl.bind(mainMod .. " + ALT + V", hl.dsp.exec_cmd("hyprctl keyword scrolling:dire
 
 hl.bind("ALT + Tab", hl.dsp.window.cycle_next())
 
-hl.bind("ALT + Tab", hl.dsp.window.bring_to_top(),{ description = "Bring active to top"})
+hl.bind("ALT + Tab", hl.dsp.window.bring_to_top(), { description = "Bring active to top" })
 
 -- Leave special windows; only if active
 
 hl.bind(mainMod .. " + TAB", function()
-    local special = hl.get_active_special_workspace()
-    if special then
-      local name = special.name:gsub("^special:", "")
-      hl.dispatch(hl.dsp.workspace.toggle_special(name))
-    else
-      hl.dispatch(hl.dsp.focus({ workspace = "m+1" }))
-    end
+  local special = hl.get_active_special_workspace()
+  if special then
+    local name = special.name:gsub("^special:", "")
+    hl.dispatch(hl.dsp.workspace.toggle_special(name))
+  else
+    hl.dispatch(hl.dsp.focus({ workspace = "m+1" }))
+  end
 end)
 
 -- Special Keys / Hot Keys
@@ -310,46 +297,41 @@ hl.bind("xf86audiostop", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --stop"), 
 
 -- Screenshot keybindings NOTE: You may need to press Fn key as well
 
-hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd(ScriptsDir .. "/ScreenShot.sh --now"))
+hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen"))
 
-hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd(ScriptsDir .. "/ScreenShot.sh --area"))
-
-hl.bind(mainMod .. " + CTRL + Print", hl.dsp.exec_cmd(ScriptsDir .. "/ScreenShot.sh --in5"))
-
-hl.bind(mainMod .. " + CTRL + SHIFT + Print", hl.dsp.exec_cmd(ScriptsDir .. "/ScreenShot.sh --in10"))
+hl.bind(mainMod .. " + SHIFT + Print", hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen all"))
 
 hl.bind("ALT + Print", hl.dsp.exec_cmd(ScriptsDir .. "/ScreenShot.sh --active"))
 
 -- screenshot with swappy (another screenshot tool)
 
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(ScriptsDir .. "/ScreenShot.sh --swappy"))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
+--hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(ScriptsDir .. "/ScreenShot.sh --swappy"))
 
 -- Resize windows
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.submap("resize"))
 
 -- Start a submap called "resize".
 hl.define_submap("resize", function()
+  -- Set repeating binds for resizing the active window.
+  hl.bind("right", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
+  hl.bind("left", hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
+  hl.bind("up", hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
+  hl.bind("down", hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
 
-    -- Set repeating binds for resizing the active window.
-    hl.bind("right", hl.dsp.window.resize({ x = 50, y = 0, relative = true}), { repeating = true })
-    hl.bind("left", hl.dsp.window.resize({ x = -50, y = 0, relative = true}), { repeating = true })
-    hl.bind("up", hl.dsp.window.resize({ x = 0, y = 50, relative = true}), { repeating = true })
-    hl.bind("down", hl.dsp.window.resize({ x = 0, y = -50, relative = true}), { repeating = true })
-
-    -- Use `reset` to go back to the global submap
-    hl.bind("escape", hl.dsp.submap("reset"))
-
+  -- Use `reset` to go back to the global submap
+  hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
 -- Move windows
 
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move{ direction = "l" })
+hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move { direction = "l" })
 
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move{ direction = "r" })
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move { direction = "r" })
 
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move{ direction = "u" })
+hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move { direction = "u" })
 
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move{ direction = "d" })
+hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move { direction = "d" })
 
 -- Swap windows
 
@@ -389,12 +371,6 @@ hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.move({ out_of_group = true }))
 
 -- Try to dynamically move in grouped window and when ungrouped
 
---  Not working for me DW 11/26/25  PR: https://github.com/LinuxBeginnings/Hyprland-Dots/pull/872
-
---bindd = $mainMod, right, Focus right, exec, bash -c 'if hyprctl activewindow -j | jq -e "((.grouped | type) == \"boolean\") or (.address == (.grouped[-1] // empty))" >/dev/null 2>&1; then hyprctl dispatch movefocus r; else hyprctl dispatch changegroupactive f; fi'
-
---bindd = $mainMod, left, Focus left, exec, bash -c 'if hyprctl activewindow -j | jq -e "((.grouped | type) == \"boolean\") or (.address == (.grouped[0] // empty))" >/dev/null 2>&1; then hyprctl dispatch movefocus l; else hyprctl dispatch changegroupactive b; fi'
-
 -- Move focus with mainMod + arrow keys
 
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
@@ -423,10 +399,10 @@ hl.bind(mainMod .. " + U", hl.dsp.workspace.toggle_special(nil))
 -- wrapped for readability
 
 for n = 1, 10 do
-    hl.bind(
-        mainMod .. " + code:" .. (n + 9),
-        hl.dsp.focus({ workspace = n })
-    )
+  hl.bind(
+    mainMod .. " + code:" .. (n + 9),
+    hl.dsp.focus({ workspace = n })
+  )
 end
 -- Switch workspaces with mainMod + [0-9]
 --hl.bind(mainMod .. " + code:10", hl.dsp.focus({ workspace = 1 }))
@@ -452,10 +428,10 @@ end
 
 -- Move active window and follow to workspace mainMod + SHIFT [0-9]
 for n = 1, 10 do
-    hl.bind(
-        mainMod .. " + SHIFT + code:" .. (n + 9),
-        hl.dsp.window.move({ workspace = n })
-    )
+  hl.bind(
+    mainMod .. " + SHIFT + code:" .. (n + 9),
+    hl.dsp.window.move({ workspace = n })
+  )
 end
 --hl.bind(mainMod .. " + SHIFT + code:10", hl.dsp.window.move({ workspace = 1 }))
 -- NOTE: code:10 = key 1
@@ -488,10 +464,10 @@ hl.bind(mainMod .. " + SHIFT + bracketright", hl.dsp.window.move({ workspace = "
 
 -- Move active window to a workspace silently mainMod + CTRL [0-9]
 for n = 1, 10 do
-    hl.bind(
-        mainMod .. " + CTRL + code:" .. (n + 9),
-        hl.dsp.window.move({ workspace = n , follow = false })
-    )
+  hl.bind(
+    mainMod .. " + CTRL + code:" .. (n + 9),
+    hl.dsp.window.move({ workspace = n, follow = false })
+  )
 end
 --hl.bind(mainMod .. " + CTRL + code:10", hl.dsp.window.move({ workspace = 1 , follow = false }))
 -- NOTE: code:10 = key 1
@@ -531,7 +507,7 @@ hl.bind(mainMod .. " + comma", hl.dsp.focus({ workspace = "e-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true})
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 
 -- NOTE: mouse:272 = left click
 
@@ -541,5 +517,5 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd(ScriptsDir .. "/ChangeLayout.sh init")
+  hl.exec_cmd(ScriptsDir .. "/ChangeLayout.sh init")
 end)

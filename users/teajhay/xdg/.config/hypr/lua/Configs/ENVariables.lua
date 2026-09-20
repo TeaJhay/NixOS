@@ -42,7 +42,7 @@ hl.env("CLUTTER_BACKEND", "wayland")
 
 --## XDG Specifications ###
 
--- Trying to fix flatpak not being seen in rofi this fix below errors 
+-- Trying to fix flatpak not being seen in rofi this fix below errors
 
 --env = XDG_DATA_DIRS,/usr/local/share:/usr/share:$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/$USER/.local/share/flatpak/exports/share
 

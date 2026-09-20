@@ -22,11 +22,8 @@
 
 local mainMod = "SUPER"
 
-local scriptsDir = "os.getenv(\"HOME\")/.config/hypr/scripts"
 
-local UserConfigs = "os.getenv(\"HOME\")/.config/hypr/UserConfigs"
-
--- for disabling Touchpad. hyprctl devices to get device name. 
+-- for disabling Touchpad. hyprctl devices to get device name.
 
 local Touchpad_Device = "asue1209:00-04f3:319f-touchpad"
 
@@ -44,7 +41,7 @@ hl.bind("xf86Launch1", hl.dsp.exec_cmd("rog-control-center"))
 
 hl.bind("xf86Launch3", hl.dsp.exec_cmd("asusctl led-mode -n"))
 
--- FN+F4 Switch keyboard RGB profile 
+-- FN+F4 Switch keyboard RGB profile
 
 hl.bind("xf86Launch4", hl.dsp.exec_cmd("asusctl profile -n"))
 
@@ -68,15 +65,18 @@ hl.bind(mainMod .. " + " .. "F6", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config
 
 -- screenshot
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "F6", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/ScreenShot.sh --area"))
+hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "F6",
+  hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/ScreenShot.sh --area"))
 
 -- screenshot (area)
 
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "F6", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/ScreenShot.sh --in5"))
+hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "F6",
+  hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/ScreenShot.sh --in5"))
 
 -- # screenshot (5 secs delay)
 
-hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "F6", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/ScreenShot.sh --in10"))
+hl.bind(mainMod .. " + " .. "ALT" .. " + " .. "F6",
+  hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/ScreenShot.sh --in10"))
 
 -- screenshot (10 secs delay)
 
@@ -87,6 +87,6 @@ hl.bind("ALT" .. " + " .. "F6", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/h
 local TOUCHPAD_ENABLED = true
 
 hl.device({
-    name = Touchpad_Device,
-    enabled = TOUCHPAD_ENABLED,
+  name = Touchpad_Device,
+  enabled = TOUCHPAD_ENABLED,
 })
