@@ -22,13 +22,6 @@ local scriptsDir = os.getenv("HOME") .. "/.config/hypr/scripts"
 
 local UserScripts = os.getenv("HOME") .. "/.config/hypr/UserScripts"
 
-local lock = os.getenv("HOME") .. "/.config/hypr/scripts/LockScreen.sh"
-
-local SwwwRandom = os.getenv("HOME") .. "/.config/hypr/UserScripts/WallpaperAutoChange.sh"
-
-local livewallpaper = ""
-
-local wallDIR = os.getenv("HOME") .. "/Pictures/wallpapers"
 
 -- change path manually here if needed
 
