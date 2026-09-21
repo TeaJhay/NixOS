@@ -7,5 +7,6 @@
     "Flatpak"
     "PrismLauncher"
     "Gaming"
+    "Mobile"
   ];
 }
