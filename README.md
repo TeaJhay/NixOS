@@ -20,7 +20,7 @@
 
 ### **My little slice of hell. Structured questionably and like garbage.**
 
-##### Utilising preservation and BTRFS rollback for impermanence with Hjem over Home Manager. I make use of a few tools, and copy from the smart people mentioned below. I'll try to add something special but, this is just my home setup while I learn nix and more about linux. I won't be doing anything server related, I'm happy and in love with Proxmox and Docker.
+##### Utilising preservation and BTRFS rollback for impermanence with Hjem over Home Manager. I make use of a few tools, and copy from the smart people mentioned below. I'll try to add something special but, this is just my home setup while I learn nix and more about linux. I won't be doing anything server related, I'm happy and in love with Proxmox and Docker. Making alot of progress, other than some preserved and security things, should be reporducible.
 
 </div>
 
@@ -40,48 +40,50 @@
 
 ## Structure (wip)
 ```
-├── configuration.nix -- Base config, maybe not even needed?
+NixOS
+├── configuration.nix -- temporary base config, removing.
+│
 ├── flake.lock
-├── flake.nix
-├── Hosts
-│   └── machineName (NixBeast)
-│       ├── disko.nix -- Root, boot and swap partitions.
-│       ├── filesystem.nix -- NFS shares and extra drives
-│       └── hardware-configuration.nix -- Hardware config minus filesystem
 │
-├── InstallNix.sh -- Installer/helper script
+├── flake.nix -- flake inputs for programs, functions, pkg channels and etc.
 │
-├── Learning -- Learning directory, playing with nix configs and modules
-│   ├── hjem-discovery.nix 
-│   ├── hjem.nix
-│   └── starship.nix
+├── hosts -- Directory of hosts managed
+│   └── NixBeast -- Host
+│       ├── default.nix -- Importing hardware configs via nixos-hardware and setting some default settings or services.
+│       ├── Disko.nix -- Disko partitioning and NFS shares
+│       ├── Hacking.nix -- Networking
+│       ├── Hardware-Configuration.nix -- Generated hardware-configuration plus additional kernel stuff + stateVersion
+│       ├── Programs.nix -- Where to declare and import *.nix files from NixOS/Modules/Packages
+│       ├── Services.nix -- Declare and set services.* or custom units
+│       └── Users.nix -- Sets enabled users and declares some options used in Hjem-Discovery
 │
-├── Options -- Big features/implementations.
-│   ├── default.nix -- move to config for each user? Enabled hjem-discovery users
-│   ├── ephemera.nix -- Impermanence/Preservation. Preserve files and configure rollback of @void
-│   ├── flatpak.nix -- Add flatpaks, should be user based. Moved to programs.
-│   └── hjem-discovery.nix -- Hjem management and auto-discovery of a user's files found in users/$Username/xdg/ and links to .local, .config and etc.
+├── InstallNix.sh -- Initial install commands for a fresh install.
 │
-├── Profiles -- Nix configs for apps that might be edited or configurations changed often, where constant rebuilds would be inconvenient
-│   └── NVF  -- Rafware, Neovim but nix and better!
+├── learning -- kept for WIP modules and where iterations of existing modules with documentation                 
 │
+├── Modules -- Directory for nix modules
+│   ├── Filesystem -- Modules for importing users, setting impermanence/preservation. This is auto-discovery and import of users + modules
+│   │   ├── default.nix -- Imports Ephemera and Hjem-Discovery
+│   │   ├── Ephemera.nix -- Preservation and impermanence (BTRFS snapshot) 
+│   │   └── Hjem-Discovery.nix -- Discovers and imports users, uses Hjem to link their xdg files and imports a users modules.
+│   │
+│   └── Packages -- Packages and apps for use by users
+│       ├── Core.nix -- Core packages for all systems
+│       ├── Flatpak.nix -- Flatpaks, likely to be split into individual packages.=
+│       ├── Gaming.nix -- Gaming related services, packages and settings
+│       ├── Mobile.nix -- Mobile related packages (Sideloading iOS)
+│       └── PrismLauncher.nix -- Minecraft Launcher
 │
-├── Programs -- Nix configs for programs. Ideally everything should be here with a users configs. Maybe move to a user folder?
-│   ├── hyprland
-│   │   └── cursor.nix
-│   ├── noctalia.nix
-│   └── noctalia.nix.bak
+├── profiles -- Profiles used for applications that require extensive config and their own repo's. Presently NVF (Somehow load at startup?)
+│   └── NVF -- NVF: Premium rafware, forked from Jet
 │
-├── Secrets -- Secrets management
-│   ├── githubGPG.enc
-│   ├── githubSSH.enc
-│   ├── password.enc
-│   └── secrets.nix
-│
-└── Users -- Users folder. Each users name, a nix file to mark them as "valid" and their dots.
-    └── teajhay
-        ├── user.nix
-        └── xdg
+├── secrets -- Configs and persistent storage for secrets (move off git?)
+│   └── secrets.nix -- Config for nix-secrets
+└── users -- Users dir
+    └── TeaJhay -- User (Me, hi!)
+        ├── default.nix -- Users default settings like password, fonts and shell
+        ├── programs -- User specific programs
+        └── xdg -- User specific dotfiles
 ```
 
 BEAUTIFUL PEOPLE:
