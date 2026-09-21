@@ -79,6 +79,7 @@ NixOS
 │
 ├── secrets -- Configs and persistent storage for secrets (move off git?)
 │   └── secrets.nix -- Config for nix-secrets
+│
 └── users -- Users dir
     └── TeaJhay -- User (Me, hi!)
         ├── default.nix -- Users default settings like password, fonts and shell
