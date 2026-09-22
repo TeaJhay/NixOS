@@ -1,10 +1,13 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   #imports = [
   #  ./cursor.nix
   #];
   nix.settings = {
-    substituters = [ "https://hyprland.cachix.org" ];
+    substituters = ["https://hyprland.cachix.org"];
     trusted-substituters = [
       "https://hyprland.cachix.org"
       "https://noctalia.cachix.org"

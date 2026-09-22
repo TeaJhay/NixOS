@@ -2,8 +2,7 @@
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   # required packages for Noctalia + plugins
   environment.systemPackages = with pkgs; [
     hyprpicker
@@ -511,7 +510,7 @@
             pure_black_dark = true;
             source = "wallpaper";
             templates = {
-              builtin_ids = [ "btop" ];
+              builtin_ids = ["btop"];
               community_ids = [
                 "neovim"
                 "prismlauncher"

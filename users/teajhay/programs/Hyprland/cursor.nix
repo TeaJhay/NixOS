@@ -3,25 +3,23 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   inherit (lib) mkIf gvariant;
-in
-{
+in {
   environment.sessionVariables = {
     HYPRCURSOR_THEME = "Bibata-Modern";
     HYPRCURSOR_SIZE = 24;
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = 24;
     # as a list makes this append to instead of overwrite.
-    XCURSOR_PATH = [ "${pkgs.bibata-cursors}/share/icons" ];
+    XCURSOR_PATH = ["${pkgs.bibata-cursors}/share/icons"];
   };
   hjem.users.teajhay = {
     xdg = {
       # idk why some files read from here, but if you're ever having
       # problems with cursor themes not working on some apps, try this.
       data.files."icons/default/index.theme" = {
-        generator = lib.generators.toINI { };
+        generator = lib.generators.toINI {};
         value = {
           "Icon Theme".Inherits = "Bibata-Modern-Classic";
         };
