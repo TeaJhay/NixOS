@@ -1,5 +1,5 @@
-_:{
-# Enable zsh
+_: {
+  # Enable zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -8,7 +8,7 @@ _:{
 
     shellAliases = {
       edit = "sudo -E nvf";
-      update-pers = "sudo nixos-rebuild switch --show-trace --flake /persistent/home/NixOS#nixos";
+      test = "sudo nixos-rebuild test --show-trace --flake #NixBeast";
       update = "sudo nixos-rebuild switch --show-trace --flake #NixBeast";
       nmtui = "env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
@@ -26,5 +26,4 @@ _:{
       "HIST_IGNORE_ALL_DUPS"
     ];
   };
-
 }

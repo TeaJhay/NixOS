@@ -1,6 +1,8 @@
-{ lib, pkgs, ... }:
-  
-let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   openlinkhub-with-static = pkgs.openlinkhub.overrideAttrs (oldAttrs: {
     postInstall =
       (oldAttrs.postInstall or "")
@@ -49,8 +51,7 @@ in {
   };
 
   environment.systemPackages = [
-  openlinkhub-with-static
-
+    openlinkhub-with-static
   ];
   services.udev.packages = [openlinkhub-with-static];
 }

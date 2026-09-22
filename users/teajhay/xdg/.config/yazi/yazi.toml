@@ -1,19 +1,19 @@
 
 [mgr]
-ratio = [1, 4, 3]
+ratio = [1, 2, 5]
 sort_by = "natural"
 sort_dir_first = true
 show_hidden = true
 mouse_events = [ "click", "scroll", "drag" ]
 [opener]
-folder = [
-  { run = 'nvf %s', block = true, desc = "NVF", for = "linux" },
-  { run = 'kitty --detach nvim %s', orphan = true, desc = "neovim (detached)", for = "linux" },
-  { run = 'lazygit -p %s', block = true, desc = "lazygit", for = "linux" },
-  { run = 'nvim %s', block = true, desc = "neovim", for = "linux" },
-  { run = 'kitty %S', orphan = true, desc = "kitty", for = "linux" },
-  { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
-]
+#folder = [
+#  { run = 'nvf %s', block = true, desc = "NVF", for = "linux" },
+#  { run = 'kitty --detach nvim %s', orphan = true, desc = "neovim (detached)", for = "linux" },
+#  { run = 'lazygit -p %s', block = true, desc = "lazygit", for = "linux" },
+#  { run = 'nvim %s', block = true, desc = "neovim", for = "linux" },
+#  { run = 'kitty %S', orphan = true, desc = "kitty", for = "linux" },
+#  { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
+#]
 
 text = [
   { run = 'nvf %s', block = true, desc = "NVF", for = "linux" },

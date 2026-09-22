@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   #imports = [
   #  ./config.nix
   #];
@@ -25,5 +24,4 @@
       session.default = "hyprland";
     };
   };
-
 }

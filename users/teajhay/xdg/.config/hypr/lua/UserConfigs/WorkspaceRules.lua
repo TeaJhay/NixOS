@@ -4,28 +4,34 @@
 
 ---@module 'hl'
 
+-- luacheck: globals hl vim, max_line_length 200
 -- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- For workspace rules
 
 -- See https://wiki.hyprland.org/Configuring/workspace-Rules/ for more
 
--- This file is used to add or overwrite workspace rules 
+-- This file is used to add or overwrite workspace rules
 
 -- This file will not be modified during dotfiles updates
 
-hl.workspace_rule({ workspace = "special:Dropdown",on_created_empty = "kitty", gaps_out = 50, gaps_in = 50})
-hl.workspace_rule({ workspace = "special:btop", on_created_empty = "[tag:specialbtop] kitty btop", gaps_out = 50, gaps_in = 50})
+hl.workspace_rule({ workspace = "special:Dropdown", on_created_empty = "kitty", gaps_out = 50, gaps_in = 50 })
+hl.workspace_rule({
+  workspace = "special:btop",
+  on_created_empty = "[tag:specialbtop] kitty btop",
+  gaps_out = 50,
+  gaps_in = 50,
+})
+hl.workspace_rule({ workspace = "special:Vesktop", on_created_empty = "vesktop" })
 
 local TARGET = "special:btop"
-local prev_special = {}  -- monitor name -> name of its active special workspace (or nil)
+local prev_special = {} -- monitor name -> name of its active special workspace (or nil)
 
-hl.on("workspace.special_active", function(ws,mon)
+hl.on("workspace.special_active", function(ws, mon)
   local monName = mon.name
   local was = prev_special[monName]
   local nowWs = mon.active_special_workspace
   local now = nowWs and nowWs.name or nil
-
   -- We just left TARGET on this monitor
   if was == TARGET and now ~= TARGET then
     local btop = hl.get_workspace(TARGET)
