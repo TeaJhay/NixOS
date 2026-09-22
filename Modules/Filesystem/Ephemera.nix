@@ -2,8 +2,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   #       ┌─────────────────────────┐
   #       │       impermanence      │
   #       └─────────────────────────┘
@@ -18,8 +17,8 @@
         "sd_mod"
       ];
       systemd.services.rollback-void = {
-        after = [ "dev-disk-by\\x2dpartlabel-disk\\x2dmain\\x2droot.device" ];
-        before = [ "sysroot.mount" ];
+        after = ["dev-disk-by\\x2dpartlabel-disk\\x2dmain\\x2droot.device"];
+        before = ["sysroot.mount"];
         description = "Roll back @void root subvolume to blank snapshot";
         path = [
           pkgs.btrfs-progs
@@ -39,7 +38,7 @@
         '';
         serviceConfig.Type = "oneshot";
         unitConfig.DefaultDependencies = "no";
-        wantedBy = [ "initrd.target" ];
+        wantedBy = ["initrd.target"];
       };
     };
     kernelModules = [
@@ -67,6 +66,7 @@
         "/var/lib/sbctl"
         "/var/lib/tailscale"
         "/var/log"
+        "/var/lib/OpenLinkHub"
         {
           directory = "/var/lib/nixos";
           inInitrd = true;
@@ -106,6 +106,7 @@
           ".local/share/zoxide"
           ".local/state/wireplumber"
           ".local/state/noctalia"
+          ".local/state/nix/profiles"
           ".ssh"
           ".config/yazi/flavors/noctalia.yazi"
           {
@@ -133,5 +134,5 @@
     };
   };
   security.sudo.extraConfig = "Defaults lecture=never";
-  systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
+  systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
 }

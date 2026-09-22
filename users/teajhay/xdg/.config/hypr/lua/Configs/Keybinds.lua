@@ -31,20 +31,17 @@ local UserScripts = os.getenv("HOME") .. "/.config/hypr/UserScripts"
 -- source = $UserConfigs/01-UserDefaults.conf -> requires manual conversion
 local UserDefaults = require("lua/UserConfigs/01-UserDefaults")
 
-
 --### STANDARD ####
 
 -- Common shortcuts
 
-
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("xdg-open \"https://\""))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd('xdg-open "https://"'))
 
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(ScriptsDir .. "/OverviewToggle.sh"))
 
 -- toggles quickshell or ags overview (tries QS first, falls back to AGS)
-
 
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(UserDefaults.term))
 
@@ -82,8 +79,10 @@ hl.bind(mainMod .. " + ALT + V", hl.dsp.exec_cmd(ScriptsDir .. "/ClipManager.sh"
 
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd(ScriptsDir .. "/RofiThemeSelector.sh"))
 
-hl.bind(mainMod .. " + CTRL + SHIFT + R",
-  hl.dsp.exec_cmd("pkill rofi || true && " .. ScriptsDir .. "/RofiThemeSelector-modified.sh"))
+hl.bind(
+  mainMod .. " + CTRL + SHIFT + R",
+  hl.dsp.exec_cmd("pkill rofi || true && " .. ScriptsDir .. "/RofiThemeSelector-modified.sh")
+)
 
 hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_cmd(ScriptsDir .. "/Kitty_themes.sh"))
 
@@ -92,7 +91,6 @@ hl.bind(mainMod .. " + CTRL + G", hl.dsp.exec_cmd(ScriptsDir .. "/Ghostty_themes
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(UserScripts .. "/RainbowBorders-low-cpu.sh --run-once"))
 
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.exec_cmd(ScriptsDir .. "/Toggle-Active-Window-Audio.sh"))
-
 
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
 
@@ -106,17 +104,21 @@ hl.bind(mainMod .. " + ALT + SPACE", hl.dsp.exec_cmd(ScriptsDir .. "/Float-all-W
 
 -- Desktop zooming or magnifier
 
+hl.bind(
+  mainMod .. " + ALT + mouse_up",
+  hl.dsp.exec_cmd(
+    [[hyprctl eval "hl.config({ cursor = { zoom_factor = $(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {f=$2; if (f<1) f=1; print f*1.5}') } })"]]
+  )
+)
 
-hl.bind(mainMod .. " + ALT + mouse_up", hl.dsp.exec_cmd(
-  [[hyprctl eval "hl.config({ cursor = { zoom_factor = $(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {f=$2; if (f<1) f=1; print f*1.5}') } })"]]
-))
-
-hl.bind(mainMod .. " + ALT + mouse_down", hl.dsp.exec_cmd(
-  [[hyprctl eval "hl.config({ cursor = { zoom_factor = $(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {f=$2; if (f<1) f=1; r=f/1.5; if (r<1) r=1; print r}') } })"]]
-))
+hl.bind(
+  mainMod .. " + ALT + mouse_down",
+  hl.dsp.exec_cmd(
+    [[hyprctl eval "hl.config({ cursor = { zoom_factor = $(hyprctl getoption cursor:zoom_factor | awk 'NR==1 {f=$2; if (f<1) f=1; r=f/1.5; if (r<1) r=1; print r}') } })"]]
+  )
+)
 
 -- Waybar / Bar related
-
 
 -- Night light toggle (Hyprsunset)
 
@@ -137,12 +139,12 @@ hl.bind("CTRL + ALT + W", hl.dsp.exec_cmd(UserScripts .. "/WallpaperRandom.sh"))
 hl.bind(mainMod .. " + CTRL + O", function()
   hl.dispatch(hl.dsp.window.set_prop({
     prop = "opaque",
-    value = "toggle"
+    value = "toggle",
   }))
 
   hl.dispatch(hl.dsp.window.set_prop({
     prop = "no_dim",
-    value = "toggle"
+    value = "toggle",
   }))
 end)
 
@@ -152,25 +154,42 @@ hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(ScriptsDir .. "/Animations.sh
 
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd(UserScripts .. "/ZshChangeTheme.sh"))
 
-hl.bind("ALT_L + SHIFT_L", hl.dsp.exec_cmd(ScriptsDir .. "/KeyboardLayout.sh switch"),
-  { locked = true, non_consuming = true })
+hl.bind(
+  "ALT_L + SHIFT_L",
+  hl.dsp.exec_cmd(ScriptsDir .. "/KeyboardLayout.sh switch"),
+  { locked = true, non_consuming = true }
+)
 
-hl.bind("SHIFT_L + ALT_L", hl.dsp.exec_cmd(ScriptsDir .. "/Tak0-Per-Window-Switch.sh"),
-  { locked = true, non_consuming = true })
+hl.bind(
+  "SHIFT_L + ALT_L",
+  hl.dsp.exec_cmd(ScriptsDir .. "/Tak0-Per-Window-Switch.sh"),
+  { locked = true, non_consuming = true }
+)
 
 hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd(UserScripts .. "/RofiCalc.sh"))
 
 -- Move current workspaces to monitors (left, right, up, down)
 
-hl.bind(mainMod .. " + CTRL + F9", hl.dsp.workspace.move({ monitor = "l" }),
-  { description = "Move current workspaces to left monitor" })
-hl.bind(mainMod .. " + CTRL + F10", hl.dsp.workspace.move({ monitor = "r" }),
-  { description = "Move current workspaces to right monitor" })
-hl.bind(mainMod .. " + CTRL + F11", hl.dsp.workspace.move({ monitor = "u" }),
-  { description = "Move current workspaces to upper monitor" })
-hl.bind(mainMod .. " + CTRL + F12", hl.dsp.workspace.move({ monitor = "d" }),
-  { description = "Move current workspaces to lower monitor" })
-
+hl.bind(
+  mainMod .. " + CTRL + F9",
+  hl.dsp.workspace.move({ monitor = "l" }),
+  { description = "Move current workspaces to left monitor" }
+)
+hl.bind(
+  mainMod .. " + CTRL + F10",
+  hl.dsp.workspace.move({ monitor = "r" }),
+  { description = "Move current workspaces to right monitor" }
+)
+hl.bind(
+  mainMod .. " + CTRL + F11",
+  hl.dsp.workspace.move({ monitor = "u" }),
+  { description = "Move current workspaces to upper monitor" }
+)
+hl.bind(
+  mainMod .. " + CTRL + F12",
+  hl.dsp.workspace.move({ monitor = "d" }),
+  { description = "Move current workspaces to lower monitor" }
+)
 
 --### SYSTEM ####
 
@@ -214,7 +233,6 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprctl dispatch splitratio 0.3"))
 
 -- layout aware keybinds
 
-
 -- Direct layout binds
 
 hl.bind(mainMod .. " + ALT + " .. 1, hl.dsp.exec_cmd(ScriptsDir .. "/ChangeLayout.sh dwindle"))
@@ -245,8 +263,6 @@ hl.bind(mainMod .. " + ALT + V", hl.dsp.exec_cmd("hyprctl keyword scrolling:dire
 
 -- Create a toggle bind (e.g., Mod + Shift + S)
 
-
-
 -- Cycle windows; if floating bring to top
 
 hl.bind("ALT + Tab", hl.dsp.window.cycle_next())
@@ -269,7 +285,11 @@ end)
 
 hl.bind("xf86audioraisevolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true })
 hl.bind("xf86audiolowervolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true })
-hl.bind("ALT + xf86audioraisevolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"), { repeating = true })
+hl.bind(
+  "ALT + xf86audioraisevolume",
+  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"),
+  { repeating = true }
+)
 
 hl.bind("ALT + XF86audiolowervolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"), { locked = true })
 
@@ -325,13 +345,13 @@ end)
 
 -- Move windows
 
-hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move { direction = "l" })
+hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.move({ direction = "l" }))
 
-hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move { direction = "r" })
+hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.move({ direction = "r" }))
 
-hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move { direction = "u" })
+hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.move({ direction = "u" }))
 
-hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move { direction = "d" })
+hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.move({ direction = "d" }))
 
 -- Swap windows
 
@@ -383,8 +403,6 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 
 -- Workspaces related
 
-
-
 hl.bind(mainMod .. " + SHIFT + tab", hl.dsp.focus({ workspace = "m-1" }))
 
 -- Special workspace
@@ -399,10 +417,7 @@ hl.bind(mainMod .. " + U", hl.dsp.workspace.toggle_special(nil))
 -- wrapped for readability
 
 for n = 1, 10 do
-  hl.bind(
-    mainMod .. " + code:" .. (n + 9),
-    hl.dsp.focus({ workspace = n })
-  )
+  hl.bind(mainMod .. " + code:" .. (n + 9), hl.dsp.focus({ workspace = n }))
 end
 -- Switch workspaces with mainMod + [0-9]
 --hl.bind(mainMod .. " + code:10", hl.dsp.focus({ workspace = 1 }))
@@ -428,10 +443,7 @@ end
 
 -- Move active window and follow to workspace mainMod + SHIFT [0-9]
 for n = 1, 10 do
-  hl.bind(
-    mainMod .. " + SHIFT + code:" .. (n + 9),
-    hl.dsp.window.move({ workspace = n })
-  )
+  hl.bind(mainMod .. " + SHIFT + code:" .. (n + 9), hl.dsp.window.move({ workspace = n }))
 end
 --hl.bind(mainMod .. " + SHIFT + code:10", hl.dsp.window.move({ workspace = 1 }))
 -- NOTE: code:10 = key 1
@@ -464,10 +476,7 @@ hl.bind(mainMod .. " + SHIFT + bracketright", hl.dsp.window.move({ workspace = "
 
 -- Move active window to a workspace silently mainMod + CTRL [0-9]
 for n = 1, 10 do
-  hl.bind(
-    mainMod .. " + CTRL + code:" .. (n + 9),
-    hl.dsp.window.move({ workspace = n, follow = false })
-  )
+  hl.bind(mainMod .. " + CTRL + code:" .. (n + 9), hl.dsp.window.move({ workspace = n, follow = false }))
 end
 --hl.bind(mainMod .. " + CTRL + code:10", hl.dsp.window.move({ workspace = 1 , follow = false }))
 -- NOTE: code:10 = key 1
