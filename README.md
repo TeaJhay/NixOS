@@ -41,7 +41,6 @@
 ## Structure (wip)
 ```
 NixOS
-├── configuration.nix -- temporary base config, removing.
 │
 ├── flake.lock
 │

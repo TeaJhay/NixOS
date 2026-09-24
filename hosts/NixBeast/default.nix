@@ -5,7 +5,7 @@
 }: let
   inherit (inputs) nixos-hardware;
 in {
-  system = "x86_64-linux";
+  nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
   imports = [
     ./Disko.nix
