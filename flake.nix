@@ -74,42 +74,25 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  nixConfig = {
-    extra-substituters = [
-      "https://hyprland.cachix.org"
-      "https://noctalia.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-    ];
-  };
+  #nixConfig = {
+  #  extra-substituters = [
+  #    "https://hyprland.cachix.org"
+  #    "https://noctalia.cachix.org"
+  #  ];
+  #  extra-trusted-public-keys = [
+  #    "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+  #    "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+  #  ];
+  #};
 
-  outputs =
-    inputs@{
-      nix-flatpak,
-      nixpkgs,
-      nixpkgs-unstable,
-      nixpkgs-master,
-      chaotic,
-      disko,
-      preservation,
-      nixos-hardware,
-      nixpkgs-lib,
-      nvf,
-      niqspkgs,
-      self,
-      ...
-    }: # Replaced long destructuring with clean inputs mapping
-
-    let
-      system = "x86_64-linux";
-
+  outputs = inputs @ {self, ...}:
+  # Replaced long destructuring with clean inputs mapping
+    with inputs; let
       # Generic helper: turn a nixpkgs-like flake input into an overlay
       # that exposes it as pkgs.<name>
       mkChannelOverlay = name: flakeInput: final: prev: {
         ${name} = import flakeInput {
-          inherit system;
+          system = prev.stdenv.hostPlatform.system;
           config.allowUnfree = true;
         };
       };
@@ -122,37 +105,57 @@
       # applied, then namespace the whole thing under pkgs.chaotic
       overlay-chaotic = final: prev: {
         chaotic = import nixpkgs-unstable {
-          inherit system;
+          system = prev.stdenv.hostPlatform.system;
           config.allowUnfree = true;
-          overlays = [ chaotic.overlays.default ];
+          overlays = [chaotic.overlays.default];
         };
       };
-    in
-    {
-      nixosConfigurations.NixBeast = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit self inputs; };
-        modules = [
-          {
-            nixpkgs.overlays = [
-              overlay-unstable
-              overlay-master
-              overlay-chaotic
-              inputs.millennium.overlays.default
-            ];
-          }
-          ./configuration.nix
-          inputs.hjem.nixosModules.default
-          inputs.noctalia-greeter.nixosModules.default
-          inputs.disko.nixosModules.disko
-          #./hosts/disko.nix
-          inputs.preservation.nixosModules.preservation
-          nix-flatpak.nixosModules.nix-flatpak
-          #./options/flatpak.nix
-          inputs.nix-secrets.nixosModules.default
-          ./secrets/secrets.nix
-          #inputs.matugen.nixosModules.default
-        ];
+      # Modules shared by every host
+      commonModules = [
+        {
+          nixpkgs.overlays = [
+            overlay-unstable
+            overlay-master
+            overlay-chaotic
+            millennium.overlays.default
+          ];
+        }
+        {
+          nix.settings.experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
+        }
+        {
+          nix.gc = {
+            automatic = true;
+            dates = "weekly";
+            options = "--delete-older-than 14d";
+          };
+        }
+        hjem.nixosModules.default
+        noctalia-greeter.nixosModules.default
+        disko.nixosModules.disko
+        preservation.nixosModules.preservation
+        nix-flatpak.nixosModules.nix-flatpak
+        inputs.nix-secrets.nixosModules.default
+        #inputs.matugen.nixosModules.default
+      ];
+
+      mkHost = {
+        path,
+        system ? "x86_64-linux",
+        extraModules ? [],
+      }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit self inputs;};
+          modules = commonModules ++ [path] ++ extraModules;
+        };
+    in {
+      nixosConfigurations = {
+        NixBeast = mkHost {path = ./hosts/NixBeast;};
+        # Laptop = mkHost {path = ./hosts/Laptop;};
       };
     };
 }

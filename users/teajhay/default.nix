@@ -4,12 +4,10 @@
   lib,
   inputs,
   ...
-}:
-let
+}: let
   user = "teajhay";
   cfg = config.Host.users."${user}";
-in
-{
+in {
   imports = [
     (inputs.import-tree ./programs)
     #./programs/Noctalia
@@ -41,9 +39,9 @@ in
 
       fontconfig = {
         defaultFonts = {
-          serif = [ "IBM Plex Serif" ];
-          sansSerif = [ "IBM Plex Sans" ];
-          monospace = [ "Iosevka Nerd Font" ];
+          serif = ["IBM Plex Serif"];
+          sansSerif = ["IBM Plex Sans"];
+          monospace = ["Iosevka Nerd Font"];
         };
       };
     };
@@ -53,6 +51,5 @@ in
       STARSHIP_CONFIG = "/home/teajhay/.config/starship/starship.toml";
       NIXOS_CONFIG = "/persistent/home/teajhay/nixos/";
     };
-
   };
 }
