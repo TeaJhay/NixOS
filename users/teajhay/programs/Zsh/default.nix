@@ -8,7 +8,7 @@ _: {
 
     shellAliases = {
       edit = "sudo -E nvf";
-      test = "sudo nixos-rebuild test --show-trace --flake #NixBeast";
+      testupdate = "sudo nixos-rebuild test --show-trace --flake #NixBeast";
       update = "sudo nixos-rebuild switch --show-trace --flake #NixBeast";
       nmtui = "env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
