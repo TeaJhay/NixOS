@@ -4,10 +4,10 @@
   inputs,
   lib,
   ...
-}:
-let
+}: let
   inherit (inputs.findFiles) findFiles;
-  inherit (lib)
+  inherit
+    (lib)
     mkIf
     mkMerge
     listToAttrs
@@ -20,34 +20,32 @@ let
 
   availableUsers =
     builtins.filter # Filters after settings the conditions, and then the list it needs to filter
-      (
-        u:
+    
+    (
+      u:
         userEntries.${u} # uses the contents of the usersDir
         == "directory" # Must be a directory
         && builtins.pathExists (usersDir + "/${u}/default.nix")
-      ) # A path with a certain file or folder in the usersDir must exist
-      (builtins.attrNames userEntries); # List to filter from
+    ) # A path with a certain file or folder in the usersDir must exist
+    
+    (builtins.attrNames userEntries); # List to filter from
 
   # This is basically the template for what folders to search in, and if they exist use findFiles to list each file. These get merged in the users default.nix or equivalent
-  getUserDotfiles =
-    username:
-    let # declares the function "getUserDotfiles" and parameter "username"
-      dotfilesDir = usersDir + "/${username}/xdg/"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
-    in
-    if
-      builtins.pathExists dotfilesDir # checks if the path exists
-    then
-      findFiles dotfilesDir # uses findFiles to return every file in the users dotfiles directory
-    else
-      { };
+  getUserDotfiles = username: let
+    # declares the function "getUserDotfiles" and parameter "username"
+    dotfilesDir = usersDir + "/${username}/xdg/"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
+  in
+    if builtins.pathExists dotfilesDir # checks if the path exists
+    then findFiles dotfilesDir # uses findFiles to return every file in the users dotfiles directory
+    else {};
 
   enabledUsers = config.Host.users.enabled; # set enabledUsers tothe option for users enabled, imported after from ./options/default.nix, which gets set to the available users anyways. Possibly set this to use the declare users in config
   invalidUsers = lib.filter (u: !(lib.elem u availableUsers)) enabledUsers; # filters invalid users by removing the enabled users from the list of availableUsers
-in
-{
-  imports = [
-  ]
-  ++ map (username: "${self}/users/${username}") availableUsers; # imports options used by enabledUsers
+in {
+  imports =
+    [
+    ]
+    ++ map (username: "${self}/users/${username}") availableUsers; # imports options used by enabledUsers
   config = mkMerge [
     # mergs functions and results for use together
     {
@@ -59,7 +57,7 @@ in
         enable = lib.mkDefault (lib.elem name enabledUsers);
       });
     }
-    (mkIf (enabledUsers != [ ]) {
+    (mkIf (enabledUsers != []) {
       assertions = [
         {
           assertion = lib.length invalidUsers == 0; # if there are invalid users, it fails and prints the users. Good for typo or clearing out removed users
@@ -69,7 +67,7 @@ in
         }
       ];
       hjem = {
-        extraModules = [ inputs.hjem-impure.hjemModules.default ];
+        extraModules = [inputs.hjem-impure.hjemModules.default];
         users = listToAttrs (
           # uses list from the mkMerge to map to values, since this is for hjem this will map the following options for each hjerm user!
           map (username: {
@@ -79,13 +77,16 @@ in
               user = username;
               directory = config.users.users.${username}.home;
               files = getUserDotfiles username;
-              impure.enable = true;
-              impure.dotsDir = usersDir + "/${username}/xdg";
-              impure.dotsDirImpure = "/persistent/home/${username}/nixos/users/${username}/xdg";
+              impure = {
+                enable = true;
+                dotsDir = usersDir + "/${username}/xdg";
+                dotsDirImpure = "/persistent/home/${username}/nixos/users/${username}/xdg";
+              };
+              clobberFiles = true;
             };
-          }) enabledUsers # the list of users it'll map hjem options for
+          })
+          enabledUsers # the list of users it'll map hjem options for
         );
-        clobberByDefault = true;
       };
     })
   ];
