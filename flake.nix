@@ -154,9 +154,9 @@
         nix-flatpak.nixosModules.nix-flatpak
         inputs.nix-secrets.nixosModules.default
         #inputs.matugen.nixosModules.default
-        (_: {
-          system.nixos.label = "Cachix";
-        })
+        #(_: {
+        #system.nixos.label = "Cleaning flake";
+        #})
         ({pkgs, ...}: {
           nix.package = pkgs.nix-monitored;
         })
