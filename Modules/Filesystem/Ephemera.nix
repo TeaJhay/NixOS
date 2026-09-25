@@ -129,6 +129,10 @@
             file = ".config/mimeapps.list";
             how = "symlink";
           }
+          {
+            file = ".config/nvim/lua/matugen.lua";
+            how = "symlink";
+          }
         ];
       };
     };
