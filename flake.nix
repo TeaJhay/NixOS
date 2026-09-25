@@ -62,11 +62,6 @@
       url = "github:ners/nix-monitored";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixd = {
-      #nixd language server
-      url = "github:nix-community/nixd";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     fan-controller = {
       url = "github:Krutonium/BetterFanController";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -159,7 +154,7 @@
         nix-flatpak.nixosModules.nix-flatpak
         inputs.nix-secrets.nixosModules.default
         #inputs.matugen.nixosModules.default
-        ({...}: {
+        (_: {
           system.nixos.label = "Cachix";
         })
         ({pkgs, ...}: {
