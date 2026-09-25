@@ -154,11 +154,8 @@
         nix-flatpak.nixosModules.nix-flatpak
         inputs.nix-secrets.nixosModules.default
         #inputs.matugen.nixosModules.default
-        #(_: {
-        #system.nixos.label = "Cleaning flake";
-        #})
-        ({pkgs, ...}: {
-          nix.package = pkgs.nix-monitored;
+        (_: {
+          system.nixos.label = self.shortRev or self.dirtyShortRev or "unknown";
         })
       ];
 
