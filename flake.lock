@@ -127,26 +127,6 @@
         "type": "github"
       }
     },
-    "fan-controller": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1733490434,
-        "narHash": "sha256-95Hlo0M8MwCMjtX6J3u5/05geju1niaGg4f0PhOudJI=",
-        "owner": "Krutonium",
-        "repo": "BetterFanController",
-        "rev": "28090fb2861f6bbb614932f83cccfd5b8ad9e7f8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Krutonium",
-        "repo": "BetterFanController",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -234,24 +214,6 @@
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "rev": "80daad04eddbbf5a4d883996a73f3f542fa437ac",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-parts_2": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_2"
-      },
-      "locked": {
-        "lastModified": 1788450739,
-        "narHash": "sha256-glZLQlzIn1fXH6PazR2iUmTo7kzzyYSshrWhLS9TqCU=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "31729ca8cbdb4fa927b34e5f4353e6a83f39e993",
         "type": "github"
       },
       "original": {
@@ -842,28 +804,6 @@
         "type": "github"
       }
     },
-    "nixd": {
-      "inputs": {
-        "flake-parts": "flake-parts_2",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "treefmt-nix": "treefmt-nix"
-      },
-      "locked": {
-        "lastModified": 1789967828,
-        "narHash": "sha256-qODCHdIqWN2B7pEZJW7oOOW3bsGGdOeAW5AAeANsMrY=",
-        "owner": "nix-community",
-        "repo": "nixd",
-        "rev": "77bb1cacfa8a947134bb3589a3c761caa3132c79",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixd",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "inputs": {
         "nixpkgs": "nixpkgs_6"
@@ -913,21 +853,6 @@
     },
     "nixpkgs-lib_2": {
       "locked": {
-        "lastModified": 1788057806,
-        "narHash": "sha256-DTQSMxzDWmT0zhguthvegnVkn7CFqGCv4IHCzk5ZUpM=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "596e2e3940e09b2abbeb03f75fa1828c57fcd72c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib_3": {
-      "locked": {
         "lastModified": 1789871957,
         "narHash": "sha256-cY6TV3IPWCsvJP+EPLvX2rRJa8YNXuybodVy1mY2L1E=",
         "owner": "nix-community",
@@ -938,22 +863,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixpkgs-master": {
-      "locked": {
-        "lastModified": 1790326334,
-        "narHash": "sha256-HvyTfOhVxw2CIzghjyiltAKOp0x12Vlj2X3+1qUDz9M=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d120cbbf835d2e7c7b07a1e4d8583a702b2ec039",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -1219,7 +1128,6 @@
       "inputs": {
         "chaotic": "chaotic",
         "disko": "disko",
-        "fan-controller": "fan-controller",
         "findFiles": "findFiles",
         "hjem": "hjem",
         "hjem-impure": "hjem-impure",
@@ -1230,11 +1138,9 @@
         "nix-flatpak": "nix-flatpak",
         "nix-monitored": "nix-monitored",
         "nix-secrets": "nix-secrets",
-        "nixd": "nixd",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_7",
-        "nixpkgs-lib": "nixpkgs-lib_3",
-        "nixpkgs-master": "nixpkgs-master",
+        "nixpkgs-lib": "nixpkgs-lib_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
         "noctalia-greeter": "noctalia-greeter",
@@ -1325,27 +1231,6 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "nixd",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1786901030,
-        "narHash": "sha256-WSFCsDSE5ffgD2MqzkM2CYjeFiKhRF/dJUN8uedb6YE=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "27b3b12a8e6375f28ebe122f07d230ca5459bbfa",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix_2": {
-      "inputs": {
-        "nixpkgs": [
           "update",
           "nixpkgs"
         ]
@@ -1371,7 +1256,7 @@
           "nixpkgs"
         ],
         "runtimeDeps": "runtimeDeps",
-        "treefmt-nix": "treefmt-nix_2"
+        "treefmt-nix": "treefmt-nix"
       },
       "locked": {
         "lastModified": 1787291435,
