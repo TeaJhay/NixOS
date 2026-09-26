@@ -7,6 +7,7 @@
 in {
   nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
+  system.nixos.label = self.shortRev or self.dirtyShortRev or "unknown";
   imports = [
     ./Disko.nix
     ./Hardware-Configuration.nix

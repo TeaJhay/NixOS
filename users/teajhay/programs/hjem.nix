@@ -1,10 +1,5 @@
 {pkgs, ...}: {
   hjem.users.teajhay = {
-    files = {
-      ".nix-profile" = {
-        source = ".local/state/nix/profiles/profile";
-      };
-    };
     xdg.config.files = {
       "jj/config.toml" = {
         generator = (pkgs.formats.toml {}).generate "config.toml";
