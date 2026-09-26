@@ -52,5 +52,6 @@
     loupe
     jujutsu
     jjui
+    trash-cli
   ];
 }

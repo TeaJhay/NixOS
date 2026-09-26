@@ -17,7 +17,7 @@ $dotnet\
 $java\
 $kotlin\
 $nodejs\
-[ ](fg:color_bg3 bg:color_bg5)\
+[ ](fg:color_bg3 )\
 $cmd_duration\
 \n$character\
 """
@@ -41,7 +41,7 @@ error_symbol = "[❯](bold color_red)"
 success_symbol = "[❯](bold color_blue)"
 
 [cmd_duration]
-format = "[$duration](bg:color_bg5 fg:color_gray)"
+format = "[$duration](fg:color_gray)"
 min_time = 500
 
 [directory]

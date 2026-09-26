@@ -44,17 +44,19 @@ require("bunny"):setup({
   hops = {
     { key = "/", path = "/" },
     { key = "t", path = "/tmp" },
-    { key = "n", path = "/nix/store", desc = "Nix store" },
-    { key = "~", path = "~", desc = "Home" },
+    { key = { "n", "x" }, path = "/nix/store", desc = "Nix store" },
+    { key = "h", path = "~", desc = "Home" },
     { key = "m", path = "~/Music", desc = "Music" },
-    { key = "d", path = "~/Desktop", desc = "Desktop" },
-    { key = "D", path = "~/Documents", desc = "Documents" },
+    { key = { "d", "t" }, path = "~/Desktop", desc = "Desktop" },
+    { key = { "d", "r" }, path = "~/Documents", desc = "Documents" },
+    { key = { "d", "d" }, path = "~/Downloads", desc = "Downloads" },
+    { key = { "d", "w" }, path = "~/Pictures", desc = "Picture" },
     { key = "c", path = "~/.config", desc = "Config files" },
     { key = { "l", "s" }, path = "~/.local/share", desc = "Local share" },
     { key = { "l", "b" }, path = "~/.local/bin", desc = "Local bin" },
     { key = { "l", "t" }, path = "~/.local/state", desc = "Local state" },
-    { key = { "h", "r" }, path = "/persistent/home/teajhay/nixos", desc = "Nix config" },
-    { key = { "h", "y" }, path = "/persistent/home/teajhay/nixos/users/teajhay/xdg/.config", desc = "Nix user config" },
+    { key = { "n", "h" }, path = "/persistent/home/teajhay/nixos", desc = "Nix config" },
+    { key = { "n", "c" }, path = "/persistent/home/teajhay/nixos/users/teajhay/xdg/.config", desc = "Nix user config" },
     -- key and path attributes are required, desc is optional
   },
   desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
@@ -64,26 +66,26 @@ require("bunny"):setup({
   fuzzy_cmd = "fzf", -- Fuzzy searching command, default is "fzf"
 })
 
-local function get_mode_bg()
-  local mode = cx.active.mode
-  if mode.is_select then
-    return Yatline.config.style_a.bg_mode.select
-  elseif mode.is_unset then
-    return Yatline.config.style_a.bg_mode.un_set
-  else
-    return Yatline.config.style_a.bg_mode.normal
-  end
-end
-
-local function left_cap()
-  local span = ui.Span("\u{e0b6}"):fg(get_mode_bg()) -- left half-circle
-  return ui.Line({ span })
-end
-
-local function right_cap()
-  local span = ui.Span("\u{e0b4}"):fg(get_mode_bg()) -- right half-circle
-  return ui.Line({ span })
-end
+--local function get_mode_bg()
+--  local mode = cx.active.mode
+--  if mode.is_select then
+--    return Yatline.config.style_a.bg_mode.select
+--  elseif mode.is_unset then
+--    return Yatline.config.style_a.bg_mode.un_set
+--  else
+--    return Yatline.config.style_a.bg_mode.normal
+--  end
+--end
+--
+--local function left_cap()
+--  local span = ui.Span("\u{e0b6}"):fg(get_mode_bg()) -- left half-circle
+--  return ui.Line({ span })
+--end
+--
+--local function right_cap()
+--  local span = ui.Span("\u{e0b4}"):fg(get_mode_bg()) -- right half-circle
+--  return ui.Line({ span })
+--end
 
 require("yatline"):setup({
   section_separator = { open = "", close = "" },

@@ -80,7 +80,7 @@ in {
               impure = {
                 enable = true;
                 dotsDir = usersDir + "/${username}/xdg";
-                dotsDirImpure = "/persistent/home/${username}/nixos/users/${username}/xdg";
+                dotsDirImpure ="/persistent/home/${username}/nixos/users/${username}/xdg";
               };
               clobberFiles = true;
             };

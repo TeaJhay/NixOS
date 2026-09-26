@@ -10,15 +10,15 @@
 in {
   imports = [
     (inputs.import-tree ./programs)
-    #./programs/Noctalia
-    #./programs/Hyprland
-    #./programs/OpenLinkHub
   ];
   options.Host.users."${user}".enable = lib.mkEnableOption "the ${user} user profile";
+  #       ┌─────────────────────────┐
+  #       │       User config       │
+  #       └─────────────────────────┘
   config = lib.mkIf cfg.enable {
     security.nix-secrets.secrets.password.neededForUsers = true;
     users.users."${user}" = {
-      home = "/home/teajhay";
+      home = ''/home/${user}'';
       isNormalUser = true;
       hashedPasswordFile = config.security.nix-secrets.secrets.password.path;
       #initialPassword = "changeme";
@@ -30,6 +30,9 @@ in {
       ];
       shell = pkgs.zsh;
     };
+    #       ┌─────────────────────────┐
+    #       │          Fonts          │
+    #       └─────────────────────────┘
     fonts = {
       enableDefaultPackages = true;
       packages = with pkgs; [
@@ -46,10 +49,19 @@ in {
       };
     };
 
+    #       ┌─────────────────────────┐
+    #       │      Nix Profiles       │
+    #       └─────────────────────────┘
+    systemd.tmpfiles.rules = [
+      "L+ /home/'${user}'/.nix-profile - - - - .local/state/nix/profiles/profile"
+    ];
+    #       ┌─────────────────────────┐
+    #       │        Env Vars         │
+    #       └─────────────────────────┘
     environment.sessionVariables = {
       EDITOR = "nvim";
-      STARSHIP_CONFIG = "/home/teajhay/.config/starship/starship.toml";
-      NIXOS_CONFIG = "/persistent/home/teajhay/nixos/";
+      STARSHIP_CONFIG = "/home/${user}/.config/starship/starship.toml";
+      NIXOS_CONFIG = "/persistent/home/${user}/nixos/";
     };
   };
 }
