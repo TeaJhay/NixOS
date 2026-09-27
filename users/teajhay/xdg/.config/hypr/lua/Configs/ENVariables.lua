@@ -3,7 +3,7 @@
 -- Manual review may be needed for complex directives
 
 ---@module 'hl'
-
+-- luacheck: globals hl max_line_length 200
 -- ==================================================
 
 --  KoolDots (2026)
@@ -43,8 +43,6 @@ hl.env("CLUTTER_BACKEND", "wayland")
 --## XDG Specifications ###
 
 -- Trying to fix flatpak not being seen in rofi this fix below errors
-
---env = XDG_DATA_DIRS,/usr/local/share:/usr/share:$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/$USER/.local/share/flatpak/exports/share
 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 
@@ -140,11 +138,7 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
 --## Aquamarine Environment Variables (Hyprland > 0.45) ###
 
--- https://wiki.hyprland.org/Configuring/Environment-variables/#aquamarine-environment-variables----ref-httpsgithubcomhyprwmaquamarineblobmaindocsenvmd---
-
 -- env = AQ_TRACE,1 # Enables more verbose logging.
-
--- env = AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0 # Set an explicit list of DRM devices (GPUs) to use. It’s a colon-separated list of paths, with the first being the primary. E.g. /dev/dri/card1:/dev/dri/card0
 
 -- env = AQ_MGPU_NO_EXPLICIT,1 # Disables explicit syncing on mgpu buffers
 

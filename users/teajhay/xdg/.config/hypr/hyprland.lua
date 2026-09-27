@@ -13,7 +13,7 @@
 -- Initial boot script enable to apply initial wallpapers, theming, new settings etc.
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/initial-boot.sh")
+  hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/initial-boot.sh")
 end)
 
 -- suggest not to change this or delete this including deleting referrence file in ~/.config/hypr/.initial_startup_done
@@ -45,12 +45,10 @@ LayerRules = require("lua/Configs/LayerRules") -- Layer Rules (defaults)
 UserLayerRules = require("lua/UserConfigs/LayerRules") -- Layer Rules (user)
 UserWorkspaceRules = require("lua/UserConfigs/WorkspaceRules")
 
-
-SystemSettings = require("lua/Configs/SystemSettings") -- Default config for hypr 
+SystemSettings = require("lua/Configs/SystemSettings") -- Default config for hypr
 
 Decorations = require("lua/UserConfigs/user_decorations") -- Decorations config file
-UserAnimations= require("lua/UserConfigs/UserAnimations")-- Animation config file
-UserKeybinds= require("lua/UserConfigs/UserKeybinds")-- Put your own keybinds here
-UserSettings= require("lua/UserConfigs/UserSettings")-- Main Hyprland Settings.
-UserDefaults = require("lua/UserConfigs/01-UserDefaults")-- settings for User defaults apps
-
+UserAnimations = require("lua/UserConfigs/UserAnimations") -- Animation config file
+UserKeybinds = require("lua/UserConfigs/UserKeybinds") -- Put your own keybinds here
+UserSettings = require("lua/UserConfigs/UserSettings") -- Main Hyprland Settings.
+UserDefaults = require("lua/UserConfigs/01-UserDefaults") -- settings for User defaults apps
