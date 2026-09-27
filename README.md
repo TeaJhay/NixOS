@@ -27,15 +27,20 @@
 
 <br clear="left"/>
 
-### To-Do list:
+### To-Do list: [^1]
 - [x] Cleaner directory structure
 - [x] Move to individual package lists rather than a united one.
 - [ ] Move dots and keys to declarative configs and secrets.
 - [ ] Look into Hjem-Rum modules
-- [ ] Fix yazi githead, needs middle cap 
-- [ ] clean up log and readme
-- [ ] add liquid glass theming
-- [ ] Optimise
+- [x] clean up log and readme
+- [ ] Optimise - *Ambitious*
+- [ ] Make this repo documented and mirror to (Codeberg?) repo that removes comments and docs for real use.
+
+## Incomplete Features [^1]
+- [ ] Fix yazi githead, needs middle cap
+- [ ] Yazi with matugen? - Possibly not possible
+- [ ] ~~add liquid glass theming~~ [^2] 
+- [ ] Matugen with transparent toggle in NVF. Cannot get colorscheme to preserve.[^3] 
 <div align="left">
 
 ## Structure (wip)
@@ -86,10 +91,17 @@ NixOS
         └── xdg -- User specific dotfiles
 ```
 
-BEAUTIFUL PEOPLE:
+#BEAUTIFUL PEOPLE:
 
 - [Jet and findFiles!](https://github.com/Michael-C-Buckley/findFiles.nix)
 - [Jet and his Dots!](https://github.com/Michael-C-Buckley/nixos)
 - [Squirrel and automation!](https://github.com/SquirrelModeller/squirrel-nixos)
 - [Connor being tech support!](https://github.com/eConnah/nix-dots)
 - [Fazzi and Hyprcursor](https://gitlab.com/fazzi/nixohess)
+
+Footnotes:
+[^1] - Will include Submodules/repo's like NVF here
+
+[^2] - Hyprglass needs work after refactors, potentially change to native theming? or learn C++...
+
+[^3] - [Awesome config linked](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom) that helped to get all bars to match colours (except for icons) but has hardcoded transparency. Need a solution to toggle background (Normal?) to a choice colour (or even make opacity 80%). [Solution using custom noctalia template](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom)
