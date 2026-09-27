@@ -138,6 +138,10 @@
             file = ".config/nvim/lua/matugen-template.lua";
             how = "symlink";
           }
+          {
+            file = ".config/kitty/themes/noctalia.conf";
+            how = "symlink";
+          }
         ];
       };
     };
