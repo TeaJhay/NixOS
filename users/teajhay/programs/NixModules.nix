@@ -40,7 +40,6 @@
     fzf
     lsd
     zsh-nix-shell
-    starship
     age
     unstable.pear-desktop
     unstable.quickshell
