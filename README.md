@@ -91,7 +91,7 @@ NixOS
         └── xdg -- User specific dotfiles
 ```
 
-#BEAUTIFUL PEOPLE:
+# BEAUTIFUL PEOPLE:
 
 - [Connor being tech support!](https://github.com/eConnah/nix-dots)
 - [Jet and findFiles!](https://github.com/Michael-C-Buckley/findFiles.nix)
