@@ -40,6 +40,11 @@
       url = "github:feel-co/hjem";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hjem-rum = {
+      url = "github:snugnug/hjem-rum";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hjem.follows = "hjem";
+    };
     hjem-impure = {
       # Hjem but impure. Use to symlink persistent dotfiles to ephemereral home and edit. Can't add folders or files.
       url = "github:Rexcrazy804/hjem-impure";

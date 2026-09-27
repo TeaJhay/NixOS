@@ -11,7 +11,6 @@
     mkIf
     mkMerge
     listToAttrs
-    map
     ;
 
   usersDir = "${self}/users"; # Where users and their data is stored!
@@ -67,7 +66,10 @@ in {
         }
       ];
       hjem = {
-        extraModules = [inputs.hjem-impure.hjemModules.default];
+        extraModules = [
+          inputs.hjem-impure.hjemModules.default
+          inputs.hjem-rum.hjemModules.default
+        ];
         users = listToAttrs (
           # uses list from the mkMerge to map to values, since this is for hjem this will map the following options for each hjerm user!
           map (username: {
@@ -80,7 +82,7 @@ in {
               impure = {
                 enable = true;
                 dotsDir = usersDir + "/${username}/xdg";
-                dotsDirImpure ="/persistent/home/${username}/nixos/users/${username}/xdg";
+                dotsDirImpure = "/persistent/home/${username}/nixos/users/${username}/xdg";
               };
               clobberFiles = true;
             };
