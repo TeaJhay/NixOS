@@ -27,7 +27,7 @@
 
 <br clear="left"/>
 
-### To-Do list: [^1]
+### To-Do list<sup>[1]</sup>
 - [x] Cleaner directory structure
 - [x] Move to individual package lists rather than a united one.
 - [ ] Move dots and keys to declarative configs and secrets.
@@ -36,11 +36,11 @@
 - [ ] Optimise - *Ambitious*
 - [ ] Make this repo documented and mirror to (Codeberg?) repo that removes comments and docs for real use.
 
-## Incomplete Features [^1]
+### Incomplete Features<sup>[1]</sup>
 - [ ] Fix yazi githead, needs middle cap
 - [ ] Yazi with matugen? - Possibly not possible
-- [ ] ~~add liquid glass theming~~ [^2] 
-- [ ] Matugen with transparent toggle in NVF. Cannot get colorscheme to preserve.[^3] 
+- [ ] ~~add liquid glass theming~~ <sup>[2]</sup> 
+- [ ] Matugen with transparent toggle in NVF. Cannot get colorscheme to preserve.<sup>[3]</sup>
 <div align="left">
 
 ## Structure (wip)
@@ -99,9 +99,9 @@ NixOS
 - [Connor being tech support!](https://github.com/eConnah/nix-dots)
 - [Fazzi and Hyprcursor](https://gitlab.com/fazzi/nixohess)
 
-Footnotes:
-[^1] - Will include Submodules/repo's like NVF here
+## 
+<sup>[1]</sup> - Will include Submodules/repo's like NVF here
 
-[^2] - Hyprglass needs work after refactors, potentially change to native theming? or learn C++...
+<sup>[2]</sup> - Hyprglass needs work after refactors, potentially change to native theming? or learn C++...
 
-[^3] - [Awesome config linked](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom) that helped to get all bars to match colours (except for icons) but has hardcoded transparency. Need a solution to toggle background (Normal?) to a choice colour (or even make opacity 80%). [Solution using custom noctalia template](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom)
+<sup>[3]</sup> - [Awesome config linked](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom) that helped to get all bars to match colours (except for icons) but has hardcoded transparency. Need a solution to toggle background (Normal?) to a choice colour (or even make opacity 80%). [Solution using custom noctalia template](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom)
