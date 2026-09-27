@@ -133,6 +133,11 @@
             file = ".config/nvim/lua/matugen.lua";
             how = "symlink";
           }
+
+          {
+            file = ".config/nvim/lua/matugen-template.lua";
+            how = "symlink";
+          }
         ];
       };
     };

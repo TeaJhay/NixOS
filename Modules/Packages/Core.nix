@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     btop
     curl
@@ -6,7 +10,7 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     unstable.yazi
     tree
-    vesktop
+    unstable.vesktop
     sshfs
     lazyssh
     zoxide

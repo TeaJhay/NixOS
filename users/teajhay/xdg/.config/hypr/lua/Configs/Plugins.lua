@@ -3,10 +3,8 @@
 -- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- This is a file where you can put config and settings for plugins
-
+--luacheck: globals hl
 -- to avoid clogging up the other config lua's
-
-
 
 -- Hymission plugin: https://github.com/gfhdhytghd/hymission
 if hl.plugin and hl.plugin.hymission then
@@ -107,10 +105,9 @@ if hl.plugin and hl.plugin.hymission then
         debug_logs = 0,
         debug_surface_logs = 0,
       },
-    }
+    },
   })
 end
-
 
 -- Hyprglass plugin: https://github.com/hyprnux/hyprglass
 if hl.plugin.hyprglass then
@@ -155,8 +152,7 @@ if hl.plugin.hyprglass then
     vibrancy = 0.8,
     vibrancy_darkness = 1,
     adaptive_boost = 0.5,
-    brightness = 1.3
-
+    brightness = 1.3,
   })
 
   hg.preset("contrasted", {
