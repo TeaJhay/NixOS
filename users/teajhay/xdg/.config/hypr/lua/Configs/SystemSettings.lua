@@ -26,14 +26,7 @@
 
 -- NOTE: some settings are in ~/.config/hypr/UserConfigs/UserDecorAnimations.conf
 
-
-
-
-
-
 hl.permission({ binary = "/usr/bin/quickshell", type = "screencopy", mode = "allow" })
-
-
 
 hl.config({
   dwindle = {
