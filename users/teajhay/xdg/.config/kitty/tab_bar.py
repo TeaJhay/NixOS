@@ -1,9 +1,9 @@
 # pyright: reportMissingImports=false
+import os
 from datetime import datetime
 from kitty.boss import get_boss
 from kitty.fast_data_types import Screen, add_timer, get_options
 from kitty.utils import color_as_int
-from kitty.utils import log_error
 from kitty.tab_bar import (
     DrawData,
     ExtraData,
@@ -14,18 +14,35 @@ from kitty.tab_bar import (
     draw_title,
 )
 
+# Battery Path (for Linux)
+bat_path = "/sys/class/power_supply/BAT0"
+
+# GLOBAL STATE!
+timer_id = None
+right_status_length = -1
+has_battery = os.path.isdir(bat_path) # Enable battery icon only if the above path exists, only check on first load
+
+
 opts = get_options()
+
+ICON = "\uf489 "
 icon_fg = as_rgb(color_as_int(opts.color0))
-icon_bg = as_rgb(color_as_int(opts.color8))
-bat_text_color = as_rgb(color_as_int(opts.color15))
-clock_color = as_rgb(color_as_int(opts.color15))
-date_color = as_rgb(color_as_int(opts.color8))
-SEPARATOR_SYMBOL, SOFT_SEPARATOR_SYMBOL = ("", "")
-RIGHT_MARGIN = 1
+icon_bg = as_rgb(color_as_int(opts.color5))
+
+CLOCK = " \uf017 %H:%M:%S "
+clock_fg = as_rgb(color_as_int(opts.color13))
+clock_bg = as_rgb(color_as_int(opts.color0))
+
+DATE = " \uf073 %Y-%m-%d "
+date_fg = as_rgb(color_as_int(opts.color13))
+date_bg = as_rgb(color_as_int(opts.color8))
+
+# Requires nerdfont: https://www.nerdfonts.com
+SEPARATOR_SYMBOL_LEFT = "\ue0b0"
+SOFT_SEPARATOR_SYMBOL_LEFT = "\ue0b1"
+SEPARATOR_SYMBOL_RIGHT = "\ue0b2"
+RIGHT_MARGIN = 0
 REFRESH_TIME = 1
-ICON = " "
-
-
 
 
 def _draw_icon(screen: Screen, index: int) -> int:
@@ -35,9 +52,86 @@ def _draw_icon(screen: Screen, index: int) -> int:
     screen.cursor.fg = icon_fg
     screen.cursor.bg = icon_bg
     screen.draw(ICON)
-    screen.cursor.fg, screen.cursor.bg = fg, bg
-    screen.cursor.x = len(ICON)
+    screen.cursor.fg = icon_bg
+    screen.cursor.bg = bg
+    screen.draw(SEPARATOR_SYMBOL_LEFT)
+    screen.cursor.fg = fg
+    screen.cursor.x = len(ICON) + len(SEPARATOR_SYMBOL_LEFT)
     return screen.cursor.x
+
+
+UNPLUGGED_ICONS = {
+    10: "󰁺",
+    20: "󰁻",
+    30: "󰁼",
+    40: "󰁽",
+    50: "󰁾",
+    60: "󰁿",
+    70: "󰂀",
+    80: "󰂁",
+    90: "󰂂",
+    100: "󰁹",
+}
+PLUGGED_ICONS = {
+    10: "󰢜 ",
+    20: "󰂆 ",
+    30: "󰂇 ",
+    40: "󰂈 ",
+    50: "󰢝 ",
+    60: "󰂉 ",
+    70: "󰢞 ",
+    80: "󰂊 ",
+    90: "󰂋 ",
+    100: "󰂅 "
+}
+ERROR_ICON = "󰂑"
+
+UNPLUGGED_COLORS = {
+    15: as_rgb(color_as_int(opts.color1)),
+    16: as_rgb(color_as_int(opts.color3)),
+    80: as_rgb(color_as_int(opts.color3)),
+    100: as_rgb(color_as_int(opts.color2)),
+}
+PLUGGED_COLORS = {
+    15: as_rgb(color_as_int(opts.color1)),
+    16: as_rgb(color_as_int(opts.color6)),
+    80: as_rgb(color_as_int(opts.color6)),
+    100: as_rgb(color_as_int(opts.color2)),
+}
+
+
+bat_fg = as_rgb(color_as_int(opts.color0))
+
+def _get_closest(dictionary, value):
+    keys = dictionary.keys()
+    def min_distance(x):
+        return abs(x - value)
+    closestIdx = min(keys, key=min_distance)
+    return dictionary[closestIdx]
+
+def get_battery_cell():
+    try:
+        with open(os.path.join(bat_path, "status"), "r") as f:
+            status = f.read()
+        with open(os.path.join(bat_path, "capacity"), "r") as f:
+            percent = int(f.read())
+        if status == "Discharging\n":
+            bat_bg = _get_closest(UNPLUGGED_COLORS, percent)
+            icon = _get_closest(UNPLUGGED_ICONS, percent)
+        elif status == "Not charging\n":
+            bat_bg = _get_closest(UNPLUGGED_COLORS, percent)
+            icon = _get_closest(PLUGGED_ICONS, percent)
+        else:
+            bat_bg = _get_closest(PLUGGED_COLORS, percent)
+            icon = _get_closest(PLUGGED_ICONS, percent)
+    except FileNotFoundError:
+        percent = 0
+        bat_bg = _get_closest(UNPLUGGED_COLORS, percent)
+        icon = ERROR_ICON
+
+    battery_str = "%s%02i%% " % (icon, percent)
+    bat_cell = (battery_str, bat_fg, bat_bg)
+    return bat_cell
 
 
 def _draw_left_status(
@@ -61,8 +155,7 @@ def _draw_left_status(
     else:
         next_tab_bg = default_bg
         needs_soft_separator = False
-    if screen.cursor.x <= len(ICON):
-        screen.cursor.x = len(ICON)
+
     screen.draw(" ")
     screen.cursor.bg = tab_bg
     draw_title(draw_data, screen, tab, index)
@@ -70,17 +163,12 @@ def _draw_left_status(
         screen.draw(" ")
         screen.cursor.fg = tab_bg
         screen.cursor.bg = next_tab_bg
-        screen.draw(SEPARATOR_SYMBOL)
+        screen.draw(SEPARATOR_SYMBOL_LEFT)
     else:
         prev_fg = screen.cursor.fg
         if tab_bg == tab_fg:
             screen.cursor.fg = default_bg
-        elif tab_bg != default_bg:
-            c1 = draw_data.inactive_bg.contrast(draw_data.default_bg)
-            c2 = draw_data.inactive_bg.contrast(draw_data.inactive_fg)
-            if c1 < c2:
-                screen.cursor.fg = default_bg
-        screen.draw(" " + SOFT_SEPARATOR_SYMBOL)
+        screen.draw(" " + SOFT_SEPARATOR_SYMBOL_LEFT)
         screen.cursor.fg = prev_fg
     end = screen.cursor.x
     return end
@@ -92,11 +180,21 @@ def _draw_right_status(screen: Screen, is_last: bool, cells: list) -> int:
     draw_attributed_string(Formatter.reset, screen)
     screen.cursor.x = screen.columns - right_status_length
     screen.cursor.fg = 0
-    for color, status in cells:
-        screen.cursor.fg = color
+    for status, color_fg, color_bg in cells:
+        screen.cursor.fg = color_bg
+        screen.draw(SEPARATOR_SYMBOL_RIGHT)
+        screen.cursor.fg = color_fg
+        screen.cursor.bg = color_bg
         screen.draw(status)
     screen.cursor.bg = 0
     return screen.cursor.x
+
+
+def _cell_length(cells):
+    right_status_length = RIGHT_MARGIN
+    for cell in cells:
+        right_status_length += len(str(cell[0])) + len(str(SEPARATOR_SYMBOL_RIGHT))
+    return right_status_length
 
 
 def _redraw_tab_bar(_):
@@ -105,18 +203,7 @@ def _redraw_tab_bar(_):
         tm.mark_tab_bar_dirty()
 
 
-
-timer_id = None
-right_status_length = -1
-
 def draw_tab(
-    tm = get_boss().active_tab_manager
-    if tm is not None:
-        w = tm.active_window
-        if w is not None:
-        cwd = w.cwd_of_child or ''
-    log_error(cwd)
-
     draw_data: DrawData,
     screen: Screen,
     tab: TabBarData,
@@ -128,15 +215,19 @@ def draw_tab(
 ) -> int:
     global timer_id
     global right_status_length
+    global has_battery
     if timer_id is None:
         timer_id = add_timer(_redraw_tab_bar, REFRESH_TIME, True)
-    clock = datetime.now().strftime(" %H:%M")
-    date = datetime.now().strftime(" %d.%m.%Y")
-    cells.appends((clock_color, clock))
-    cells.append((date_color, date))
-    right_status_length = RIGHT_MARGIN
-    for cell in cells:
-        right_status_length += len(str(cell[1]))
+    now = datetime.now()
+    clock = now.strftime(CLOCK)
+    date = now.strftime(DATE)
+    cells = []
+    if has_battery:
+        cells.append(get_battery_cell())
+    cells.append((date, date_fg, date_bg))
+    cells.append((clock, clock_fg, clock_bg))
+
+    right_status_length = _cell_length(cells)
 
     _draw_icon(screen, index)
     _draw_left_status(
