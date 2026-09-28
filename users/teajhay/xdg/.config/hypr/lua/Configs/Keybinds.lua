@@ -307,7 +307,7 @@ hl.bind("xf86Rfkill", hl.dsp.exec_cmd(ScriptsDir .. "/AirplaneMode.sh"), { locke
 
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --pause"), { locked = true })
 
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --pause"), { locked = true })
+--hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --pause"), { locked = true })
 
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd(ScriptsDir .. "/MediaCtrl.sh --nxt"), { locked = true })
 

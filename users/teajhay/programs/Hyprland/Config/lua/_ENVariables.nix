@@ -7,6 +7,34 @@
     ''
       -- /* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */  #
 
+      -- environment-variables
+
+      -- Current Version of KoolDots:
+
+      --## Toolkit Backend Variables ###
+
+      --hl.env("GDK_BACKEND", "wayland,x11,*")
+
+      --hl.env("QT_QPA_PLATFORM", "wayland;xcb")
+
+      --hl.env("CLUTTER_BACKEND", "wayland")
+
+      --Run SDL2 applications on Wayland.
+
+      --Remove or set to x11 if games that provide older versions of SDL cause compatibility issues
+
+      --env = SDL_VIDEODRIVER,wayland
+
+      --## XDG Specifications ###
+
+      -- Trying to fix flatpak not being seen in rofi this fix below errors
+
+      --hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
+
+      --hl.env("XDG_SESSION_DESKTOP", "Hyprland")
+
+      --hl.env("XDG_SESSION_TYPE", "wayland")
+
       --hl.env("WLR_DRM_DEVICES", "/dev/dri/card1")
 
       --## QT Variables ###
@@ -73,7 +101,7 @@
 
       --env = EGL_PLATFORM,wayland
 
-      --## Aquamarine Environment Variables (Hyprland > 0.45) ###
+      -- Aquamarine Environment Variables (Hyprland > 0.45) ###
 
       -- https://wiki.hyprland.org/Configuring/Environment-variables/#aquamarine-environment-variables
 
