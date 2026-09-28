@@ -2,11 +2,10 @@
   self,
   pkgs,
   ...
-}:
-{
+}: {
   security.nix-secrets = {
     enable = true;
-    extraPackages = with pkgs; [ age ];
+    extraPackages = with pkgs; [age];
     storage = "${self}/secrets"; # Relative path to your `secrets` (copied to /nix/store)
     storagePath = "/persistent/home/teajhay/nixos/secrets/"; # Absolute path to your `secrets` (copied to /nix/store)
     identityPaths = [
@@ -20,15 +19,15 @@
 
     # Add your secrets here...
     secrets = {
-      password.recipients = [ "teajhay" ];
+      password.recipients = ["teajhay"];
       #teajhay-password.recipients = [ "teajhay" ]; # Per user passwords? but I don't need to have every users secrets on every users machien, only the actual enabledUsers.
       githubSSH = {
-        recipients = [ "teajhay" ];
+        recipients = ["teajhay"];
         owner = "teajhay";
         mode = "0600";
       };
       githubGPG = {
-        recipients = [ "teajhay" ];
+        recipients = ["teajhay"];
         owner = "teajhay";
         mode = "0400";
       };
@@ -41,7 +40,7 @@
     # started in user sessions.
     enable = true;
     enableSSHSupport = true;
-
+    pinentryPackage = pkgs.pinentry-curses;
     settings = {
       default-cache-ttl = 28800;
       max-cache-ttl = 28800;
@@ -49,5 +48,4 @@
       max-cache-ttl-ssh = 28800;
     };
   };
-
 }
