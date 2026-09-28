@@ -60,6 +60,8 @@ in {
     #       └─────────────────────────┘
     environment.sessionVariables = {
       EDITOR = "nvim";
+      TERMINAL = "kitty";
+      FILES = "yazi";
       STARSHIP_CONFIG = "/home/${user}/.config/starship/starship.toml";
       NIXOS_CONFIG = "/persistent/home/${user}/nixos/";
     };

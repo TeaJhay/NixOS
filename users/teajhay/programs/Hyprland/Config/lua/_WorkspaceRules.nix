@@ -24,7 +24,10 @@
         gaps_out = 50,
         gaps_in = 50,
       })
+
       hl.workspace_rule({ workspace = "special:Vesktop", on_created_empty = "vesktop" })
+
+      hl.workspace_rule({ workspace = "special:mailbox", on_created_empty = "thunderbird" })
 
       local TARGET = "special:btop"
       local prev_special = {} -- monitor name -> name of its active special workspace (or nil)
