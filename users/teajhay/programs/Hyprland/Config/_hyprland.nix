@@ -21,7 +21,7 @@
       Plugins = require("lua/Plugins") -- Plugins + Configs
       Monitors = require("lua/monitors") -- Monitors
       Startup_Apps = require("lua/Startup_Apps") -- Startup apps
-      ENVariable = require("lua/ENVariables") -- Environment variables
+      --ENVariable = require("lua/ENVariables") -- Environment variables # NOTE: Not needed anymore. Declare in nix.
       WindowRules = require("lua/Configs/WindowRules") -- Window Rules
       LayerRules = require("lua/Configs/LayerRules") -- Layer Rules
       WorkspaceRules = require("lua/WorkspaceRules") --  Workspace Rules

@@ -8,7 +8,6 @@
       -- /* ---- 💫 https://github.com/LinuxBeginnings 💫 ---- */  #
 
       -- Converted from config/hypr/UserConfigs/UserDecorations.conf.
-      -- NOTE: wallust-hyprland.conf is hyprlang-sourced in the original config.
       -- Lua parity for importing that file is still evolving; using static color fallbacks here.
 
       hl.config({
