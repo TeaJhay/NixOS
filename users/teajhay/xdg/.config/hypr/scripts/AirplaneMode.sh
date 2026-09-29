@@ -5,7 +5,7 @@
 #  License: GNU GPLv3
 #  SPDX-License-Identifier: GPL-3.0-or-later
 # ==================================================
-# Airplane Mode. Turning on or off all wifi using rfkill. 
+# Airplane Mode. Turning on or off all wifi using rfkill.
 
 notif="$HOME/.config/swaync/images/ja.png"
 
