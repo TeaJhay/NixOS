@@ -7,7 +7,7 @@
 # ==================================================
 
 # Detect active Hyprland config mode (Lua entrypoint vs legacy .conf includes)
-config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+config_home="$HOME/.config"
 hypr_dir="$config_home/hypr"
 lua_entry="$hypr_dir/hyprland.lua"
 legacy_lua_entry="$config_home/hyprland.lua"
@@ -24,10 +24,10 @@ ws=$(hyprctl activeworkspace -j | jq -r .id)
 # Process all windows on the current workspace
 if [[ "$hypr_config_mode" == "lua" ]]; then
     # In Lua mode, use the native Lua API via hl.dispatch to ensure compatibility
-    hyprctl clients -j | jq -r --arg ws "$ws" '.[] | select(.workspace.id == ($ws|tonumber)) | .address' | while read -r addr; do
-        hyprctl dispatch "hl.dispatch(hl.dsp.window.float({ window = \"address:${addr}\", action = \"toggle\" }))" >/dev/null 2>&1
-    done
-else
-    # Legacy Hyprlang mode
-    hyprctl clients -j | jq -r --arg ws "$ws" '.[] | select(.workspace.id == ($ws|tonumber)) | .address' | xargs -r -I {} hyprctl dispatch togglefloating address:{}
-fi
+                    hyprctl clients -j | jq -r --arg ws "$ws" '.[] | select(.workspace.id == ($ws|tonumber)) | .address' | while read -r addr; do
+        hyprctl dispatch "hl.dispatch(hl.dsp.window.float({ window = 'address:$addr', action = \"toggle\" }))" >/dev/null 2>&1
+                    done
+                else
+                    # Legacy Hyprlang mode
+                    hyprctl clients -j | jq -r --arg ws "$ws" '.[] | select(.workspace.id == ($ws|tonumber)) | .address' | xargs -r -I {} hyprctl dispatch togglefloating address:{}
+                fi
