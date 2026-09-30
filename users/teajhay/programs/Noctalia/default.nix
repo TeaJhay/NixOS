@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   #imports = [
   #  ./config.nix
   #];
@@ -22,4 +22,8 @@ _: {
       session.default = "hyprland";
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    greetd
+  ];
 }

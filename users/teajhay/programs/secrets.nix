@@ -46,6 +46,10 @@
       max-cache-ttl = 28800;
       default-cache-ttl-ssh = 28800;
       max-cache-ttl-ssh = 28800;
+      allow-loopback-pinentry = true;
     };
   };
+  environment.systemPackages = with pkgs; [
+    #    age
+  ];
 }

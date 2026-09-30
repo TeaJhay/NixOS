@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   # Enable zsh
   programs.zsh = {
     enable = true;
@@ -7,9 +7,14 @@ _: {
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      ls = "eza --icons --group-driectories-first";
+      ll = "eza --icons --group-driectories-first -alh";
+      cat = "bat";
+      grep = "rg";
+      find = "fd";
+      cd = "z";
       clean = ''clear && printf "\033[3J"'';
       nixsize = "nix path-info -Sh .#nixosConfigurations.NixBeast.config.system.build.toplevel";
-      edit = "sudo -E nvf";
       testupdate = "nh os test -H NixBeast";
       update = "nh os switch -H NixBeast";
       nmtui = "env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
@@ -28,4 +33,21 @@ _: {
       "HIST_IGNORE_ALL_DUPS"
     ];
   };
+  environment.systemPackages = with pkgs; [
+    gh
+    fastfetch
+    fzf
+    lsd
+    zsh-nix-shell
+    ripgrep
+    tealdeer
+    fd
+    unzip
+    nodejs
+    jujutsu
+    jjui
+    trash-cli
+    eza
+    bat
+  ];
 }
