@@ -29,11 +29,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    nvf = {
-      # neo-vim framework for Nix - Rafware
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     disko = {
       # Disk partitioning, formatting and declaring tool.
       url = "github:nix-community/disko";
@@ -121,6 +116,7 @@
             "nix-command"
             "flakes"
           ];
+          documentation.enable = false;
         }
         {
           programs.nh = {
