@@ -122,6 +122,10 @@
           ".local/share/millennium"
           ".local/share/heroic"
           ".config/heroic"
+          {
+            directory = ".cache/tealdeer";
+            how = "symlink";
+          }
         ];
         files = [
           ".gitconfig"
@@ -142,6 +146,7 @@
             file = ".config/kitty/themes/noctalia.conf";
             how = "symlink";
           }
+          ".config/jjui/config.toml"
         ];
       };
     };
