@@ -44,48 +44,48 @@ hl.config({
   },
 })
 
---hl.config({
---  group = {
---    col = {
---      border_active = "rgba(ffffffff)",
---    },
---    groupbar = {
---      col = {
---        active = "rgba(0f111aff)",
---      },
---    },
---  },
---})
---
----- Animated RGB border
---local rainbow_colors = {
---  "rgba(ff00007f)", -- red
---  "rgba(ff80007f)", -- orange
---  "rgba(ffff007f)", -- yellow
---  "rgba(00ff007f)", -- green
---  "rgba(00ffff7f)", -- cyan
---  "rgba(0080ff7f)", -- blue
---  "rgba(0000ff7f)", -- blue
---  "rgba(8000ff7f)", -- purple
---  "rgba(ff00ff7f)", -- magenta
---}
---
---local angle = 0
---
---local rainbow_timer = hl.timer(function()
---  angle = (angle + 2) % 360
---
---  hl.config({
---    general = {
---      col = {
---        active_border = {
---          colors = rainbow_colors,
---          angle = angle,
---        },
---      },
---    },
---  })
---end, {
---  timeout = 80,
---  type = "repeat",
---})
+hl.config({
+  group = {
+    col = {
+      border_active = "rgba(ffffffff)",
+    },
+    groupbar = {
+      col = {
+        active = "rgba(0f111aff)",
+      },
+    },
+  },
+})
+
+-- Animated RGB border
+local rainbow_colors = {
+  "rgba(ff00007f)", -- red
+  "rgba(ff80007f)", -- orange
+  "rgba(ffff007f)", -- yellow
+  "rgba(00ff007f)", -- green
+  "rgba(00ffff7f)", -- cyan
+  "rgba(0080ff7f)", -- blue
+  "rgba(0000ff7f)", -- blue
+  "rgba(8000ff7f)", -- purple
+  "rgba(ff00ff7f)", -- magenta
+}
+
+local angle = 0
+
+local rainbow_timer = hl.timer(function()
+  angle = (angle + 2) % 360
+
+  hl.config({
+    general = {
+      col = {
+        active_border = {
+          colors = rainbow_colors,
+          angle = angle,
+        },
+      },
+    },
+  })
+end, {
+  timeout = 80,
+  type = "repeat",
+})

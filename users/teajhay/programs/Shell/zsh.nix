@@ -18,6 +18,7 @@
       nixsize = "nix path-info -Sh .#nixosConfigurations.NixBeast.config.system.build.toplevel";
       testupdate = "nh os test -H NixBeast";
       update = "nh os switch -H NixBeast";
+      upgrade = "nh os switch -H NixBeast --update --ask";
       nmtui = "env NEWT_COLORS='root=white,black border=black,lightgray window=lightgray,lightgray title=black,lightgray button=black,cyan' nmtui";
     };
 

@@ -36,7 +36,7 @@ in {
   #       ┌─────────────────────────┐
   #       │          Sound          │
   #       └─────────────────────────┘
-  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 
   security.rtkit.enable = true;
 }

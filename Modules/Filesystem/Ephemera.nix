@@ -122,10 +122,7 @@
           ".local/share/millennium"
           ".local/share/heroic"
           ".config/heroic"
-          {
-            directory = ".cache/tealdeer";
-            how = "symlink";
-          }
+          ".cache/tealdeer"
         ];
         files = [
           ".gitconfig"
