@@ -35,6 +35,7 @@
 - [x] clean up log and readme
 - [ ] Optimise - *Ambitious*
 - [ ] Make this repo documented and mirror to (Codeberg?) repo that removes comments and docs for real use.
+- [ ] Setup Harmonia (and maybe circus?) on homelab to compile/cache binaries and pull latest git commits<sup>[4]</sup>
 
 ### Incomplete Features<sup>[1]</sup>
 - [ ] Fix yazi githead, needs middle cap
@@ -94,15 +95,26 @@ NixOS
 # BEAUTIFUL PEOPLE:
 
 - [Connor being tech support!](https://github.com/eConnah/nix-dots)
-- [Jet and findFiles!](https://github.com/Michael-C-Buckley/findFiles.nix)
-- [Jet and his Dots!](https://github.com/Michael-C-Buckley/nixos)
 - [Raf and his premium rafware](https://github.com/NotAShelf).
 - [Squirrel and automation!](https://github.com/SquirrelModeller/squirrel-nixos)
 - [Fazzi and Hyprcursor](https://gitlab.com/fazzi/nixohess)
 
+# Useful Resources and Tools:
+- [Search the ecosystem!](https://nixsearch.thekoppe.com/)
+- [Tack](Add.link)
+- [NH](Add.link)
+- [NCRO](Add.link)
+- [Hjem](Add.link)
+- [Hjem-rum](Add.link)
+- [Hjem-impure](Add.link)
+- [findFiles](https://github.com/Michael-C-Buckley/findFiles.nix)
+- [Nix-eval-stats](https://notashelf.github.io/nix-evaluator-stats/)
+  
 ## 
 <sup>[1]</sup> - Will include Submodules/repo's like NVF here
 
 <sup>[2]</sup> - Hyprglass needs work after refactors, potentially change to native theming? or learn C++...
 
 <sup>[3]</sup> - [Awesome config linked](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom) that helped to get all bars to match colours (except for icons) but has hardcoded transparency. Need a solution to toggle background (Normal?) to a choice colour (or even make opacity 80%). [Solution using custom noctalia template](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom)
+
+<sup>[4]</sup> - Perhaps with fallback to regular caches? need to research more.
