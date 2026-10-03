@@ -64,5 +64,6 @@
     trash-cli
     unstable.eza
     bat
+    zoxide
   ];
 }
