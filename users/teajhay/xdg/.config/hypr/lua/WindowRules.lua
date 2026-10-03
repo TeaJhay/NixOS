@@ -470,7 +470,7 @@ local opacity_rules = {
   { "multimedia", { tag = "multimedia" }, "0.94 0.86" },
   { "file-manager", { tag = "file-manager" }, "0.9 0.8" },
   { "im", { tag = "im" }, "0.98 0.86" },
-  { "terminal", { tag = "terminal" }, "1 0.8" },
+  { "terminal", { tag = "terminal" }, "1 0.8", { suppress_event = "maximize" } },
   { "text-editor", { class = "^(gedit|org.gnome.TextEditor|mousepad)$" }, "0.8 0.7" },
   { "deluge", { class = "^(deluge)$" }, "0.9 0.8" },
   { "seahorse", { class = "^(seahorse)$" }, "0.9 0.8" },

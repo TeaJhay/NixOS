@@ -1,3 +1,7 @@
 flake.lock # flake lock file
 .*.%tmp
 keys.txt
+stats.json
+local.txt
+cache.txt
+cache2.txt
