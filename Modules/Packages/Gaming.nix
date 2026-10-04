@@ -1,22 +1,26 @@
-{ pkgs, ... }:
 {
-
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.gamemode.enable = true;
   programs.steam = {
     enable = true;
     protontricks.enable = true;
-    package = pkgs.millennium-steam;
+    package = inputs.millennium.packages.${pkgs.stdenv.hostPlatform.system}.millennium-steam;
     extraCompatPackages = with pkgs; [
       proton-ge-bin
     ];
   };
-  hardware.uinput.enable = true;
-  hardware.steam-hardware.enable = true;
-  hardware.bluetooth = {
-    enable = true;
-    settings = {
-      General = {
-        Experimental = true;
+  hardware = {
+    uinput.enable = true;
+    steam-hardware.enable = true;
+    bluetooth = {
+      enable = true;
+      settings = {
+        General = {
+          Experimental = true;
+        };
       };
     };
   };
