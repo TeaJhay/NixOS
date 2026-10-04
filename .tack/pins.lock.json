@@ -1,1 +1,171 @@
-{}
+{
+  "$declared": {
+    "disko": "github:nix-community/disko",
+    "findFiles": "github:Michael-C-Buckley/findFiles.nix",
+    "hjem": "github:feel-co/hjem",
+    "hjem-impure": "github:Rexcrazy804/hjem-impure",
+    "hjem-rum": "github:snugnug/hjem-rum",
+    "hyprland": "github:hyprwm/Hyprland",
+    "import-tree": "github:denful/import-tree",
+    "millennium": "github:SteamClientHomebrew/Millennium",
+    "niqspkgs": "github:diniamo/niqspkgs",
+    "nix-flatpak": "github:gmodena/nix-flatpak",
+    "nix-secrets": "github:unnamed-systems/nix-secrets",
+    "nixos-hardware": "github:NixOS/nixos-hardware/master",
+    "nixpkgs": "https://channels.nixos.org/nixos-26.05/nixexprs.tar.xz",
+    "nixpkgs-lib": "github:nix-community/nixpkgs.lib",
+    "nixpkgs-unstable": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz",
+    "noctalia": "github:noctalia-dev/noctalia/cachix",
+    "noctalia-greeter": "github:noctalia-dev/noctalia-greeter",
+    "preservation": "github:nix-community/preservation",
+    "zen-browser": "github:youwen5/zen-browser-flake"
+  },
+  "disko": {
+    "type": "github",
+    "owner": "nix-community",
+    "repo": "disko",
+    "rev": "725ea35e410ad83be4931d1bff7e090eacaf3563",
+    "narHash": "sha256-uZkBR7yHdIKUFB5SZdfgh1qkGfI3XmYmI/lTiquxbck=",
+    "lastModified": 1789770686
+  },
+  "findFiles": {
+    "type": "github",
+    "owner": "Michael-C-Buckley",
+    "repo": "findFiles.nix",
+    "rev": "5ff64e4e46595ea2659cc7cb5de3310c1a3012d1",
+    "narHash": "sha256-GY6gO98OlcjXgkqNH4v9oFkwNGxpIPycCp59Rzl4yYw=",
+    "lastModified": 1787496769
+  },
+  "hjem": {
+    "type": "github",
+    "owner": "feel-co",
+    "repo": "hjem",
+    "rev": "cef02450f2c18a7e2b9297ea8d366f9a597254f7",
+    "narHash": "sha256-tycoVCB2KSVdy9ERT1lJGHdP9Hf4FHanaEY25hUxylw=",
+    "lastModified": 1790081753
+  },
+  "hjem-impure": {
+    "type": "github",
+    "owner": "Rexcrazy804",
+    "repo": "hjem-impure",
+    "rev": "206320fa7d060232f19c4d2831e66471d8e5d161",
+    "narHash": "sha256-2S8BRs/a9ElePH7o7LSTib4t/oQ0p9sn/qjAP6BmTK8=",
+    "lastModified": 1786164166
+  },
+  "hjem-rum": {
+    "type": "github",
+    "owner": "snugnug",
+    "repo": "hjem-rum",
+    "rev": "4194064c687bf6ca7a79cbe127cbe5a3f51ed5d5",
+    "narHash": "sha256-ntcojKoFfndHu9/cw6zRyan2AECyxMwJ0e1Qr7a+m40=",
+    "lastModified": 1789576270
+  },
+  "hyprland": {
+    "type": "github",
+    "owner": "hyprwm",
+    "repo": "Hyprland",
+    "rev": "579829f065b425f7b4e850915054f2dd472b27c8",
+    "narHash": "sha256-CZjwghUIfNoWcNvHI59ImwZMeJwT+NgYF8ncUJyecoE=",
+    "lastModified": 1791114448
+  },
+  "import-tree": {
+    "type": "github",
+    "owner": "denful",
+    "repo": "import-tree",
+    "rev": "eb1b52eaecc57f7c136d07ae8a93e724dfecac46",
+    "narHash": "sha256-ljEMTXP/rH0tOvDzc9gzwww6KcHRPRnEHzd9lK48V7s=",
+    "lastModified": 1788467110
+  },
+  "millennium": {
+    "type": "github",
+    "owner": "SteamClientHomebrew",
+    "repo": "Millennium",
+    "rev": "63c3928f0306edd83122c0f5b085a9b1a3d60f55",
+    "narHash": "sha256-+mNY2lHscvVa4KntAxuRMMFYMYxju06avIKyHooM8EE=",
+    "lastModified": 1791044936
+  },
+  "niqspkgs": {
+    "type": "github",
+    "owner": "diniamo",
+    "repo": "niqspkgs",
+    "rev": "d3ecf69607638ff323ea735d71cca826d4e70098",
+    "narHash": "sha256-WQLwbfnl1NsSUpF08KmGgY0TgX93qXbBc2H4Fxqp7zM=",
+    "lastModified": 1770459190
+  },
+  "nix-flatpak": {
+    "type": "github",
+    "owner": "gmodena",
+    "repo": "nix-flatpak",
+    "rev": "f1f045fc8b35ff59f88982c1752d3f3a42ca6a61",
+    "narHash": "sha256-OsZ/I7v3ArCrk0XOUvkiU1dFtGtE1qZTHRGjvBXIKUU=",
+    "lastModified": 1790428548
+  },
+  "nix-secrets": {
+    "type": "github",
+    "owner": "unnamed-systems",
+    "repo": "nix-secrets",
+    "rev": "151f264a22b595802647db8fac09a2dbd6cb202c",
+    "narHash": "sha256-rxClV4z02Ev/bk0/FpdT5h9Oq4/o16RA7e6LRl1/QtU=",
+    "lastModified": 1788356805
+  },
+  "nixos-hardware": {
+    "type": "github",
+    "owner": "NixOS",
+    "repo": "nixos-hardware",
+    "rev": "0953bb1a609df63013176e3463393f8df993d3ef",
+    "narHash": "sha256-fDMYyzY1lI5b8RuCMrvoaIgTeRwNnTG4dNk1ucROlQE=",
+    "lastModified": 1790948122
+  },
+  "nixpkgs": {
+    "type": "tarball",
+    "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.11150.825e2028c29b/nixexprs.tar.xz?rev=825e2028c29b702a4a5f085f08095d12099784f2&lastModified=1791031588",
+    "rev": "825e2028c29b702a4a5f085f08095d12099784f2",
+    "narHash": "sha256-4XF6NXFWmQPM0xHuxTw+iQEA6mUtmDQNJoVd4u9GkLw="
+  },
+  "nixpkgs-lib": {
+    "type": "github",
+    "owner": "nix-community",
+    "repo": "nixpkgs.lib",
+    "rev": "84c0df294bb8987f10938edc1aaa6b128ef913be",
+    "narHash": "sha256-T1VbAlHaHtp0u7e0MFTxWbfONW9rNt94pBzMPPweQPk=",
+    "lastModified": 1791085218
+  },
+  "nixpkgs-unstable": {
+    "type": "tarball",
+    "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1084552.55ba7f49ef29/nixexprs.tar.xz?rev=55ba7f49ef2962b42cbd126522b7df5f95037679&lastModified=1790981744",
+    "rev": "55ba7f49ef2962b42cbd126522b7df5f95037679",
+    "narHash": "sha256-NkNW1Y9AiuKO0HfeTnY555OJTYq9MQE3+Wz4kfBp/fI="
+  },
+  "noctalia": {
+    "type": "github",
+    "owner": "noctalia-dev",
+    "repo": "noctalia",
+    "rev": "e639a87e811ad3268c73f6d5e77669c94184ba15",
+    "narHash": "sha256-R+cq28uDVDRY//7BjWXh/oKGv+yIrDsuFJJX9H41yEo=",
+    "lastModified": 1791048152
+  },
+  "noctalia-greeter": {
+    "type": "github",
+    "owner": "noctalia-dev",
+    "repo": "noctalia-greeter",
+    "rev": "6127c31e64624edea725c134e8c19a1dd25447e1",
+    "narHash": "sha256-yiE/la9jccbQavds701a3OXvyzoWrOV34d7PG4ieewg=",
+    "lastModified": 1791048167
+  },
+  "preservation": {
+    "type": "github",
+    "owner": "nix-community",
+    "repo": "preservation",
+    "rev": "93416f4614ad2dfed5b0dcf12f27e57d27a5ab11",
+    "narHash": "sha256-mMI9IanU+Xw+pVogD2oT0I2kTmvz2Un/Apc5+CwUpEY=",
+    "lastModified": 1757436102
+  },
+  "zen-browser": {
+    "type": "github",
+    "owner": "youwen5",
+    "repo": "zen-browser-flake",
+    "rev": "4bbcd79d8104040a2e510f81199210070900ebcd",
+    "narHash": "sha256-9Wlecihq1JF26Le4xw1q75pQ4z0Pw88rRmUjeHzQXjY=",
+    "lastModified": 1791109428
+  }
+}

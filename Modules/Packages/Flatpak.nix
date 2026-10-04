@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   # ... your config
 
   # Configure nix-flatpak
@@ -9,7 +8,6 @@
       "com.github.tchx84.Flatseal"
       "org.telegram.desktop"
       "com.stremio.Stremio"
-      "dev.khcrysalis.PlumeImpactor"
     ];
   };
 }

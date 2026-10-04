@@ -23,7 +23,7 @@
             key = "F6928ABB9CBF3877";
           };
           git = {
-            sign-on-push = "true";
+            sign-on-push = true;
           };
           template-aliases = {
             "format_short_signature(signature)" = ''
