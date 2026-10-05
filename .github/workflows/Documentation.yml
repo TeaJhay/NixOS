@@ -1,0 +1,51 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'learning/docs/**'
+      - '.github/workflows/Documentation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Lix
+        uses: canidae-solutions/lix-quick-install-action@v5
+        with:
+          lix_conf: |
+            experimental-features = nix-command flakes pipe-operator
+
+      - name: Build docs with ndg
+        working-directory: learning/docs
+        run: nix develop -c ndg html
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: learning/docs/build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
