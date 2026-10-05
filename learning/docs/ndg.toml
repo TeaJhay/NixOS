@@ -10,7 +10,7 @@ output_dir = "build"
 # module_options = "options.json"
 
 # Title for the documentation
-title = "Nix-Dots Docs"
+title = "NixOS Hell."
 
 # Footer text for the documentation
 footer_text = "built with ndg"
@@ -33,7 +33,7 @@ footer_text = "built with ndg"
 
 # Directory containing additional assets
 assets_dir = "./assets"
-
+script_paths = ["./assets/link.js"]
 # Path to manpage URL mappings JSON file
 # manpage_urls_path = "manpage-urls.json"
 
