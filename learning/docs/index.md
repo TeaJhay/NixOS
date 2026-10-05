@@ -1,5 +1,5 @@
 +++
-title = "Nix-Dots - Wee Wee"
+title = "Hell."
 +++
 
 <div style="font-size: 1vmin;" align="center">
@@ -48,7 +48,8 @@ title = "Nix-Dots - Wee Wee"
 - [ ] Optimise - *Ambitious*
 - [x] Mirror to Codeberg and Forgejo.[^5]
 - [x] Setup Circus-CI on homelab to compile/cache binaries and pull latest git commits
-- [ ] Document with NDG and/or Hugo and remove comments from nix files. Steal from eConnah 
+- [ ] Document with NDG and move to astro site. remove comments from nix files. Steal from eConnah
+- [ ] Setup matrix homeserver.[^6]
 
 ### Incomplete Features[^1]
 - [ ] Fix yazi githead, needs middle cap
@@ -130,3 +131,5 @@ NixOS
 [^3]: [Awesome config linked](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom) that helped to get all bars to match colours (except for icons) but has hardcoded transparency. Need a solution to toggle background (Normal?) to a choice colour (or even make opacity 80%). [Solution using custom noctalia template](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom)
 
 [^5]: Selfhosted forgejo instance WIP, eyeing brewery.
+
+[^6]: Considering continuwuity but perhaps a better alternative?
