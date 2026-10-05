@@ -51,7 +51,7 @@
           };
           user = {
             name = "Teajhay";
-            email = "140999577+TeaJhay@users.noreply.github.com";
+            email = "git@doesntcompute.site";
           };
         };
       };
