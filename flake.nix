@@ -73,8 +73,6 @@
         NixBeast = mkHost {path = ./hosts/NixBeast;};
         # Laptop = mkHost {path = ./hosts/Laptop;};
       };
-      packages.x86_64-linux = {
-        NixBeast = self.nixosConfigurations.NixBeast.config.system.build.toplevel;
-      };
+      packages.x86_64-linux = self.nixosConfigurations.NixBeast.config.system.build.toplevel;
     };
 }
