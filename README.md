@@ -21,28 +21,28 @@
 ### **My little slice of hell. Structured questionably and like garbage.**
 
 ##### Utilising preservation and BTRFS rollback for impermanence with Hjem over Home Manager. I make use of a few tools, and copy from the smart people mentioned below. I'll try to add something special but, this is just my home setup while I learn nix and more about linux. I won't be doing anything server related, I'm happy and in love with Proxmox and Docker. Making a lot of progress, other than some preserved and security things, should be reproducible.
-
 </div>
-
-
 <br clear="left"/>
 
-### To-Do list<sup>[1]</sup>
+### Mirrors
+<a href="https://codeberg.org/TeaJhay/NixOS"><img src="https://raw.githubusercontent.com/homarr-labs/dashboard-icons/adca944175c9a3eb0471f78a4da87f237476d585/svg/codeberg.svg" width="5%" alt="codeberg mirror"/></a>&emsp;&emsp;<a href="https://git.doesntcompute.site/TeaJhay/NixOS"><img src="https://raw.githubusercontent.com/homarr-labs/dashboard-icons/adca944175c9a3eb0471f78a4da87f237476d585/svg/forgejo.svg" width="3.5%" alt="Forgejo mirror"/></a>&emsp;&emsp;<a href="https://github.com/TeaJhay/NixOS"><img src="https://raw.githubusercontent.com/homarr-labs/dashboard-icons/adca944175c9a3eb0471f78a4da87f237476d585/svg/github-light.svg" width="5%" alt="Github mirror"/></a>
+ 
+### To-Do list[^1]
 - [x] Cleaner directory structure
 - [x] Move to individual package lists rather than a united one.
 - [ ] Move dots and keys to declarative configs and secrets.
 - [ ] Look into Hjem-Rum modules
 - [x] clean up log and readme
 - [ ] Optimise - *Ambitious*
-- [ ] Make this repo documented and mirror to (Codeberg?) repo that removes comments and docs for real use.
-- [ ] Setup Harmonia (and maybe circus?) on homelab to compile/cache binaries and pull latest git commits<sup>[4]</sup>
+- [x] Mirror to Codeberg and Forgejo.[^5]
+- [x] Setup Circus-CI on homelab to compile/cache binaries and pull latest git commits
+- [ ] Document with NDG and/or Hugo and remove comments from nix files. Steal from eConnah 
 
-### Incomplete Features<sup>[1]</sup>
+### Incomplete Features[^1]
 - [ ] Fix yazi githead, needs middle cap
 - [ ] Yazi with matugen? - Possibly not possible
-- [ ] ~~add liquid glass theming~~ <sup>[2]</sup> 
-- [ ] Matugen with transparent toggle in NVF. Cannot get colorscheme to preserve.<sup>[3]</sup>
-<div align="left">
+- [ ] ~~add liquid glass theming~~ [^2]
+- [ ] Matugen with transparent toggle in NVF. Cannot get colorscheme to preserve.[^3]
 
 ## Structure (wip)
 ```
@@ -111,10 +111,10 @@ NixOS
 - [Nix-eval-stats](https://notashelf.github.io/nix-evaluator-stats/)
   
 ## 
-<sup>[1]</sup> - Will include Submodules/repo's like NVF here
+[^1]: Will include Submodules/repo's like NVF here
 
-<sup>[2]</sup> - Hyprglass needs work after refactors, potentially change to native theming? or learn C++...
+[^2]: Hyprglass needs work after refactors, potentially change to native theming? or learn C++...
 
-<sup>[3]</sup> - [Awesome config linked](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom) that helped to get all bars to match colours (except for icons) but has hardcoded transparency. Need a solution to toggle background (Normal?) to a choice colour (or even make opacity 80%). [Solution using custom noctalia template](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom)
+[^3]: [Awesome config linked](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom) that helped to get all bars to match colours (except for icons) but has hardcoded transparency. Need a solution to toggle background (Normal?) to a choice colour (or even make opacity 80%). [Solution using custom noctalia template](https://codeberg.org/eljangus/nixos/src/commit/269a386313ae7d8417b6e45589577d1b13793a73/assets/misc/noctalia/templates/neovim-custom)
 
-<sup>[4]</sup> - Perhaps with fallback to regular caches? need to research more.
+[^5]: Selfhosted forgejo instance WIP, eyeing brewery.
