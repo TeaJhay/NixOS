@@ -1,0 +1,3 @@
+[submodule "profiles/NVF"]
+	path = profiles/NVF
+	url = git@github.com:TeaJhay/NVF.git
