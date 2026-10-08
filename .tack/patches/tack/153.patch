@@ -1,0 +1,185 @@
+From a6b5c4052702b808f2aaea6826511d42cec2becc Mon Sep 17 00:00:00 2001
+From: Ferry <217118383+ferryfisher@users.noreply.github.com>
+Date: Tue, 6 Oct 2026 07:06:33 -0700
+Subject: [PATCH 1/2] resolver: use fetchTarball for locked tarball inputs
+
+---
+ .tack/default.nix | 57 +++++++++++++++++------------------------------
+ 1 file changed, 20 insertions(+), 37 deletions(-)
+
+diff --git a/.tack/default.nix b/.tack/default.nix
+index 4e3e8ca..168d155 100644
+--- a/.tack/default.nix
++++ b/.tack/default.nix
+@@ -26,7 +26,6 @@ let
+     match
+     pathExists
+     readFile
+-    removeAttrs
+     split
+     stringLength
+     substring
+@@ -50,34 +49,6 @@ let
+     "indirect"
+   ];
+ 
+-  fetchTreeAttrs = {
+-    type = null;
+-    owner = null;
+-    repo = null;
+-    host = null;
+-    url = null;
+-    id = null;
+-    ref = null;
+-    rev = null;
+-    narHash = null;
+-    lastModified = null;
+-    revCount = null;
+-    submodules = null;
+-    shallow = null;
+-    allRefs = null;
+-    name = null;
+-    lfs = null;
+-    exportIgnore = null;
+-    verifyCommit = null;
+-    keytype = null;
+-    publicKey = null;
+-    publicKeys = null;
+-    dirtyRev = null;
+-    dirtyShortRev = null;
+-    unpack = null;
+-    treeHash = null;
+-  };
+-
+   call =
+     {
+       overrides ? { },
+@@ -165,17 +136,29 @@ let
+         else
+           let
+             node = lock.${name};
++            type = node.type or "";
+           in
+-          if (node.type or "") == "path" then
++          if type == "path" then
+             {
+-              outPath = if substring 0 1 node.path == "/" then node.path else resolverDir + ("/" + node.path);
++              outPath = if substring 0 1 node.path == "/" then node.path else resolverDir + "/" + node.path;
+               lastModified = node.lastModified or 0;
+             }
+-            // (if node ? narHash then { inherit (node) narHash; } else { })
+-          else if !(elem (node.type or "") knownTypes) then
+-            throw "tack: unknown lock type '${node.type or "?"}' for pin '${name}'"
++          else if type == "tarball" then
++            let
++              fetched = fetchTarball {
++                inherit (node) url;
++                sha256 = node.narHash;
++              };
++            in
++            {
++              outPath = fetched;
++              inherit (node) url;
++              inherit (node) rev narHash lastModified;
++            }
++          else if !(elem type knownTypes) then
++            throw "tack: unknown lock type '${type}' for pin '${name}'"
+           else
+-            fetchTree (intersectAttrs fetchTreeAttrs node);
++            fetchTree node;
+ 
+       fetchFixed =
+         { name, entry }:
+@@ -534,7 +517,7 @@ let
+           inherit side;
+           follows = policy.global;
+           location = "all_follow";
+-          excluded = policy.excluded;
++          inherit (policy) excluded;
+         })
+         // resolve (projectFollows {
+           inherit side;
+@@ -552,7 +535,7 @@ let
+         followLayersForSide {
+           inherit side policy;
+           resolve = resolveFollows;
+-          inherited = policy.inherited;
++          inherit (policy) inherited;
+         };
+ 
+       followMetaForSide =
+
+From d8190b02e77779db47879f917e4266d3a790503c Mon Sep 17 00:00:00 2001
+From: Ferry <217118383+ferryfisher@users.noreply.github.com>
+Date: Wed, 7 Oct 2026 06:20:07 -0700
+Subject: [PATCH 2/2] resolver: fix tarball metadata
+
+---
+ .tack/default.nix | 42 ++++++++++++++++++++++++++++++++----------
+ 1 file changed, 32 insertions(+), 10 deletions(-)
+
+diff --git a/.tack/default.nix b/.tack/default.nix
+index 168d155..3deb0b3 100644
+--- a/.tack/default.nix
++++ b/.tack/default.nix
+@@ -49,6 +49,34 @@ let
+     "indirect"
+   ];
+ 
++  fetchTreeAttrs = {
++    type = null;
++    owner = null;
++    repo = null;
++    host = null;
++    url = null;
++    id = null;
++    ref = null;
++    rev = null;
++    narHash = null;
++    lastModified = null;
++    revCount = null;
++    submodules = null;
++    shallow = null;
++    allRefs = null;
++    name = null;
++    lfs = null;
++    exportIgnore = null;
++    verifyCommit = null;
++    keytype = null;
++    publicKey = null;
++    publicKeys = null;
++    dirtyRev = null;
++    dirtyShortRev = null;
++    unpack = null;
++    treeHash = null;
++  };
++
+   call =
+     {
+       overrides ? { },
+@@ -144,21 +172,15 @@ let
+               lastModified = node.lastModified or 0;
+             }
+           else if type == "tarball" then
+-            let
+-              fetched = fetchTarball {
+-                inherit (node) url;
+-                sha256 = node.narHash;
+-              };
+-            in
+             {
+-              outPath = fetched;
+-              inherit (node) url;
+-              inherit (node) rev narHash lastModified;
++              outPath = fetchTarball (
++                { inherit (node) url; } // (if node ? narHash then { sha256 = node.narHash; } else { })
++              );
+             }
+           else if !(elem type knownTypes) then
+             throw "tack: unknown lock type '${type}' for pin '${name}'"
+           else
+-            fetchTree node;
++            fetchTree (intersectAttrs fetchTreeAttrs node);
+ 
+       fetchFixed =
+         { name, entry }:

@@ -1,14 +1,19 @@
 {pkgs, ...}: {
-  programs.git = {
-    enable = true;
-    config = {
-      user = {
-        name = "Teajhay";
+  programs = {
+    git = {
+      enable = true;
+      config = {
+        user = {
+          name = "Teajhay";
+        };
       };
     };
+    thunderbird.enable = true;
+    tack = {
+      enable = true;
+      nixConfTokens = true;
+    };
   };
-  programs.thunderbird.enable = true;
-
   #       ┌─────────────────────────┐
   #       │         Packages        │
   #       └─────────────────────────┘

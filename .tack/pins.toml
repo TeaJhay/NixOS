@@ -46,7 +46,12 @@ channel = "https://channels.nixos.org/{path}/nixexprs.tar.xz"
 #   tags_from       fixed-only repo url or http(s) page to read tag's tags from, for an
 #                   asset that isn't a release download
 [inputs]
-
+[inputs.tack]
+url = "github:manic-systems/tack"
+group = "rafware"
+patches = [
+"https://github.com/manic-systems/tack/pull/153"
+]
 [inputs.nix-flatpak]
 url = "github:gmodena/nix-flatpak"
 
@@ -54,7 +59,7 @@ url = "github:gmodena/nix-flatpak"
 url = "github:nix-community/nixpkgs.lib"
 
 [inputs.nixpkgs-unstable]
-url = "channel:nixpkgs-unstable"
+url = "channel:nixos-unstable"
 
 [inputs.nixpkgs]
 url = "channel:nixos-26.05"
@@ -65,8 +70,14 @@ url = "github:NixOS/nixos-hardware/master"
 [inputs.preservation]
 url = "github:nix-community/preservation"
 
+[inputs.preservation.follows]
+nixpkgs-unstable = "nixpkgs-unstable"
+
 [inputs.import-tree]
 url = "github:denful/import-tree"
+
+[inputs.import-tree.follows]
+nixpkgs-unstable = "nixpkgs-unstable"
 
 [inputs.findFiles]
 url = "github:Michael-C-Buckley/findFiles.nix"
@@ -102,7 +113,7 @@ nixpkgs = "nixpkgs"
 url = "github:youwen5/zen-browser-flake"
 
 [inputs.zen-browser.follows]
-nxipkgs = "nxipkgs"
+nxipkgs = "nixpkgs"
 
 [inputs.hjem]
 url = "github:feel-co/hjem"

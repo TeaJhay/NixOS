@@ -31,6 +31,11 @@
         owner = "teajhay";
         mode = "0400";
       };
+      gh-token = {
+        recipients = ["teajhay"];
+        owner = "teajhay";
+        mode = "0444";
+      };
       #password.recipients = [ "teajhay" ];
       #password.recipients = [ "teajhay" ];
     };

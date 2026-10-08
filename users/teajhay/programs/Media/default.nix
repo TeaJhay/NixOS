@@ -4,5 +4,6 @@
     krita
     udiskie
     loupe
+    onlyoffice-desktopeditors
   ];
 }
