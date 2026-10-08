@@ -109,12 +109,8 @@
           ".local/state/nix/profiles"
           ".ssh"
           ".config/yazi/flavors/noctalia.yazi"
-          {
-            directory = ".gnupg";
-            user = "teajhay";
-            group = "wheel";
-            mode = "0775";
-          }
+          ".gnupg"
+          "Dev"
           ".thunderbird"
           ".steam"
           ".var/app"
@@ -123,6 +119,7 @@
           ".local/share/heroic"
           ".config/heroic"
           ".cache/tealdeer"
+          ".cache/nix"
         ];
         files = [
           ".gitconfig"
