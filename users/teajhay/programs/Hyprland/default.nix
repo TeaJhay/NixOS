@@ -37,7 +37,7 @@
   environment.systemPackages = with pkgs; [
     hyprcursor
     playerctl
-    unstable.quickshell
+    quickshell
     qt6.qtwayland
   ];
 }

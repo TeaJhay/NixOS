@@ -57,6 +57,7 @@ require("bunny"):setup({
     { key = { "l", "t" }, path = "~/.local/state", desc = "Local state" },
     { key = { "n", "h" }, path = "/persistent/home/teajhay/nixos", desc = "Nix config" },
     { key = { "n", "c" }, path = "/persistent/home/teajhay/nixos/users/teajhay/xdg/.config", desc = "Nix user config" },
+    { key = { "n", "p" }, path = "/persistent/home/teajhay/nixos/profiles/", desc = "Nix profiles" },
     -- key and path attributes are required, desc is optional
   },
   desc_strategy = "path", -- If desc isn't present, use "path" or "filename", default is "path"
@@ -65,27 +66,6 @@ require("bunny"):setup({
   notify = false, -- Notify after hopping, default is false
   fuzzy_cmd = "fzf", -- Fuzzy searching command, default is "fzf"
 })
-
---local function get_mode_bg()
---  local mode = cx.active.mode
---  if mode.is_select then
---    return Yatline.config.style_a.bg_mode.select
---  elseif mode.is_unset then
---    return Yatline.config.style_a.bg_mode.un_set
---  else
---    return Yatline.config.style_a.bg_mode.normal
---  end
---end
---
---local function left_cap()
---  local span = ui.Span("\u{e0b6}"):fg(get_mode_bg()) -- left half-circle
---  return ui.Line({ span })
---end
---
---local function right_cap()
---  local span = ui.Span("\u{e0b4}"):fg(get_mode_bg()) -- right half-circle
---  return ui.Line({ span })
---end
 
 require("yatline"):setup({
   section_separator = { open = "", close = "" },
@@ -105,7 +85,7 @@ require("yatline"):setup({
   style_b = { bg = catppuccin_palette.surface0, fg = catppuccin_palette.text },
   style_c = { bg = catppuccin_palette.base, fg = catppuccin_palette.text },
 
-  permissions_t_fg = catppuccin_palette.green,
+  permissions_t_fg = th.tasks.hovered:fg(),
   permissions_r_fg = catppuccin_palette.yellow,
   permissions_w_fg = catppuccin_palette.red,
   permissions_x_fg = catppuccin_palette.sky,
@@ -203,13 +183,4 @@ require("yatline-githead"):setup({
 
   show_untracked = true,
   untracked_symbol = " ",
-
-  --prefix_color = catppuccin_palette.pink,
-  --branch_color = catppuccin_palette.pink,
-  --commit_color = catppuccin_palette.mauve,
-  --stashes_color = catppuccin_palette.teal,
-  --state_color = catppuccin_palette.lavender,
-  --staged_color = catppuccin_palette.green,
-  --unstaged_color = catppuccin_palette.yellow,
-  --untracked_color = catppuccin_palette.pink,
 })

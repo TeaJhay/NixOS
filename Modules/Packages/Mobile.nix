@@ -4,6 +4,6 @@
     libimobiledevice
     ifuse
     usbutils
-    unstable.iloader
+    iloader
   ];
 }

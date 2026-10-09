@@ -8,9 +8,9 @@
     curl
     kitty
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    unstable.yazi
+    yazi
     tree
-    unstable.vesktop
+    vesktop
     sshfs
     lazyssh
     zoxide

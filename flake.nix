@@ -7,20 +7,10 @@
     };
   in
     with inputs; let
-      # Generic helper: turn a nixpkgs-like flake input into an overlay
-      # that exposes it as pkgs.<name>
-      mkChannelOverlay = name: flakeInput: final: prev: {
-        ${name} = import flakeInput {
-          system = prev.stdenv.hostPlatform.system;
-          config.allowUnfree = true;
-        };
-      };
-      overlay-unstable = mkChannelOverlay "unstable" nixpkgs-unstable;
       # Modules shared by every host
       commonModules = [
         ({config, ...}: {
           nixpkgs.overlays = [
-            overlay-unstable # Prefix package with "unstable." to use unstable package
             millennium.overlays.default # Millenium overlay for steam
           ];
           documentation.enable = false;
@@ -73,6 +63,8 @@
         nix-flatpak.nixosModules.nix-flatpak
         inputs.nix-secrets.nixosModules.default
         inputs.tack.nixosModules.default
+        nixos-core.nixosModules.default
+        {system.nixos-core.enable = true;}
       ];
 
       # Helper for making hosts.
