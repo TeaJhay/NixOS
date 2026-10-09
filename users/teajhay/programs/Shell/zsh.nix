@@ -63,7 +63,7 @@
     jujutsu
     jjui
     trash-cli
-    unstable.eza
+    eza
     bat
     zoxide
   ];

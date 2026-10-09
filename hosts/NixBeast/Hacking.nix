@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   #       ┌─────────────────────────┐
   #       │       Networking        │
   #       └─────────────────────────┘
@@ -36,10 +35,14 @@
     firewall.allowedTCPPorts = [
       2049
       22
+      443
+      80
     ];
     firewall.allowedUDPPorts = [
       2049
       22
+      443
+      80
     ];
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;

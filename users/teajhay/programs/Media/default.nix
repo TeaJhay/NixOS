@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    unstable.pear-desktop
+    pear-desktop
     krita
     udiskie
     loupe

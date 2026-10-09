@@ -178,7 +178,7 @@ def _draw_right_status(screen: Screen, is_last: bool, cells: list) -> int:
     if not is_last:
         return 0
     draw_attributed_string(Formatter.reset, screen)
-    screen.cursor.x = screen.columns - right_status_length
+    screen.cursor.x = max(0, screen.columns - right_status_length)
     screen.cursor.fg = 0
     for status, color_fg, color_bg in cells:
         screen.cursor.fg = color_bg

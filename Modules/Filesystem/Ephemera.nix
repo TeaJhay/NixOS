@@ -140,6 +140,10 @@
             file = ".config/kitty/themes/noctalia.conf";
             how = "symlink";
           }
+          {
+            file = ".zsh_history";
+            how = "symlink";
+          }
           ".config/jjui/config.toml"
         ];
       };
