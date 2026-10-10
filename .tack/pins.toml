@@ -36,9 +36,6 @@ exclude_follow = ["nixpkgs"]
 [inputs.tack]
 url = "github:manic-systems/tack"
 group = "rafware"
-patches = [
-"https://github.com/manic-systems/tack/pull/153"
-]
 
 #NOTE: Extra utilities
 [inputs.nix-flatpak]
