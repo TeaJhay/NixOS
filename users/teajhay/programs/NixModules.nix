@@ -17,7 +17,7 @@
   #       ┌─────────────────────────┐
   #       │         Packages        │
   #       └─────────────────────────┘
-
+  services.headscale.settings.warnings = ["The `foo' service is deprecated and will go away soon!"];
   environment.systemPackages = with pkgs; [
     gcc
     nixd

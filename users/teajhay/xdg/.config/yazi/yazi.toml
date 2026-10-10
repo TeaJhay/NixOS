@@ -14,7 +14,9 @@ mouse_events = [ "click", "scroll", "drag" ]
 #  { run = 'kitty %S', orphan = true, desc = "kitty", for = "linux" },
 #  { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
 #]
-
+extract = [
+	{ run = 'ya pub extract --list %s', desc = "Extract here", for = "linux" },
+]
 text = [
   { run = 'nvf %s', block = true, desc = "NVF", for = "linux" },
   { run = '${EDITOR:-nvim} %s', block = true, desc = "$EDITOR", for = "linux" },
@@ -50,26 +52,31 @@ fallback = [
 rules = [
   { url = "*/", use = "folder" },
 
-  { mime = "text/*", use = "text" },
+  { mime = "text/*",  use = "text" },
   { mime = "image/*", use = "image" },
   { mime = "video/*", use = "video" },
-  { mime = "application/octet-stream", use = "video" },
   { mime = "audio/*", use = "audio" },
-  { mime = "inode/empty", use = "text" },
+  { mime = "inode/empty",      use = "text" },
   { mime = "application/json", use = "text" },
 
-  { mime = "application/zip", use = "archive" },
-  { mime = "application/gzip", use = "archive" },
-  { mime = "application/x-bzip", use = "archive" },
-  { mime = "application/x-bzip2", use = "archive" },
-  { mime = "application/x-tar", use = "archive" },
-  { mime = "application/x-7z-compressed", use = "archive" },
-  { mime = "application/x-rar", use = "archive" },
-  { mime = "application/pdf", use = "document" },
-  { mime = "application/epub+zip", use = "document" },
-  { mime = "application/x-mobipocket-ebook", use = "document" },
-    # Virtual file system
+  { mime = "application/zip",              use = "extract" },
+  { mime = "application/gzip",             use = "extract" },
+  { mime = "application/x-bzip",           use = "extract" },
+  { mime = "application/x-bzip2",          use = "extract" },
+  { mime = "application/x-tar",            use = "extract" },
+  { mime = "application/x-7z-compressed",  use = "extract" },
+  { mime = "application/x-rar",            use = "extract" },
+
+  { mime = "application/pdf",                  use = "document" },
+  { mime = "application/epub+zip",             use = "document" },
+  { mime = "application/x-mobipocket-ebook",   use = "document" },
+
+  { mime = "application/octet-stream", use = "video" },
+
+  # Virtual file system
   { mime = "vfs/{absent,stale}", use = "download" },
+
+  # Catch-all, keep it last
   { mime = "*", use = "fallback" },
 ]
 
