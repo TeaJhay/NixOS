@@ -36,6 +36,10 @@ require("zoxide"):setup({
   update_db = true,
 })
 
+require("sshfs"):setup({
+  mount_dir = os.getenv("HOME") .. "/Dev/vfs",
+})
+
 require("session"):setup({
   sync_yanked = true,
 })

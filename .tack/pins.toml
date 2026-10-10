@@ -5,7 +5,8 @@ channel = "https://channels.nixos.org/{path}/nixexprs.tar.xz"
 [all_follow]
 hjem = "hjem"
 nixpkgs = ["nixpkgs-stable", "nixpkgs-unstable"]
-
+[tack] 
+recomposable = true
 [omit_inputs]
 [signers]
 [inputs]

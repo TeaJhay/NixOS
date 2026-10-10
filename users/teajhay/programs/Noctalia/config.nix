@@ -250,12 +250,18 @@
             background_opacity = 0.2;
             enabled = true;
             inactive_opacity = 0.78;
-            monitors = [
-              "DP-3"
-              "HDMI-A-1"
-            ];
             reserve_space = false;
             smart_auto_hide = true;
+          };
+          monitor = {
+            TV = {
+              match = "HDMI-A-1";
+              enabled = true;
+            };
+            Small = {
+              match = "DP-5";
+              enabled = true;
+            };
           };
           idle = {
             behavior = {
@@ -305,12 +311,12 @@
             };
             schema_version = 2;
             widget = {
-              "lockscreen-login-box@DP-3" = {
+              "lockscreen-login-box@DP-5" = {
                 box_height = 196;
                 box_width = 810;
                 cx = 960;
                 cy = 898;
-                output = "DP-3";
+                output = "DP-5";
                 placement_height = 1080;
                 placement_width = 1920;
                 rotation = 0;
@@ -413,7 +419,7 @@
             };
             widget_order = [
               "lockscreen-login-box@HDMI-A-1"
-              "lockscreen-login-box@DP-3"
+              "lockscreen-login-box@DP-5"
               "lockscreen-widget-0000000000000001"
               "lockscreen-widget-0000000000000002"
               "lockscreen-widget-0000000000000004"
@@ -428,7 +434,7 @@
           osd = {
             background_opacity = 0.1;
             monitors = [
-              "DP-3"
+              "DP-5"
               "HDMI-A-1"
             ];
             offset_x = 0;
@@ -528,7 +534,7 @@
               path = "/home/teajhay/Pictures/wallpapers/Dreamy-Aesthetic-Home-Under-Moonlight.png";
             };
             monitors = {
-              DP-3 = {
+              DP-5 = {
                 path = "/home/teajhay/Pictures/wallpapers/Dreamy-Aesthetic-Home-Under-Moonlight.png";
               };
               HDMI-A-1 = {
