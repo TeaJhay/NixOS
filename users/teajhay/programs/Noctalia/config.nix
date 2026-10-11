@@ -55,81 +55,81 @@
               smart_auto_hide = true;
             };
             top = {
-              background_opacity = 0.2;
+              background_opacity = 0.5;
               capsule_group = [
                 {
                   accordion = true;
                   accordion_direction = "start";
                   enabled = true;
-                  fill = "surface_variant";
+                  fill = "surface";
                   id = "g1";
                   members = [
                     "launcher"
                     "wallhaven"
                     "wallpaper"
                   ];
-                  opacity = 1;
+                  opacity = 0.5;
                   padding = 6;
                 }
                 {
                   accordion = true;
                   accordion_direction = "start";
                   enabled = true;
-                  fill = "surface_variant";
+                  fill = "surface";
                   id = "g2";
                   members = [
                     "volume"
                     "input_volume"
                   ];
-                  opacity = 1;
+                  opacity = 0.5;
                   padding = 6;
                 }
                 {
                   accordion = true;
                   accordion_direction = "start";
                   enabled = true;
-                  fill = "surface_variant";
+                  fill = "surface";
                   id = "g3";
                   members = [
                     "session"
                     "control-center"
                   ];
-                  opacity = 1;
+                  opacity = 0.5;
                   padding = 6;
                 }
                 {
                   accordion = true;
                   accordion_direction = "start";
                   enabled = true;
-                  fill = "surface_variant";
+                  fill = "surface";
                   id = "g5";
                   members = [
                     "network_rx"
                     "network_tx"
                     "bluetooth"
                   ];
-                  opacity = 1;
+                  opacity = 0.5;
                   padding = 6;
                 }
                 {
                   accordion = false;
                   accordion_direction = "end";
                   enabled = true;
-                  fill = "surface_variant";
+                  fill = "surface";
                   id = "g4";
                   members = [
                     "ram"
                     "cpu"
                     "power_profile"
                   ];
-                  opacity = 1;
+                  opacity = 0.5;
                   padding = 6;
                 }
                 {
                   accordion = false;
                   accordion_direction = "end";
                   enabled = true;
-                  fill = "surface_variant";
+                  fill = "surface";
                   id = "g6";
                   members = [
                     "shelly"
@@ -140,7 +140,7 @@
                     "nightlight"
                     "weather"
                   ];
-                  opacity = 1;
+                  opacity = 0.5;
                   padding = 6;
                 }
               ];
@@ -321,7 +321,7 @@
                 placement_width = 1920;
                 rotation = 0;
                 settings = {
-                  background_color = "surface_variant";
+                  background_color = "surface";
                   background_opacity = 0.88;
                   background_radius = 12;
                   center_password_text = false;
@@ -348,7 +348,7 @@
                 placement_width = 2560;
                 rotation = 0;
                 settings = {
-                  background_color = "surface_variant";
+                  background_color = "surface";
                   background_opacity = 0.88;
                   background_radius = 12;
                   center_password_text = false;
