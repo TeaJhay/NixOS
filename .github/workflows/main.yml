@@ -30,7 +30,7 @@ jobs:
         run: git submodule update --init --remote
 
       - name: tack update
-        run: nix run github:manic-systems/tack -- update
+        run: nix --accept-flake-config run github:manic-systems/tack -- update
 
       - name: Create pull request
         id: cpr
