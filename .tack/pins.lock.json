@@ -13,7 +13,7 @@
     "nix-secrets": "github:unnamed-systems/nix-secrets",
     "nixos-core": "github:manic-systems/nixos-core",
     "nixos-hardware": "github:NixOS/nixos-hardware/master",
-    "nixpkgs": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz",
+    "nixpkgs": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz",
     "nixpkgs-lib": "github:nix-community/nixpkgs.lib",
     "noctalia": "github:noctalia-dev/noctalia/cachix",
     "noctalia-greeter": "github:noctalia-dev/noctalia-greeter",
@@ -121,15 +121,15 @@
     "type": "github",
     "owner": "NixOS",
     "repo": "nixos-hardware",
-    "rev": "4bc63156b109ee7b4103e3ec30565c8c92bde435",
-    "narHash": "sha256-c3oMt0QoE+4yiRk6u1m2L9ogjaUw0uTGn9yk808KkgE=",
-    "lastModified": 1791373788
+    "rev": "60a624466c08787ee8303393b7d4752d1826f14f",
+    "narHash": "sha256-BYhx89XJltnRyQeuDKHVL5eSqbbfAcOKuDts7QRsrxQ=",
+    "lastModified": 1791721963
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1088030.8edc0c72e3a3/nixexprs.tar.xz?rev=8edc0c72e3a38faf5434e40d1f19431125fe4b30&lastModified=1791487292",
-    "rev": "8edc0c72e3a38faf5434e40d1f19431125fe4b30",
-    "narHash": "sha256-6BIvCXtdLW4HQwsOGkgH444aB3vCbHypE9TA78ireh8=",
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1089111.6510408d147d/nixexprs.tar.xz?rev=6510408d147d8c5e6d76043e899e9251756f6a75&lastModified=1791594108",
+    "rev": "6510408d147d8c5e6d76043e899e9251756f6a75",
+    "narHash": "sha256-V0WmebqwEeAVZMqxfv7Dq7hpKkPPM19W50xQf3D1Kf4=",
     "lastModified": 315532800
   },
   "nixpkgs-lib": {
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "4a79d1b2b67b3373bb66dc3dd6854120680d18e3",
-    "narHash": "sha256-gyIWW3/IEayQ4QnVCkYcGVzd8RyvgYywGoFDbA78XYk=",
-    "lastModified": 1791691567
+    "rev": "45084cf764f08c1f00e0c7e7432732f225105b7e",
+    "narHash": "sha256-mBCtcZPGgBLfEYxFvBRsc0KeDz0JtN2BMhcIWGoMk94=",
+    "lastModified": 1791701131
   },
   "noctalia-greeter": {
     "type": "github",

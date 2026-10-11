@@ -19,7 +19,7 @@ recomposable = true
 
 #NOTE: Base inputs
 [inputs.nixpkgs]
-url = "channel:nixpkgs-unstable"
+url = "channel:nixos-unstable"
 
 #NOTE: Maniac preemo soft
 [inputs.nixos-core]
