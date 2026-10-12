@@ -42,8 +42,8 @@ jobs:
           branch: automation/update-tacks
           delete-branch: true
 
-      - name: Enable auto-merge
+      - name: Merge PR
         if: steps.cpr.outputs.pull-request-number != ''
-        run: gh pr merge --auto --squash "${{ steps.cpr.outputs.pull-request-number }}"
+        run: gh pr merge --squash "${{ steps.cpr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
