@@ -36,6 +36,7 @@ group = "rafware"
 exclude_follow = ["nixpkgs"]
 [inputs.tack]
 url = "github:manic-systems/tack"
+exclude_follow = ["nixpkgs"]
 group = "rafware"
 
 #NOTE: Extra utilities

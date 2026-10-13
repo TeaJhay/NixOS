@@ -16,6 +16,7 @@
       cdi = "zi";
       clean = ''clear && printf "\033[3J"'';
       nixsize = "nix path-info -Sh .#nixosConfigurations.NixBeast.config.system.build.toplevel";
+      nixstat = ''NIX_SHOW_STATS=1 nix eval .#nixosConfigurations.lenix.config.system.build.toplevel --substituters "" --option eval-cache false --raw --read-only'';
       testupdate = "nh os test -H NixBeast";
       update = "nh os switch -H NixBeast";
       upgrade = "nh os switch -H NixBeast --update --ask";
