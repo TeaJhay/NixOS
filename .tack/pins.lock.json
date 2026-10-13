@@ -65,9 +65,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "6cc0822e24ad18df62689de80593541a61b49924",
-    "narHash": "sha256-6JkVAadW+25LvCUfhcQJxX8Cddufq9AWHmoscgmHFIA=",
-    "lastModified": 1791830869
+    "rev": "1bd31aaa579a40680ce876e1547e371b60c45522",
+    "narHash": "sha256-mrUYWjc1UsDzf1pxufndPicShoD6tl9Nf/Fw4kTO9Vw=",
+    "lastModified": 1791886032
   },
   "import-tree": {
     "type": "github",
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "274c5b7e37114c3d8e42a3f3d84544b3e150f6f9",
-    "narHash": "sha256-+6bbJP6efFvF77OTrqc/fouCdjOcOH6rXY995PH1AiE=",
-    "lastModified": 1791834082
+    "rev": "0c8808e8392b49385459422ce14ff28e2c2aed83",
+    "narHash": "sha256-dxH7jjA9EZDo1x5P8wgJbykOSWQj1Q2AgxQhdN/NeyM=",
+    "lastModified": 1791852984
   },
   "noctalia-greeter": {
     "type": "github",
@@ -168,9 +168,9 @@
     "type": "github",
     "owner": "manic-systems",
     "repo": "tack",
-    "rev": "1df34422c2699ff9d40f3be959aedaa5056ca3cb",
-    "narHash": "sha256-7wHRQAoMC0lp4VeXF+cgzJec1K/+dFBpPwpXRPdpo+o=",
-    "lastModified": 1791739078
+    "rev": "ceef477f4c9fada177872d29ac00a8651f21df8b",
+    "narHash": "sha256-IMSEULXBQoHKobbnr6mqVUujm36RXvdvE1Tt5OdRj2E=",
+    "lastModified": 1791839790
   },
   "zen-browser": {
     "type": "github",
