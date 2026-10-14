@@ -28,8 +28,7 @@
 
 # BEAUTIFUL PEOPLE:
 
-- [Connor being tech support!](https://github.com/eConnah/nix-dots)
+- [Clémentine being tech support!](https://github.com/eConnah/nix-dots)
 - [Raf and his premium rafware](https://github.com/NotAShelf).
 - [Squirrel and automation!](https://github.com/SquirrelModeller/squirrel-nixos)
 - [Fazzi and Hyprcursor](https://gitlab.com/fazzi/nixohess)
-  
