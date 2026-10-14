@@ -65,9 +65,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "38a82a41163817918bb4e51f41ae5f7e35f3a04a",
-    "narHash": "sha256-bVBhgoY43QEkRt4v5qXMEEg9Xx9BtLWL/9kOcOKlzjQ=",
-    "lastModified": 1791986696
+    "rev": "e2ad066c9ffd45ddfbe4dc76d2de16b382fbe3eb",
+    "narHash": "sha256-sqWBYgjkJd5xTJKd9Jz/SbtrJfY3eTqxyqn1xfH6O00=",
+    "lastModified": 1792003461
   },
   "import-tree": {
     "type": "github",
@@ -144,17 +144,17 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "83f21859fcfda13fe98e3c796e8d4322230b9a71",
-    "narHash": "sha256-d48qkXoWdS8vfUleRIdZXpQVWyRrAIp+2FKYNnt1rG0=",
-    "lastModified": 1791988212
+    "rev": "4e21d7d9309a462411ffc68b2d33e05c90892619",
+    "narHash": "sha256-lOGkfjoqysQKD3GWd6VVrC7q9ENqb0gaA0mAOqANzzo=",
+    "lastModified": 1792007393
   },
   "noctalia-greeter": {
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia-greeter",
-    "rev": "a8683078d798c30403905f5356729d1c2b7d88a4",
-    "narHash": "sha256-EkDSqqrW/qWaO4BYNqr9MMCdfIpLhnc2JoWipgoZrek=",
-    "lastModified": 1791985171
+    "rev": "c0d328447e3093107a6002cd947c7b5f4a289eed",
+    "narHash": "sha256-T7mKc+DgrSTEtNXXE2jfVHoUNRogl/A0HhfjbKSIDMM=",
+    "lastModified": 1791996288
   },
   "preservation": {
     "type": "github",
