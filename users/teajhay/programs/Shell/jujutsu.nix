@@ -16,6 +16,17 @@
               ];
               doc = "A convenient alias to pull a pr $1 from remote $0 into branch $2";
             };
+            push = {
+              definition = [
+                "util"
+                "exec"
+                "--"
+                "uvx"
+                "jj-pre-push"
+                "push"
+              ];
+              doc = "An integration for pre-push hooks";
+            };
           };
           signing = {
             behavior = "drop";
