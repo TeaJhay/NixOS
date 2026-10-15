@@ -81,9 +81,9 @@
     "type": "github",
     "owner": "SteamClientHomebrew",
     "repo": "Millennium",
-    "rev": "4ecc644bf728090215294ceeb2c7cc5e22abac66",
-    "narHash": "sha256-JquPo1pb8gQTazVr5UBEOsWhoV9YR4/yOVtMyR4lQXM=",
-    "lastModified": 1791991619
+    "rev": "22af2f453777a925fb398a3dab60a407e66aa83f",
+    "narHash": "sha256-xyl3KTB+j4W3dAxQVSolNJCQZOasDnCLB3Dr14adBmU=",
+    "lastModified": 1792022604
   },
   "niqspkgs": {
     "type": "github",
@@ -127,10 +127,10 @@
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1090327.7fd4004d0511/nixexprs.tar.xz?rev=7fd4004d0511991fff3a0524856a9be09e28c5f0&lastModified=1791734076",
-    "rev": "7fd4004d0511991fff3a0524856a9be09e28c5f0",
-    "narHash": "sha256-0dNcyVeoD61zhucIpt5BAQ+ytd6JzF641Z+A9bgltLo=",
-    "lastModified": 315532800
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1092090.55bfb4d7437b/nixexprs.tar.xz?rev=55bfb4d7437bd4e09ab7cba58a43bd68eb310044&lastModified=1791956154",
+    "rev": "55bfb4d7437bd4e09ab7cba58a43bd68eb310044",
+    "narHash": "sha256-gJX2+xcImvxBCI3bp7zXKLUX2AwsdTxMgJ1UX/5Hm/o=",
+    "lastModified": 1791956154
   },
   "nixpkgs-lib": {
     "type": "github",
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "4e21d7d9309a462411ffc68b2d33e05c90892619",
-    "narHash": "sha256-lOGkfjoqysQKD3GWd6VVrC7q9ENqb0gaA0mAOqANzzo=",
-    "lastModified": 1792007393
+    "rev": "a33122c4208a385e19c9a252e65e2751b2c44fbb",
+    "narHash": "sha256-gCF1P9r0UzPah0fqBTg2nVuxuuNnRxnYYHklvq8VKZI=",
+    "lastModified": 1792070304
   },
   "noctalia-greeter": {
     "type": "github",
@@ -168,9 +168,9 @@
     "type": "github",
     "owner": "manic-systems",
     "repo": "tack",
-    "rev": "cb825647a30e7f54915babbec5b5786c647772d6",
-    "narHash": "sha256-F+sgyf1KB/ogY41JJ52WPYuWXosB6dXTlO3J/m+xcww=",
-    "lastModified": 1791942069
+    "rev": "cb40a92166a280f79f36dd3529cf12d0532ce30a",
+    "narHash": "sha256-SxL4jbhDWuCj2E3Ik9/ngu5pPK6AeuOf18b/fmDHEJk=",
+    "lastModified": 1792025586
   },
   "zen-browser": {
     "type": "github",
