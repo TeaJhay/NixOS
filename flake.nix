@@ -39,7 +39,7 @@
                 "https://cache.manic.systems"
               ];
               trusted-public-keys = [
-                "cache.doesntcompute.site:S6YA1haeQJ97lrvFMflyFur4+Tssfu7jc7d233Fd87I="
+                "cache.doesntcompute.site:peri6vDK6y7aPih0zdRdSbOJ+nAOv7BVY1DqRsqyuc8="
                 "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
                 "cache.manic.systems-1:s6OZanN8Us8vRi0jVivP3qlMn0cYHBjBALKrNe5nH8s="
               ];
