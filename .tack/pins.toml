@@ -88,6 +88,7 @@ exclude_follow = ["nixpkgs"]
 #NOTE: Apps
 [inputs.zen-browser]
 url = "github:youwen5/zen-browser-flake"
+patches = [ "https://patch-diff.githubusercontent.com/raw/youwen5/zen-browser-flake/pull/23.patch" ]
 group = "Apps"
 [inputs.millennium]
 url = "github:SteamClientHomebrew/Millennium"

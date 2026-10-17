@@ -1,0 +1,27 @@
+From 6ca1a282fa32f47cd9fd15ad8592e09558600da8 Mon Sep 17 00:00:00 2001
+From: brainlesslukas <info@brainlesslukas.com>
+Date: Sun, 18 Oct 2026 02:18:06 +0200
+Subject: [PATCH] fix: update hash
+
+---
+ sources.json | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/sources.json b/sources.json
+index 4d83d36..f12bfb6 100644
+--- a/sources.json
++++ b/sources.json
+@@ -3,10 +3,10 @@
+   "firefoxVersion": "158.0",
+   "x86_64-linux": {
+     "url": "https://github.com/zen-browser/desktop/releases/download/1.23.3b/zen.linux-x86_64.tar.xz",
+-    "hash": "sha256-d9cHicsaxIhxd0FpzxdQdy6J62cfSiWHJO9F1pyIbxU="
++    "hash": "sha256-uyBF0+IWVNQP6EElAJLurf0sH8gx7vtQkiJ3PIvcoUk="
+   },
+   "aarch64-linux": {
+     "url": "https://github.com/zen-browser/desktop/releases/download/1.23.3b/zen.linux-aarch64.tar.xz",
+     "hash": "sha256-LknzDhflX5VhgHYwZeV3buP8KsAK7Ni+m+RlwtyTdgU="
+   }
+-}
+\ No newline at end of file
++}

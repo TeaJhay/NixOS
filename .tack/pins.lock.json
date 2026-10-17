@@ -178,6 +178,19 @@
     "repo": "zen-browser-flake",
     "rev": "5a0d21f99706b231df9ff35ab95dbccda88414d8",
     "narHash": "sha256-TEDD0EgSDKOl9hGNlEaINfd2Y4PFhyh4czw4lb1AGak=",
-    "lastModified": 1792140224
+    "lastModified": 1792140224,
+    "patched": {
+      "path": "/nix/store/sx8p7ri48f0x1p3ckn9sqwwk9z4vm0d9-source",
+      "narHash": "sha256-JIlrSrFcrCmhsHFiI2Qh6QvJDFhOJ3GIOpiSg3Td7Co=",
+      "lastModified": 1792140224,
+      "patches": [
+        {
+          "source": "https://patch-diff.githubusercontent.com/raw/youwen5/zen-browser-flake/pull/23.patch",
+          "url": "https://patch-diff.githubusercontent.com/raw/youwen5/zen-browser-flake/pull/23.patch",
+          "file": "patches/zen-browser/23.patch",
+          "sha256": "82248f6abfc68c6cc4215b1d3d2debb294a6c0e07a818cdead2abc2554deec44"
+        }
+      ]
+    }
   }
 }
