@@ -10,8 +10,6 @@ local mainMod = "SUPER"
 
 local ScriptsDir = os.getenv("HOME") .. "/.config/hypr/scripts"
 
-local UserScripts = os.getenv("HOME") .. "/.config/hypr/scripts"
-
 --### STANDARD ####
 
 -- Common shortcuts
@@ -79,7 +77,6 @@ hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("noctalia msg panel-toggle wallpaper"
 hl.bind(mainMod .. " + ALT + W", hl.dsp.exec_cmd("noctalia msg wallpaper-random"))
 
 -- Set window to opaque and nodim
-
 hl.bind(mainMod .. " + CTRL + O", function()
   hl.dispatch(hl.dsp.window.set_prop({
     prop = "opaque",
@@ -383,6 +380,12 @@ end
 
 -- Move active window and follow to workspace mainMod + SHIFT [0-9]
 
+--for n = 1, 10 do
+--  hl.bind(mainMod .. " + SHIFT + code:" .. (n + 9), function()
+--    hl.dispatch(hl.dsp.workspace.move({ workspace = n, monitor = hl.get_active_monitor() }))
+--    hl.dispatch(hl.dsp.window.move({ workspace = n }))
+--  end)
+--end
 for n = 1, 10 do
   hl.bind(mainMod .. " + SHIFT + code:" .. (n + 9), hl.dsp.window.move({ workspace = n }))
 end
@@ -423,8 +426,3 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- NOTE: mouse:272 = right click
-
--- Autostart
-hl.on("hyprland.start", function()
-  hl.exec_cmd(ScriptsDir .. "/ChangeLayout.sh init")
-end)
