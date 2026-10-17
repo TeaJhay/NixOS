@@ -31,7 +31,7 @@
                 "cgroups"
                 "flakes"
                 "nix-command"
-                # "pipe-operator"
+                "pipe-operators"
               ];
               substituters = [
                 "https://cache.doesntcompute.site/nix-cache"
