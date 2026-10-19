@@ -19,7 +19,7 @@
     "noctalia-greeter": "github:noctalia-dev/noctalia-greeter",
     "preservation": "github:nix-community/preservation",
     "tack": "github:manic-systems/tack",
-    "zen-browser": "github:youwen5/zen-browser-flake"
+    "zen-browser": "github:TeaJhay/zen-browser-flake"
   },
   "disko": {
     "type": "github",
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "fb07a6da892ba8e577f932af24a9575c870582c2",
-    "narHash": "sha256-9pmJltA+O0i40XrH29ciP9t9zn0Qf40w/rrJoFdVp+Y=",
-    "lastModified": 1792424605
+    "rev": "d9bcdc437c4a65686da8f5647f3dca9d963ece9d",
+    "narHash": "sha256-UbkKiq/ifhvJfdzXWwZpH8FthECKFMebZFrhup7ptus=",
+    "lastModified": 1792436598
   },
   "noctalia-greeter": {
     "type": "github",
@@ -174,23 +174,10 @@
   },
   "zen-browser": {
     "type": "github",
-    "owner": "youwen5",
+    "owner": "TeaJhay",
     "repo": "zen-browser-flake",
-    "rev": "5a0d21f99706b231df9ff35ab95dbccda88414d8",
-    "narHash": "sha256-TEDD0EgSDKOl9hGNlEaINfd2Y4PFhyh4czw4lb1AGak=",
-    "lastModified": 1792140224,
-    "patched": {
-      "path": "/nix/store/sx8p7ri48f0x1p3ckn9sqwwk9z4vm0d9-source",
-      "narHash": "sha256-JIlrSrFcrCmhsHFiI2Qh6QvJDFhOJ3GIOpiSg3Td7Co=",
-      "lastModified": 1792140224,
-      "patches": [
-        {
-          "source": "https://patch-diff.githubusercontent.com/raw/youwen5/zen-browser-flake/pull/23.patch",
-          "url": "https://patch-diff.githubusercontent.com/raw/youwen5/zen-browser-flake/pull/23.patch",
-          "file": "patches/zen-browser/23.patch",
-          "sha256": "82248f6abfc68c6cc4215b1d3d2debb294a6c0e07a818cdead2abc2554deec44"
-        }
-      ]
-    }
+    "rev": "91c70852a313c008b9bf20dabf8949902086bfb4",
+    "narHash": "sha256-rXHPly0LuB2cRv1RFZjyJCKpfHn8o+BGzSfIpZR1Mag=",
+    "lastModified": 1792419909
   }
 }
