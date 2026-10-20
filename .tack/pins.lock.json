@@ -25,9 +25,9 @@
     "type": "github",
     "owner": "nix-community",
     "repo": "disko",
-    "rev": "725ea35e410ad83be4931d1bff7e090eacaf3563",
-    "narHash": "sha256-uZkBR7yHdIKUFB5SZdfgh1qkGfI3XmYmI/lTiquxbck=",
-    "lastModified": 1789770686
+    "rev": "7fdf779611daf0e250889cb27e4f1f602147a8f2",
+    "narHash": "sha256-BsLGrgqKJg2o9IsjU4Xvzo8RZV9Fn1GajEasifBwqsI=",
+    "lastModified": 1792505528
   },
   "findFiles": {
     "type": "github",
@@ -65,9 +65,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "12f242511a9c0fe8a884a9d90511bbbbe044f067",
-    "narHash": "sha256-e5hPjAKpI70AgioW8g/nDiOm2yiR1WJhtYSzwltsNyA=",
-    "lastModified": 1792425323
+    "rev": "2860d07b09ef94909bbb7113b2644b65fe8c20b2",
+    "narHash": "sha256-JTE/Z2qI8uq64+HCP9yVtMzr0hFvI8tanzLUJpBubw8=",
+    "lastModified": 1792508535
   },
   "import-tree": {
     "type": "github",
@@ -121,16 +121,16 @@
     "type": "github",
     "owner": "NixOS",
     "repo": "nixos-hardware",
-    "rev": "60a624466c08787ee8303393b7d4752d1826f14f",
-    "narHash": "sha256-BYhx89XJltnRyQeuDKHVL5eSqbbfAcOKuDts7QRsrxQ=",
-    "lastModified": 1791721963
+    "rev": "efb6d0d5e2394c3c5416a18652808aba206c0988",
+    "narHash": "sha256-6n1Dn+WYtD8lprnSi+0k4FjbKfIVNG8lblpJ5MiiqXs=",
+    "lastModified": 1792491056
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1093333.fe13242281a6/nixexprs.tar.xz?rev=fe13242281a67641c0102cdb1087f0ebe586c7df&lastModified=1792094642",
-    "rev": "fe13242281a67641c0102cdb1087f0ebe586c7df",
-    "narHash": "sha256-LPFRbrCWWyNsdQLO3SX1B/5UMkFK0hfe7bZR6lENvpc=",
-    "lastModified": 1792094642
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1095516.09063bd1f2b3/nixexprs.tar.xz?rev=09063bd1f2b36fd9fd793c36dfade7bd40a93dfc&lastModified=1792210252",
+    "rev": "09063bd1f2b36fd9fd793c36dfade7bd40a93dfc",
+    "narHash": "sha256-EFOYkCb5ZNtbPx1NInawzi4y/6JRdHia0ag0CbJoMNY=",
+    "lastModified": 1792210252
   },
   "nixpkgs-lib": {
     "type": "github",
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "d9bcdc437c4a65686da8f5647f3dca9d963ece9d",
-    "narHash": "sha256-UbkKiq/ifhvJfdzXWwZpH8FthECKFMebZFrhup7ptus=",
-    "lastModified": 1792436598
+    "rev": "ee75f7adcc012f2b02852b655769758cce7eb721",
+    "narHash": "sha256-sVeO0/25+P2l8JGIeJSChSNl0jj3EgNrKTDsRXyOQKo=",
+    "lastModified": 1792502223
   },
   "noctalia-greeter": {
     "type": "github",
