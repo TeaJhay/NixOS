@@ -19,7 +19,7 @@
     "noctalia-greeter": "github:noctalia-dev/noctalia-greeter",
     "preservation": "github:nix-community/preservation",
     "tack": "github:manic-systems/tack",
-    "zen-browser": "github:TeaJhay/zen-browser-flake"
+    "zen-browser": "github:TeaJhay/zen-browser-flake?rev=458cd16116c362a5e92d5db6bdc3599e4e8b1f4a"
   },
   "disko": {
     "type": "github",
@@ -176,8 +176,8 @@
     "type": "github",
     "owner": "TeaJhay",
     "repo": "zen-browser-flake",
-    "rev": "91c70852a313c008b9bf20dabf8949902086bfb4",
-    "narHash": "sha256-rXHPly0LuB2cRv1RFZjyJCKpfHn8o+BGzSfIpZR1Mag=",
-    "lastModified": 1792419909
+    "rev": "458cd16116c362a5e92d5db6bdc3599e4e8b1f4a",
+    "narHash": "sha256-qpJE5ug1T+7LEdXRLI9/ZIwe/rzqjILR9BpMg/sNVtM=",
+    "lastModified": 1791627880
   }
 }
