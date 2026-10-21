@@ -55,6 +55,7 @@ require("bunny"):setup({
     { key = { "d", "r" }, path = "~/Documents", desc = "Documents" },
     { key = { "d", "d" }, path = "~/Downloads", desc = "Downloads" },
     { key = { "d", "w" }, path = "~/Pictures", desc = "Picture" },
+    { key = { "d", "e" }, path = "~/Dev", desc = "Projects" },
     { key = "c", path = "~/.config", desc = "Config files" },
     { key = { "l", "s" }, path = "~/.local/share", desc = "Local share" },
     { key = { "l", "b" }, path = "~/.local/bin", desc = "Local bin" },
