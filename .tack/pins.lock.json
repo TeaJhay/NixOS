@@ -65,9 +65,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "8b7aefe32e3459a6e3a92cbd6dd6c638d1b8dbdd",
-    "narHash": "sha256-PbJXTTC8kJSvhU9tfYdrPKzhWX0QqDffIQjLcV543oM=",
-    "lastModified": 1792600228
+    "rev": "5a97e150ac62001de66d0b902fe0ddc3c8f61011",
+    "narHash": "sha256-zBwfjt96i9gHg43RDSyo9yOYtsAwFpFsrxnJ1MoUh0M=",
+    "lastModified": 1792676046
   },
   "import-tree": {
     "type": "github",
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "15051a8251435dfcb9abdb2c63b9cf401f2f0d58",
-    "narHash": "sha256-78muVLcTK0P73ir65B88rr+MesTEemMrxywYQs9RVLk=",
-    "lastModified": 1792653901
+    "rev": "2e83bf2a5cf73629c12bb58e2f3d36e36104a6cb",
+    "narHash": "sha256-nYxj6UjePv5IQq0/dxsT3A5qU57seUE0DY5NXrMyUo8=",
+    "lastModified": 1792679383
   },
   "noctalia-greeter": {
     "type": "github",
