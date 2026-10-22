@@ -26,15 +26,12 @@ text = [
 
 document = [
   { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
-  { run = 'zathura %s1', orphan = true, desc = "zathura", for = "linux" },
-  { run = 'libreoffice %s1', orphan = true, desc = "libreoffice", for = "linux" },
+  { run = 'onlyoffice-desktopeditors %s1', orphan = true, desc = "OnlyOffice", for = "linux" },
 ]
 
 image = [
   { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
-  { run = 'qimgv %s1', orphan = true, desc = "qimgv", for = "linux" },
   { run = 'krita %s1', orphan = true, desc = "krita", for = "linux" },
-  { run = 'satty --filename %s1', orphan = true, desc = "satty", for = "linux" },
 ]
 video = [
   { run = 'xdg-open %s1', orphan = true, desc = "xdg-open", for = "linux" },
