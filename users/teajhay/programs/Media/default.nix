@@ -3,7 +3,7 @@
     pear-desktop
     krita
     udiskie
-    loupe
+    oculante
     onlyoffice-desktopeditors
     xdg-desktop-portal-termfilechooser
     stremio-linux-shell
