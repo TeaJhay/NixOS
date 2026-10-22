@@ -9,7 +9,7 @@
   cfg = config.Host.users."${user}";
 in {
   imports = [
-    (inputs.import-tree ./programs)
+    (inputs.import-tree ./modules)
   ];
   options.Host.users."${user}".enable = lib.mkEnableOption "the ${user} user profile";
   #       ┌─────────────────────────┐
