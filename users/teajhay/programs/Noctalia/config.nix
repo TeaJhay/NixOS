@@ -14,7 +14,7 @@
     translate-shell
     libnotify
     slurp
-    swappy
+    satty
     grim
     wl-clipboard
   ];
