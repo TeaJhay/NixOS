@@ -93,6 +93,7 @@
           ".config/vesktop"
           ".config/gh"
           ".java"
+          ".local/share/direnv"
           ".local/share/PrismLauncher"
           ".local/share/Steam"
           ".local/share/applications"
