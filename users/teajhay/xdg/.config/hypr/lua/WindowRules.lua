@@ -82,7 +82,7 @@ hl.window_rule({
 
 -- terminal tags
 local term_rules = {
-  { "emulators", "^(ghostty|wezterm|Alacritty|kitty|kitty-dropterm)$" },
+  { "emulators", "^(ghostty|wezterm|Alacritty|kitty|kitty-dropterm|nmtui|filechooser)$" },
 }
 
 for _, rule in ipairs(term_rules) do
@@ -309,6 +309,11 @@ local float_rules = {
   { "qalculate", { class = "^([Qq]alculate-gtk)$" } },
   { "center-auth-required-title", { title = "^(Authentication Required)$" } },
   {
+    "yazi-filechooser",
+    { class = "^(filechooser)$" },
+    { size = { "monitor_w*0.7", "monitor_h*0.6" } },
+  },
+  {
     "center-polkit-auth-dialog",
     {
       title = "^(Authentication required|Authentication Required)$",
@@ -498,13 +503,13 @@ end
 -- workspaces
 
 hl.workspace_rule({
-  workspace = 1,
+  workspace = "1",
   monitor = "DP-5",
   default = true,
 })
 
 hl.workspace_rule({
-  workspace = 4,
+  workspace = "4",
   monitor = "HDMI-A-1",
   default = true,
 })
