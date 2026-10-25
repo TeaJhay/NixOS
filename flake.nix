@@ -66,7 +66,7 @@
         inputs.nix-secrets.nixosModules.default
         inputs.tack.nixosModules.default
         nixos-core.nixosModules.default
-        {system.nixos-core.enable = true;}
+        {system.nixos-core.enable = false;}
       ];
 
       # Helper for making hosts.

@@ -1,0 +1,148 @@
+From bdcf5e82027324eac32c03331d4ea9c4948228b6 Mon Sep 17 00:00:00 2001
+From: MJ Moriarity <matt@mattmoriarity.com>
+Date: Wed, 21 Oct 2026 11:50:01 -0600
+Subject: [PATCH 1/2] remove references to boot.initrd.systemd.enable
+
+the option has been removed in master and nixos-unstable-small and will
+soon be absent in nixos-unstable.
+---
+ module.nix                       | 7 -------
+ tests/appliance-image-verity.nix | 2 --
+ tests/firstboot.nix              | 3 ---
+ 3 files changed, 12 deletions(-)
+
+diff --git a/module.nix b/module.nix
+index 9daaa2a..0a058ec 100644
+--- a/module.nix
++++ b/module.nix
+@@ -16,13 +16,6 @@ in
+   ];
+ 
+   config = lib.mkIf cfg.enable {
+-    assertions = [
+-      {
+-        assertion = config.boot.initrd.systemd.enable;
+-        message = "This module cannot be used with scripted initrd.";
+-      }
+-    ];
+-
+     boot.initrd.systemd = {
+       targets.initrd-preservation = {
+         description = "Initrd Preservation Mounts";
+diff --git a/tests/appliance-image-verity.nix b/tests/appliance-image-verity.nix
+index 5534374..a7d811e 100644
+--- a/tests/appliance-image-verity.nix
++++ b/tests/appliance-image-verity.nix
+@@ -73,8 +73,6 @@ pkgs:
+         };
+       };
+ 
+-      boot.initrd.systemd.enable = true;
+-
+       networking.useNetworkd = true;
+ 
+       services.userborn = {
+diff --git a/tests/firstboot.nix b/tests/firstboot.nix
+index 44bafef..8637362 100644
+--- a/tests/firstboot.nix
++++ b/tests/firstboot.nix
+@@ -25,9 +25,6 @@ pkgs:
+         ];
+       };
+ 
+-      # test-specific configuration below
+-      boot.initrd.systemd.enable = true;
+-
+       networking.useNetworkd = true;
+ 
+       virtualisation = {
+
+From ed8dbeaac0ad240341259c814cade7163a53fc1f Mon Sep 17 00:00:00 2001
+From: MJ Moriarity <matt@mattmoriarity.com>
+Date: Wed, 21 Oct 2026 12:04:14 -0600
+Subject: [PATCH 2/2] update nixpkgs for tests
+
+---
+ tests/appliance-image-verity.nix | 4 +++-
+ tests/basic.nix                  | 1 +
+ tests/flake.lock                 | 6 +++---
+ tests/flake.nix                  | 6 +++---
+ 4 files changed, 10 insertions(+), 7 deletions(-)
+
+diff --git a/tests/appliance-image-verity.nix b/tests/appliance-image-verity.nix
+index a7d811e..e009ca6 100644
+--- a/tests/appliance-image-verity.nix
++++ b/tests/appliance-image-verity.nix
+@@ -42,6 +42,7 @@ pkgs:
+       };
+ 
+       image.repart = {
++        enable = true;
+         verityStore.enable = true;
+ 
+         inherit (config.system) name;
+@@ -92,6 +93,7 @@ pkgs:
+             options = [ "mode=0755" ];
+           };
+           "/nix/store" = {
++            fsType = "none";
+             device = "/usr/nix/store";
+             options = [ "bind" ];
+           };
+@@ -123,7 +125,7 @@ pkgs:
+         "-f",
+         "qcow2",
+         "-b",
+-        "${nodes.machine.system.build.finalImage}/${nodes.machine.image.fileName}",
++        "${nodes.machine.system.build.image}/${nodes.machine.image.fileName}",
+         "-F",
+         "raw",
+         tmp_disk_image.name,
+diff --git a/tests/basic.nix b/tests/basic.nix
+index f21295c..217ef9d 100644
+--- a/tests/basic.nix
++++ b/tests/basic.nix
+@@ -127,6 +127,7 @@ in
+     # (for syntax highlighting)
+     /* python */
+     ''
++      import os
+       import json
+ 
+       initrd_files = json.loads('${initrdJSON}')
+diff --git a/tests/flake.lock b/tests/flake.lock
+index 7eb35f3..3376d6e 100644
+--- a/tests/flake.lock
++++ b/tests/flake.lock
+@@ -20,11 +20,11 @@
+     },
+     "nixpkgs": {
+       "locked": {
+-        "lastModified": 1757068644,
+-        "narHash": "sha256-NOrUtIhTkIIumj1E/Rsv1J37Yi3xGStISEo8tZm3KW4=",
++        "lastModified": 1792502884,
++        "narHash": "sha256-IoNisKcGbUjdd45qCqywGMCYmZ5EnkxezvLII0FWwNA=",
+         "owner": "nixos",
+         "repo": "nixpkgs",
+-        "rev": "8eb28adfa3dc4de28e792e3bf49fcf9007ca8ac9",
++        "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
+         "type": "github"
+       },
+       "original": {
+diff --git a/tests/flake.nix b/tests/flake.nix
+index 4779c9b..4dca873 100644
+--- a/tests/flake.nix
++++ b/tests/flake.nix
+@@ -16,9 +16,9 @@
+         perSystem = { pkgs, ... }:
+           {
+             checks = {
+-              default = pkgs.nixosTest (import ./basic.nix pkgs);
+-              firstboot = pkgs.nixosTest (import ./firstboot.nix pkgs);
+-              verity-image = pkgs.nixosTest (import ./appliance-image-verity.nix pkgs);
++              default = pkgs.testers.nixosTest (import ./basic.nix pkgs);
++              firstboot = pkgs.testers.nixosTest (import ./firstboot.nix pkgs);
++              verity-image = pkgs.testers.nixosTest (import ./appliance-image-verity.nix pkgs);
+             };
+           };
+       };

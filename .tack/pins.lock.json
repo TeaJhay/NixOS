@@ -65,9 +65,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "5a97e150ac62001de66d0b902fe0ddc3c8f61011",
-    "narHash": "sha256-zBwfjt96i9gHg43RDSyo9yOYtsAwFpFsrxnJ1MoUh0M=",
-    "lastModified": 1792676046
+    "rev": "390f8f8297911620d5dcb226520ba0cf21e43479",
+    "narHash": "sha256-ogakOpv3ftOjXiemRNMHBeIP7kAohr3vAxr9vgj4bo0=",
+    "lastModified": 1792868113
   },
   "import-tree": {
     "type": "github",
@@ -113,48 +113,48 @@
     "type": "github",
     "owner": "manic-systems",
     "repo": "nixos-core",
-    "rev": "ea3d43aab1da4ab847065d50892c774904aa492d",
-    "narHash": "sha256-4XPY3uV0guJjLwzQb2wbio448zKfgkaH3dEh7ui2Bxg=",
-    "lastModified": 1792210974
+    "rev": "13d9c52c1ea8275e5c5b99878f96a8435bebad9f",
+    "narHash": "sha256-zWTz3A7cZyjCV8a9z/d20cDborKQgt+2YfDLIsnZkVQ=",
+    "lastModified": 1792822547
   },
   "nixos-hardware": {
     "type": "github",
     "owner": "NixOS",
     "repo": "nixos-hardware",
-    "rev": "efb6d0d5e2394c3c5416a18652808aba206c0988",
-    "narHash": "sha256-6n1Dn+WYtD8lprnSi+0k4FjbKfIVNG8lblpJ5MiiqXs=",
-    "lastModified": 1792491056
+    "rev": "1b418b8f203e49a92f250f8babdd19af1b6f7a7f",
+    "narHash": "sha256-2UBK0jdmPANGaeAIoVOZY+hSPB2Gy13ZuZeSxP3vF8k=",
+    "lastModified": 1792697326
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1097682.02c087f3fe67/nixexprs.tar.xz?rev=02c087f3fe673c9e317f206a627cb6b910336dbe&lastModified=1792502884",
-    "rev": "02c087f3fe673c9e317f206a627cb6b910336dbe",
-    "narHash": "sha256-ij8QUxzTOHovLrNOxVRx+RAhGQFOMsJbji0veiatH5k=",
-    "lastModified": 1792502884
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.xz?rev=3ec636362e1816bc2f0888fa0fa2c69f1bc9e504&lastModified=1792773339",
+    "rev": "3ec636362e1816bc2f0888fa0fa2c69f1bc9e504",
+    "narHash": "sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv+bWAr4V8YeKBw=",
+    "lastModified": 1792773339
   },
   "nixpkgs-lib": {
     "type": "github",
     "owner": "nix-community",
     "repo": "nixpkgs.lib",
-    "rev": "d0f596215fbb1603854039023c281b7c2ed1fd33",
-    "narHash": "sha256-Kgup1sH+/4qilwusTsSZ4PVjvVABEu5mrgWcZqZ7ePw=",
-    "lastModified": 1792290253
+    "rev": "bdfc468264d9078f56dcf98d6b4e37f539d37399",
+    "narHash": "sha256-yp5c8UsnvGcJQ6hQcbXqpfK9qPhH1iNYdoVO6zjNamA=",
+    "lastModified": 1792895748
   },
   "noctalia": {
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "2e83bf2a5cf73629c12bb58e2f3d36e36104a6cb",
-    "narHash": "sha256-nYxj6UjePv5IQq0/dxsT3A5qU57seUE0DY5NXrMyUo8=",
-    "lastModified": 1792679383
+    "rev": "40a82f21ab5f135f4324b1862f7b7732af581856",
+    "narHash": "sha256-UmKgnpRUr3XnwyBEj8uxeuES9qEtwP5aPyknujcCcuU=",
+    "lastModified": 1792896157
   },
   "noctalia-greeter": {
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia-greeter",
-    "rev": "1c35a133958c83b7cd018cced2119c1026504497",
-    "narHash": "sha256-hon2Py5QcQ5tAqKUAlNiJhl7MnZQg5XD32TXMLJlD+c=",
-    "lastModified": 1792407766
+    "rev": "dbace1c834a9e0f2e1b5d4ef186db8ec3b422a49",
+    "narHash": "sha256-23ynML6xH86MdfydW4bGPuReToZhqFspAO8Q220i/hM=",
+    "lastModified": 1792894449
   },
   "preservation": {
     "type": "github",
@@ -162,7 +162,20 @@
     "repo": "preservation",
     "rev": "93416f4614ad2dfed5b0dcf12f27e57d27a5ab11",
     "narHash": "sha256-mMI9IanU+Xw+pVogD2oT0I2kTmvz2Un/Apc5+CwUpEY=",
-    "lastModified": 1757436102
+    "lastModified": 1757436102,
+    "patched": {
+      "path": "/nix/store/vnmmi50almv3jsaxlcgvmf2y66kh9dhd-source",
+      "narHash": "sha256-HmqQ+/PpAkaIUjD+PkPs1FCcZ5N8dK2yC/5HCA9xm90=",
+      "lastModified": 1757436102,
+      "patches": [
+        {
+          "source": "https://patch-diff.githubusercontent.com/raw/nix-community/preservation/pull/36.patch",
+          "url": "https://patch-diff.githubusercontent.com/raw/nix-community/preservation/pull/36.patch",
+          "file": "patches/preservation/36.patch",
+          "sha256": "aebe71f847bd1a4bbe446f8e0102071aa944ccf274c729d12d45b98bde615de5"
+        }
+      ]
+    }
   },
   "tack": {
     "type": "github",

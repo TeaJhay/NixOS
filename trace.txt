@@ -1,0 +1,412 @@
+warning: Git tree '/persistent/home/teajhay/nixos' is dirty
+error:
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/attrsets.nix:1706:17:
+         1705|         zipAttrsWith (
+         1706|           name: values:
+             |                 ^
+         1707|           let
+
+       … while calling the 'head' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/attrsets.nix:1711:13:
+         1710|           if length values == 1 || pred here (elemAt values 1) (head values) then
+         1711|             head values
+             |             ^
+         1712|           else
+
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:283:38:
+          282|             let
+          283|               recurse = mapAttrs (n: v: if isOption v then v.value else recurse v);
+             |                                      ^
+          284|             in
+
+       … while evaluating the attribute 'value'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1181:7:
+         1180|     // {
+         1181|       value = addErrorContext "while evaluating the option `${showOption loc}':" (
+             |       ^
+         1182|         # Apply the 'apply' function to the merged value. This allows options to
+
+       … while evaluating the option `system.build.toplevel':
+
+       … while evaluating the attribute 'mergedValue'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1276:5:
+         1275|     # Type-check the remaining definitions, and merge them. Or throw if no definitions.
+         1276|     mergedValue =
+             |     ^
+         1277|       if isDefined then
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1277:7:
+         1276|     mergedValue =
+         1277|       if isDefined then
+             |       ^
+         1278|         if type.merge ? v2 then
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1231:7:
+         1230|       # original singleton straight to the type merge.
+         1231|       if
+             |       ^
+         1232|         length defs == 1
+
+       … in the right operand of the AND (&&) operator
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1233:9:
+         1232|         length defs == 1
+         1233|         && addErrorContext "while evaluating definitions from `${(head defs).file}':" (
+             |         ^
+         1234|           !(head defs).value ? _type
+
+       … while evaluating definitions from `/nix/store/zqznszbq59yjk0cm3ray4pfyglaps6qb-source/nixos/modules/system/activation/top-level.nix':
+
+       … in the argument of the not operator
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1234:12:
+         1233|         && addErrorContext "while evaluating definitions from `${(head defs).file}':" (
+         1234|           !(head defs).value ? _type
+             |            ^
+         1235|         )
+
+       … while evaluating the attribute 'value'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:866:21:
+          865|             inherit (module) file;
+          866|             inherit value;
+             |                     ^
+          867|           }) module.config
+
+       … from call site
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/nixos/modules/system/activation/top-level.nix:78:26:
+           77|   # Handle assertions and warnings
+           78|   baseSystemAssertWarn = lib.asserts.checkAssertWarn config.assertions config.warnings baseSystem;
+             |                          ^
+           79|
+
+       … while calling 'checkAssertWarn'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/asserts.nix:196:27:
+          195|   checkAssertWarn =
+          196|     assertions: warnings: val:
+             |                           ^
+          197|     let
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/asserts.nix:200:5:
+          199|     in
+          200|     if failedAssertions != [ ] then
+             |     ^
+          201|       throw "\nFailed assertions:\n${concatStringsSep "\n" (map (x: "- ${x}") failedAssertions)}"
+
+       … while calling the 'catAttrs' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/asserts.nix:198:26:
+          197|     let
+          198|       failedAssertions = catAttrs "message" (filter (x: !x.assertion) assertions);
+             |                          ^
+          199|     in
+
+       … while calling the 'filter' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/asserts.nix:198:46:
+          197|     let
+          198|       failedAssertions = catAttrs "message" (filter (x: !x.assertion) assertions);
+             |                                              ^
+          199|     in
+
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/asserts.nix:198:54:
+          197|     let
+          198|       failedAssertions = catAttrs "message" (filter (x: !x.assertion) assertions);
+             |                                                      ^
+          199|     in
+
+       … in the argument of the not operator
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/asserts.nix:198:58:
+          197|     let
+          198|       failedAssertions = catAttrs "message" (filter (x: !x.assertion) assertions);
+             |                                                          ^
+          199|     in
+
+       … while evaluating the attribute 'assertion'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1871:13:
+         1870|           {
+         1871|             assertion = !opt.isDefined;
+             |             ^
+         1872|             message = ''
+
+       … in the argument of the not operator
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1871:26:
+         1870|           {
+         1871|             assertion = !opt.isDefined;
+             |                          ^
+         1872|             message = ''
+
+       … while evaluating the attribute 'isDefined'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1190:21:
+         1189|       definitionsWithLocations = res.defsFinal;
+         1190|       inherit (res) isDefined;
+             |                     ^
+         1191|       inherit (res.checkedAndMerged) valueMeta;
+
+       … while evaluating the attribute 'isDefined'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1340:5:
+         1339|
+         1340|     isDefined = defsFinal != [ ];
+             |     ^
+         1341|
+
+       … while evaluating the attribute 'values'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1270:11:
+         1269|         {
+         1270|           values = defsSorted;
+             |           ^
+         1271|           inherit (defsFiltered) highestPrio;
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1264:13:
+         1263|             # Avoid sorting if we don't have to.
+         1264|             if any (def: def.value._type or "" == "order") defsFiltered.values then
+             |             ^
+         1265|               sortProperties defsFiltered.values
+
+       … while calling the 'any' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1264:16:
+         1263|             # Avoid sorting if we don't have to.
+         1264|             if any (def: def.value._type or "" == "order") defsFiltered.values then
+             |                ^
+         1265|               sortProperties defsFiltered.values
+
+       … from call site
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1259:26:
+         1258|           # Process mkOverride properties.
+         1259|           defsFiltered = filterOverrides' defsNormalized;
+             |                          ^
+         1260|
+
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1460:5:
+         1459|     in
+         1460|     defs:
+             |     ^
+         1461|     # Optimize for the singleton case, equivalent to the `else` clause.
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1462:5:
+         1461|     # Optimize for the singleton case, equivalent to the `else` clause.
+         1462|     if length defs == 1 then
+             |     ^
+         1463|       {
+
+       … while calling the 'length' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1462:8:
+         1461|     # Optimize for the singleton case, equivalent to the `else` clause.
+         1462|     if length defs == 1 then
+             |        ^
+         1463|       {
+
+       … while calling the 'concatMap' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1244:28:
+         1243|           # Process mkMerge and mkIf properties.
+         1244|           defsNormalized = concatMap (
+             |                            ^
+         1245|             m:
+
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1245:13:
+         1244|           defsNormalized = concatMap (
+         1245|             m:
+             |             ^
+         1246|             map (
+
+       … while calling the 'map' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1246:13:
+         1245|             m:
+         1246|             map (
+             |             ^
+         1247|               value:
+
+       … while evaluating definitions from `/nix/store/zqznszbq59yjk0cm3ray4pfyglaps6qb-source/flake.nix':
+
+       … from call site
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1255:82:
+         1254|                 }
+         1255|             ) (addErrorContext "while evaluating definitions from `${m.file}':" (dischargeProperties m.value))
+             |                                                                                  ^
+         1256|           ) defs;
+
+       … while calling 'dischargeProperties'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1411:5:
+         1410|   dischargeProperties =
+         1411|     def:
+             |     ^
+         1412|     if def ? _type then
+
+       … from call site
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1415:33:
+         1414|         if isBool def.condition then
+         1415|           if def.condition then dischargeProperties def.content else [ ]
+             |                                 ^
+         1416|         else
+
+       … while calling 'dischargeProperties'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1411:5:
+         1410|   dischargeProperties =
+         1411|     def:
+             |     ^
+         1412|     if def ? _type then
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1414:9:
+         1413|       if def._type == "if" then
+         1414|         if isBool def.condition then
+             |         ^
+         1415|           if def.condition then dischargeProperties def.content else [ ]
+
+       … while calling the 'isBool' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1414:12:
+         1413|       if def._type == "if" then
+         1414|         if isBool def.condition then
+             |            ^
+         1415|           if def.condition then dischargeProperties def.content else [ ]
+
+       … while evaluating the attribute 'condition'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1581:13:
+         1580|     _type = "if";
+         1581|     inherit condition content;
+             |             ^
+         1582|   };
+
+       … from call site
+         at «github:manic-systems/nixos-core/13d9c52c1ea8275e5c5b99878f96a8435bebad9f?narHash=sha256-zWTz3A7cZyjCV8a9z/d20cDborKQgt%2B2YfDLIsnZkVQ%3D»/nix/modules/nixos.nix:498:43:
+          497|     # With the systemd initrd stage-1 is handled by systemd; these don't apply.
+          498|     boot.initrd.extraUtilsCommands = mkIf cfg.components.extraUtilsCommand.enable ''
+             |                                           ^
+          499|       copy_bin_and_libs ${getExe' cfg.package "nixos-core"}
+
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:283:38:
+          282|             let
+          283|               recurse = mapAttrs (n: v: if isOption v then v.value else recurse v);
+             |                                      ^
+          284|             in
+
+       … while evaluating the attribute 'value'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1181:7:
+         1180|     // {
+         1181|       value = addErrorContext "while evaluating the option `${showOption loc}':" (
+             |       ^
+         1182|         # Apply the 'apply' function to the merged value. This allows options to
+
+       … while evaluating the option `system.nixos-core.components.extraUtilsCommand.enable':
+
+       … while evaluating the attribute 'mergedValue'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1276:5:
+         1275|     # Type-check the remaining definitions, and merge them. Or throw if no definitions.
+         1276|     mergedValue =
+             |     ^
+         1277|       if isDefined then
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1277:7:
+         1276|     mergedValue =
+         1277|       if isDefined then
+             |       ^
+         1278|         if type.merge ? v2 then
+
+       … while evaluating the attribute 'values'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1270:11:
+         1269|         {
+         1270|           values = defsSorted;
+             |           ^
+         1271|           inherit (defsFiltered) highestPrio;
+
+       … while evaluating a branch condition
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1264:13:
+         1263|             # Avoid sorting if we don't have to.
+         1264|             if any (def: def.value._type or "" == "order") defsFiltered.values then
+             |             ^
+         1265|               sortProperties defsFiltered.values
+
+       … while calling the 'any' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1264:16:
+         1263|             # Avoid sorting if we don't have to.
+         1264|             if any (def: def.value._type or "" == "order") defsFiltered.values then
+             |                ^
+         1265|               sortProperties defsFiltered.values
+
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1264:21:
+         1263|             # Avoid sorting if we don't have to.
+         1264|             if any (def: def.value._type or "" == "order") defsFiltered.values then
+             |                     ^
+         1265|               sortProperties defsFiltered.values
+
+       … while evaluating the attribute 'value._type'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1458:67:
+         1457|       strip =
+         1458|         def: if def.value._type or "" == "override" then def // { value = def.value.content; } else def;
+             |                                                                   ^
+         1459|     in
+
+       … while evaluating the attribute 'value.content'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1638:22:
+         1637|     _type = "override";
+         1638|     inherit priority content;
+             |                      ^
+         1639|   };
+
+       … while evaluating the attribute 'default'
+         at «github:manic-systems/nixos-core/13d9c52c1ea8275e5c5b99878f96a8435bebad9f?narHash=sha256-zWTz3A7cZyjCV8a9z/d20cDborKQgt%2B2YfDLIsnZkVQ%3D»/nix/modules/nixos.nix:326:11:
+          325|         // {
+          326|           default = !config.boot.initrd.systemd.enable;
+             |           ^
+          327|           defaultText = literalExpression "!config.boot.initrd.systemd.enable";
+
+       … in the argument of the not operator
+         at «github:manic-systems/nixos-core/13d9c52c1ea8275e5c5b99878f96a8435bebad9f?narHash=sha256-zWTz3A7cZyjCV8a9z/d20cDborKQgt%2B2YfDLIsnZkVQ%3D»/nix/modules/nixos.nix:326:22:
+          325|         // {
+          326|           default = !config.boot.initrd.systemd.enable;
+             |                      ^
+          327|           defaultText = literalExpression "!config.boot.initrd.systemd.enable";
+
+       … from call site
+         at «github:manic-systems/nixos-core/13d9c52c1ea8275e5c5b99878f96a8435bebad9f?narHash=sha256-zWTz3A7cZyjCV8a9z/d20cDborKQgt%2B2YfDLIsnZkVQ%3D»/nix/modules/nixos.nix:326:22:
+          325|         // {
+          326|           default = !config.boot.initrd.systemd.enable;
+             |                      ^
+          327|           defaultText = literalExpression "!config.boot.initrd.systemd.enable";
+
+       … while calling anonymous lambda
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:283:38:
+          282|             let
+          283|               recurse = mapAttrs (n: v: if isOption v then v.value else recurse v);
+             |                                      ^
+          284|             in
+
+       … while evaluating the attribute 'value'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1181:7:
+         1180|     // {
+         1181|       value = addErrorContext "while evaluating the option `${showOption loc}':" (
+             |       ^
+         1182|         # Apply the 'apply' function to the merged value. This allows options to
+
+       … while evaluating the option `boot.initrd.systemd.enable':
+
+       … from call site
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1184:29:
+         1183|         # yield a value computed from the definitions
+         1184|         if opt ? apply then opt.apply res.mergedValue else res.mergedValue
+             |                             ^
+         1185|       );
+
+       … while calling 'apply'
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1862:11:
+         1861|         apply =
+         1862|           x:
+             |           ^
+         1863|           throw "The option `${showOption optionName}' can no longer be used since it's been removed. ${replacementInstructions}";
+
+       … while calling the 'throw' builtin
+         at «https://releases.nixos.org/nixos/unstable/nixos-26.11pre1100280.3ec636362e18/nixexprs.tar.zst?narHash=sha256-17eNBI5Khe4JZaRkL5hRGPWf8MZ6qv%2BbWAr4V8YeKBw%3D»/lib/modules.nix:1863:11:
+         1862|           x:
+         1863|           throw "The option `${showOption optionName}' can no longer be used since it's been removed. ${replacementInstructions}";
+             |           ^
+         1864|       });
+
+       error: The option `boot.initrd.systemd.enable' can no longer be used since it's been removed. Scripted initrd has been removed.
