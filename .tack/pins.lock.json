@@ -65,9 +65,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "390f8f8297911620d5dcb226520ba0cf21e43479",
-    "narHash": "sha256-ogakOpv3ftOjXiemRNMHBeIP7kAohr3vAxr9vgj4bo0=",
-    "lastModified": 1792868113
+    "rev": "c4e7596a3db89cb0d213eeb3e436599422995b43",
+    "narHash": "sha256-3Q9x7UnMrDBwEcCLNH1P86IZHdAD8j1toPEEIi1Flmc=",
+    "lastModified": 1792919706
   },
   "import-tree": {
     "type": "github",
@@ -81,9 +81,9 @@
     "type": "github",
     "owner": "SteamClientHomebrew",
     "repo": "Millennium",
-    "rev": "f7a356f6789bc7d23f44bfbcdd95c71f0385cc1a",
-    "narHash": "sha256-2krnWSUcN06EYtUKqFxkbSIQP6NAfhMOrgnxZXB+dcc=",
-    "lastModified": 1792357572
+    "rev": "de5e9bdc251e2a422549ebe8b932015e126b994f",
+    "narHash": "sha256-JQ7ff1427PoYtxXbj+keMsNr+Nikc1/RuPm4l/VjX8U=",
+    "lastModified": 1792943446
   },
   "niqspkgs": {
     "type": "github",
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "40a82f21ab5f135f4324b1862f7b7732af581856",
-    "narHash": "sha256-UmKgnpRUr3XnwyBEj8uxeuES9qEtwP5aPyknujcCcuU=",
-    "lastModified": 1792896157
+    "rev": "1af14b8cdb701175bec57ddf27d070b92461024b",
+    "narHash": "sha256-ro0+LW36/WjKD1MddTnGuHHaxTIyrs7yPx54AYAvKuw=",
+    "lastModified": 1792990725
   },
   "noctalia-greeter": {
     "type": "github",
@@ -160,22 +160,9 @@
     "type": "github",
     "owner": "nix-community",
     "repo": "preservation",
-    "rev": "93416f4614ad2dfed5b0dcf12f27e57d27a5ab11",
-    "narHash": "sha256-mMI9IanU+Xw+pVogD2oT0I2kTmvz2Un/Apc5+CwUpEY=",
-    "lastModified": 1757436102,
-    "patched": {
-      "path": "/nix/store/vnmmi50almv3jsaxlcgvmf2y66kh9dhd-source",
-      "narHash": "sha256-HmqQ+/PpAkaIUjD+PkPs1FCcZ5N8dK2yC/5HCA9xm90=",
-      "lastModified": 1757436102,
-      "patches": [
-        {
-          "source": "https://patch-diff.githubusercontent.com/raw/nix-community/preservation/pull/36.patch",
-          "url": "https://patch-diff.githubusercontent.com/raw/nix-community/preservation/pull/36.patch",
-          "file": "patches/preservation/36.patch",
-          "sha256": "aebe71f847bd1a4bbe446f8e0102071aa944ccf274c729d12d45b98bde615de5"
-        }
-      ]
-    }
+    "rev": "00be7f7dd1a11ae0605386f2272288de7cf33abe",
+    "narHash": "sha256-s/A2rSO2Ndf8Y5yiouesnI/3Zkn9pmVGF2NxFxOUvx8=",
+    "lastModified": 1792953443
   },
   "tack": {
     "type": "github",

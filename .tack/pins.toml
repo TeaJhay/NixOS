@@ -66,9 +66,6 @@ group = "Extra"
 [inputs.preservation]
 url = "github:nix-community/preservation"
 group = "Extra"
-patches = [
-"https://patch-diff.githubusercontent.com/raw/nix-community/preservation/pull/36.patch"
-]
 [inputs.disko]
 url = "github:nix-community/disko"
 group = "Extra"
