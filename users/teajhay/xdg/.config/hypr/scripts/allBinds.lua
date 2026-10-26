@@ -14,7 +14,7 @@ def keyname:
   else "code:\(.keycode)" end;
 
 .[]
-| "[" + ((.modmask | mods) + [keyname] | join(" + "))
+| "[" + ((.modmask | mods) + [keyname] | join("+"))
   + "] = "
   + (if .description != "" then .description else "\(.dispatcher) \(.arg)" end)' | noctalia dmenu
 EOF
