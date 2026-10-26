@@ -14,5 +14,6 @@
     sshfs
     lazyssh
     zoxide
+    socat
   ];
 }
