@@ -41,9 +41,9 @@
     "type": "github",
     "owner": "feel-co",
     "repo": "hjem",
-    "rev": "4cd448d5b3220b8bbccdb6e7e8185b515f63a776",
-    "narHash": "sha256-xj1hq1P05Lekx9tAtyJGSMFw8Z5oK4jh+n7Qr0Q1m5k=",
-    "lastModified": 1792547720
+    "rev": "d219ef55ab7311d884cf33e114561082fec95f34",
+    "narHash": "sha256-BohcZsIqBOd6YL6+jUkdM4GE+aQc72E6yrqVyt1z5X4=",
+    "lastModified": 1793026809
   },
   "hjem-impure": {
     "type": "github",
@@ -65,9 +65,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "c4e7596a3db89cb0d213eeb3e436599422995b43",
-    "narHash": "sha256-3Q9x7UnMrDBwEcCLNH1P86IZHdAD8j1toPEEIi1Flmc=",
-    "lastModified": 1792919706
+    "rev": "fb6e5380228b2908ed9b74867a32b26f623a0cec",
+    "narHash": "sha256-LRXOFW/j7IrbTcjcSRxXTVLadf1v7nMMAiznHFcUx5Q=",
+    "lastModified": 1793028007
   },
   "import-tree": {
     "type": "github",
@@ -81,9 +81,9 @@
     "type": "github",
     "owner": "SteamClientHomebrew",
     "repo": "Millennium",
-    "rev": "de5e9bdc251e2a422549ebe8b932015e126b994f",
-    "narHash": "sha256-JQ7ff1427PoYtxXbj+keMsNr+Nikc1/RuPm4l/VjX8U=",
-    "lastModified": 1792943446
+    "rev": "d6a7822a43744b6290a0e059bdd032d9b9a2ec94",
+    "narHash": "sha256-vKNDa2aF7mi8I5SJVlqtePTwel64sYEAiHQR7HbUpwk=",
+    "lastModified": 1793036394
   },
   "niqspkgs": {
     "type": "github",
@@ -144,9 +144,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "1af14b8cdb701175bec57ddf27d070b92461024b",
-    "narHash": "sha256-ro0+LW36/WjKD1MddTnGuHHaxTIyrs7yPx54AYAvKuw=",
-    "lastModified": 1792990725
+    "rev": "125a30d4f13e86200e704a013d17ac0ed88a8044",
+    "narHash": "sha256-XuCihFGu51wBr4GaO+RgNeP7nJ1iOZC/uss5FVtqOLI=",
+    "lastModified": 1793024674
   },
   "noctalia-greeter": {
     "type": "github",
