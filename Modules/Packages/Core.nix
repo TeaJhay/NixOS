@@ -15,5 +15,6 @@
     lazyssh
     zoxide
     socat
+    modprobed-db
   ];
 }

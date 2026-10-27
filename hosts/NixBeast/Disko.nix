@@ -1,5 +1,5 @@
-{ inputs, ... }: {
-  imports = [ inputs.disko.nixosModules.disko ];
+{inputs, ...}: {
+  imports = [inputs.disko.nixosModules.disko];
   # Enable supported filesystems
   boot.supportedFilesystems = [
     "btrfs"
@@ -18,7 +18,7 @@
         esp = {
           content = {
             format = "vfat";
-            mountOptions = [ "umask=0077" ];
+            mountOptions = ["umask=0077"];
             mountpoint = "/boot";
             type = "filesystem";
           };
@@ -29,7 +29,7 @@
         };
         root = {
           content = {
-            extraArgs = [ "-f" ];
+            extraArgs = ["-f"];
             subvolumes = {
               "/@nix" = {
                 mountOptions = [
@@ -56,7 +56,7 @@
                 mountpoint = "/persistent/home";
               };
               "/@snapshots" = {
-                mountOptions = [ "subvol=@snapshots" ];
+                mountOptions = ["subvol=@snapshots"];
                 mountpoint = "/snapshots";
               };
               "/@void" = {
@@ -77,7 +77,7 @@
                 mountpoint = "/games";
               };
               "/@void-blank" = {
-                mountOptions = [ "subvol=@void-blank" ];
+                mountOptions = ["subvol=@void-blank"];
               };
             };
             type = "btrfs";
@@ -136,6 +136,21 @@
         "rw"
         "x-systemd.automount"
         "noauto"
+        "nofail"
+        "nconnect=8"
+      ];
+    };
+
+    "/home/teajhay/Dev/projects" = {
+      device = "10.0.1.200:/mnt/Jormungandr/Desktop/Documents/projects";
+      fsType = "nfs";
+      options = [
+        "soft"
+        "rw"
+        "x-systemd.automount"
+        "noauto"
+        "nofail"
+        "nconnect=8"
       ];
     };
 
@@ -147,6 +162,8 @@
         "rw"
         "x-systemd.automount"
         "noauto"
+        "nofail"
+        "nconnect=8"
       ];
     };
 
@@ -158,6 +175,8 @@
         "rw"
         "x-systemd.automount"
         "noauto"
+        "nofail"
+        "nconnect=8"
       ];
     };
 
@@ -169,8 +188,9 @@
         "rw"
         "x-systemd.automount"
         "noauto"
+        "nofail"
+        "nconnect=8"
       ];
     };
   };
-
 }
