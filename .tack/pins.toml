@@ -83,6 +83,10 @@ exclude_follow = ["nixpkgs"]
 url = "github:hyprwm/Hyprland"
 group = "Graphical Environment"
 exclude_follow = ["nixpkgs"]
+[inputs.KvLibadwaita]
+url  = "github:GabePoel/KvLibadwaita"
+type = "fetch"
+group = "Graphical Environment"
 
 #NOTE: Apps
 [inputs.zen-browser]
