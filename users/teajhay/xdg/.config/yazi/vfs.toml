@@ -1,5 +1,0 @@
-[sftp.my-server]
-host = "10.0.1.102"
-user = "root"
-port = 22
-password = "superior"
