@@ -80,8 +80,7 @@ in {
           "/var/lib/OpenLinkHub"
           {
             directory = "/etc/nixos";
-            user = "teajhay";
-            group = "users";
+            group = "wheel";
             mode = "0775";
           }
         ];
