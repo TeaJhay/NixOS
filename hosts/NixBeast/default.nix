@@ -22,9 +22,20 @@ _: {
       tcpcrypt.enable = true;
       firewall = {
         enable = true;
-        allowedTCPPorts = [];
-        allowedUDPPorts = [];
+        allowedTCPPorts = [
+          2049
+          22
+          443
+          80
+        ];
+        allowedUDPPorts = [
+          2049
+          22
+          443
+          80
+        ];
       };
+      interfaces.enp10s0.wakeOnLan.enable = true;
       defaultGateway = {
         address = "10.0.0.1";
         interface = "enp10s0";

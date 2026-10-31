@@ -1,5 +1,5 @@
-{ inputs, ... }: {
-  imports = [ inputs.disko.nixosModules.disko ];
+{inputs, ...}: {
+  imports = [inputs.disko.nixosModules.disko];
   # Enable supported filesystems
   boot.supportedFilesystems = [
     "btrfs"
@@ -18,7 +18,7 @@
         esp = {
           content = {
             format = "vfat";
-            mountOptions = [ "umask=0077" ];
+            mountOptions = ["umask=0077"];
             mountpoint = "/boot";
             type = "filesystem";
           };
@@ -29,7 +29,7 @@
         };
         root = {
           content = {
-            extraArgs = [ "-f" ];
+            extraArgs = ["-f"];
             subvolumes = {
               "/@nix" = {
                 mountOptions = [
@@ -56,7 +56,7 @@
                 mountpoint = "/persistent/home";
               };
               "/@snapshots" = {
-                mountOptions = [ "subvol=@snapshots" ];
+                mountOptions = ["subvol=@snapshots"];
                 mountpoint = "/snapshots";
               };
               "/@void" = {
@@ -77,7 +77,7 @@
                 mountpoint = "/games";
               };
               "/@void-blank" = {
-                mountOptions = [ "subvol=@void-blank" ];
+                mountOptions = ["subvol=@void-blank"];
               };
             };
             type = "btrfs";
@@ -107,6 +107,13 @@
   fileSystems = {
     "/nix".neededForBoot = true;
     "/persistent".neededForBoot = true;
+    "/var/lib/nixos" = {
+      device = "/persistent/var/lib/nixos";
+      fsType = "none";
+      options = ["bind"];
+      neededForBoot = true;
+      depends = ["/persistent"];
+    };
 
     #       ┌─────────────────────────┐
     #       │   Local (ext4) Drives   │
@@ -172,5 +179,4 @@
       ];
     };
   };
-
 }
