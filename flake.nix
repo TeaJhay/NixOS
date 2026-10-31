@@ -68,7 +68,17 @@
         inputs.nix-secrets.nixosModules.default
         inputs.tack.nixosModules.default
         nixos-core.nixosModules.default
-        {system.nixos-core.enable = false;}
+        {
+          system.nixos-core = {
+            enable = true;
+            components = {
+              bootStage1.enable = false;
+              extraUtilsCommand.enable = false;
+              initialRamdisk.enable = false;
+              nixosInitCompat.enable = true;
+            };
+          };
+        }
       ];
 
       # Helper for making hosts.

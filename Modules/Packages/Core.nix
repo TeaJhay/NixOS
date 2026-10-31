@@ -16,5 +16,6 @@
     zoxide
     socat
     modprobed-db
+    forgejo-cli
   ];
 }

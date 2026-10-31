@@ -4,7 +4,7 @@ channel = "https://channels.nixos.org/{path}/nixexprs.tar.xz"
 
 [all_follow]
 hjem = "hjem"
-#nixpkgs = ["nixpkgs-stable", "nixpkgs-unstable"]
+nixpkgs = ["nixpkgs-stable", "nixpkgs-unstable"]
 [tack] 
 #recomposable = true
 [omit_inputs]
@@ -28,14 +28,11 @@ group = "rafware"
 [inputs.hjem]
 url = "github:feel-co/hjem"
 group = "rafware"
-exclude_follow = ["nixpkgs"]
 [inputs.hjem-rum]
 url = "github:snugnug/hjem-rum"
 group = "rafware"
-exclude_follow = ["nixpkgs"]
 [inputs.tack]
 url = "github:manic-systems/tack"
-exclude_follow = ["nixpkgs"]
 group = "rafware"
 
 #NOTE: Extra utilities

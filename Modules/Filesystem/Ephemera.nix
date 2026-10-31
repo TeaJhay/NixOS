@@ -107,7 +107,6 @@
           ".local/share/zoxide"
           ".local/state/wireplumber"
           ".local/state/noctalia"
-          ".local/state/modprobed-db"
           ".local/state/nix/profiles"
           ".ssh"
           ".config/yazi/flavors/noctalia.yazi"
@@ -125,6 +124,10 @@
         ];
         files = [
           ".gitconfig"
+          {
+            file = ".local/share/modprobed-db/modprobed.db";
+            how = "symlink";
+          }
           {
             file = ".config/mimeapps.list";
             how = "symlink";

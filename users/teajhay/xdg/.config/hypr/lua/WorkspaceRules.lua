@@ -10,22 +10,32 @@
 
 -- This file will not be modified during dotfiles updates
 
-hl.workspace_rule({ workspace = "special:Dropdown", on_created_empty = "kitty", gaps_out = 50, gaps_in = 50 })
+-- to trigger an app to be started when a workspace is created, add the workspace ID and exec_cmd command to the table.
+hl.on("workspace.created", function(ws)
+  local workspace_programs = {
+    ["special:Vesktop"] = { cmd = "vesktop", opts = nil },
+    ["special:mailbox"] = { cmd = "thunderbird", opts = nil },
+    ["special:Dropdown"] = { cmd = "kitty", opts = nil },
+    ["special:btop"] = { cmd = "kitty btop", opts = { tag = "specialbtop" } },
+  }
+  local program = workspace_programs[ws.name]
+  if program and ws.is_empty then
+    hl.exec_cmd(program.cmd, program.opts)
+  end
+end)
+
+hl.workspace_rule({ workspace = "special:Dropdown", gaps_out = 50, gaps_in = 50 })
+
 hl.workspace_rule({
   workspace = "special:btop",
-  on_created_empty = "[tag:specialbtop] kitty btop",
   gaps_out = 50,
   gaps_in = 50,
 })
 
-hl.workspace_rule({ workspace = "special:Vesktop", on_created_empty = "vesktop" })
-
-hl.workspace_rule({ workspace = "special:mailbox", on_created_empty = "thunderbird" })
-
 local TARGET = "special:btop"
 local prev_special = {} -- monitor name -> name of its active special workspace (or nil)
 
-hl.on("workspace.special_active", function(ws, mon)
+hl.on("workspace.special_active", function(_, mon)
   local monName = mon.name
   local was = prev_special[monName]
   local nowWs = mon.active_special_workspace
