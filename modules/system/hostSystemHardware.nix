@@ -19,7 +19,7 @@ in {
         default = null;
         description = "Systems platform";
       };
-      hardware = mkOption {
+      modules = mkOption {
         type = listOf str;
         default = [];
         description = "List of hardware modules this device has ";
