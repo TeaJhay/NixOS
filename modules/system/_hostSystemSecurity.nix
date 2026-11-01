@@ -1,0 +1,2 @@
+
+  security.rtkit.enable = true;
