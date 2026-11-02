@@ -5,16 +5,30 @@
   inputs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.host.system.preservation;
+  inherit (lib) mkEnableOption mkOption mkIf;
+  inherit (lib.types) listOf either str attrs;
+  cfg = config.host.system.impermanence;
+  cfgUser = config.host.system.impermanence.user;
 in {
   imports = [
     inputs.nixos-core.nixosModules.default
     {system.nixos-core.enable = true;}
   ];
   options.host.system = {
-    preservation = {
+    impermanence = {
       enable = mkEnableOption "enable ephemeral root on this device";
+      user = mkOption {
+        type = str;
+        description = "User whose contents to persist";
+      };
+      directories = mkOption {
+        type = listOf (either str attrs);
+        description = "List of directories to persist";
+      };
+      files = mkOption {
+        type = listOf (either str attrs);
+        description = "List of files to persist";
+      };
     };
   };
   config = mkIf cfg.enable {
@@ -84,69 +98,9 @@ in {
             mode = "0775";
           }
         ];
-
-        users.teajhay = {
-          directories = [
-            ".config/jj/repos"
-            ".config/zen"
-            ".config/YouTube Music"
-            ".config/vesktop"
-            ".config/gh"
-            ".java"
-            ".local/share/direnv"
-            ".local/share/PrismLauncher"
-            ".local/share/Steam"
-            ".local/share/applications"
-            ".local/share/krita"
-            ".local/share/flatpak"
-            ".local/share/icons"
-            ".local/share/keyrings"
-            ".local/share/nvim"
-            ".local/share/stremio"
-            ".local/share/zoxide"
-            ".local/state/wireplumber"
-            ".local/state/noctalia"
-            ".local/state/modprobed-db"
-            ".local/state/nix/profiles"
-            ".ssh"
-            ".config/yazi/flavors/noctalia.yazi"
-            ".gnupg"
-            "Dev/vfs"
-            ".thunderbird"
-            ".steam"
-            ".var/app"
-            ".config/millennium"
-            ".local/share/millennium"
-            ".local/share/heroic"
-            ".config/heroic"
-            ".cache/tealdeer"
-            ".cache/nix"
-          ];
-          files = [
-            ".gitconfig"
-            {
-              file = ".config/mimeapps.list";
-              method = "symlink";
-            }
-            {
-              file = ".config/nvim/lua/matugen.lua";
-              method = "symlink";
-            }
-
-            {
-              file = ".config/nvim/lua/matugen-template.lua";
-              method = "symlink";
-            }
-            {
-              file = ".config/kitty/themes/noctalia.conf";
-              method = "symlink";
-            }
-            {
-              file = ".zsh_history";
-              method = "symlink";
-            }
-            ".config/jjui/config.toml"
-          ];
+        users.${cfgUser} = {
+          directories = cfg.directories;
+          files = cfg.files;
         };
       };
     };

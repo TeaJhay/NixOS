@@ -1,12 +1,13 @@
 _: {
   host.system = {
     enable = true;
+    role = "desktop";
     unfreeSoftware = true;
+    platform = "x86_64-linux";
     users.teajhay = {
       role = "admin";
     };
     hardware = {
-      platform = "x86_64-linux";
       modules = [
         "cpu/amd"
         "gpu/amd"

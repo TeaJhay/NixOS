@@ -27,22 +27,34 @@ in {
   ];
   options.host = {
     system = {
-      enable = mkEnableOption "machine configuration";
+      enable = mkEnableOption "Host configuration module";
       users = mkOption {
-        description = "List of machine users and their respective roles.";
-        default = [];
-
+        description = "Users on this host";
         type = attrsOf (submodule {
           options.role = mkOption {
             type = enum ["admin" "user"];
             default = "user";
-            description = "User's role on the machine.";
+            description = "User's role on this host";
           };
         });
       };
+      role = mkOption {
+        description = "Hardware role of this host";
+        type = enum ["desktop" "server" "laptop"];
+      };
+      platform = mkOption {
+        type = enum [
+          "x86_64-linux"
+          "aarch64-linux"
+          "i686-linux"
+          "armv7l-linux"
+        ];
+        default = null;
+        description = "Platform architecture of this host";
+      };
       unfreeSoftware = mkEnableOption {
         default = false;
-        description = "allow unfree software";
+        description = "Allow unfree software on this host";
       };
     };
   };
@@ -56,7 +68,7 @@ in {
       })
       cfg.users;
     #hostPlatform
-    nixpkgs.hostPlatform = cfg.hardware.platform;
+    nixpkgs.hostPlatform = cfg.platform;
 
     # Hjem files
     hjem = {
