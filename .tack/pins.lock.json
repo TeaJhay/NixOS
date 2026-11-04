@@ -74,9 +74,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "7cc61bc9a0b00ea90cfcb1055227f0937c527d32",
-    "narHash": "sha256-um+dW6hAJAVCgPb3eP6scegqEt+2cd95fdsbiHdvONg=",
-    "lastModified": 1793718629
+    "rev": "64bde62ee467d7fe56d15431e91eaa4bb47ddd14",
+    "narHash": "sha256-0vHmcnw8AgqQUig++z70GD3/BFs4wZpMmqRSnrq0kDQ=",
+    "lastModified": 1793815543
   },
   "import-tree": {
     "type": "github",
@@ -136,10 +136,10 @@
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1106360.0bb2eedc20e4/nixexprs.tar.xz?rev=0bb2eedc20e4739f29e8045034f2828ad7054f8f&lastModified=1793540411",
-    "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
-    "narHash": "sha256-us2GRWGXbOQpN1blyJGvmdx+g4bv9GoFYq5iiOHRiZ8=",
-    "lastModified": 1793540411
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1107793.1d060086d60c/nixexprs.tar.xz?rev=1d060086d60cb76a40cf37109f979d88a5bd6396&lastModified=1793726008",
+    "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
+    "narHash": "sha256-iNjybNORi/2+shilhMlkNr01UHWKOHRGzQyIyvobs9o=",
+    "lastModified": 1793726008
   },
   "nixpkgs-lib": {
     "type": "github",
@@ -153,9 +153,9 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "0fdce4d3d29438ce7da9d99fff492c7f8a06db33",
-    "narHash": "sha256-+F/Lugl5zL5Dt6T4hATCDSLeIh2vyBRYAd4KRLbDwO4=",
-    "lastModified": 1793725780
+    "rev": "60861c9334a2d655df3c7430e7afef70634e6719",
+    "narHash": "sha256-LU1rreOr6ILVpT3zeXhk1SyJOQxJUUaiqSEw0wtKlIg=",
+    "lastModified": 1793804639
   },
   "noctalia-greeter": {
     "type": "github",
@@ -177,9 +177,9 @@
     "type": "github",
     "owner": "manic-systems",
     "repo": "tack",
-    "rev": "aea40b8c73e6e7552229d87885fde8d1f69a060a",
-    "narHash": "sha256-MkkhlJZhaUzGRu1XbAg2y77B9/qUZZaItZRv3e6Hinc=",
-    "lastModified": 1793636072
+    "rev": "4ec7cc54362fdc2aa062ccb38b5b826b31921261",
+    "narHash": "sha256-WFAX4R64cjol4+w1KPTTnq58qm5G/QXCInxLY1pIVIk=",
+    "lastModified": 1793758878
   },
   "zen-browser": {
     "type": "github",
