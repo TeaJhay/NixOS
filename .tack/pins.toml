@@ -25,19 +25,20 @@ url = "channel:nixos-unstable"
 [inputs.nixos-core]
 url = "github:manic-systems/nixos-core"
 group = "rafware"
-exclude_follow = ["nixpkgs"]
 [inputs.hjem]
 url = "github:feel-co/hjem"
 group = "rafware"
-exclude_follow = ["nixpkgs"]
 [inputs.hjem-rum]
 url = "github:snugnug/hjem-rum"
 group = "rafware"
-exclude_follow = ["nixpkgs"]
 [inputs.tack]
 url = "github:manic-systems/tack"
-exclude_follow = ["nixpkgs"]
 group = "rafware"
+
+#NOTE: Homelab
+[inputs.circus]
+url = "github:manic-systems/circus"
+group = "homelab"
 
 #NOTE: Extra utilities
 [inputs.nix-flatpak]
