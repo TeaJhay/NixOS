@@ -23,7 +23,7 @@ in {
   };
 
   config =
-    mkIf cfg.enable
+    mkIf (cfg.enable && !cfg.virtual.enable)
     {
       environment.etc."machine-id".text = cfg.hardware.machine-id;
     };

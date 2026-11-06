@@ -7,7 +7,7 @@
   inherit (self.lib) assimilate;
   hosts = builtins.filter (x: x != null) (
     lib.mapAttrsToList (name: value:
-      if (value == "directory")
+      if (value == "directory" && name != "containers")
       then name
       else null) (
       builtins.readDir "${self}/hosts"
@@ -31,7 +31,7 @@ in {
           ++ (
             assimilate (self + "/hosts/${host}")
             |> lib.filter (
-              p: builtins.match ".*/hosts/NixBeast/users/[^/]+/xdg(/.*)?" (toString p) == null
+              p: builtins.match ".*/hosts/${host}/users/[^/]+/xdg(/.*)?" (toString p) == null
             )
           );
       };

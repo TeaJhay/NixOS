@@ -38,9 +38,10 @@ in {
           };
         });
       };
+
       role = mkOption {
         description = "Hardware role of this host";
-        type = enum ["desktop" "server" "laptop"];
+        type = enum ["desktop" "kvm-virt" "lxc-virt" "server" "laptop"];
       };
       platform = mkOption {
         type = enum [
