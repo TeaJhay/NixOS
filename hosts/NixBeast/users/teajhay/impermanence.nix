@@ -8,8 +8,8 @@
   user = baseNameOf ./.;
   cfg = config.host.system.impermanence;
 in {
+  imports = [inputs.nixos-core.nixosModules.default];
   config = mkIf cfg.enable {
-    imports = [inputs.nixos-core.nixosModules.default];
     system.nixos-core.persistence.stores."/persistent".users.${user} = {
       directories = [
         ".config/jj/repos"
