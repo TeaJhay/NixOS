@@ -1,3 +1,6 @@
 [submodule "profiles/NVF"]
 	path = profiles/NVF
 	url = git@github.com:TeaJhay/NVF.git
+[submodule "secrets"]
+	path = secrets
+	url = forgejo@git-ssh.doesntcompute.site:TeaJhay/secrets.git
