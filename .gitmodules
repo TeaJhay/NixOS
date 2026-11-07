@@ -3,4 +3,4 @@
 	url = git@github.com:TeaJhay/NVF.git
 [submodule "secrets"]
 	path = secrets
-	url = forgejo@git-ssh.doesntcompute.site:TeaJhay/secrets.git
+	url = forgejo@git.doesntcompute.site:TeaJhay/secrets.git
