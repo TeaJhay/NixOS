@@ -40,17 +40,6 @@ in {
           	admin 0.0.0.0:2019
           	email admin@doesntcompute.site
           	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-          	log {
-          		output file /var/log/caddy/access.log {
-          			roll_size 50mb
-          			roll_keep 5
-          		}
-          		format console
-          		level DEBUG
-          	}
-          	servers {
-          		protocols h1 h2
-          	}
         '';
         extraConfig = ''
                     (lan_only) {
