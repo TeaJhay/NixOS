@@ -56,19 +56,23 @@ in {
           }
         '';
       };
+      environment.extraInit = ''
+        export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+      '';
       virtualisation = {
         oci-containers = {
-          backend = "docker";
+          backend = "podman";
           containers = {
             caddy-ui-backend = {
               environment = {
                 CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${cfg.port}";
                 TZ = "Australia/Brisbane";
               };
-              image = "zackwag/caddy-ui-backend:latest";
+              image = "docker.io/library/zackwag/caddy-ui-backend:latest";
               ports = ["3001:3001"];
+              autoStart = true;
               volumes = [
-                "/var/run/docker.sock:/var/run/docker.sock"
+                "/run/podman/podman.sock:/var/run/docker.sock"
                 "/docker/caddy/ui:/etc/caddy-ui"
                 "/docker/caddy/data:/data/caddy"
                 "/etc/caddy/caddy_config:/etc/caddy/Caddyfile"
@@ -77,12 +81,20 @@ in {
             };
             caddy-ui-frontend = {
               dependsOn = ["caddy-ui-backend"];
-              image = "zackwag/caddy-ui-frontend:latest";
+              image = "docker.io/library/zackwag/caddy-ui-frontend:latest";
+              autoStart = true;
               ports = ["9877:80"];
             };
           };
         };
-        docker = {enable = true;};
+        podman = {
+          enable = true;
+          autoPrune.enable = true;
+          # Create a `docker` alias for podman, to use it as a drop-in replacement
+          dockerCompat = true;
+          # Required for containers under podman-compose to be able to talk to each other.
+          defaultNetwork.settings.dns_enabled = true;
+        };
       };
       networking.firewall = {
         allowedTCPPorts = [80 443 3001];

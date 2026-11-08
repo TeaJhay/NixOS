@@ -78,7 +78,7 @@ in {
       users.users = {
         admin = {
           isNormalUser = true;
-          extraGroups = ["wheel"]; # Grants sudo access
+          extraGroups = ["wheel" "podman"]; # Grants sudo access
           openssh.authorizedKeys.keys = [ssh-key];
           shell = pkgs.fish;
         };
