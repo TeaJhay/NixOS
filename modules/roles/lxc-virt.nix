@@ -70,6 +70,8 @@ in {
         s-tui
         carapace
         fishPlugins.z
+        jjui
+        dua
       ];
       # User Settings
       security.sudo.wheelNeedsPassword = false;
