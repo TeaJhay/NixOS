@@ -12,7 +12,17 @@
 in {
   imports = [
     inputs.nixos-core.nixosModules.default
-    {system.nixos-core.enable = true;}
+    {
+      system.nixos-core = {
+        enable = true;
+        components = {
+          bootStage1.enable = false;
+          extraUtilsCommand.enable = false;
+          initialRamdisk.enable = false;
+          nixosInitCompat.enable = true;
+        };
+      };
+    }
   ];
   options.host.system = {
     impermanence = {
@@ -99,8 +109,8 @@ in {
           }
         ];
         users.${cfgUser} = {
-          directories = cfg.directories;
-          files = cfg.files;
+          inherit (cfg) directories;
+          inherit (cfg) files;
         };
       };
     };
