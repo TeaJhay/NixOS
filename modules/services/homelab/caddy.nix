@@ -28,15 +28,15 @@ in {
         package = pkgs.caddy.withPlugins {
           plugins = [
             # NOTE: not pinned
-            "github.com/caddy-dns/cloudflare"
-            "github.com/mholt/caddy-l4"
+            "github.com/caddy-dns/cloudflare@v0.2.4"
+            "github.com/mholt/caddy-l4@v0.1.2"
           ];
           # TODO: INVESTIGATE HASH
           hash = lib.fakeHash;
         };
         logFormat = lib.mkForce "level  INFO";
         globalConfig = ''
-          etrics
+          metrics
           	admin 0.0.0.0:2019
           	email admin@doesntcompute.site
           	acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
@@ -64,6 +64,7 @@ in {
           		X-Frame-Options "SAMEORIGIN"
           		Referrer-Policy "strict-origin-when-cross-origin"
           	}
+          }
         '';
       };
     })

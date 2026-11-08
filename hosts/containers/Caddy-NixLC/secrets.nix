@@ -21,15 +21,7 @@ in {
       };
       secrets = {
         password.recipients = ["admin"];
-        "${hostName}/circus_api" = {
-          recipients = ["admin"];
-          owner = "admin";
-        };
-        "${hostName}/circus_signing" = {
-          recipients = ["admin"];
-          owner = "admin";
-        };
-        "${hostName}/circus_password" = {
+        "${hostName}/env" = {
           recipients = ["admin"];
           owner = "admin";
         };
