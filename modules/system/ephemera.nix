@@ -8,6 +8,7 @@
   inherit (lib) mkEnableOption mkOption mkIf;
   inherit (lib.types) listOf either str attrs;
   cfg = config.host.system.impermanence;
+  virtual = config.host.system.virtual;
   cfgUser = config.host.system.impermanence.user;
 in {
   imports = [
@@ -20,6 +21,9 @@ in {
           extraUtilsCommand.enable = false;
           initialRamdisk.enable = false;
           nixosInitCompat.enable = true;
+          bootloaderInstaller = mkIf virtual.enable {
+            enable = false;
+          };
         };
       };
     }
