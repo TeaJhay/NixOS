@@ -9,9 +9,9 @@ _: {
       proxmox.enable = true;
     };
     services = {
-      circus.enable = true;
-      ipv4 = "10.0.1.111";
-      port = "3000";
+      caddy.enable = true;
+      ipv4 = "10.0.1.110";
+      port = "9877";
       baseDomain = "doesntcompute.site";
     };
   };

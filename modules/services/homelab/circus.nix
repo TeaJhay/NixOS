@@ -22,7 +22,6 @@ in {
   };
   config = mkMerge [
     (mkIf cfg.circus.enable {
-      networking.firewall.allowedTCPPorts = [443 3000 80];
       services.circus = {
         enable = true;
 
@@ -34,7 +33,7 @@ in {
           database.url = "postgresql:///circus?host=/run/postgresql&user=circus";
           server = {
             host = "0.0.0.0";
-            port = cfg.port;
+            inherit (cfg) port;
             force_secure_cookies = false;
             rate_limit_rps = 200;
             rate_limit_burst = 200;
