@@ -68,7 +68,7 @@ in {
                 CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${cfg.port}";
                 TZ = "Australia/Brisbane";
               };
-              image = "docker.io/library/zackwag/caddy-ui-backend:latest";
+              image = "docker.io/zackwag/caddy-ui-backend:latest";
               ports = ["3001:3001"];
               autoStart = true;
               volumes = [
@@ -81,7 +81,7 @@ in {
             };
             caddy-ui-frontend = {
               dependsOn = ["caddy-ui-backend"];
-              image = "docker.io/library/zackwag/caddy-ui-frontend:latest";
+              image = "docker.io/zackwag/caddy-ui-frontend:latest";
               autoStart = true;
               ports = ["9877:80"];
             };
