@@ -56,28 +56,32 @@ in {
           }
         '';
       };
-    })
-    {
-      virtualisation.oci-containers.containers = {
-        caddy-ui-backend = {
-          image = "zackwag/caddy-ui-backend:latest";
-          ports = ["9876:3001"];
-          volumes = [
-            "/var/run/docker.sock:/var/run/docker.sock"
-            "/var/lib/caddy-ui:/etc/caddy-ui"
-          ];
-          environment = {
-            TZ = "Australia/Brisbane";
-            CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${cfg.port}";
+      virtualisation = {
+        oci-containers = {
+          backend = "docker";
+          containers = {
+            caddy-ui-backend = {
+              environment = {
+                CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${cfg.port}";
+                TZ = "Australia/Brisbane";
+              };
+              image = "zackwag/caddy-ui-backend:latest";
+              ports = ["3001:3001"];
+              volumes = [
+                "/var/run/docker.sock:/var/run/docker.sock"
+                "/docker/caddy-ui:/etc/caddy-ui"
+              ];
+            };
+            caddy-ui-frontend = {
+              dependsOn = ["caddy-ui-backend"];
+              image = "zackwag/caddy-ui-frontend:latest";
+              ports = ["9877:80"];
+            };
           };
         };
-        caddy-ui-frontend = {
-          image = "zackwag/caddy-ui-frontend:latest";
-          ports = ["9877:80"];
-          dependsOn = ["caddy-ui-backend"];
-        };
+        docker = {enable = true;};
       };
-    }
+    })
     {
       services.caddy.virtualHosts.${url}.extraConfig = ''
         reverse_proxy ${cfg.ipv4}:${cfg.port}

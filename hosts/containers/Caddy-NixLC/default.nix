@@ -10,7 +10,7 @@ _: {
     };
     services = {
       caddy.enable = true;
-      ipv4 = "10.0.1.110";
+      ipv4 = "10.0.1.10";
       port = "9877";
       baseDomain = "doesntcompute.site";
     };
