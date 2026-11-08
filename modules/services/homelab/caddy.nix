@@ -69,7 +69,10 @@ in {
               ports = ["3001:3001"];
               volumes = [
                 "/var/run/docker.sock:/var/run/docker.sock"
-                "/docker/caddy-ui:/etc/caddy-ui"
+                "/docker/caddy/ui:/etc/caddy-ui"
+                "/docker/caddy/data:/data/caddy"
+                "/etc/caddy/caddy_config:/etc/caddy/Caddyfile"
+                "/docker/caddy/logs:/var/log/caddy"
               ];
             };
             caddy-ui-frontend = {
