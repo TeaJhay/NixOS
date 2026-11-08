@@ -4,14 +4,14 @@
   hostName,
   ...
 }: let
-  host = "${self}/hosts/containers/${hostName}";
+  host = "${self}/secrets";
   hostSecrets = "/home/admin/nix/secrets";
 in {
   imports = [inputs.nix-secrets.nixosModules.default];
   config = {
     security.nix-secrets = {
       enable = true;
-      storage = "${host}/secrets";
+      storage = host;
       storagePath = hostSecrets;
       identityPaths = [
         "${hostSecrets}/admin.txt"
