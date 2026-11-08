@@ -19,6 +19,7 @@
     "noctalia": "github:noctalia-dev/noctalia/cachix",
     "noctalia-greeter": "github:noctalia-dev/noctalia-greeter",
     "preservation": "github:nix-community/preservation",
+    "secrets": "git+ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git",
     "tack": "github:manic-systems/tack",
     "zen-browser": "github:TeaJhay/zen-browser-flake?rev=458cd16116c362a5e92d5db6bdc3599e4e8b1f4a"
   },
@@ -172,6 +173,14 @@
     "rev": "00be7f7dd1a11ae0605386f2272288de7cf33abe",
     "narHash": "sha256-s/A2rSO2Ndf8Y5yiouesnI/3Zkn9pmVGF2NxFxOUvx8=",
     "lastModified": 1792953443
+  },
+  "secrets": {
+    "type": "git",
+    "url": "ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git",
+    "ref": "HEAD",
+    "rev": "80cdc474cb95fa7d971f448bec38e21aafcfeacc",
+    "narHash": "sha256-BDWVo480AuDjfRRKZl7oFCkE584Mc5ZkEDZs4Hzj4Wo=",
+    "lastModified": 1794133838
   },
   "tack": {
     "type": "github",

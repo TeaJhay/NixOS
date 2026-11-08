@@ -20,7 +20,9 @@ recomposable = true
 #NOTE: Base inputs
 [inputs.nixpkgs]
 url = "channel:nixos-unstable"
-
+[inputs.secrets]
+url = "git+ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git"
+type = "fetch"
 #NOTE: Maniac preemo soft
 [inputs.nixos-core]
 url = "github:manic-systems/nixos-core"

@@ -1,17 +1,15 @@
 {
-  self,
   inputs,
   hostName,
   ...
 }: let
-  host = "${self}/secrets";
   hostSecrets = "/home/admin/nix/secrets";
 in {
   imports = [inputs.nix-secrets.nixosModules.default];
   config = {
     security.nix-secrets = {
       enable = true;
-      storage = host;
+      storage = inputs.secrets;
       storagePath = hostSecrets;
       identityPaths = [
         "${hostSecrets}/admin.txt"
