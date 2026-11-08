@@ -24,7 +24,7 @@ in {
       services.caddy = {
         enable = true;
         environmentFile = secrets."${hostName}/env".path;
-
+        email = "admin@doesntcompute.site";
         package = pkgs.caddy.withPlugins {
           plugins = [
             # NOTE: not pinned
@@ -83,6 +83,10 @@ in {
           };
         };
         docker = {enable = true;};
+      };
+      networking.firewall = {
+        allowedTCPPorts = [80 443 3001];
+        allowedUDPPorts = [2019 9877];
       };
     })
     {
