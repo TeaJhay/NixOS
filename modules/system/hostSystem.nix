@@ -92,6 +92,7 @@ in {
         })
         cfg.users;
     };
+    system.stateVersion = config.system.nixos.release;
     system.nixos.label = self.shortRev or self.dirtyShortRev or "unknown";
     nixpkgs.config.allowUnfree = cfg.unfreeSoftware;
   };
