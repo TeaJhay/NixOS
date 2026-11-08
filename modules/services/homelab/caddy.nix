@@ -32,7 +32,7 @@ in {
             "github.com/mholt/caddy-l4@v0.1.2"
           ];
           # TODO: INVESTIGATE HASH
-          hash = lib.fakeHash;
+          hash = "sha256-eGv+I4CceOEqWrMs5fTWPrTF3DBXtB+0vu3Ndw4yArE=";
         };
         logFormat = lib.mkForce "level  INFO";
         globalConfig = ''

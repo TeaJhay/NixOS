@@ -30,7 +30,7 @@ in {
     };
   };
   config =
-    mkIf (cfg.role == "kvm-lxc" && cfg.virtual.enable)
+    mkIf (cfg.role == "lxc-virt" && cfg.virtual.enable)
     {
       nix = {
         settings = {

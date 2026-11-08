@@ -20,6 +20,7 @@ in {
       value = lib.nixosSystem {
         specialArgs = {
           inherit inputs self;
+          hostName = host;
         };
 
         modules =
