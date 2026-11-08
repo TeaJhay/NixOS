@@ -47,7 +47,7 @@ in {
         "dev-mqueue.mount"
         "sys-fs-fuse-connections.mount"
       ];
-      system.stateVersion = "26.11"; # Match your targets
+      system.stateVersion = config.system.nixos.release; # Match your targets
 
       environment.sessionVariables = {
         EDITOR = "micro";
