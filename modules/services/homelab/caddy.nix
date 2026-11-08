@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  hostName,
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
@@ -9,7 +10,6 @@
   inherit (lib.types) str;
   cfg = config.host.system.services;
   secrets = config.security.nix-secrets.secrets;
-  host = config.networking.hostName;
   url = cfg.circus.url;
 in {
   options.host.system.services.caddy = {
@@ -23,7 +23,7 @@ in {
     (mkIf cfg.caddy.enable {
       services.caddy = {
         enable = true;
-        environmentFile = secrets."${host}/env".path;
+        environmentFile = secrets."${hostName}/env".path;
 
         package = pkgs.caddy.withPlugins {
           plugins = [

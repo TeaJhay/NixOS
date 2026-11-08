@@ -2,6 +2,7 @@
   lib,
   config,
   inputs,
+  hostName,
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
@@ -9,7 +10,6 @@
   inherit (lib.types) str;
   cfg = config.host.system.services;
   secrets = config.security.nix-secrets.secrets;
-  host = config.networking.hostName;
   url = cfg.circus.url;
 in {
   imports = [inputs.circus.nixosModules.default];
@@ -88,21 +88,21 @@ in {
               {
                 username = "teajhay";
                 email = "git@doesntcompute.site";
-                password_file = secrets."${host}/circus_password".path;
+                password_file = secrets."${hostName}/circus_password".path;
                 role = "admin";
               }
             ];
             api_keys = [
               {
                 name = "admin-key";
-                key_file = secrets."${host}/circus_api".path;
+                key_file = secrets."${hostName}/circus_api".path;
                 role = "admin";
               }
             ];
           };
           signing = {
             enabled = true;
-            key_file = secrets."${host}/circus_signing".path;
+            key_file = secrets."${hostName}/circus_signing".path;
             public_key = "cache.${cfg.baseDomain}-1:cTv/ePA602QGzUci4rMdYGkuS4LA0NzEjoWnaHAwvAg=";
           };
           tracing = {
@@ -116,7 +116,7 @@ in {
               smtp_host = "mail-au.smtp2go.com";
               smtp_port = 465;
               smtp_user = "homelab@${cfg.baseDomain}";
-              smtp_password_file = secrets."${host}/smtp_password".path;
+              smtp_password_file = secrets."${hostName}/smtp_password".path;
               tls = true;
               from_address = "circus@${cfg.baseDomain}";
               to_addresses = ["admin@${cfg.baseDomain}"];
