@@ -27,7 +27,7 @@ in {
         email = "admin@doesntcompute.site";
         package = pkgs.caddy.withPlugins {
           plugins = [
-            # NOTE: not pinned
+            # NOTE: pinned for hash
             "github.com/caddy-dns/cloudflare@v0.2.4"
             "github.com/mholt/caddy-l4@v0.1.2"
           ];
@@ -72,7 +72,7 @@ in {
               podman.user = "admin";
               ports = ["3001:3001"];
               autoStart = true;
-              extraOptions = [ "--network=caddy-ui" ];
+              extraOptions = ["--network=caddy-ui"];
               volumes = [
                 "/run/podman/podman.sock:/var/run/docker.sock"
                 "/podman/caddy/ui:/etc/caddy-ui"
@@ -104,42 +104,41 @@ in {
         };
       };
       systemd = {
-      tmpfiles.rules = [
-        "d /podman/caddy 0755 admin users -"
-        "d /podman/caddy/logs 0755 admin users -"
-        "d /podman/caddy/data 0755 admin users -"
-        "d /podman/caddy/config 0755 admin users -"
-        "d /podman/caddy/ui 0755 admin users -"
-      ];
-services = {
-create-caddy-ui-network = {
-  wantedBy = [ "multi-user.target" ];
-  before = [
-    "podman-caddy-ui-backend.service"
-    "podman-caddy-ui-frontend.service"
-  ];
-  serviceConfig = {
-    Type = "oneshot";
-    RemainAfterExit = true;
-  };
-  script = ''
-    ${pkgs.podman}/bin/podman network exists caddy-ui || \
-      ${pkgs.podman}/bin/podman network create caddy-ui
-  '';
-};
-podman-caddy-ui-backend = {
-  after = [ "create-caddy-ui-network.service" ];
-  requires = [ "create-caddy-ui-network.service" ];
-};
-podman-caddy-ui-frontend = {
-  after = [ "create-caddy-ui-network.service" ];
-  requires = [ "create-caddy-ui-network.service" ];
-};
-};
-      }''
+        tmpfiles.rules = [
+          "d /podman/caddy 0755 admin users -"
+          "d /podman/caddy/logs 0755 admin users -"
+          "d /podman/caddy/data 0755 admin users -"
+          "d /podman/caddy/config 0755 admin users -"
+          "d /podman/caddy/ui 0755 admin users -"
+        ];
+        services = {
+          create-caddy-ui-network = {
+            wantedBy = ["multi-user.target"];
+            before = [
+              "podman-caddy-ui-backend.service"
+              "podman-caddy-ui-frontend.service"
+            ];
+            serviceConfig = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+            };
+            script = ''
+              ${pkgs.podman}/bin/podman network exists caddy-ui || \
+                ${pkgs.podman}/bin/podman network create --subnet 172.30.0.0/24 caddy-ui
+            '';
+          };
+          podman-caddy-ui-backend = {
+            after = ["create-caddy-ui-network.service"];
+            requires = ["create-caddy-ui-network.service"];
+          };
+          podman-caddy-ui-frontend = {
+            after = ["create-caddy-ui-network.service"];
+            requires = ["create-caddy-ui-network.service"];
+          };
+        };
+      };
       networking.firewall = {
-        allowedTCPPorts = [80 2019 443 3001];
-        allowedUDPPorts = [9877];
+        allowedTCPPorts = [80 2019 443 3001 9877];
       };
     })
     {
