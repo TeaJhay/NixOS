@@ -81,6 +81,9 @@ in {
           extraGroups = ["wheel" "podman"]; # Grants sudo access
           openssh.authorizedKeys.keys = [ssh-key];
           shell = pkgs.fish;
+          linger = true;
+          subUidRanges = [{ startUid = 10000; count = 50000; }];
+          subGidRanges = [{ startGid = 10000; count = 50000; }];
         };
         root.openssh.authorizedKeys.keys = [ssh-key];
       };
