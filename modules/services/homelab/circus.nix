@@ -1,5 +1,6 @@
 {
   lib,
+  self,
   config,
   inputs,
   hostName,
@@ -9,6 +10,7 @@
   inherit (lib.options) mkOption mkEnableOption;
   inherit (lib.types) str;
   cfg = config.host.system.services;
+  service = self.nixosConfigurations."Caddy-NixLC".config.host.system.services;
   secrets = config.security.nix-secrets.secrets;
   url = cfg.circus.url;
 in {
@@ -132,11 +134,11 @@ in {
 
         handle @nix {
         	rewrite * /nix-cache{uri}
-        	reverse_proxy ${cfg.ipv4}:${cfg.port}
+        	reverse_proxy ${service.ipv4}:${service.port}
         }
 
         handle {
-        	reverse_proxy ${cfg.ipv4}:${cfg.port}
+        	reverse_proxy ${service.ipv4}:${service.port}
         }
       '';
     }
