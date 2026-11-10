@@ -8,7 +8,8 @@ _: {
       enable = true;
       proxmox.enable = true;
     };
-    services = {
+    services.circus = {
+      enable = true;
       ipv4 = "10.0.1.10";
       port = "";
       baseDomain = "doesntcompute.site";

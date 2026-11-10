@@ -1,29 +1,45 @@
 {lib, ...}: let
-  inherit (lib) mkOption;
-  inherit (lib.types) str;
+  inherit (lib) mkEnableOption mkOption;
+  inherit (lib.types) attrsOf submodule str;
 in {
   options.host.system = {
-    services = {
-      ipv4 = mkOption {
-        type = str;
-        default = "";
-        description = "ipv4 address used to access this service";
-      };
-      ipv6 = mkOption {
-        type = str;
-        default = "";
-        description = "ipv6 address used to access this service";
-      };
-      port = mkOption {
-        type = str;
-        default = "";
-        description = "Port used to access this service";
-      };
-      baseDomain = mkOption {
-        type = str;
-        default = "";
-        description = "Base domain to be used with this service";
-      };
+    services = mkOption {
+      description = "Users on this host";
+      type = attrsOf (submodule {
+        options = {
+          enable = mkEnableOption "enable caddy reverse-proxy and webserver, in addition to Caddy/ui";
+          url = mkOption {
+            type = str;
+            default = "";
+            description = "url this service is served on";
+          };
+          baseDomain = mkOption {
+            type = str;
+            default = "";
+            description = "basedomain to be used with this service";
+          };
+          subDomain = mkOption {
+            type = str;
+            default = "";
+            description = "subdomain to be used with this service";
+          };
+          ipv4 = mkOption {
+            type = str;
+            default = "";
+            description = "ipv4 address used to access this service";
+          };
+          ipv6 = mkOption {
+            type = str;
+            default = "";
+            description = "ipv6 address used to access this service";
+          };
+          port = mkOption {
+            type = str;
+            default = "";
+            description = "Port used to access this service";
+          };
+        };
+      });
     };
   };
 }

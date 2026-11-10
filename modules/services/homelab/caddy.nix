@@ -7,22 +7,13 @@
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
-  inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib.types) str;
-  cfg = config.host.system.services;
-  service = self.nixosConfigurations."Caddy-NixLC".config.host.system.services;
+  cfg = self.nixosConfigurations."Caddy-NixLC".config.host.system.services;
+  host = config.host.system.services;
   secrets = config.security.nix-secrets.secrets;
-  url = cfg.circus.url;
+  url = cfg.subDomain + "." + cfg.baseDomain;
 in {
-  options.host.system.services.caddy = {
-    enable = mkEnableOption "enable caddy reverse-proxy and webserver, in addition to Caddy/ui";
-    url = mkOption {
-      type = str;
-      default = "caddy.${cfg.baseDomain}";
-    };
-  };
   config = mkMerge [
-    (mkIf cfg.caddy.enable {
+    (mkIf (host.caddy.enable or false) {
       services.caddy = {
         enable = true;
         environmentFile = secrets."${hostName}/env".path;
@@ -145,7 +136,7 @@ in {
     })
     {
       services.caddy.virtualHosts.${url}.extraConfig = ''
-        reverse_proxy ${service.ipv4}:${service.port}
+        reverse_proxy ${cfg.ipv4}:${cfg.port}
       '';
     }
   ];

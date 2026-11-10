@@ -7,23 +7,14 @@
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
-  inherit (lib.options) mkOption mkEnableOption;
-  inherit (lib.types) str;
-  cfg = config.host.system.services;
-  service = self.nixosConfigurations."Caddy-NixLC".config.host.system.services;
+  cfg = self.nixosConfigurations."Circus-NixLC".config.host.system.services;
+  host = config.host.system.services;
   secrets = config.security.nix-secrets.secrets;
-  url = cfg.circus.url;
+  url = cfg.subDomain + "." + cfg.baseDomain;
 in {
   imports = [inputs.circus.nixosModules.default];
-  options.host.system.services.circus = {
-    enable = mkEnableOption "Enable manic-systems funny CI builder and cache";
-    url = mkOption {
-      type = str;
-      default = "cache.${cfg.baseDomain}";
-    };
-  };
   config = mkMerge [
-    (mkIf cfg.circus.enable {
+    (mkIf (host.circus.enable or false) {
       services.circus = {
         enable = true;
 
@@ -134,11 +125,11 @@ in {
 
         handle @nix {
         	rewrite * /nix-cache{uri}
-        	reverse_proxy ${service.ipv4}:${service.port}
+        	reverse_proxy ${cfg.ipv4}:${cfg.port}
         }
 
         handle {
-        	reverse_proxy ${service.ipv4}:${service.port}
+        	reverse_proxy ${cfg.ipv4}:${cfg.port}
         }
       '';
     }

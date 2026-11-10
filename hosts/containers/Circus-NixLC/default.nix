@@ -8,10 +8,11 @@ _: {
       enable = true;
       proxmox.enable = true;
     };
-    services = {
-      circus.enable = true;
+    services.circus = {
+      enable = true;
       ipv4 = "10.0.1.111";
       port = "3000";
+      subDomain = "cache";
       baseDomain = "doesntcompute.site";
     };
   };
