@@ -1,5 +1,5 @@
 _: {
-  host.system = {
+  sys = {
     enable = true;
     role = "desktop";
     unfreeSoftware = true;
@@ -8,6 +8,7 @@ _: {
       role = "admin";
     };
     hardware = {
+      machine-id = "02593cf2c06c4f61836f38cc685434a5";
       modules = [
         "cpu/amd"
         "gpu/amd"
@@ -20,7 +21,7 @@ _: {
     };
     networking = {
       timezone = "Australia/Brisbane";
-      tcpcrypt.enable = true;
+      tcpcrypt.enable = false;
       firewall = {
         enable = true;
         allowedTCPPorts = [

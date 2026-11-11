@@ -10,7 +10,8 @@
 in {
   imports = [inputs.nixos-core.nixosModules.default];
   config = mkIf cfg.enable {
-    system.nixos-core.persistence.stores."/persistent".users.${user} = {
+    sys.impermanence = {
+      inherit user;
       directories = [
         ".config/jj/repos"
         ".config/zen"

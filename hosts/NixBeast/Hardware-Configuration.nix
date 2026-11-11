@@ -7,9 +7,7 @@
   modulesPath,
   pkgs,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -24,19 +22,18 @@
         "uas"
         "sd_mod"
       ];
-      kernelModules = [ "amdgpu" ];
+      kernelModules = ["amdgpu"];
       systemd.emergencyAccess = true;
     };
-    kernelParams = [ ];
+    kernelParams = [];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelModules = [ "kvm-amd" ];
-    extraModulePackages = [ ];
+    kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
     kernelPackages = pkgs.linuxPackages_zen; # Use zen OR latest kernel.
   };
-  system.stateVersion = "26.05"; # DO NOT TOUCH
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
