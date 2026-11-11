@@ -1,5 +1,5 @@
 _: {
-  host.system = {
+  sys = {
     enable = true;
     role = "lxc-virt";
     unfreeSoftware = true;

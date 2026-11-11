@@ -12,7 +12,7 @@ Make this an option where users can be declared in a list, and then map each use
   inherit (lib) mkOption mkIf mapAttrs mkEnableOption;
   inherit (lib.types) enum attrsOf submodule;
   inherit (inputs.findFiles) findFiles;
-  cfg = config.host.system;
+  cfg = config.sys;
 
   getUserDotfiles = username: let
     # declares the function "getUserDotfiles" and parameter "username"
@@ -25,38 +25,42 @@ in {
   imports = [
     inputs.hjem.nixosModules.default
   ];
-  options.host = {
-    system = {
-      enable = mkEnableOption "Host configuration module";
-      users = mkOption {
-        description = "Users on this host";
-        type = attrsOf (submodule {
-          options.role = mkOption {
-            type = enum ["admin" "user"];
-            default = "user";
-            description = "User's role on this host";
-          };
-        });
-      };
+  options.sys = {
+    enable = mkEnableOption "Host configuration module";
+    users = mkOption {
+      description = "Users on this host";
+      type = attrsOf (submodule {
+        options.role = mkOption {
+          type = enum ["admin" "user"];
+          default = "user";
+          description = "User's role on this host";
+        };
+      });
+    };
 
-      role = mkOption {
-        description = "Hardware role of this host";
-        type = enum ["desktop" "kvm-virt" "lxc-virt" "server" "laptop"];
-      };
-      platform = mkOption {
-        type = enum [
-          "x86_64-linux"
-          "aarch64-linux"
-          "i686-linux"
-          "armv7l-linux"
-        ];
-        default = null;
-        description = "Platform architecture of this host";
-      };
-      unfreeSoftware = mkEnableOption {
-        default = false;
-        description = "Allow unfree software on this host";
-      };
+    role = mkOption {
+      description = "Hardware role of this host";
+      type = enum ["desktop" "kvm-virt" "lxc-virt" "server" "laptop"];
+    };
+    platform = mkOption {
+      type = enum [
+        "x86_64-linux"
+        "aarch64-linux"
+        "i686-linux"
+        "armv7l-linux"
+      ];
+      default = null;
+      description = "Platform architecture of this host";
+    };
+    unfreeSoftware = mkEnableOption {
+      default = false;
+      description = "Allow unfree software on this host";
+    };
+    services = mkOption {
+      description = "Users on this host";
+      type = attrsOf (submodule {
+        options.enable = mkEnableOption "Enable this service";
+      });
     };
   };
 
@@ -85,7 +89,7 @@ in {
           files = getUserDotfiles name;
           impure = {
             enable = true;
-            dotsDir = "${self}/hosts/${config.system.name}/${name}/xdg";
+            dotsDir = "${self}/hosts/${config.system.name}/users/${name}/xdg";
             dotsDirImpure = "${self}/hosts/${config.system.name}/users/${name}/xdg";
           };
           clobberFiles = true;

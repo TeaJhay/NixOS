@@ -5,9 +5,9 @@
 }: let
   inherit (lib) mkIf mkOption;
   inherit (lib.types) listOf strMatching str;
-  cfg = config.host.system;
+  cfg = config.sys;
 in {
-  options.host.system = {
+  options.sys = {
     hardware = {
       modules = mkOption {
         type = listOf str;

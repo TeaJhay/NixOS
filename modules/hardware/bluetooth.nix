@@ -7,7 +7,7 @@
   inherit (lib) elem;
   inherit (lib.modules) mkIf;
 in {
-  config = mkIf (elem "bluetooth" config.host.system.hardware.modules) {
+  config = mkIf (elem "bluetooth" config.sys.hardware.modules) {
     environment.systemPackages = [pkgs.overskride];
     hardware.bluetooth = {
       enable = true;

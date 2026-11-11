@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  inherit (config.host.system.hardware) modules;
-  inherit (lib) mkIf mkMerge;
+  inherit (config.sys.hardware) modules;
+  inherit (lib) filterAttrs mkForce mapAttrs mkIf mkMerge;
   inherit (lib.lists) elem any;
   inherit (lib.strings) hasPrefix;
 in {
@@ -20,11 +20,15 @@ in {
       };
       environment.systemPackages = [pkgs.at-spi2-core];
       security.rtkit.enable = true;
-      users.extraGroups = [
-        "audio"
-        "pipewire"
-      ];
-      services.pulseaudio.enable = lib.mkForce false;
+      users.users =
+        mapAttrs (_name: _: {
+          extraGroups = [
+            "audio"
+            "pipewire"
+          ];
+        })
+        config.sys.users;
+      services.pulseaudio.enable = mkForce false;
       boot.kernelModules = ["snd_usb_audio"];
     }
 

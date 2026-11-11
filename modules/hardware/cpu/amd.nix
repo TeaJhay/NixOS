@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (config.host.system.hardware) modules;
+  inherit (config.sys.hardware) modules;
   inherit (lib.modules) mkIf mkMerge mkDefault;
 
   inherit (lib.lists) elem any;

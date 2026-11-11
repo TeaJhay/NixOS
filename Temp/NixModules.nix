@@ -9,10 +9,6 @@
       };
     };
     thunderbird.enable = true;
-    tack = {
-      enable = true;
-      nixConfTokens = true;
-    };
   };
   #       ┌─────────────────────────┐
   #       │         Packages        │

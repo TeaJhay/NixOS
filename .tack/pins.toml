@@ -41,7 +41,10 @@ group = "rafware"
 [inputs.circus]
 url = "github:manic-systems/circus"
 group = "homelab"
-
+[inputs.matrix]
+url = "git+https://forgejo.ellis.link/continuwuation/continuwuity"
+type = "fetch"
+group = "homelab"
 #NOTE: Extra utilities
 [inputs.nix-flatpak]
 url = "github:gmodena/nix-flatpak"
@@ -87,6 +90,10 @@ exclude_follow = ["nixpkgs"]
 url = "github:hyprwm/Hyprland"
 group = "Graphical Environment"
 exclude_follow = ["nixpkgs"]
+[inputs.KvLibadwaita]
+url  = "github:GabePoel/KvLibadwaita"
+type = "fetch"
+group = "Graphical Environment"
 
 #NOTE: Apps
 [inputs.zen-browser]

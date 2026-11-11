@@ -3,11 +3,11 @@
   config,
   ...
 }: let
-  inherit (config.host.system.hardware) modules;
+  inherit (config.sys.hardware) modules;
   inherit (lib.modules) mkIf mkMerge;
   inherit (lib.lists) any;
   inherit (lib.strings) hasPrefix;
-  cfg = config.host.system;
+  cfg = config.sys;
 in
   mkIf (cfg.role == "kvm-virt") (mkMerge [
     {

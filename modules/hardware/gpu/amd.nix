@@ -4,16 +4,22 @@
   pkgs,
   ...
 }: let
-  inherit (config.host.system.hardware) modules;
+  inherit (config.sys.hardware) modules;
   inherit (lib.modules) mkIf mkMerge;
   inherit (lib.lists) elem any;
   inherit (lib.strings) hasPrefix;
+  inherit (lib) filterAttrs mapAttrs;
 in
   # TODO: Make gpu/amd elem, and ensure sub hardware configs can still take
   # effect without forcing full gpu stack onto machine
   mkIf (any (s: hasPrefix "gpu/amd" s) modules) (mkMerge [
     {
-      users.extraGroups = ["video"];
+      users.users =
+        mapAttrs (_name: _: {
+          extraGroups = ["video"];
+        })
+        config.sys.users;
+
       environment.variables.AMD_VULKAN_ICD = "RADV";
       environment.variables.VDPAU_DRIVER = "radeonsi";
       hardware.amdgpu.initrd.enable = true;

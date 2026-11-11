@@ -1,14 +1,13 @@
 {
   lib,
-  self,
   config,
   inputs,
   hostName,
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
-  cfg = self.nixosConfigurations."Circus-NixLC".config.host.system.services;
-  host = config.host.system.services;
+  cfg = config.homelab.circus;
+  host = config.sys.services;
   secrets = config.security.nix-secrets.secrets;
   url = cfg.subDomain + "." + cfg.baseDomain;
 in {

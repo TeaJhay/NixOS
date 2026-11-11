@@ -1,17 +1,18 @@
 {
-  self,
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  hostSecrets = "/home/teajhay/Dev/projects/NixOS/secrets";
+in {
   imports = [
     inputs.nix-secrets.nixosModules.default
   ];
   security.nix-secrets = {
     enable = true;
     extraPackages = with pkgs; [age];
-    storage = "${self}/secrets"; # Relative path to your `secrets` (copied to /nix/store)
-    storagePath = "/persistent/home/teajhay/nixos/secrets/"; # Absolute path to your `secrets` (copied to /nix/store)
+    storage = inputs.secrets; # Relative path to your `secrets` (copied to /nix/store)
+    storagePath = hostSecrets; # Absolute path to your `secrets` (copied to /nix/store)
     identityPaths = [
       "/persistent/home/teajhay/.ssh/keys.txt" # Path to your age private key
       "/persistent/home/teajhay/.ssh/id_ed25519" # You can also use SSH keys
@@ -56,7 +57,4 @@
       max-cache-ttl-ssh = 28800;
     };
   };
-  environment.systemPackages = with pkgs; [
-    #    age
-  ];
 }

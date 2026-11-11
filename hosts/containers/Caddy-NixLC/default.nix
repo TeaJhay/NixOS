@@ -1,5 +1,5 @@
 _: {
-  host.system = {
+  sys = {
     enable = true;
     role = "lxc-virt";
     unfreeSoftware = true;
@@ -8,12 +8,6 @@ _: {
       enable = true;
       proxmox.enable = true;
     };
-    services.caddy = {
-      enable = true;
-      ipv4 = "10.0.1.10";
-      port = "9877";
-      subDomain = "caddy";
-      baseDomain = "doesntcompute.site";
-    };
+    services.caddy = {enable = true;};
   };
 }

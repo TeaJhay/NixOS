@@ -7,10 +7,9 @@
 }: let
   inherit (lib) mkEnableOption mkOption mkIf;
   inherit (lib.types) listOf either str attrs;
-  cfg = config.host.system.impermanence;
-  virtual = config.host.system.virtual;
-  cfgUser = config.host.system.impermanence.user;
+  cfg = config.sys.impermanence;
 in {
+  disabledModules = ["programs/tack.nix"];
   imports = [
     inputs.nixos-core.nixosModules.default
     {
@@ -21,14 +20,12 @@ in {
           extraUtilsCommand.enable = false;
           initialRamdisk.enable = false;
           nixosInitCompat.enable = true;
-          bootloaderInstaller = mkIf virtual.enable {
-            enable = false;
-          };
+          bootloaderInstaller.enable = false;
         };
       };
     }
   ];
-  options.host.system = {
+  options.sys = {
     impermanence = {
       enable = mkEnableOption "enable ephemeral root on this device";
       user = mkOption {
@@ -112,7 +109,7 @@ in {
             mode = "0775";
           }
         ];
-        users.${cfgUser} = {
+        users.${cfg.user} = {
           inherit (cfg) directories;
           inherit (cfg) files;
         };

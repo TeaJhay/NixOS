@@ -31,6 +31,10 @@ in {
           recipients = ["admin"];
           owner = "admin";
         };
+        "${hostName}/smtp_password" = {
+          recipients = ["admin"];
+          owner = "admin";
+        };
       };
     };
     security.rtkit.enable = true;

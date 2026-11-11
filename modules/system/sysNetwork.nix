@@ -10,10 +10,10 @@
   timezone =
     nullOr (addCheck str nospace)
     // {description = "null or string without spaces";};
-  cfg = config.host.system;
+  cfg = config.sys;
   own = ["timezone" "dns" "resolved"];
 in {
-  options.host.system.networking = mkOption {
+  options.sys.networking = mkOption {
     default = {};
     description = "Upstream `networking.*` settings plus host-specific extras.";
     type = submodule {
