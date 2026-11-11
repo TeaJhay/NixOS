@@ -40,10 +40,11 @@ group = "rafware"
 #NOTE: Homelab
 [inputs.circus]
 url = "github:manic-systems/circus"
+exclude_follow = ["nixpkgs"]
 group = "homelab"
-[inputs.matrix]
+[inputs.continuwuity]
 url = "git+https://forgejo.ellis.link/continuwuation/continuwuity"
-type = "fetch"
+exclude_follow = ["nixpkgs"]
 group = "homelab"
 #NOTE: Extra utilities
 [inputs.nix-flatpak]

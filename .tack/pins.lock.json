@@ -2,6 +2,7 @@
   "$declared": {
     "KvLibadwaita": "github:GabePoel/KvLibadwaita",
     "circus": "github:manic-systems/circus",
+    "continuwuity": "git+https://forgejo.ellis.link/continuwuation/continuwuity",
     "disko": "github:nix-community/disko",
     "findFiles": "github:Michael-C-Buckley/findFiles.nix",
     "hjem": "github:feel-co/hjem",
@@ -39,6 +40,14 @@
     "rev": "90e6328cad33a463bba74dc046be09848a4ae868",
     "narHash": "sha256-w5sdalq2PbuCrCaglUXJsvQkfjvZPYiDgdYZVlyTDsk=",
     "lastModified": 1793402889
+  },
+  "continuwuity": {
+    "type": "git",
+    "url": "https://forgejo.ellis.link/continuwuation/continuwuity",
+    "ref": "HEAD",
+    "rev": "7afe5885e9c6a41c198d36f063acf6aa138c767f",
+    "narHash": "sha256-q/RMyfUCBsVt+ocxFbeU3bFmREtDuMIbbWxvkd8IQZ4=",
+    "lastModified": 1794605074
   },
   "disko": {
     "type": "github",
