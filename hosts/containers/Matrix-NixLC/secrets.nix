@@ -21,7 +21,9 @@ in {
         password.recipients = ["admin"];
         "${hostName}/token_file" = {
           recipients = ["admin"];
-          owner = "admin";
+          owner = "continuwuity";
+          group = "continuwuity";
+          mode = "0400";
         };
       };
     };

@@ -32,7 +32,7 @@ in {
             allow_federation = true;
             allow_registration = true;
             allow_legacy_media = true;
-            max_request_size = 2000000;
+            max_request_size = 52428800;
             registration_token_file = secrets."Matrix-NixLC/token_file".path;
 
             # No suffix
