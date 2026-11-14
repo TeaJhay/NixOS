@@ -196,9 +196,9 @@
     "type": "git",
     "url": "ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git",
     "ref": "HEAD",
-    "rev": "02f1ae4167d70ada29988270c6c81257485c0483",
-    "narHash": "sha256-vwdk/J94tlt35icrhNdknKoiKhq+zy9mR/7fJvIA4/k=",
-    "lastModified": 1794566187
+    "rev": "516156193d18685bdc7d022c64322d4dc87aa5e8",
+    "narHash": "sha256-9KSTwH1/lWRq/aQk2NQZW6n1f106ENSrI3z0WHqAXek=",
+    "lastModified": 1794622775
   },
   "tack": {
     "type": "github",

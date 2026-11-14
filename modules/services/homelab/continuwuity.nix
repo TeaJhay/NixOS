@@ -86,6 +86,11 @@ in {
       networking.firewall = {
         allowedTCPPorts = [8008 29334];
       };
+      systemd = {
+        tmpfiles.rules = [
+          "d /data 0755 admin users -"
+        ];
+      };
     })
     {
       services.caddy.virtualHosts = {
