@@ -1,48 +1,46 @@
-{
-  lib,
-  config,
-  ...
-}: let
+{lib, ...}: let
   inherit (lib) mkEnableOption mkOption;
-  inherit (lib.types) attrsOf submodule str;
+  inherit (lib.types) attrsOf nullOr port str submodule;
 in {
   options.homelab = mkOption {
     description = "Users on this host";
-    type = attrsOf (submodule {
+    type = attrsOf (submodule ({config, ...}: {
       options = {
-        enable = mkEnableOption "enable caddy reverse-proxy and webserver, in addition to Caddy/ui";
+        enable = mkEnableOption "this service and it's related configuration, including modules and oci-containers";
+        baseDomain = mkOption {
+          type = str;
+          description = "Base domain used with this service";
+        };
+
+        subDomain = mkOption {
+          type = str;
+          description = "Subdomain used with this service";
+        };
+
         url = mkOption {
           type = str;
           default = "${config.subDomain}.${config.baseDomain}";
           defaultText = lib.literalExpression ''"''${config.subDomain}.''${config.baseDomain}"'';
-          description = "url this service is served on";
+          description = "URL this service is served on. Defaults to {subDomain}.{baseDomain}";
         };
-        baseDomain = mkOption {
-          type = str;
-          default = "";
-          description = "basedomain to be used with this service";
-        };
-        subDomain = mkOption {
-          type = str;
-          default = "";
-          description = "subdomain to be used with this service";
-        };
+
         ipv4 = mkOption {
-          type = str;
-          default = "";
-          description = "ipv4 address used to access this service";
+          type = nullOr str;
+          default = null;
+          description = "IPv4 address used to access this service";
         };
+
         ipv6 = mkOption {
-          type = str;
-          default = "";
-          description = "ipv6 address used to access this service";
+          type = nullOr str;
+          default = null;
+          description = "IPv6 address used to access this service";
         };
+
         port = mkOption {
-          type = str;
-          default = "";
+          type = port;
           description = "Port used to access this service";
         };
       };
-    });
+    }));
   };
 }
