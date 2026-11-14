@@ -20,7 +20,7 @@ _: let
     }
     {
       # ncro
-      url = "https://cache.manic.systems/nix-cache";
+      url = "https://ci.manic.systems/nix-cache";
       priority = 30;
       public_key = "ci.manic.systems-1:5EoSMEa0D55JxnmC0yr2L7/2eHr/nHH0XWupc+Z9z88=";
     }
@@ -36,7 +36,7 @@ _: let
   usable = builtins.filter (s: s.public_key != "") substituters;
 in {
   # makes ``substituters.substituters`` available as an argument in any other module
-  _module.args.substituters = {inherit substituters;};
+  _module.args.substituters = substituters;
 
   nix.settings = {
     substituters = map (s: "${s.url}?priority=${toString s.priority}") usable;

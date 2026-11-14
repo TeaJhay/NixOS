@@ -3,6 +3,7 @@
   config,
   inputs,
   hostName,
+  substituters,
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
@@ -58,20 +59,7 @@ in {
           cache = {
             enabled = true;
             cache_url = "https://cache.${cfg.baseDomain}/nix-cache";
-            upstreams = [
-              {
-                url = "https://cache.manic.systems";
-                public_key = "cache.manic.systems-1:s6OZanN8Us8vRi0jVivP3qlMn0cYHBjBALKrNe5nH8s=";
-              }
-              {
-                url = "https://nix-community.cachix.org";
-                public_key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
-              }
-              {
-                url = "https://cache.nixos.org";
-                public_key = "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=";
-              }
-            ];
+            upstreams = map (upstream: {inherit (upstream) url public_key;}) substituters;
           };
           logs.log_dir = "/var/lib/circus/logs";
           logs.compress = true;
