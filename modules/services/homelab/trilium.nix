@@ -1,5 +1,6 @@
 {
   lib,
+  inputs,
   config,
   ...
 }: let
@@ -10,6 +11,7 @@ in {
   config = mkMerge [
     (mkIf (host.trilium.enable or false) {
       services.trilium-server = {
+        package = inputs.trilium.packages.x86_64-linux.server;
         enable = true;
         host = cfg.ipv4;
         inherit (cfg) port;
