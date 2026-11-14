@@ -58,6 +58,10 @@ group = "homelab"
 url = "gh:TriliumNext/Trilium"
 exclude_follow = ["nixpkgs"]
 group = "homelab"
+[inputs.authentik]
+url = "nix-community:authentik-nix"
+exclude_follow = ["nixpkgs"]
+group = "homelab"
 
 #NOTE: Extra utilities
 [inputs.nix-flatpak]

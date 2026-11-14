@@ -2,6 +2,12 @@ _: let
   baseDomain = "doesntcompute.site";
 in {
   homelab = {
+    authentik = {
+      ipv4 = "10.0.1.116";
+      port = 9001;
+      subDomain = "auth";
+      inherit baseDomain;
+    };
     circus = {
       ipv4 = "10.0.1.111";
       port = 3000;
