@@ -18,7 +18,10 @@ in {
         admin = "age1ffhwld5y09rpyuuzwks0y272wltpgvsafxaud3n2n05gyz73cyqqyaqglg";
       };
       secrets = {
-        password.recipients = ["admin"];
+        password = {
+          recipients = ["admin"];
+          owner = "admin";
+        };
         "${hostName}/env" = {
           recipients = ["admin"];
           owner = "admin";
