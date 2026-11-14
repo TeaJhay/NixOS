@@ -68,9 +68,7 @@ in {
               podman.user = "admin";
               ports = ["29334:29334"];
               autoStart = true;
-              volumes = [
-                ".:/data"
-              ];
+              volumes = ["mautrix-discord-data:/data"];
             };
           };
         };
@@ -85,11 +83,6 @@ in {
       };
       networking.firewall = {
         allowedTCPPorts = [8008 29334];
-      };
-      systemd = {
-        tmpfiles.rules = [
-          "d /data 0755 admin users -"
-        ];
       };
     })
     {
