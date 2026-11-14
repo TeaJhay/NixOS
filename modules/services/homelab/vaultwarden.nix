@@ -18,7 +18,7 @@ in {
         configureNginx = false;
         configurePostgres = false;
 
-        environmentFile = secrets."Vaultwarden-NixLC/env".path;
+        environmentFile = secrets."${hostName}/env".path;
         config = {
           WEBSOCKET_ENABLED = true;
           SIGNUPS_ALLOWED = true;
@@ -43,6 +43,9 @@ in {
 
           EXPERIMENTAL_CLIENT_FEATURE_FLAGS = "ssh-key-vault,pm-34171-card-scanner,pm-32009-new-item-types,ssh-agent-v2,pm-30529-webauthn-related-origins";
         };
+      };
+      networking.firewall = {
+        allowedTCPPorts = [cfg.port];
       };
     })
     {

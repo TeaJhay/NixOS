@@ -117,8 +117,12 @@ in {
           };
         };
       };
+      networking.firewall = {
+        allowedTCPPorts = [cfg.port];
+      };
     })
     {
+
       services.caddy.virtualHosts.${url}.extraConfig = ''
         @nix path /nix-cache-info /*.narinfo /nar/* /log/* /realisations/*
 
