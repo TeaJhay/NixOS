@@ -43,13 +43,19 @@ in {
 
           EXPERIMENTAL_CLIENT_FEATURE_FLAGS = "ssh-key-vault,pm-34171-card-scanner,pm-32009-new-item-types,ssh-agent-v2,pm-30529-webauthn-related-origins";
         };
-
-        # TODO: Add reverse proxy config if using one
-        # Could also sneak this into evies config since hosting on 192.168.0.0/16
-        # Changing this to lastname.org and using another machine
-        # For reverse proxy doesn't seem viable at the moment since i only get
-        # forwarding for 80/443 to one machine in the lab
       };
     })
+    {
+      services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
+        header {
+        	X-Content-Type-Options "nosniff"
+        	Referrer-Policy "strict-origin-when-cross-origin"
+        }
+        # NPM: "WebSockets Support" is enabled here automatically
+        reverse_proxy ${cfg.ipv4}:${cfg.port} {
+        	header_up X-Real-IP {http.request.remote.host}
+        }
+      '';
+    }
   ];
 }
