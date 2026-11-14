@@ -37,13 +37,13 @@
                 "https://cache.nixos.org/"
                 "https://cache.doesntcompute.site"
                 "https://nix-community.cachix.org"
-                "https://cache.manic.systems"
+                "https://ci.manic.systems"
               ];
               trusted-public-keys = [
                 "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
                 "cache.doesntcompute.site-1:cTv/ePA602QGzUci4rMdYGkuS4LA0NzEjoWnaHAwvAg="
                 "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-                "cache.manic.systems-1:s6OZanN8Us8vRi0jVivP3qlMn0cYHBjBALKrNe5nH8s="
+                "ci.manic.systems-1:5EoSMEa0D55JxnmC0yr2L7/2eHr/nHH0XWupc+Z9z88="
               ];
               trusted-users = [
                 "root"

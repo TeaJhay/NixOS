@@ -14,6 +14,7 @@ in {
     ./Programs.nix
     ./Hacking.nix
     ./Users.nix
+    ./Services.nix
     "${self}/Modules/Filesystem"
     nixos-hardware.nixosModules.common-cpu-amd # common AMD cpu settings
     nixos-hardware.nixosModules.common-cpu-amd-pstate # Common AMD cpu pstate settings

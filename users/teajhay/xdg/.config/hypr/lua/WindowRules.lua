@@ -470,7 +470,7 @@ end
 -- OPACITY
 
 local opacity_rules = {
-  { "browser", { tag = "browser" }, "1.0 0.96" },
+  { "browser", { tag = "browser" }, "1.0 0.99" },
   { "projects", { tag = "projects" }, "0.9 0.8" },
   { "multimedia", { tag = "multimedia" }, "0.94 0.86" },
   { "file-manager", { tag = "file-manager" }, "0.9 0.8" },

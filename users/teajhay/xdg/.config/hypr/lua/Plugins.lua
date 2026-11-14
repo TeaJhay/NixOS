@@ -40,14 +40,14 @@ if hl.plugin.hyprglass then
     blur_iterations = 3,
     chromatic_aberration = 0.3,
     fresnel_strength = 0.8,
-    edge_thickness = 0.01,
-    contrast = 1.0,
-    lens_distortion = 0.4,
-    saturation = 1.0,
+    edge_thickness = 0.02,
+    contrast = 1.6,
+    lens_distortion = 0.7,
+    saturation = 0.9,
     vibrancy = 0.8,
     vibrancy_darkness = 1,
     adaptive_boost = 0.5,
-    brightness = 1.3,
+    brightness = 0.3,
   })
 
   hg.preset("contrasted", {

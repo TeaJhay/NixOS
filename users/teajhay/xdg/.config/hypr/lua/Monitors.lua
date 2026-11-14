@@ -11,12 +11,14 @@ hl.monitor({
   mode = "3840x2160@120.0",
   position = "1920x0",
   scale = 1.5,
-  cm = "wide",
+  cm = "hdredid",
   bitdepth = 10,
-  vrr = 0,
+  vrr = 2,
   --disabled = true,
-  -- sdrbrightness = 0.7,
-  -- sdrsaturation = 0.3,
+  sdr_min_luminance = 0.005,
+  sdr_max_luminance = 203,
+  sdrbrightness = 0.3,
+  sdrsaturation = 1.02,
 })
 
 --monitorv2 {
