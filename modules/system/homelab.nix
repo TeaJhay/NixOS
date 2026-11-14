@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit (lib) mkEnableOption mkOption;
   inherit (lib.types) attrsOf submodule str;
 in {
@@ -9,7 +13,8 @@ in {
         enable = mkEnableOption "enable caddy reverse-proxy and webserver, in addition to Caddy/ui";
         url = mkOption {
           type = str;
-          default = "";
+          default = "${config.subDomain}.${config.baseDomain}";
+          defaultText = lib.literalExpression ''"''${config.subDomain}.''${config.baseDomain}"'';
           description = "url this service is served on";
         };
         baseDomain = mkOption {

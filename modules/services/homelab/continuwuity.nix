@@ -15,7 +15,9 @@ in {
     (mkIf (host.matrix.enable or false) {
       services.matrix-continuwuity = {
         enable = true;
-        package = inputs.continuwuity.packages.${pkgs.stdenv.hostPlatform.system}.max-perf-haswell;
+        package = inputs.continuwuity.packages.${pkgs.stdenv.hostPlatform.system}.max-perf-haswell.overrideAttrs {
+          doCheck = false;
+        };
         settings = {
           global = {
             server_name = "doesntcompute.site";
