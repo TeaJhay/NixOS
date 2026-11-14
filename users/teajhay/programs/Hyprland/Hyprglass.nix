@@ -18,13 +18,13 @@
     }:
       stdenv.mkDerivation (finalAttrs: {
         pname = "hyprglass";
-        version = "14df05f8bfcc0c5df9f66e5fbc6d71bb2a7c0475";
+        version = "317ed8c1b06be00990ccdca02bf9ade936f47f13";
 
         src = fetchFromGitHub {
           owner = "hyprnux";
           repo = "hyprglass";
           rev = "${finalAttrs.version}";
-          hash = "sha256-M43QRfd8DHMb1SD7WZPjQZpr2XRbpWQ3Bw7FB4w6O9s="; # keep your existing hash
+          hash = "sha256-zA7q8r/FAURwg2GnaPsKxLvbnsnOXmhYzUeOUezLuPk="; # keep your existing hash
         };
 
         nativeBuildInputs = [pkg-config wayland-scanner];
