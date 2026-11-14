@@ -4,7 +4,7 @@ in {
   homelab = {
     authentik = {
       ipv4 = "10.0.1.116";
-      port = 9001;
+      port = 9000;
       subDomain = "auth";
       inherit baseDomain;
     };
@@ -22,7 +22,7 @@ in {
     };
     technitium = {
       ipv4 = "10.0.1.101";
-      port = 80;
+      port = 53443;
       subDomain = "dns";
       inherit baseDomain;
     };

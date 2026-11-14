@@ -31,6 +31,14 @@ in {
           avatars = "gravatar";
         };
       };
+      networking.firewall = {
+        allowedTCPPorts = [3389 6636 1812 9300 9900 9901 9000 9443 9001];
+      };
     })
+    {
+      services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
+        reverse_proxy ${cfg.ipv4}:${cfg.port}
+      '';
+    }
   ];
 }
