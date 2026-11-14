@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   config,
   options,
   modulesPath,
@@ -111,8 +112,11 @@ in {
           };
           nh = {
             enable = true;
-            clean.enable = true;
-            clean.extraArgs = "--keep-since 5d --keep 20";
+            package = inputs.nh.packages.default;
+            clean = {
+              enable = true;
+              extraArgs = "--keep-since 5d --keep 20";
+            };
             flake = "/home/admin/nix"; # sets NH_OS_FLAKE variable for you
           };
         };

@@ -23,19 +23,23 @@ url = "channel:nixos-unstable"
 [inputs.secrets]
 url = "git+ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git"
 type = "fetch"
+
 #NOTE: Maniac preemo soft
 [inputs.nixos-core]
 url = "github:manic-systems/nixos-core"
-group = "rafware"
+group = "manic-ware"
 [inputs.hjem]
 url = "github:feel-co/hjem"
-group = "rafware"
+group = "manic-ware"
 [inputs.hjem-rum]
 url = "github:snugnug/hjem-rum"
-group = "rafware"
+group = "manic-ware"
 [inputs.tack]
 url = "github:manic-systems/tack"
-group = "rafware"
+group = "manic-ware"
+[inputs.nh]
+url   = "github:nix-community/nh"
+group = "manic-ware"
 
 #NOTE: Homelab
 [inputs.circus]
@@ -46,6 +50,7 @@ group = "homelab"
 url = "git+https://forgejo.ellis.link/continuwuation/continuwuity"
 exclude_follow = ["nixpkgs"]
 group = "homelab"
+
 #NOTE: Extra utilities
 [inputs.nix-flatpak]
 url = "github:gmodena/nix-flatpak"
