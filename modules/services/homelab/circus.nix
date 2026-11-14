@@ -115,6 +115,13 @@ in {
               on_failure_only = true;
             };
           };
+          oauth.oidc.authentik = {
+            display_name = "Authentik";
+            client_id = "OpH9NATX5jjIshEPyonVPBaiMBgS4oV5ZvRVi5Bx";
+            client_secret_file = secrets."${hostName}/circus_oidc_secret".path;
+            redirect_uri = "https://cache.doesntcompute.site/api/v1/auth/oidc/authentik/callback";
+            issuer_url = "https://auth.doesntcompute.site/application/o/circus/";
+          };
         };
       };
       networking.firewall = {
@@ -122,7 +129,6 @@ in {
       };
     })
     {
-
       services.caddy.virtualHosts.${url}.extraConfig = ''
         @nix path /nix-cache-info /*.narinfo /nar/* /log/* /realisations/*
 

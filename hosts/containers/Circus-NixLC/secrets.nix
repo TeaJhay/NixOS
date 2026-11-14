@@ -38,6 +38,10 @@ in {
           recipients = ["admin"];
           owner = "admin";
         };
+        "${hostName}/circus_oidc_secret" = {
+          recipients = ["admin"];
+          owner = "admin";
+        };
       };
     };
     security.rtkit.enable = true;
