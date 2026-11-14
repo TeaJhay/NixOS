@@ -9,7 +9,6 @@
     "hjem-impure": "github:Rexcrazy804/hjem-impure",
     "hjem-rum": "github:snugnug/hjem-rum",
     "hyprland": "github:hyprwm/Hyprland",
-    "import-tree": "github:denful/import-tree",
     "millennium": "github:SteamClientHomebrew/Millennium",
     "nh": "github:nix-community/nh",
     "niqspkgs": "github:diniamo/niqspkgs",
@@ -18,13 +17,12 @@
     "nixos-core": "github:manic-systems/nixos-core",
     "nixos-hardware": "github:NixOS/nixos-hardware/master",
     "nixpkgs": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz",
-    "nixpkgs-lib": "github:nix-community/nixpkgs.lib",
     "noctalia": "github:noctalia-dev/noctalia/cachix",
     "noctalia-greeter": "github:noctalia-dev/noctalia-greeter",
-    "preservation": "github:nix-community/preservation",
     "secrets": "git+ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git",
     "tack": "github:manic-systems/tack",
-    "zen-browser": "github:TeaJhay/zen-browser-flake?rev=458cd16116c362a5e92d5db6bdc3599e4e8b1f4a"
+    "trilium": "github:TriliumNext/Trilium",
+    "zen-browser": "github:youwen5/zen-browser-flake"
   },
   "KvLibadwaita": {
     "type": "github",
@@ -97,14 +95,6 @@
     "rev": "0767f6347a69607638a4f93b3cd613af15a121e0",
     "narHash": "sha256-1I8u6r86xSBRVUd6qTFBffifRqS/DcUv4n7pdtL9M8c=",
     "lastModified": 1794583226
-  },
-  "import-tree": {
-    "type": "github",
-    "owner": "denful",
-    "repo": "import-tree",
-    "rev": "eb1b52eaecc57f7c136d07ae8a93e724dfecac46",
-    "narHash": "sha256-ljEMTXP/rH0tOvDzc9gzwww6KcHRPRnEHzd9lK48V7s=",
-    "lastModified": 1788467110
   },
   "millennium": {
     "type": "github",
@@ -193,21 +183,13 @@
     "narHash": "sha256-DSALS6KCU9HRcKHzG8WWg5wOlmKlbgfCRJKlmpyMipE=",
     "lastModified": 1794402928
   },
-  "preservation": {
-    "type": "github",
-    "owner": "nix-community",
-    "repo": "preservation",
-    "rev": "00be7f7dd1a11ae0605386f2272288de7cf33abe",
-    "narHash": "sha256-s/A2rSO2Ndf8Y5yiouesnI/3Zkn9pmVGF2NxFxOUvx8=",
-    "lastModified": 1792953443
-  },
   "secrets": {
     "type": "git",
     "url": "ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git",
     "ref": "HEAD",
-    "rev": "516156193d18685bdc7d022c64322d4dc87aa5e8",
-    "narHash": "sha256-9KSTwH1/lWRq/aQk2NQZW6n1f106ENSrI3z0WHqAXek=",
-    "lastModified": 1794622775
+    "rev": "d3af818d373d396e38a0c8fecbb14dc1d2357881",
+    "narHash": "sha256-OA4b3zaRDeNfs3vwGqtBclk3yaSwKMAngV4FOTDZ6M4=",
+    "lastModified": 1794641453
   },
   "tack": {
     "type": "github",
@@ -217,12 +199,20 @@
     "narHash": "sha256-bdNCaHUF3c8hgsYw6FCI+lGcZanZIDxt2Sefu5AsERY=",
     "lastModified": 1794450976
   },
+  "trilium": {
+    "type": "github",
+    "owner": "TriliumNext",
+    "repo": "Trilium",
+    "rev": "94e34a41ff7e88a902ced85a8b4cfd4f1f422e91",
+    "narHash": "sha256-F/uVTFTD74aHFPEreBVNY49tdVBH9WSmLj+0qvDQ4BU=",
+    "lastModified": 1794598515
+  },
   "zen-browser": {
     "type": "github",
-    "owner": "TeaJhay",
+    "owner": "youwen5",
     "repo": "zen-browser-flake",
-    "rev": "458cd16116c362a5e92d5db6bdc3599e4e8b1f4a",
-    "narHash": "sha256-qpJE5ug1T+7LEdXRLI9/ZIwe/rzqjILR9BpMg/sNVtM=",
-    "lastModified": 1791627880
+    "rev": "ddf9a4d974a43fdc32db8f766a137093d6822ff5",
+    "narHash": "sha256-eLUmhmHQJg9DUKtYMfdyK1v6ktkc7ikbGsYvEwyw3y0=",
+    "lastModified": 1794485312
   }
 }

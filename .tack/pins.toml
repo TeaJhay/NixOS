@@ -1,10 +1,14 @@
 [shorturls]
 gh = "github:{path}"
 channel = "https://channels.nixos.org/{path}/nixexprs.tar.xz"
+fj = "git+https://{path}"
+ssh = "git+ssh://{path}"
+manic = "github:manic-systems/{path}"
+nix-community = "github:nix-community/{path}"
 
 [all_follow]
 hjem = "hjem"
-nixpkgs = ["nixpkgs-stable", "nixpkgs-unstable"]
+nixpkgs = ["nixpkgs", "nixpkgs-lib", "nixpkgs-stable", "nixpkgs-unstable"]
 [tack] 
 recomposable = true
 [omit_inputs]
@@ -21,91 +25,86 @@ recomposable = true
 [inputs.nixpkgs]
 url = "channel:nixos-unstable"
 [inputs.secrets]
-url = "git+ssh://forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git"
+url = "ssh:forgejo@git-ssh.doesntcompute.site/TeaJhay/secrets.git"
 type = "fetch"
 
 #NOTE: Maniac preemo soft
 [inputs.nixos-core]
-url = "github:manic-systems/nixos-core"
+url = "manic:nixos-core"
 group = "manic-ware"
 [inputs.hjem]
-url = "github:feel-co/hjem"
+url = "gh:feel-co/hjem"
 group = "manic-ware"
 [inputs.hjem-rum]
-url = "github:snugnug/hjem-rum"
+url = "gh:snugnug/hjem-rum"
 group = "manic-ware"
 [inputs.tack]
-url = "github:manic-systems/tack"
+url = "manic:tack"
 group = "manic-ware"
 [inputs.nh]
-url   = "github:nix-community/nh"
+url   = "nix-community:nh"
 group = "manic-ware"
 
 #NOTE: Homelab
 [inputs.circus]
-url = "github:manic-systems/circus"
+url = "manic:circus"
 exclude_follow = ["nixpkgs"]
 group = "homelab"
 [inputs.continuwuity]
-url = "git+https://forgejo.ellis.link/continuwuation/continuwuity"
+url = "fj:forgejo.ellis.link/continuwuation/continuwuity"
+exclude_follow = ["nixpkgs"]
+group = "homelab"
+[inputs.trilium]
+url = "gh:TriliumNext/Trilium"
 exclude_follow = ["nixpkgs"]
 group = "homelab"
 
 #NOTE: Extra utilities
 [inputs.nix-flatpak]
-url = "github:gmodena/nix-flatpak"
-group = "Extra"
-[inputs.nixpkgs-lib]
-url = "github:nix-community/nixpkgs.lib"
+url = "gh:gmodena/nix-flatpak"
 group = "Extra"
 [inputs.nixos-hardware]
-url = "github:NixOS/nixos-hardware/master"
-group = "Extra"
-[inputs.import-tree]
-url = "github:denful/import-tree"
+url = "gh:NixOS/nixos-hardware/master"
 group = "Extra"
 [inputs.findFiles]
-url = "github:Michael-C-Buckley/findFiles.nix"
+url = "gh:Michael-C-Buckley/findFiles.nix"
 group = "Extra"
 [inputs.niqspkgs]
-url = "github:diniamo/niqspkgs"
+url = "gh:diniamo/niqspkgs"
 group = "Extra"
 [inputs.hjem-impure]
-url = "github:Rexcrazy804/hjem-impure"
+url = "gh:Rexcrazy804/hjem-impure"
 group = "Extra"
 [inputs.nix-secrets]
-url = "github:unnamed-systems/nix-secrets"
-group = "Extra"
-[inputs.preservation]
-url = "github:nix-community/preservation"
+url = "gh:unnamed-systems/nix-secrets"
 group = "Extra"
 [inputs.disko]
-url = "github:nix-community/disko"
+url = "nix-community:disko"
 group = "Extra"
 
 #NOTE: Graphical Environment
 [inputs.noctalia]
-url = "github:noctalia-dev/noctalia/cachix"
+url = "gh:noctalia-dev/noctalia/cachix"
 group = "Graphical Environment"
 exclude_follow = ["nixpkgs"]
 [inputs.noctalia-greeter]
-url = "github:noctalia-dev/noctalia-greeter"
+url = "gh:noctalia-dev/noctalia-greeter"
 group = "Graphical Environment"
 exclude_follow = ["nixpkgs"]
 [inputs.hyprland]
-url = "github:hyprwm/Hyprland"
+url = "gh:hyprwm/Hyprland"
 group = "Graphical Environment"
 exclude_follow = ["nixpkgs"]
 [inputs.KvLibadwaita]
-url  = "github:GabePoel/KvLibadwaita"
+url  = "gh:GabePoel/KvLibadwaita"
 type = "fetch"
 group = "Graphical Environment"
 
 #NOTE: Apps
 [inputs.zen-browser]
-url = "github:TeaJhay/zen-browser-flake?rev=458cd16116c362a5e92d5db6bdc3599e4e8b1f4a"
+url = "gh:youwen5/zen-browser-flake"
 group = "Apps"
 [inputs.millennium]
-url = "github:SteamClientHomebrew/Millennium"
+url = "gh:SteamClientHomebrew/Millennium"
 dir = "packages/nix"
 group = "Apps"
