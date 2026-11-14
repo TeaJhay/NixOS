@@ -40,7 +40,7 @@ in {
 
           # NOTE: set to true once sso is setup
           SSO_ENABLED = true;
-
+          HTTP_REQUEST_BLOCK_NON_GLOBAL_IPS = false;
           EXPERIMENTAL_CLIENT_FEATURE_FLAGS = "ssh-key-vault,pm-34171-card-scanner,pm-32009-new-item-types,ssh-agent-v2,pm-30529-webauthn-related-origins";
         };
       };

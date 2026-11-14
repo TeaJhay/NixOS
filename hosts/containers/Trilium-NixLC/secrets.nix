@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  inputs,
+  hostName,
+  ...
+}: let
   hostSecrets = "/home/admin/nix/secrets";
 in {
   imports = [inputs.nix-secrets.nixosModules.default];
@@ -15,6 +19,10 @@ in {
       };
       secrets = {
         password = {
+          recipients = ["admin"];
+          owner = "admin";
+        };
+        "${hostName}/trilium-env" = {
           recipients = ["admin"];
           owner = "admin";
         };

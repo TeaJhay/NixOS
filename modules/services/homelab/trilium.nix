@@ -2,11 +2,13 @@
   lib,
   inputs,
   config,
+  hostName,
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
   cfg = config.homelab.trilium;
   host = config.sys.services;
+  secrets = config.security.nix-secrets.secrets;
 in {
   config = mkMerge [
     (mkIf (host.trilium.enable or false) {
@@ -15,6 +17,7 @@ in {
         enable = true;
         host = cfg.ipv4;
         inherit (cfg) port;
+        environmentFile = secrets."${hostName}/trilium-env".path;
       };
       networking.firewall = {
         allowedTCPPorts = [cfg.port];
