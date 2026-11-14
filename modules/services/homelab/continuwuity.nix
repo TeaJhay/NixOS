@@ -3,6 +3,7 @@
   pkgs,
   config,
   inputs,
+  hostName,
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
@@ -33,7 +34,7 @@ in {
             allow_registration = true;
             allow_legacy_media = true;
             max_request_size = 52428800;
-            registration_token_file = secrets."Matrix-NixLC/token_file".path;
+            registration_token_file = secrets."${hostName}/token_file".path;
 
             # No suffix
             new_user_displayname_suffix = "";
@@ -48,9 +49,11 @@ in {
 
             # Experimental MSC's
             allow_sticky_events = true;
-            # Continuwuity listens on localhost by default,
-            # address and port are handled automatically
-
+            # OIDC
+            discovery_url = "https://auth.doesntcompute.site/application/o/continuwuity/";
+            client_id = "aENcq0q52YUboe4GVMtNUvde1wxZl2LpdcPE8RaP";
+            client_secret_file = secrets."${hostName}/continuwuity-oidc-secret".path;
+            provider_name = "Authentik";
             # You can add any further configuration here, e.g.
             # trusted_servers = [ "matrix.org" ];
           };

@@ -28,6 +28,13 @@ in {
           group = "continuwuity";
           mode = "0400";
         };
+
+        "${hostName}/continuwuity-oidc-secret" = {
+          recipients = ["admin"];
+          owner = "continuwuity";
+          group = "continuwuity";
+          mode = "0400";
+        };
       };
     };
     security.rtkit.enable = true;
