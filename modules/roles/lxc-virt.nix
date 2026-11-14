@@ -15,7 +15,9 @@
   proxmoxModule = removeAttrs (options.proxmoxLXC or {}) ["_module"];
   ssh-key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDZ9m9RlLXNMoakl6Df7Rrfl+0ChqeeJf2afrX+d94wy openpgp:0x973131DA";
 in {
+  disabledModules = ["programs/tack.nix"];
   imports = [
+    inputs.tack.nixosModules.default
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
   options.sys.virtual = {
@@ -112,12 +114,16 @@ in {
           };
           nh = {
             enable = true;
-            package = inputs.nh.packages.default;
+            package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
             clean = {
               enable = true;
               extraArgs = "--keep-since 5d --keep 20";
             };
             flake = "/home/admin/nix"; # sets NH_OS_FLAKE variable for you
+          };
+          tack = {
+            enable = true;
+            nixConfTokens = true;
           };
         };
         # SSH Settings

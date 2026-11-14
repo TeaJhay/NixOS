@@ -9,7 +9,6 @@
   inherit (lib.types) listOf either str attrs;
   cfg = config.sys.impermanence;
 in {
-  disabledModules = ["programs/tack.nix"];
   imports = [
     inputs.nixos-core.nixosModules.default
     {
