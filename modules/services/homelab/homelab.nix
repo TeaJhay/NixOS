@@ -98,8 +98,8 @@ in {
       subDomain = "pxe";
       inherit baseDomain;
     };
-    firefoxSync = {
-      ipv4 = "10.0.1.112";
+    syncStorage = {
+      ipv4 = "10.0.1.113";
       port = 5000;
       subDomain = "sync";
       inherit baseDomain;

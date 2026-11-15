@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   hostName,
   ...
@@ -11,14 +12,25 @@
 in {
   config = mkMerge [
     (mkIf (host.syncStorage.enable or false) {
+      services.postgresql = {
+        enable = true;
+        package = pkgs.postgresql_19;
+      };
       services.firefox-syncserver = {
         enable = true;
-        secrets = secrets."${hostName}/sync";
         singleNode = {
           enable = true;
-          hostname = hostName;
+          enableNginx = false;
           enableTLS = true;
-          inherit (cfg) url;
+          hostname = hostName;
+          url = "https://${cfg.url}";
+
+          capacity = 5;
+        };
+        database.type = "postgresql";
+        secrets = secrets."${hostName}/ff-sync".path;
+        settings = {
+          host = cfg.ipv4;
         };
       };
       networking.firewall = {

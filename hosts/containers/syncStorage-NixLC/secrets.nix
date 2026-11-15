@@ -22,7 +22,7 @@ in {
           recipients = ["admin"];
           neededForUsers = true;
         };
-        "${hostName}/sync" = {
+        "${hostName}/ff-sync" = {
           recipients = ["admin"];
           owner = "admin";
         };
