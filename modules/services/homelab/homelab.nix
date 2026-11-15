@@ -117,7 +117,7 @@ in {
       inherit baseDomain;
     };
     trilium = {
-      ipv4 = "10.0.1.114";
+      ipv4 = "10.0.1.106";
       port = 8080;
       subDomain = "wiki";
       inherit baseDomain;
