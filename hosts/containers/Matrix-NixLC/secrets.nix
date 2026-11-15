@@ -20,7 +20,7 @@ in {
       secrets = {
         password = {
           recipients = ["admin"];
-          owner = "admin";
+          neededForUsers = true;
         };
         "${hostName}/token_file" = {
           recipients = ["admin"];

@@ -89,6 +89,7 @@ in {
             extraGroups = ["wheel" "podman"]; # Grants sudo access
             openssh.authorizedKeys.keys = [ssh-key];
             shell = pkgs.fish;
+            hashedPasswordFile = config.security.nix-secrets.secrets.password.path;
             linger = true;
             subUidRanges = [
               {

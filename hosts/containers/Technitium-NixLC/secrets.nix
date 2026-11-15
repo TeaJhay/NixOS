@@ -16,7 +16,7 @@ in {
       secrets = {
         password = {
           recipients = ["admin"];
-          owner = "admin";
+          neededForUsers = true;
         };
       };
     };

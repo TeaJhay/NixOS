@@ -20,7 +20,7 @@ in {
       secrets = {
         password = {
           recipients = ["admin"];
-          owner = "admin";
+          neededForUsers = true;
         };
         "${hostName}/circus_api" = {
           recipients = ["admin"];
