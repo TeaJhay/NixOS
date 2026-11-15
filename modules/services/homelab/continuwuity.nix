@@ -50,11 +50,15 @@ in {
             # Experimental MSC's
             allow_sticky_events = true;
             # OIDC
-            oauth.oidc = {
-              discovery_url = "https://auth.doesntcompute.site/application/o/continuwuity/";
-              client_id = "aENcq0q52YUboe4GVMtNUvde1wxZl2LpdcPE8RaP";
-              client_secret_file = secrets."${hostName}/continuwuity-oidc-secret".path;
-              provider_name = "Authentik";
+            oauth = {
+              # so Mautrix can still E2E
+              compatibility_mode = "hybrid";
+              oidc = {
+                discovery_url = "https://auth.doesntcompute.site/application/o/continuwuity/";
+                client_id = "aENcq0q52YUboe4GVMtNUvde1wxZl2LpdcPE8RaP";
+                client_secret_file = secrets."${hostName}/continuwuity-oidc-secret".path;
+                provider_name = "Authentik";
+              };
             };
             # You can add any further configuration here, e.g.
             # trusted_servers = [ "matrix.org" ];
