@@ -1,23 +1,22 @@
 {
   lib,
   config,
-  hostName,
   ...
 }: let
   inherit (lib.modules) mkMerge mkIf;
   cfg = config.homelab.tandoor;
   host = config.sys.services;
-  secrets = config.security.nix-secrets.secrets;
 in {
   config = mkMerge [
     (mkIf (host.tandoor.enable or false) {
       services.tandoor-recipes = {
+        enable = true;
         inherit (cfg) port;
-        address = cfg.url;
+        address = cfg.ipv4;
         extraConfig = {
           ENABLE_SIGNUP = "1";
+          ALLOWED_HOSTS = cfg.url;
         };
-        database.createLocally = true;
       };
       networking.firewall.allowedTCPPorts = [cfg.port];
     })

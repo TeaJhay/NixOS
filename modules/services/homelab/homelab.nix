@@ -40,7 +40,7 @@ in {
     };
     tandoor = {
       ipv4 = "10.0.1.119";
-      port = 80;
+      port = 8080;
       subDomain = "food";
       inherit baseDomain;
     };
