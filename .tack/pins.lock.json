@@ -74,24 +74,9 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "49b566a9780413a2498b7e8b925337ddb41a41a7",
-    "narHash": "sha256-mZ3HOZXL6SZ+nl+IqFym+ZZQxKfhJOgE0e4UlbYf390=",
-    "lastModified": 1795106254,
-    "public": true,
-    "patched": {
-      "path": "/nix/store/i8nwawxq6shnpj90p4sv5dvy7ypivy3n-source",
-      "narHash": "sha256-853fTOkW5c3kLRMd49WcK/jMkPtM4PLbNo+QLA/koTw=",
-      "lastModified": 1795106254,
-      "patches": [
-        {
-          "source": "https://patch-diff.githubusercontent.com/raw/hyprwm/Hyprland/pull/17048.patch",
-          "url": "https://patch-diff.githubusercontent.com/raw/hyprwm/Hyprland/pull/17048.patch",
-          "file": "patches/hyprland/17048.patch",
-          "sha256": "56bbd1b9833bddeb175fa7480a7c76e835b086c95761d1bfa8b89589dd81fa56"
-        }
-      ],
-      "diff": "e0776eef65149dadc6e82e3a59e40cba0547419fa41ebee9e6c3c5cb3859144f"
-    }
+    "rev": "489b111974fc1ecf7f4cd84e7d995ce84804e11e",
+    "narHash": "sha256-853fTOkW5c3kLRMd49WcK/jMkPtM4PLbNo+QLA/koTw=",
+    "lastModified": 1795113678
   },
   "import-tree": {
     "type": "github",
@@ -151,7 +136,7 @@
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1122823.04906337b6d5/nixexprs.tar.xz?rev=04906337b6d53e8bb0eaf0470ae9f070a4d4eb55&lastModified=1794890597",
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1122823.04906337b6d5/nixexprs.tar.xz?lastModified=1794890597&rev=04906337b6d53e8bb0eaf0470ae9f070a4d4eb55",
     "rev": "04906337b6d53e8bb0eaf0470ae9f070a4d4eb55",
     "narHash": "sha256-vJoAj1xon3Mhfc8FZ5uBrPyZee9Eqa05gG/taXv6iZ8=",
     "lastModified": 1794890597
@@ -168,9 +153,10 @@
     "type": "github",
     "owner": "noctalia-dev",
     "repo": "noctalia",
-    "rev": "d9483363739a33c56e51ee46db8e4238fdf655df",
-    "narHash": "sha256-0tgFAeyHko1Xv0VQwDagyHN+h1epB+dxlHnh+VFTuVk=",
-    "lastModified": 1795104329
+    "rev": "6bc8abe9250575a15b1b3b88d993906551fcacf0",
+    "narHash": "sha256-aYa8thBtObLfwM29BtpqnV+fs+1JUnkb0EDliLmJwCg=",
+    "lastModified": 1795109055,
+    "public": true
   },
   "noctalia-greeter": {
     "type": "github",
