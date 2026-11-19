@@ -20,7 +20,7 @@
     "noctalia-greeter": "github:noctalia-dev/noctalia-greeter",
     "preservation": "github:nix-community/preservation",
     "tack": "github:manic-systems/tack",
-    "zen-browser": "github:TeaJhay/zen-browser-flake?rev=458cd16116c362a5e92d5db6bdc3599e4e8b1f4a"
+    "zen-browser": "github:youwen5/zen-browser-flake"
   },
   "KvLibadwaita": {
     "type": "github",
@@ -77,7 +77,21 @@
     "rev": "49b566a9780413a2498b7e8b925337ddb41a41a7",
     "narHash": "sha256-mZ3HOZXL6SZ+nl+IqFym+ZZQxKfhJOgE0e4UlbYf390=",
     "lastModified": 1795106254,
-    "public": true
+    "public": true,
+    "patched": {
+      "path": "/nix/store/i8nwawxq6shnpj90p4sv5dvy7ypivy3n-source",
+      "narHash": "sha256-853fTOkW5c3kLRMd49WcK/jMkPtM4PLbNo+QLA/koTw=",
+      "lastModified": 1795106254,
+      "patches": [
+        {
+          "source": "https://patch-diff.githubusercontent.com/raw/hyprwm/Hyprland/pull/17048.patch",
+          "url": "https://patch-diff.githubusercontent.com/raw/hyprwm/Hyprland/pull/17048.patch",
+          "file": "patches/hyprland/17048.patch",
+          "sha256": "56bbd1b9833bddeb175fa7480a7c76e835b086c95761d1bfa8b89589dd81fa56"
+        }
+      ],
+      "diff": "e0776eef65149dadc6e82e3a59e40cba0547419fa41ebee9e6c3c5cb3859144f"
+    }
   },
   "import-tree": {
     "type": "github",
@@ -137,7 +151,7 @@
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1122823.04906337b6d5/nixexprs.tar.xz?lastModified=1794890597&rev=04906337b6d53e8bb0eaf0470ae9f070a4d4eb55",
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1122823.04906337b6d5/nixexprs.tar.xz?rev=04906337b6d53e8bb0eaf0470ae9f070a4d4eb55&lastModified=1794890597",
     "rev": "04906337b6d53e8bb0eaf0470ae9f070a4d4eb55",
     "narHash": "sha256-vJoAj1xon3Mhfc8FZ5uBrPyZee9Eqa05gG/taXv6iZ8=",
     "lastModified": 1794890597
@@ -184,10 +198,10 @@
   },
   "zen-browser": {
     "type": "github",
-    "owner": "TeaJhay",
+    "owner": "youwen5",
     "repo": "zen-browser-flake",
-    "rev": "458cd16116c362a5e92d5db6bdc3599e4e8b1f4a",
-    "narHash": "sha256-qpJE5ug1T+7LEdXRLI9/ZIwe/rzqjILR9BpMg/sNVtM=",
-    "lastModified": 1791627880
+    "rev": "dda00955fd67d2ff9975eafc78fef5f1e41c3b44",
+    "narHash": "sha256-JUkgT0FFtwFTNjn+bA9AljIUNHnBm09XBMEy1Sb4Zvo=",
+    "lastModified": 1795091293
   }
 }

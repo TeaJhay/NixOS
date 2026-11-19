@@ -80,6 +80,9 @@ exclude_follow = ["nixpkgs"]
 url = "github:hyprwm/Hyprland"
 group = "Graphical Environment"
 exclude_follow = ["nixpkgs"]
+patches = [
+"https://patch-diff.githubusercontent.com/raw/hyprwm/Hyprland/pull/17048.patch",
+]
 [inputs.KvLibadwaita]
 url  = "github:GabePoel/KvLibadwaita"
 type = "fetch"
@@ -87,7 +90,7 @@ group = "Graphical Environment"
 
 #NOTE: Apps
 [inputs.zen-browser]
-url = "github:TeaJhay/zen-browser-flake?rev=458cd16116c362a5e92d5db6bdc3599e4e8b1f4a"
+url = "gh:youwen5/zen-browser-flake"
 group = "Apps"
 [inputs.millennium]
 url = "github:SteamClientHomebrew/Millennium"

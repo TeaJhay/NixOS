@@ -1,0 +1,1592 @@
+From b48f40cb30195f9e9c8a2ead11a1ca6d63cc98ad Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:22:58 +0100
+Subject: [PATCH 1/8] render/shaders: support external textures in the surface
+ shader
+
+---
+ src/render/OpenGL.cpp                    |  5 +-
+ src/render/ShaderLoader.cpp              |  1 +
+ src/render/ShaderLoader.hpp              |  2 +-
+ src/render/shaders/glsl/defines.h        |  1 +
+ src/render/shaders/glsl/ext.frag         | 43 ---------------
+ src/render/shaders/glsl/motion_blur.glsl | 66 +++++++++++++++++++-----
+ src/render/shaders/glsl/surface.frag     |  8 +++
+ 7 files changed, 66 insertions(+), 60 deletions(-)
+ delete mode 100644 src/render/shaders/glsl/ext.frag
+
+diff --git a/src/render/OpenGL.cpp b/src/render/OpenGL.cpp
+index aacacb1c583..31939a149fc 100644
+--- a/src/render/OpenGL.cpp
++++ b/src/render/OpenGL.cpp
+@@ -962,7 +962,6 @@ const std::array<std::string, SH_FRAG_LAST> FRAG_SHADERS = {
+     "quad.frag",
+     "passthru.frag",
+     "rgbamatte.frag",
+-    "ext.frag",
+     "blur1.frag",
+     "blur2.frag",
+     "blurprepare.frag",
+@@ -1443,9 +1442,7 @@ WP<CShader> CHyprOpenGLImpl::renderToFBInternal(CRenderContext& ctx, SP<ITexture
+     switch (texType) {
+         case TEXTURE_RGBA: shaderFeatures |= SH_FEAT_RGBA; break;
+         case TEXTURE_RGBX: shaderFeatures &= ~SH_FEAT_RGBA; break;
+-
+-        // TODO set correct features
+-        case TEXTURE_EXTERNAL: shader = getShaderVariant(SH_FRAG_EXT, SH_FEAT_ROUNDING | SH_FEAT_DISCARD | SH_FEAT_TINT | globalFeatures(ctx)); break; // might be unused
++        case TEXTURE_EXTERNAL: shaderFeatures |= SH_FEAT_EXTERNAL | (tex->m_opaque ? 0 : SH_FEAT_RGBA); break;
+         default: RASSERT(false, "tex->m_iTarget unsupported!");
+     }
+ 
+diff --git a/src/render/ShaderLoader.cpp b/src/render/ShaderLoader.cpp
+index 713f4035522..e7a703d7bb2 100644
+--- a/src/render/ShaderLoader.cpp
++++ b/src/render/ShaderLoader.cpp
+@@ -81,6 +81,7 @@ std::string CShaderLoader::getDefines(const SShaderVariant& variant) {
+         {"USE_BLUR_MATTE", SH_FEAT_BLUR_MATTE},
+         {"USE_ALT_TONEMAP", SH_FEAT_ALT_TONEMAP},
+         {"USE_BLUR_PROPORTIONAL", SH_FEAT_BLUR_PROPORTIONAL},
++        {"USE_EXTERNAL", SH_FEAT_EXTERNAL},
+     });
+ 
+     std::string           res;
+diff --git a/src/render/ShaderLoader.hpp b/src/render/ShaderLoader.hpp
+index 744e576109d..03ef3b5c4e3 100644
+--- a/src/render/ShaderLoader.hpp
++++ b/src/render/ShaderLoader.hpp
+@@ -28,6 +28,7 @@ namespace Render {
+         SH_FEAT_BLUR_MATTE        = (1 << 12), // condition: transformed-window blur matte
+         SH_FEAT_ALT_TONEMAP       = (1 << 13), // condition: tonemapMode == 3
+         SH_FEAT_BLUR_PROPORTIONAL = (1 << 14), // condition: decoration:blur:proportional
++        SH_FEAT_EXTERNAL          = (1 << 15), // samplerExternalOES texture sampling; condition: TEXTURE_EXTERNAL
+ 
+         // uniforms: targetPrimariesXYZ; condition: SH_FEAT_TONEMAP || SH_FEAT_SDR_MOD
+     };
+@@ -47,7 +48,6 @@ namespace Render {
+         SH_FRAG_QUAD = 0,
+         SH_FRAG_PASSTHRURGBA,
+         SH_FRAG_MATTE,
+-        SH_FRAG_EXT,
+         SH_FRAG_BLUR1,
+         SH_FRAG_BLUR2,
+         SH_FRAG_BLURPREPARE,
+diff --git a/src/render/shaders/glsl/defines.h b/src/render/shaders/glsl/defines.h
+index 64a9f971d8b..e63de2339fe 100644
+--- a/src/render/shaders/glsl/defines.h
++++ b/src/render/shaders/glsl/defines.h
+@@ -14,5 +14,6 @@
+ #define USE_ICC         0
+ #define USE_MIRROR      0
+ #define USE_BLUR_MATTE  0
++#define USE_EXTERNAL    0
+ #define SOURCE_TF       9 // eTransferFunction, compiled in per variant. 9 is CM_TRANSFER_FUNCTION_SRGB
+ #define TARGET_TF       9
+diff --git a/src/render/shaders/glsl/ext.frag b/src/render/shaders/glsl/ext.frag
+deleted file mode 100644
+index 1c614bd3c8a..00000000000
+--- a/src/render/shaders/glsl/ext.frag
++++ /dev/null
+@@ -1,43 +0,0 @@
+-#version 300 es
+-
+-#define ALLOW_INCLUDES
+-#extension GL_ARB_shading_language_include : enable
+-#extension GL_OES_EGL_image_external_essl3 : require
+-
+-precision                  highp float;
+-in vec2                    v_texcoord;
+-uniform samplerExternalOES tex;
+-uniform float              alpha;
+-
+-uniform float              radius;
+-uniform float              roundingPower;
+-uniform vec2               topLeft;
+-uniform vec2               fullSize;
+-#include "rounding.glsl"
+-
+-uniform int  discardOpaque;
+-uniform int  discardAlpha;
+-uniform int  discardAlphaValue;
+-
+-uniform int  applyTint;
+-uniform vec3 tint;
+-
+-layout(location = 0) out vec4 fragColor;
+-void main() {
+-
+-    vec4 pixColor = texture(tex, v_texcoord);
+-
+-    if (discardOpaque == 1 && pixColor[3] * alpha == 1.0)
+-        discard;
+-
+-    if (applyTint == 1) {
+-        pixColor[0] = pixColor[0] * tint[0];
+-        pixColor[1] = pixColor[1] * tint[1];
+-        pixColor[2] = pixColor[2] * tint[2];
+-    }
+-
+-    if (radius > 0.0)
+-        pixColor = rounding(pixColor, radius, roundingPower, topLeft, fullSize);
+-
+-    fragColor = pixColor * alpha;
+-}
+diff --git a/src/render/shaders/glsl/motion_blur.glsl b/src/render/shaders/glsl/motion_blur.glsl
+index a5a394b1759..e786e69b0d4 100644
+--- a/src/render/shaders/glsl/motion_blur.glsl
++++ b/src/render/shaders/glsl/motion_blur.glsl
+@@ -3,37 +3,79 @@
+ 
+ const int MOTION_BLUR_MAX_SAMPLES = 64;
+ 
++int motionBlurSampleCount(int requestedSamples) {
++    return int(clamp(float(requestedSamples), 1.0, float(MOTION_BLUR_MAX_SAMPLES)));
++}
++
++// false if this fragment is outside of the box at sample i
++bool motionBlurSourceUV(int i, int samples, vec4 previousBox, vec4 currentBox, vec4 sourceBox, vec2 sourceTexOrigin, vec2 sourceTexSize, out vec2 sourceUV) {
++    float t   = float(i) / float(samples);
++    vec4  box = mix(currentBox, previousBox, t);
++    if (box.z <= 0.0 || box.w <= 0.0)
++        return false;
++
++    vec2 uv = (vec2(gl_FragCoord) - box.xy) / box.zw;
++
++    if (uv.x < 0.0 || uv.y < 0.0 || uv.x > 1.0 || uv.y > 1.0)
++        return false;
++
++    sourceUV = (sourceBox.xy + uv * sourceBox.zw - sourceTexOrigin) / sourceTexSize;
++    return true;
++}
++
++vec4 motionBlurResolve(vec4 accumulated, int samples) {
++    if (accumulated.a == 0.0)
++        return vec4(0.0);
++
++    return accumulated / float(samples);
++}
++
+ vec4 motionBlurSample(sampler2D texSampler, vec4 previousBox, vec4 currentBox, vec4 sourceBox, vec2 sourceTexOrigin, vec2 sourceTexSize, int requestedSamples,
+                       bool useRGBA) {
+-    int   samples    = int(clamp(float(requestedSamples), 1.0, float(MOTION_BLUR_MAX_SAMPLES)));
++    int  samples     = motionBlurSampleCount(requestedSamples);
+     vec4 accumulated = vec4(0.0);
+ 
+     for (int i = 0; i < MOTION_BLUR_MAX_SAMPLES; ++i) {
+         if (i >= samples)
+             break;
+ 
+-        float t  = float(i) / float(samples);
+-        vec4  box = mix(currentBox, previousBox, t);
+-        if (box.z <= 0.0 || box.w <= 0.0)
++        vec2 sourceUV;
++        if (!motionBlurSourceUV(i, samples, previousBox, currentBox, sourceBox, sourceTexOrigin, sourceTexSize, sourceUV))
+             continue;
+ 
+-        vec2  uv  = (vec2(gl_FragCoord) - box.xy) / box.zw;
++        vec4 color = texture(texSampler, sourceUV);
++        if (!useRGBA)
++            color.a = 1.0;
++
++        accumulated += color;
++    }
++
++    return motionBlurResolve(accumulated, samples);
++}
++
++#if USE_EXTERNAL
++vec4 motionBlurSample(samplerExternalOES texSampler, vec4 previousBox, vec4 currentBox, vec4 sourceBox, vec2 sourceTexOrigin, vec2 sourceTexSize, int requestedSamples,
++                      bool useRGBA) {
++    int  samples     = motionBlurSampleCount(requestedSamples);
++    vec4 accumulated = vec4(0.0);
++
++    for (int i = 0; i < MOTION_BLUR_MAX_SAMPLES; ++i) {
++        if (i >= samples)
++            break;
+ 
+-        if (uv.x < 0.0 || uv.y < 0.0 || uv.x > 1.0 || uv.y > 1.0)
++        vec2 sourceUV;
++        if (!motionBlurSourceUV(i, samples, previousBox, currentBox, sourceBox, sourceTexOrigin, sourceTexSize, sourceUV))
+             continue;
+ 
+-        vec2 sourceUV = (sourceBox.xy + uv * sourceBox.zw - sourceTexOrigin) / sourceTexSize;
+-        vec4 color    = texture(texSampler, sourceUV);
++        vec4 color = texture(texSampler, sourceUV);
+         if (!useRGBA)
+             color.a = 1.0;
+ 
+         accumulated += color;
+     }
+ 
+-    if (accumulated.a == 0.0)
+-        return vec4(0.0);
+-
+-    return accumulated / float(samples);
++    return motionBlurResolve(accumulated, samples);
+ }
++#endif
+ 
+ #endif
+diff --git a/src/render/shaders/glsl/surface.frag b/src/render/shaders/glsl/surface.frag
+index ceeab126dd9..87ea6e4f3fb 100644
+--- a/src/render/shaders/glsl/surface.frag
++++ b/src/render/shaders/glsl/surface.frag
+@@ -4,9 +4,17 @@
+ 
+ #include "defines.h"
+ 
++#if USE_EXTERNAL
++#extension GL_OES_EGL_image_external_essl3 : require
++#endif
++
+ precision         highp float;
+ in vec2           v_texcoord;
++#if USE_EXTERNAL
++uniform samplerExternalOES tex;
++#else
+ uniform sampler2D tex;
++#endif
+ #if USE_BLUR
+ uniform vec2      uvSize;
+ uniform vec2      uvOffset;
+
+From 50ecf31f348d23996d9b8f940da55788eb363084 Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:24:33 +0100
+Subject: [PATCH 2/8] helpers/format: treat yuv formats without alpha as opaque
+
+---
+ src/helpers/Format.cpp            | 21 +++++++++++++++++++++
+ src/helpers/Format.hpp            |  1 +
+ src/protocols/types/DMABuffer.cpp |  4 +---
+ src/render/gl/GLTexture.cpp       |  4 ++--
+ tests/helpers/Format.cpp          | 11 +++++++++++
+ 5 files changed, 36 insertions(+), 5 deletions(-)
+
+diff --git a/src/helpers/Format.cpp b/src/helpers/Format.cpp
+index 8830a52f366..3d0afcc29ee 100644
+--- a/src/helpers/Format.cpp
++++ b/src/helpers/Format.cpp
+@@ -111,6 +111,27 @@ bool NFormatUtils::isFormatYUV(uint32_t drmFormat) {
+     }
+ }
+ 
++static bool isFormatYUVWithAlpha(uint32_t drmFormat) {
++    switch (drmFormat & ~DRM_FORMAT_BIG_ENDIAN) {
++        case DRM_FORMAT_AYUV:
++        case DRM_FORMAT_AVUY8888:
++        case DRM_FORMAT_Y410:
++        case DRM_FORMAT_Y412:
++        case DRM_FORMAT_Y416:
++        case DRM_FORMAT_Y0L0:
++        case DRM_FORMAT_Y0L2: return true;
++        default: return false;
++    }
++}
++
++bool NFormatUtils::isFormatOpaque(DRMFormat drmFormat) {
++    // hyprgraphics doesn't know YUV formats, and treats unknown formats as having alpha
++    if (isFormatYUV(drmFormat))
++        return !isFormatYUVWithAlpha(drmFormat);
++
++    return isDrmFormatOpaque(drmFormat);
++}
++
+ bool NFormatUtils::isShmBufferLayoutValid(DRMFormat drmFormat, const Vector2D& size, int32_t stride, int32_t offset, size_t poolSize) {
+     if (offset < 0 || size.x <= 0 || size.y <= 0 || stride <= 0)
+         return false;
+diff --git a/src/helpers/Format.hpp b/src/helpers/Format.hpp
+index 3e2f9d8c249..f0adc335bb9 100644
+--- a/src/helpers/Format.hpp
++++ b/src/helpers/Format.hpp
+@@ -16,6 +16,7 @@ namespace NFormatUtils {
+     SHMFormat   drmToShm(DRMFormat drm);
+     DRMFormat   shmToDRM(SHMFormat shm);
+     bool        isFormatYUV(uint32_t drmFormat);
++    bool        isFormatOpaque(DRMFormat drmFormat);
+     bool        isShmBufferLayoutValid(DRMFormat drmFormat, const Vector2D& size, int32_t stride, int32_t offset, size_t poolSize);
+     std::string drmFormatName(DRMFormat drm);
+     std::string drmModifierName(uint64_t mod);
+diff --git a/src/protocols/types/DMABuffer.cpp b/src/protocols/types/DMABuffer.cpp
+index 76aa1720712..344c2cb6ed3 100644
+--- a/src/protocols/types/DMABuffer.cpp
++++ b/src/protocols/types/DMABuffer.cpp
+@@ -4,10 +4,8 @@
+ #include "../../render/Renderer.hpp"
+ #include "../../helpers/Format.hpp"
+ #include "helpers/Drm.hpp"
+-#include <hyprgraphics/egl/Egl.hpp>
+ 
+ using namespace Hyprutils::OS;
+-using namespace Hyprgraphics::Egl;
+ 
+ CDMABuffer::CDMABuffer(uint32_t id, wl_client* client, const Aquamarine::SDMABUFAttrs& attrs_, std::array<CFileDescriptor, 4> fds) : m_attrs(attrs_), m_fds(std::move(fds)) {
+     for (size_t i = 0; i < m_fds.size(); ++i)
+@@ -23,7 +21,7 @@ CDMABuffer::CDMABuffer(uint32_t id, wl_client* client, const Aquamarine::SDMABUF
+     if UNLIKELY (!m_resource->good())
+         return;
+ 
+-    m_opaque  = isDrmFormatOpaque(m_attrs.format);
++    m_opaque  = NFormatUtils::isFormatOpaque(m_attrs.format);
+     m_texture = g_pHyprRenderer->createTexture(m_attrs, m_opaque); // texture takes ownership of the eglImage
+ 
+     if UNLIKELY (!m_texture) {
+diff --git a/src/render/gl/GLTexture.cpp b/src/render/gl/GLTexture.cpp
+index 41a95f9e41b..f28dc03510a 100644
+--- a/src/render/gl/GLTexture.cpp
++++ b/src/render/gl/GLTexture.cpp
+@@ -72,7 +72,7 @@ CGLTexture::CGLTexture(const Aquamarine::SDMABUFAttrs& attrs, void* image, bool
+         return;
+     }
+ 
+-    m_opaque = isDrmFormatOpaque(attrs.format);
++    m_opaque = NFormatUtils::isFormatOpaque(attrs.format);
+ 
+     // #TODO external only formats should be external as well.
+     // also needs a separate color shader.
+@@ -81,7 +81,7 @@ CGLTexture::CGLTexture(const Aquamarine::SDMABUFAttrs& attrs, void* image, bool
+         m_type   = TEXTURE_EXTERNAL;
+     } else {*/
+     m_target = GL_TEXTURE_2D;
+-    m_type   = isDrmFormatOpaque(attrs.format) ? TEXTURE_RGBX : TEXTURE_RGBA;
++    m_type   = m_opaque ? TEXTURE_RGBX : TEXTURE_RGBA;
+     //}
+ 
+     allocate(attrs.size, attrs.format);
+diff --git a/tests/helpers/Format.cpp b/tests/helpers/Format.cpp
+index bf3d205de0a..8b0f9b25d44 100644
+--- a/tests/helpers/Format.cpp
++++ b/tests/helpers/Format.cpp
+@@ -33,6 +33,17 @@ TEST(Helpers, formatIsFormatYUV) {
+     EXPECT_FALSE(isFormatYUV(DRM_FORMAT_ARGB8888));
+ }
+ 
++TEST(Helpers, formatIsFormatOpaqueYUV) {
++    EXPECT_TRUE(isFormatOpaque(DRM_FORMAT_NV12));
++    EXPECT_TRUE(isFormatOpaque(DRM_FORMAT_P010));
++    EXPECT_TRUE(isFormatOpaque(DRM_FORMAT_YUYV));
++    EXPECT_TRUE(isFormatOpaque(DRM_FORMAT_XYUV8888));
++    EXPECT_FALSE(isFormatOpaque(DRM_FORMAT_AYUV));
++    EXPECT_FALSE(isFormatOpaque(DRM_FORMAT_Y410));
++    EXPECT_TRUE(isFormatOpaque(DRM_FORMAT_XRGB8888));
++    EXPECT_FALSE(isFormatOpaque(DRM_FORMAT_ARGB8888));
++}
++
+ TEST(Helpers, formatGetPixelFormatFromDRM) {
+     const auto* xrgb = getPixelFormatFromDRM(DRM_FORMAT_XRGB8888);
+     ASSERT_NE(xrgb, nullptr);
+
+From 44a0ea90fab8bd699e9a1c3032b6c0f97491651c Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:25:10 +0100
+Subject: [PATCH 3/8] render: import yuv dmabufs as external textures
+
+---
+ src/render/gl/GLTexture.cpp | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+
+diff --git a/src/render/gl/GLTexture.cpp b/src/render/gl/GLTexture.cpp
+index f28dc03510a..8b296973525 100644
+--- a/src/render/gl/GLTexture.cpp
++++ b/src/render/gl/GLTexture.cpp
+@@ -74,15 +74,14 @@ CGLTexture::CGLTexture(const Aquamarine::SDMABUFAttrs& attrs, void* image, bool
+ 
+     m_opaque = NFormatUtils::isFormatOpaque(attrs.format);
+ 
+-    // #TODO external only formats should be external as well.
+-    // also needs a separate color shader.
+-    /*if (NFormatUtils::isFormatYUV(attrs.format)) {
++    // YUV has to be sampled externally for the driver to convert it to RGB
++    if (NFormatUtils::isFormatYUV(attrs.format)) {
+         m_target = GL_TEXTURE_EXTERNAL_OES;
+         m_type   = TEXTURE_EXTERNAL;
+-    } else {*/
+-    m_target = GL_TEXTURE_2D;
+-    m_type   = m_opaque ? TEXTURE_RGBX : TEXTURE_RGBA;
+-    //}
++    } else {
++        m_target = GL_TEXTURE_2D;
++        m_type   = m_opaque ? TEXTURE_RGBX : TEXTURE_RGBA;
++    }
+ 
+     allocate(attrs.size, attrs.format);
+     m_eglImage = image;
+
+From 3ce6d614db09f96d9c630b43bb40c901d42061f6 Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:25:44 +0100
+Subject: [PATCH 4/8] monitor: block direct scanout of yuv buffers
+
+---
+ src/output/Monitor.cpp | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/src/output/Monitor.cpp b/src/output/Monitor.cpp
+index 9418f4d1b17..e0273bc7426 100644
+--- a/src/output/Monitor.cpp
++++ b/src/output/Monitor.cpp
+@@ -2,6 +2,7 @@
+ #include "../desktop/view/window/WindowEffectsController.hpp"
+ #include "../desktop/view/window/WindowPresentation.hpp"
+ #include "../helpers/MiscFunctions.hpp"
++#include "../helpers/Format.hpp"
+ #include "../macros.hpp"
+ #include "SharedDefs.hpp"
+ #include "../helpers/TransferFunction.hpp"
+@@ -1988,9 +1989,9 @@ uint16_t CMonitor::isDSBlocked(bool full) {
+             return reasons;
+     }
+ 
+-    // we can't scanout shm buffers.
++    // we can't scanout shm buffers, nor yuv, as we don't set the plane's color encoding.
+     const auto params = PSURFACE->m_current.buffer->dmabuf();
+-    if (!params.success || !PSURFACE->m_current.texture->isDMA() /* dmabuf */) {
++    if (!params.success || !PSURFACE->m_current.texture->isDMA() /* dmabuf */ || NFormatUtils::isFormatYUV(params.format)) {
+         reasons |= DS_BLOCK_DMA;
+         if (!full)
+             return reasons;
+
+From 5bdce5d80b40eca7af53f572705e1b5a84ce7835 Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:27:25 +0100
+Subject: [PATCH 5/8] render: advertise yuv dmabuf formats
+
+---
+ src/protocols/LinuxDMABUF.cpp      |  2 +-
+ src/render/OpenGL.cpp              | 16 ++++++++++------
+ src/render/OpenGL.hpp              |  1 +
+ tests/protocols/DMABUFFeedback.cpp | 18 ++++++++++++++++++
+ 4 files changed, 30 insertions(+), 7 deletions(-)
+
+diff --git a/src/protocols/LinuxDMABUF.cpp b/src/protocols/LinuxDMABUF.cpp
+index 35bbb4abf95..31915530656 100644
+--- a/src/protocols/LinuxDMABUF.cpp
++++ b/src/protocols/LinuxDMABUF.cpp
+@@ -71,7 +71,7 @@ CDMABUFFormatTable::CDMABUFFormatTable(SDMABUFTranche _rendererTranche, std::vec
+     for (auto& [monitor, tranche] : m_monitorTranches) {
+         tranche.indices.clear();
+         for (auto const& fmt : tranche.formats) {
+-            // Scanout feedback must not re-advertise unsupported YUV formats.
++            // YUV is never scanned out, see CMonitor::isDSBlocked
+             if (NFormatUtils::isFormatYUV(fmt.drmFormat))
+                 continue;
+ 
+diff --git a/src/render/OpenGL.cpp b/src/render/OpenGL.cpp
+index 31939a149fc..7ec1f3d9672 100644
+--- a/src/render/OpenGL.cpp
++++ b/src/render/OpenGL.cpp
+@@ -384,8 +384,9 @@ CHyprOpenGLImpl::CHyprOpenGLImpl() : m_drmFD(g_pCompositor->m_drmRenderNode.fd >
+     LOG(Log::DEBUG, "Renderer: {}", rc<const char*>(glGetString(GL_RENDERER)));
+     LOG(Log::DEBUG, "Supported extensions: ({}) {}", std::ranges::count(m_extensions, ' '), m_extensions);
+ 
+-    m_exts.EXT_read_format_bgra        = m_extensions.contains("GL_EXT_read_format_bgra");
+-    m_exts.EXT_color_buffer_half_float = m_extensions.contains("GL_EXT_color_buffer_half_float") || m_extensions.contains("GL_EXT_color_buffer_float");
++    m_exts.EXT_read_format_bgra         = m_extensions.contains("GL_EXT_read_format_bgra");
++    m_exts.EXT_color_buffer_half_float  = m_extensions.contains("GL_EXT_color_buffer_half_float") || m_extensions.contains("GL_EXT_color_buffer_float");
++    m_exts.OES_EGL_image_external_essl3 = m_extensions.contains("GL_OES_EGL_image_external_essl3");
+ 
+     RASSERT(m_extensions.contains("GL_EXT_texture_format_BGRA8888"), "GL_EXT_texture_format_BGRA8888 support by the GPU driver is required");
+ 
+@@ -511,9 +512,12 @@ std::optional<std::vector<uint64_t>> CHyprOpenGLImpl::getModsForFormat(EGLint fo
+     // reserve number of elements to avoid reallocations
+     result.reserve(mods.size());
+ 
+-    bool linearIsExternal = false;
++    // yuv is always sampled externally, so external-only modifiers are fine for it
++    const bool ALLOW_EXTERNAL = NFormatUtils::isFormatYUV(format);
++
++    bool       linearIsExternal = false;
+     for (size_t i = 0; i < std::min(mods.size(), external.size()); ++i) {
+-        if (external[i]) {
++        if (external[i] && !ALLOW_EXTERNAL) {
+             if (mods[i] == DRM_FORMAT_MOD_LINEAR)
+                 linearIsExternal = true;
+             continue;
+@@ -572,8 +576,8 @@ void CHyprOpenGLImpl::initDRMFormats() {
+     dmaFormats.reserve(formats.size());
+ 
+     for (auto const& fmt : formats) {
+-        // Do not advertise YUV until the renderer supports it.
+-        if (NFormatUtils::isFormatYUV(fmt))
++        // YUV can only be sampled externally
++        if (NFormatUtils::isFormatYUV(fmt) && !m_exts.OES_EGL_image_external_essl3)
+             continue;
+ 
+         std::vector<uint64_t> mods;
+diff --git a/src/render/OpenGL.hpp b/src/render/OpenGL.hpp
+index 44d668ee45d..c997152fc98 100644
+--- a/src/render/OpenGL.hpp
++++ b/src/render/OpenGL.hpp
+@@ -280,6 +280,7 @@ namespace Render::GL {
+         struct {
+             bool EXT_read_format_bgra               = false;
+             bool EXT_color_buffer_half_float        = false;
++            bool OES_EGL_image_external_essl3       = false;
+             bool EXT_image_dma_buf_import           = false;
+             bool EXT_image_dma_buf_import_modifiers = false;
+             bool KHR_context_flush_control          = false;
+diff --git a/tests/protocols/DMABUFFeedback.cpp b/tests/protocols/DMABUFFeedback.cpp
+index f7598eebd36..23209e93a08 100644
+--- a/tests/protocols/DMABUFFeedback.cpp
++++ b/tests/protocols/DMABUFFeedback.cpp
+@@ -142,6 +142,24 @@ TEST_F(CDMABUFFormatTableTest, FilteringWithoutMonitorsRetainsRendererFormats) {
+                   });
+ }
+ 
++TEST_F(CDMABUFFormatTableTest, YUVIsOnlyAdvertisedForRendering) {
++    const SDMABUFTranche renderer{
++        .device  = 1,
++        .formats = {{DRM_FORMAT_NV12, {I915_FORMAT_MOD_X_TILED}}},
++    };
++    std::vector<std::pair<PHLMONITORREF, SDMABUFTranche>> monitors;
++    monitors.emplace_back(PHLMONITORREF{},
++                          SDMABUFTranche{
++                              .device  = 1,
++                              .flags   = ZWP_LINUX_DMABUF_FEEDBACK_V1_TRANCHE_FLAGS_SCANOUT,
++                              .formats = {{DRM_FORMAT_NV12, {I915_FORMAT_MOD_X_TILED}}, {DRM_FORMAT_XRGB8888, {I915_FORMAT_MOD_X_TILED}}},
++                          });
++
++    const CDMABUFFormatTable table{renderer, monitors};
++    expectFormats(table, table.m_rendererTranche, {{DRM_FORMAT_NV12, I915_FORMAT_MOD_X_TILED}});
++    expectFormats(table, table.m_monitorTranches.front().second, {{DRM_FORMAT_XRGB8888, I915_FORMAT_MOD_X_TILED}});
++}
++
+ class CDMABUFFeedbackOutput : public Aquamarine::IOutput {
+   public:
+     bool commit() override {
+
+From f1659df062196f0ba40fd4cfc9104b730402e9a6 Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:29:54 +0100
+Subject: [PATCH 6/8] render: pass yuv color hints on dmabuf import
+
+---
+ src/helpers/cm/ColorRepresentation.hpp      | 38 +++++++++++++++++++
+ src/render/GLRenderer.cpp                   |  4 +-
+ src/render/GLRenderer.hpp                   |  2 +-
+ src/render/OpenGL.cpp                       | 41 ++++++++++++++++++++-
+ src/render/OpenGL.hpp                       |  3 +-
+ src/render/Renderer.hpp                     |  3 +-
+ tests/output/MonitorWindowTransaction.cpp   |  2 +-
+ tests/protocols/DMABUF.cpp                  |  2 +-
+ tests/protocols/WorkspaceCaptureSession.cpp |  2 +-
+ 9 files changed, 87 insertions(+), 10 deletions(-)
+ create mode 100644 src/helpers/cm/ColorRepresentation.hpp
+
+diff --git a/src/helpers/cm/ColorRepresentation.hpp b/src/helpers/cm/ColorRepresentation.hpp
+new file mode 100644
+index 00000000000..c240ac9b11d
+--- /dev/null
++++ b/src/helpers/cm/ColorRepresentation.hpp
+@@ -0,0 +1,38 @@
++#pragma once
++
++#include <cstdint>
++
++namespace NColorManagement {
++    enum eYCbCrCoefficients : uint8_t {
++        CM_YCBCR_COEFFICIENTS_UNSET = 0,
++        CM_YCBCR_COEFFICIENTS_BT601,
++        CM_YCBCR_COEFFICIENTS_BT709,
++        CM_YCBCR_COEFFICIENTS_BT2020,
++    };
++
++    enum eYCbCrRange : uint8_t {
++        CM_YCBCR_RANGE_UNSET = 0,
++        CM_YCBCR_RANGE_FULL,
++        CM_YCBCR_RANGE_LIMITED,
++    };
++
++    // H.273 Chroma420SampleLocType
++    enum eChromaLocation : uint8_t {
++        CM_CHROMA_LOCATION_UNSET = 0,
++        CM_CHROMA_LOCATION_TYPE_0,
++        CM_CHROMA_LOCATION_TYPE_1,
++        CM_CHROMA_LOCATION_TYPE_2,
++        CM_CHROMA_LOCATION_TYPE_3,
++        CM_CHROMA_LOCATION_TYPE_4,
++        CM_CHROMA_LOCATION_TYPE_5,
++    };
++
++    // how to convert YCbCr to RGB, unset values are left to the driver
++    struct SColorRepresentation {
++        eYCbCrCoefficients coefficients   = CM_YCBCR_COEFFICIENTS_UNSET;
++        eYCbCrRange        range          = CM_YCBCR_RANGE_UNSET;
++        eChromaLocation    chromaLocation = CM_CHROMA_LOCATION_UNSET;
++
++        bool               operator==(const SColorRepresentation&) const = default;
++    };
++}
+diff --git a/src/render/GLRenderer.cpp b/src/render/GLRenderer.cpp
+index a37678efc44..34471b97484 100644
+--- a/src/render/GLRenderer.cpp
++++ b/src/render/GLRenderer.cpp
+@@ -247,9 +247,9 @@ SP<ITexture> CHyprGLRenderer::createTexture(uint32_t drmFormat, uint8_t* pixels,
+     return makeShared<CGLTexture>(drmFormat, pixels, stride, size, keepDataCopy, opaque);
+ }
+ 
+-SP<ITexture> CHyprGLRenderer::createTexture(const Aquamarine::SDMABUFAttrs& attrs, bool opaque) {
++SP<ITexture> CHyprGLRenderer::createTexture(const Aquamarine::SDMABUFAttrs& attrs, bool opaque, const NColorManagement::SColorRepresentation& representation) {
+     g_pHyprOpenGL->makeEGLCurrent();
+-    const auto image = g_pHyprOpenGL->createEGLImage(attrs);
++    const auto image = g_pHyprOpenGL->createEGLImage(attrs, representation);
+     if (!image)
+         return nullptr;
+     return makeShared<CGLTexture>(attrs, image, opaque);
+diff --git a/src/render/GLRenderer.hpp b/src/render/GLRenderer.hpp
+index ac00f5b09bb..059423e58e0 100644
+--- a/src/render/GLRenderer.hpp
++++ b/src/render/GLRenderer.hpp
+@@ -22,7 +22,7 @@ namespace Render::GL {
+         SP<ITexture>            createStencilTexture(const int width, const int height) override;
+         SP<ITexture>            createTexture(bool opaque = false) override;
+         SP<ITexture>            createTexture(uint32_t drmFormat, uint8_t* pixels, uint32_t stride, const Vector2D& size, bool keepDataCopy = false, bool opaque = false) override;
+-        SP<ITexture>            createTexture(const Aquamarine::SDMABUFAttrs&, bool opaque = false) override;
++        SP<ITexture>            createTexture(const Aquamarine::SDMABUFAttrs&, bool opaque = false, const NColorManagement::SColorRepresentation& representation = {}) override;
+         SP<ITexture>            createTexture(const int width, const int height, unsigned char* const data) override;
+         SP<ITexture>            createTexture(cairo_surface_t* cairo) override;
+         SP<ITexture>            createTexture(std::span<const float> lut3D, size_t N) override;
+diff --git a/src/render/OpenGL.cpp b/src/render/OpenGL.cpp
+index 7ec1f3d9672..4fdf5b777de 100644
+--- a/src/render/OpenGL.cpp
++++ b/src/render/OpenGL.cpp
+@@ -642,8 +642,38 @@ void CHyprOpenGLImpl::initDRMFormats() {
+         LOG(Log::WARN, "Your GPU does not support rendering to FP16 buffers, some effects and CM settings might be unavailable.");
+ }
+ 
+-EGLImageKHR CHyprOpenGLImpl::createEGLImage(const Aquamarine::SDMABUFAttrs& attrs) {
+-    std::array<EGLint, 50> attribs;
++static std::vector<std::pair<EGLint, EGLint>> yuvHints(const SColorRepresentation& representation) {
++    std::vector<std::pair<EGLint, EGLint>> hints;
++
++    switch (representation.coefficients) {
++        case CM_YCBCR_COEFFICIENTS_BT601: hints.emplace_back(EGL_YUV_COLOR_SPACE_HINT_EXT, EGL_ITU_REC601_EXT); break;
++        case CM_YCBCR_COEFFICIENTS_BT709: hints.emplace_back(EGL_YUV_COLOR_SPACE_HINT_EXT, EGL_ITU_REC709_EXT); break;
++        case CM_YCBCR_COEFFICIENTS_BT2020: hints.emplace_back(EGL_YUV_COLOR_SPACE_HINT_EXT, EGL_ITU_REC2020_EXT); break;
++        case CM_YCBCR_COEFFICIENTS_UNSET: break;
++    }
++
++    switch (representation.range) {
++        case CM_YCBCR_RANGE_FULL: hints.emplace_back(EGL_SAMPLE_RANGE_HINT_EXT, EGL_YUV_FULL_RANGE_EXT); break;
++        case CM_YCBCR_RANGE_LIMITED: hints.emplace_back(EGL_SAMPLE_RANGE_HINT_EXT, EGL_YUV_NARROW_RANGE_EXT); break;
++        case CM_YCBCR_RANGE_UNSET: break;
++    }
++
++    if (representation.chromaLocation == CM_CHROMA_LOCATION_UNSET)
++        return hints;
++
++    // horizontally, types 0, 2 and 4 are cosited, 1, 3 and 5 are at the midpoint.
++    // vertically, types 0 and 1 are at the midpoint, 2 and 3 are cosited, 4 and 5 sit at 1.0, which EGL can't express.
++    const int TYPE = representation.chromaLocation - CM_CHROMA_LOCATION_TYPE_0;
++    hints.emplace_back(EGL_YUV_CHROMA_HORIZONTAL_SITING_HINT_EXT, TYPE % 2 == 0 ? EGL_YUV_CHROMA_SITING_0_EXT : EGL_YUV_CHROMA_SITING_0_5_EXT);
++
++    if (TYPE < 4)
++        hints.emplace_back(EGL_YUV_CHROMA_VERTICAL_SITING_HINT_EXT, TYPE < 2 ? EGL_YUV_CHROMA_SITING_0_5_EXT : EGL_YUV_CHROMA_SITING_0_EXT);
++
++    return hints;
++}
++
++EGLImageKHR CHyprOpenGLImpl::createEGLImage(const Aquamarine::SDMABUFAttrs& attrs, const SColorRepresentation& representation) {
++    std::array<EGLint, 64> attribs;
+     size_t                 idx = 0;
+ 
+     attribs[idx++] = EGL_WIDTH;
+@@ -681,6 +711,13 @@ EGLImageKHR CHyprOpenGLImpl::createEGLImage(const Aquamarine::SDMABUFAttrs& attr
+         }
+     }
+ 
++    if (NFormatUtils::isFormatYUV(attrs.format)) {
++        for (const auto& [name, value] : yuvHints(representation)) {
++            attribs[idx++] = name;
++            attribs[idx++] = value;
++        }
++    }
++
+     attribs[idx++] = EGL_IMAGE_PRESERVED_KHR;
+     attribs[idx++] = EGL_TRUE;
+     attribs[idx++] = EGL_NONE;
+diff --git a/src/render/OpenGL.hpp b/src/render/OpenGL.hpp
+index c997152fc98..94aa9a1350b 100644
+--- a/src/render/OpenGL.hpp
++++ b/src/render/OpenGL.hpp
+@@ -6,6 +6,7 @@
+ #include "../helpers/time/Timer.hpp"
+ #include "../helpers/math/Math.hpp"
+ #include "../helpers/Format.hpp"
++#include "../helpers/cm/ColorRepresentation.hpp"
+ #include "../helpers/DeformableMesh.hpp"
+ #include "../helpers/sync/SyncTimeline.hpp"
+ #include <GLES3/gl32.h>
+@@ -235,7 +236,7 @@ namespace Render::GL {
+ 
+         std::vector<SDRMFormat>                   getDRMFormats();
+         std::vector<uint64_t>                     getDRMFormatModifiers(DRMFormat format);
+-        EGLImageKHR                               createEGLImage(const Aquamarine::SDMABUFAttrs& attrs);
++        EGLImageKHR                               createEGLImage(const Aquamarine::SDMABUFAttrs& attrs, const NColorManagement::SColorRepresentation& representation = {});
+ 
+         bool                                      initShaders(const std::string& path = "");
+ 
+diff --git a/src/render/Renderer.hpp b/src/render/Renderer.hpp
+index a5307fab6ea..f7d1446e73b 100644
+--- a/src/render/Renderer.hpp
++++ b/src/render/Renderer.hpp
+@@ -32,6 +32,7 @@
+ #include "../helpers/time/Timer.hpp"
+ #include "../helpers/math/Math.hpp"
+ #include "../helpers/time/Time.hpp"
++#include "../helpers/cm/ColorRepresentation.hpp"
+ #include "../../protocols/cursor-shape-v1.hpp"
+ #include "desktop/view/Popup.hpp"
+ #include "Framebuffer.hpp"
+@@ -190,7 +191,7 @@ namespace Render {
+         virtual SP<ITexture>                createStencilTexture(const int width, const int height)                                                                    = 0;
+         virtual SP<ITexture>                createTexture(bool opaque = false)                                                                                         = 0;
+         virtual SP<ITexture> createTexture(uint32_t drmFormat, uint8_t* pixels, uint32_t stride, const Vector2D& size, bool keepDataCopy = false, bool opaque = false) = 0;
+-        virtual SP<ITexture> createTexture(const Aquamarine::SDMABUFAttrs&, bool opaque = false)                                                                       = 0;
++        virtual SP<ITexture> createTexture(const Aquamarine::SDMABUFAttrs&, bool opaque = false, const NColorManagement::SColorRepresentation& representation = {})    = 0;
+         virtual SP<ITexture> createTexture(const int width, const int height, unsigned char* const)                                                                    = 0;
+         virtual SP<ITexture> createTexture(cairo_surface_t* cairo)                                                                                                     = 0;
+         virtual SP<ITexture> createTexture(std::span<const float> lut3D, size_t N)                                                                                     = 0;
+diff --git a/tests/output/MonitorWindowTransaction.cpp b/tests/output/MonitorWindowTransaction.cpp
+index 474ed8b594b..bd100b5a52c 100644
+--- a/tests/output/MonitorWindowTransaction.cpp
++++ b/tests/output/MonitorWindowTransaction.cpp
+@@ -114,7 +114,7 @@ class CTransactionTestRenderer : public Render::IHyprRenderer {
+     SP<Render::ITexture> createTexture(uint32_t, uint8_t*, uint32_t, const Vector2D&, bool, bool) override {
+         return nullptr;
+     }
+-    SP<Render::ITexture> createTexture(const Aquamarine::SDMABUFAttrs&, bool) override {
++    SP<Render::ITexture> createTexture(const Aquamarine::SDMABUFAttrs&, bool, const NColorManagement::SColorRepresentation&) override {
+         return nullptr;
+     }
+     SP<Render::ITexture> createTexture(int, int, unsigned char*) override {
+diff --git a/tests/protocols/DMABUF.cpp b/tests/protocols/DMABUF.cpp
+index 496515c00f7..70a72c825bc 100644
+--- a/tests/protocols/DMABUF.cpp
++++ b/tests/protocols/DMABUF.cpp
+@@ -295,7 +295,7 @@ class CDMABUFTestRenderer : public Render::IHyprRenderer {
+     bool                                  m_validTexture  = true;
+     std::vector<Aquamarine::SDMABUFAttrs> m_imports;
+ 
+-    SP<Render::ITexture>                  createTexture(const Aquamarine::SDMABUFAttrs& attrs, bool) override {
++    SP<Render::ITexture>                  createTexture(const Aquamarine::SDMABUFAttrs& attrs, bool, const NColorManagement::SColorRepresentation&) override {
+         m_imports.push_back(attrs);
+         for (int i = 0; i < attrs.planes; ++i)
+             EXPECT_NE(fcntl(attrs.fds[i], F_GETFD), -1);
+diff --git a/tests/protocols/WorkspaceCaptureSession.cpp b/tests/protocols/WorkspaceCaptureSession.cpp
+index c1237eec9b5..15246a035fe 100644
+--- a/tests/protocols/WorkspaceCaptureSession.cpp
++++ b/tests/protocols/WorkspaceCaptureSession.cpp
+@@ -302,7 +302,7 @@ class CSessionTestRenderer : public Render::IHyprRenderer {
+     SP<Render::ITexture> createTexture(uint32_t, uint8_t*, uint32_t, const Vector2D&, bool, bool) override {
+         return nullptr;
+     }
+-    SP<Render::ITexture> createTexture(const Aquamarine::SDMABUFAttrs&, bool) override {
++    SP<Render::ITexture> createTexture(const Aquamarine::SDMABUFAttrs&, bool, const NColorManagement::SColorRepresentation&) override {
+         return nullptr;
+     }
+     SP<Render::ITexture> createTexture(int, int, unsigned char*) override {
+
+From 2b22d7c1924dc331354207d2840fbc584ad9b59b Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:32:16 +0100
+Subject: [PATCH 7/8] protocols: track color representation in surface state
+
+---
+ src/protocols/core/Compositor.cpp    |  2 ++
+ src/protocols/types/Buffer.cpp       |  4 ++++
+ src/protocols/types/Buffer.hpp       |  5 +++++
+ src/protocols/types/DMABuffer.cpp    | 18 ++++++++++++++++++
+ src/protocols/types/DMABuffer.hpp    |  6 ++++++
+ src/protocols/types/SurfaceState.cpp |  6 ++++++
+ src/protocols/types/SurfaceState.hpp |  5 +++++
+ tests/protocols/Compositor.cpp       | 27 ++++++++++++++++++++++++++-
+ 8 files changed, 72 insertions(+), 1 deletion(-)
+
+diff --git a/src/protocols/core/Compositor.cpp b/src/protocols/core/Compositor.cpp
+index 6d05d606aad..846b09e1fce 100644
+--- a/src/protocols/core/Compositor.cpp
++++ b/src/protocols/core/Compositor.cpp
+@@ -674,6 +674,8 @@ void CWLSurfaceResource::commitState(SSurfaceState& state) {
+     if (m_current.buffer) {
+         if (m_current.buffer->isSynchronous())
+             m_current.updateSynchronousTexture(lastTexture);
++        else if (state.updated.bits.buffer || state.updated.bits.colorRepresentation)
++            m_current.texture = m_current.buffer->textureFor(m_current.colorRepresentation);
+ 
+         // if the surface is a cursor, update the shm buffer
+         // TODO: don't update the entire texture
+diff --git a/src/protocols/types/Buffer.cpp b/src/protocols/types/Buffer.cpp
+index 917c0ba5433..f1e962a03af 100644
+--- a/src/protocols/types/Buffer.cpp
++++ b/src/protocols/types/Buffer.cpp
+@@ -27,6 +27,10 @@ bool IHLBuffer::locked() {
+     return m_locks > 0;
+ }
+ 
++SP<Render::ITexture> IHLBuffer::textureFor(const NColorManagement::SColorRepresentation& representation) {
++    return m_texture;
++}
++
+ void IHLBuffer::onBackendRelease(const std::function<void()>& fn) {
+     if (m_hlEvents.backendRelease) {
+         if (m_backendReleaseQueuedFn)
+diff --git a/src/protocols/types/Buffer.hpp b/src/protocols/types/Buffer.hpp
+index e93240b1e10..0eddda11303 100644
+--- a/src/protocols/types/Buffer.hpp
++++ b/src/protocols/types/Buffer.hpp
+@@ -10,6 +10,10 @@
+ class CSyncReleaser;
+ class CHLBufferReference;
+ 
++namespace NColorManagement {
++    struct SColorRepresentation;
++}
++
+ class IHLBuffer : public Aquamarine::IBuffer {
+   public:
+     virtual ~IHLBuffer();
+@@ -22,6 +26,7 @@ class IHLBuffer : public Aquamarine::IBuffer {
+     virtual void                                lock();
+     virtual void                                unlock();
+     virtual bool                                locked();
++    virtual SP<Render::ITexture>                textureFor(const NColorManagement::SColorRepresentation& representation); // what to sample with, given a color representation
+ 
+     void                                        onBackendRelease(const std::function<void()>& fn);
+     void                                        addReleasePoint(CDRMSyncPointState& point);
+diff --git a/src/protocols/types/DMABuffer.cpp b/src/protocols/types/DMABuffer.cpp
+index 344c2cb6ed3..b8fa5f58c28 100644
+--- a/src/protocols/types/DMABuffer.cpp
++++ b/src/protocols/types/DMABuffer.cpp
+@@ -77,6 +77,24 @@ void CDMABuffer::endDataPtr() {
+     // FIXME:
+ }
+ 
++SP<Render::ITexture> CDMABuffer::textureFor(const NColorManagement::SColorRepresentation& representation) {
++    if (!NFormatUtils::isFormatYUV(m_attrs.format) || representation == NColorManagement::SColorRepresentation{})
++        return m_texture;
++
++    if (m_representedTexture && m_representation == representation)
++        return m_representedTexture;
++
++    auto texture = g_pHyprRenderer->createTexture(m_attrs, m_opaque, representation);
++    if UNLIKELY (!texture || !texture->ok()) {
++        LOG(Log::ERR, "CDMABuffer: failed to import with a color representation, using driver defaults");
++        return m_texture;
++    }
++
++    m_representedTexture = texture;
++    m_representation     = representation;
++    return m_representedTexture;
++}
++
+ bool CDMABuffer::good() {
+     return m_success;
+ }
+diff --git a/src/protocols/types/DMABuffer.hpp b/src/protocols/types/DMABuffer.hpp
+index b1d63ec998b..3c82589c0fc 100644
+--- a/src/protocols/types/DMABuffer.hpp
++++ b/src/protocols/types/DMABuffer.hpp
+@@ -1,6 +1,7 @@
+ #pragma once
+ 
+ #include "Buffer.hpp"
++#include "../../helpers/cm/ColorRepresentation.hpp"
+ #include <array>
+ #include <hyprutils/os/FileDescriptor.hpp>
+ 
+@@ -16,6 +17,7 @@ class CDMABuffer : public IHLBuffer {
+     virtual Aquamarine::SDMABUFAttrs               dmabuf();
+     virtual std::tuple<uint8_t*, uint32_t, size_t> beginDataPtr(uint32_t flags);
+     virtual void                                   endDataPtr();
++    virtual SP<Render::ITexture>                   textureFor(const NColorManagement::SColorRepresentation& representation);
+     bool                                           good();
+     void                                           closeFDs();
+     std::vector<Hyprutils::OS::CFileDescriptor>    exportSyncFiles();
+@@ -26,6 +28,10 @@ class CDMABuffer : public IHLBuffer {
+     Aquamarine::SDMABUFAttrs                      m_attrs;
+     std::array<Hyprutils::OS::CFileDescriptor, 4> m_fds;
+ 
++    // yuv re-imported with a color representation, m_texture uses the driver's defaults
++    SP<Render::ITexture>                   m_representedTexture;
++    NColorManagement::SColorRepresentation m_representation;
++
+     struct {
+         CHyprSignalListener resourceDestroy;
+     } m_listeners;
+diff --git a/src/protocols/types/SurfaceState.cpp b/src/protocols/types/SurfaceState.cpp
+index 4605a64f8a0..f2aa78be0ac 100644
+--- a/src/protocols/types/SurfaceState.cpp
++++ b/src/protocols/types/SurfaceState.cpp
+@@ -157,6 +157,9 @@ void SSurfaceState::mergeFrom(SSurfaceState& ref) {
+     if (ref.updated.bits.viewport)
+         viewport = ref.viewport;
+ 
++    if (ref.updated.bits.colorRepresentation)
++        colorRepresentation = ref.colorRepresentation;
++
+     if (ref.updated.bits.acquire)
+         acquire = ref.acquire;
+ 
+@@ -226,6 +229,9 @@ void SSurfaceState::updateFrom(SSurfaceState& ref) {
+     if (ref.updated.bits.viewport)
+         viewport = ref.viewport;
+ 
++    if (ref.updated.bits.colorRepresentation)
++        colorRepresentation = ref.colorRepresentation;
++
+     if (ref.updated.bits.acquire)
+         acquire = ref.acquire;
+ 
+diff --git a/src/protocols/types/SurfaceState.hpp b/src/protocols/types/SurfaceState.hpp
+index b95ab271660..72472f98c4a 100644
+--- a/src/protocols/types/SurfaceState.hpp
++++ b/src/protocols/types/SurfaceState.hpp
+@@ -4,6 +4,7 @@
+ #include "../../helpers/time/Time.hpp"
+ #include "../../managers/eventLoop/EventLoopTimer.hpp"
+ #include "../WaylandProtocol.hpp"
++#include "../../helpers/cm/ColorRepresentation.hpp"
+ #include "./Buffer.hpp"
+ 
+ namespace Render {
+@@ -68,6 +69,7 @@ struct SSurfaceState {
+             bool cursor : 1;
+             bool xwayland : 1;
+             bool xdgPopup : 1;
++            bool colorRepresentation : 1;
+         } bits;
+     } updated;
+ 
+@@ -104,6 +106,9 @@ struct SSurfaceState {
+     } viewport;
+     Vector2D sourceSize();
+ 
++    // color representation protocol surface state
++    NColorManagement::SColorRepresentation colorRepresentation;
++
+     // drm syncobj protocol surface state
+     CDRMSyncPointState  acquire;
+     WP<SReadableWaiter> acquireWaiter;
+diff --git a/tests/protocols/Compositor.cpp b/tests/protocols/Compositor.cpp
+index 5ca9af20eec..6af9b4ab255 100644
+--- a/tests/protocols/Compositor.cpp
++++ b/tests/protocols/Compositor.cpp
+@@ -55,8 +55,12 @@ class CCommitTestBuffer : public IHLBuffer {
+         ++m_releases;
+         IHLBuffer::sendRelease();
+     }
++    SP<Render::ITexture> textureFor(const NColorManagement::SColorRepresentation& representation) override {
++        return representation == NColorManagement::SColorRepresentation{} ? m_texture : m_representedTexture;
++    }
+ 
+-    int m_releases = 0;
++    int                  m_releases           = 0;
++    SP<Render::ITexture> m_representedTexture = makeShared<CCommitTestTexture>();
+ };
+ 
+ // Dispatch real surface requests on an isolated server, without a renderer or GPU.
+@@ -202,6 +206,27 @@ TEST_F(CSurfaceCommitTest, NullBufferAfterRoleRemovalAllowsEmptyInitialCommit) {
+     EXPECT_EQ(commits, 2);
+ }
+ 
++TEST_F(CSurfaceCommitTest, ColorRepresentationOnlyCommitReselectsTexture) {
++    auto surf = surface();
++    auto buf  = buffer();
++    attach(surf, buf);
++    ASSERT_EQ(surf->m_current.texture, buf->m_texture);
++
++    // the new representation applies to the current contents, without a new buffer
++    surf->m_pending.colorRepresentation = {
++        .coefficients = NColorManagement::CM_YCBCR_COEFFICIENTS_BT709,
++        .range        = NColorManagement::CM_YCBCR_RANGE_LIMITED,
++    };
++    surf->m_pending.updated.bits.colorRepresentation = true;
++    commit(surf);
++    EXPECT_EQ(surf->m_current.texture, buf->m_representedTexture);
++
++    surf->m_pending.colorRepresentation              = {};
++    surf->m_pending.updated.bits.colorRepresentation = true;
++    commit(surf);
++    EXPECT_EQ(surf->m_current.texture, buf->m_texture);
++}
++
+ TEST_F(CSurfaceCommitTest, SynchronizedNullBufferUnmapsOnlyOnParentCommit) {
+     auto parent = surface(), child = surface();
+     auto [sub, id] = subsurface(child, parent);
+
+From d030be9c4950e3ed0f7d89792bbfd9e74f6f1239 Mon Sep 17 00:00:00 2001
+From: Vaxry <vaxry@vaxry.net>
+Date: Thu, 19 Nov 2026 17:39:13 +0100
+Subject: [PATCH 8/8] protocols: implement color-representation-v1
+
+---
+ CMakeLists.txt                          |   1 +
+ src/managers/ProtocolManager.cpp        |   6 +
+ src/protocols/ColorRepresentation.cpp   | 191 ++++++++++++++++++
+ src/protocols/ColorRepresentation.hpp   |  50 +++++
+ tests/protocols/ColorRepresentation.cpp | 251 ++++++++++++++++++++++++
+ 5 files changed, 499 insertions(+)
+ create mode 100644 src/protocols/ColorRepresentation.cpp
+ create mode 100644 src/protocols/ColorRepresentation.hpp
+ create mode 100644 tests/protocols/ColorRepresentation.cpp
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3bc09271d66..e172f9f0cc5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -611,6 +611,7 @@ protocolnew("staging/single-pixel-buffer" "single-pixel-buffer-v1" false)
+ protocolnew("staging/security-context" "security-context-v1" false)
+ protocolnew("staging/content-type" "content-type-v1" false)
+ protocolnew("staging/color-management" "color-management-v1" false)
++protocolnew("staging/color-representation" "color-representation-v1" false)
+ protocolnew("staging/xdg-toplevel-tag" "xdg-toplevel-tag-v1" false)
+ protocolnew("staging/xdg-system-bell" "xdg-system-bell-v1" false)
+ protocolnew("staging/ext-workspace" "ext-workspace-v1" false)
+diff --git a/src/managers/ProtocolManager.cpp b/src/managers/ProtocolManager.cpp
+index fc202e0f1bf..38f797e52a5 100644
+--- a/src/managers/ProtocolManager.cpp
++++ b/src/managers/ProtocolManager.cpp
+@@ -38,6 +38,7 @@
+ #include "../protocols/Viewporter.hpp"
+ #include "../protocols/MesaDRM.hpp"
+ #include "../protocols/LinuxDMABUF.hpp"
++#include "../protocols/ColorRepresentation.hpp"
+ #include "../protocols/DRMLease.hpp"
+ #include "../protocols/DRMSyncobj.hpp"
+ #include "../protocols/Screencopy.hpp"
+@@ -260,6 +261,9 @@ CProtocolManager::CProtocolManager() {
+     if (!g_pHyprRenderer->getDRMFormats().empty()) {
+         PROTO::mesaDRM  = makeUnique<CMesaDRMProtocol>(&wl_drm_interface, 2, "MesaDRM");
+         PROTO::linuxDma = makeUnique<CLinuxDMABufV1Protocol>(&zwp_linux_dmabuf_v1_interface, 5, "LinuxDMABUF");
++
++        // yuv only comes in dmabufs
++        PROTO::colorRepresentation = makeUnique<CColorRepresentationProtocol>(&wp_color_representation_manager_v1_interface, 1, "ColorRepresentation");
+     } else
+         LOG(Log::WARN, "ProtocolManager: Not binding linux-dmabuf and MesaDRM: DMABUF not available");
+ }
+@@ -346,6 +350,7 @@ CProtocolManager::~CProtocolManager() {
+     PROTO::sync.reset();
+     PROTO::mesaDRM.reset();
+     PROTO::linuxDma.reset();
++    PROTO::colorRepresentation.reset();
+ }
+ 
+ bool CProtocolManager::isGlobalPrivileged(const wl_global* global) {
+@@ -399,6 +404,7 @@ bool CProtocolManager::isGlobalPrivileged(const wl_global* global) {
+         PROTO::sync     ? PROTO::sync->getGlobal()      : nullptr,
+         PROTO::mesaDRM  ? PROTO::mesaDRM->getGlobal()   : nullptr,
+         PROTO::linuxDma ? PROTO::linuxDma->getGlobal()  : nullptr,
++        PROTO::colorRepresentation ? PROTO::colorRepresentation->getGlobal() : nullptr,
+ 	PROTO::colorManagement ? PROTO::colorManagement->getGlobal() : nullptr,
+     };
+     // clang-format on
+diff --git a/src/protocols/ColorRepresentation.cpp b/src/protocols/ColorRepresentation.cpp
+new file mode 100644
+index 00000000000..f0121bc94af
+--- /dev/null
++++ b/src/protocols/ColorRepresentation.cpp
+@@ -0,0 +1,191 @@
++#include "ColorRepresentation.hpp"
++#include "core/Compositor.hpp"
++#include "../helpers/Format.hpp"
++
++#include <algorithm>
++#include <array>
++
++using namespace NColorManagement;
++
++// what EGL import hints can express
++static constexpr std::array SUPPORTED_COEFFICIENTS = {
++    WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT601,
++    WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT709,
++    WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT2020,
++};
++
++static constexpr std::array SUPPORTED_RANGES = {
++    WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_FULL,
++    WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_LIMITED,
++};
++
++static_assert(sc<uint32_t>(CM_CHROMA_LOCATION_TYPE_0) == WP_COLOR_REPRESENTATION_SURFACE_V1_CHROMA_LOCATION_TYPE_0);
++static_assert(sc<uint32_t>(CM_CHROMA_LOCATION_TYPE_5) == WP_COLOR_REPRESENTATION_SURFACE_V1_CHROMA_LOCATION_TYPE_5);
++
++static eYCbCrCoefficients coefficientsFromWP(wpColorRepresentationSurfaceV1Coefficients coefficients) {
++    switch (coefficients) {
++        case WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT601: return CM_YCBCR_COEFFICIENTS_BT601;
++        case WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT709: return CM_YCBCR_COEFFICIENTS_BT709;
++        case WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT2020: return CM_YCBCR_COEFFICIENTS_BT2020;
++        default: return CM_YCBCR_COEFFICIENTS_UNSET;
++    }
++}
++
++static eYCbCrRange rangeFromWP(wpColorRepresentationSurfaceV1Range range) {
++    switch (range) {
++        case WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_FULL: return CM_YCBCR_RANGE_FULL;
++        case WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_LIMITED: return CM_YCBCR_RANGE_LIMITED;
++        default: return CM_YCBCR_RANGE_UNSET;
++    }
++}
++
++static bool isYUVBuffer(const CHLBufferReference& buffer) {
++    return buffer->type() == Aquamarine::BUFFER_TYPE_DMABUF && NFormatUtils::isFormatYUV(buffer->dmabuf().format);
++}
++
++CColorRepresentationSurface::CColorRepresentationSurface(UP<CWpColorRepresentationSurfaceV1>&& resource, SP<CWLSurfaceResource> surface) :
++    m_surface(surface), m_resource(std::move(resource)) {
++    if UNLIKELY (!good())
++        return;
++
++    m_resource->setDestroy([this](CWpColorRepresentationSurfaceV1* r) { destroy(); });
++    m_resource->setOnDestroy([this](CWpColorRepresentationSurfaceV1* r) { destroy(); });
++
++    m_resource->setSetAlphaMode([this](CWpColorRepresentationSurfaceV1* r, wpColorRepresentationSurfaceV1AlphaMode mode) {
++        if (!m_surface) {
++            r->error(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_INERT, "set_alpha_mode on an inert object");
++            return;
++        }
++
++        // premultiplied electrical is the default, so there's nothing to set
++        if (mode != WP_COLOR_REPRESENTATION_SURFACE_V1_ALPHA_MODE_PREMULTIPLIED_ELECTRICAL)
++            r->error(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_ALPHA_MODE, "unsupported alpha mode");
++    });
++
++    m_resource->setSetCoefficientsAndRange(
++        [this](CWpColorRepresentationSurfaceV1* r, wpColorRepresentationSurfaceV1Coefficients coefficients, wpColorRepresentationSurfaceV1Range range) {
++            if (!m_surface) {
++                r->error(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_INERT, "set_coefficients_and_range on an inert object");
++                return;
++            }
++
++            const auto COEFFICIENTS = coefficientsFromWP(coefficients);
++            const auto RANGE        = rangeFromWP(range);
++
++            if (COEFFICIENTS == CM_YCBCR_COEFFICIENTS_UNSET || RANGE == CM_YCBCR_RANGE_UNSET) {
++                r->error(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_COEFFICIENTS, "unsupported coefficients and range");
++                return;
++            }
++
++            auto representation         = m_surface->m_pending.colorRepresentation;
++            representation.coefficients = COEFFICIENTS;
++            representation.range        = RANGE;
++            setPending(representation);
++        });
++
++    m_resource->setSetChromaLocation([this](CWpColorRepresentationSurfaceV1* r, wpColorRepresentationSurfaceV1ChromaLocation location) {
++        if (!m_surface) {
++            r->error(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_INERT, "set_chroma_location on an inert object");
++            return;
++        }
++
++        if (location < WP_COLOR_REPRESENTATION_SURFACE_V1_CHROMA_LOCATION_TYPE_0 || location > WP_COLOR_REPRESENTATION_SURFACE_V1_CHROMA_LOCATION_TYPE_5) {
++            r->error(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_CHROMA_LOCATION, "invalid chroma location");
++            return;
++        }
++
++        auto representation           = m_surface->m_pending.colorRepresentation;
++        representation.chromaLocation = sc<eChromaLocation>(location);
++        setPending(representation);
++    });
++
++    m_listeners.surfacePrecommit = surface->m_events.precommit.listen([this] { onPrecommit(); });
++}
++
++bool CColorRepresentationSurface::good() {
++    return m_resource->resource();
++}
++
++void CColorRepresentationSurface::destroy() {
++    // unsetting is double-buffered as well
++    if (m_surface)
++        setPending({});
++
++    PROTO::colorRepresentation->destroySurface(this);
++}
++
++void CColorRepresentationSurface::setPending(const SColorRepresentation& representation) {
++    m_surface->m_pending.colorRepresentation              = representation;
++    m_surface->m_pending.updated.bits.colorRepresentation = true;
++}
++
++void CColorRepresentationSurface::onPrecommit() {
++    auto& pending = m_surface->m_pending;
++
++    // the current contents look different now, repaint them
++    if (pending.updated.bits.colorRepresentation && pending.colorRepresentation != m_surface->m_current.colorRepresentation) {
++        pending.bufferDamage.add(CBox{{}, pending.bufferSize});
++        pending.updated.bits.damage = true;
++    }
++
++    if (pending.colorRepresentation == SColorRepresentation{})
++        return;
++
++    const auto& BUFFER = pending.updated.bits.buffer ? pending.buffer : m_surface->m_current.buffer;
++    if (!BUFFER || isYUVBuffer(BUFFER))
++        return;
++
++    m_resource->error(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_PIXEL_FORMAT, "color representation set for a non-YUV buffer");
++    pending.rejected = true;
++}
++
++CColorRepresentationProtocol::CColorRepresentationProtocol(const wl_interface* iface, const int& ver, const std::string& name) : IWaylandProtocol(iface, ver, name) {
++    ;
++}
++
++void CColorRepresentationProtocol::bindManager(wl_client* client, void* data, uint32_t ver, uint32_t id) {
++    const auto RESOURCE = m_managers.emplace_back(makeUnique<CWpColorRepresentationManagerV1>(client, ver, id)).get();
++
++    if UNLIKELY (!RESOURCE->resource()) {
++        wl_client_post_no_memory(client);
++        m_managers.pop_back();
++        return;
++    }
++
++    RESOURCE->setDestroy([this](CWpColorRepresentationManagerV1* manager) { destroyManager(manager); });
++    RESOURCE->setOnDestroy([this](CWpColorRepresentationManagerV1* manager) { destroyManager(manager); });
++    RESOURCE->setGetSurface(
++        [this](CWpColorRepresentationManagerV1* manager, uint32_t id, wl_resource* surface) { getSurface(manager, id, CWLSurfaceResource::fromResource(surface)); });
++
++    RESOURCE->sendSupportedAlphaMode(WP_COLOR_REPRESENTATION_SURFACE_V1_ALPHA_MODE_PREMULTIPLIED_ELECTRICAL);
++
++    for (const auto coefficients : SUPPORTED_COEFFICIENTS) {
++        for (const auto range : SUPPORTED_RANGES)
++            RESOURCE->sendSupportedCoefficientsAndRanges(coefficients, range);
++    }
++
++    RESOURCE->sendDone();
++}
++
++void CColorRepresentationProtocol::destroyManager(CWpColorRepresentationManagerV1* manager) {
++    std::erase_if(m_managers, [&](const auto& other) { return other.get() == manager; });
++}
++
++void CColorRepresentationProtocol::destroySurface(CColorRepresentationSurface* surface) {
++    std::erase_if(m_surfaces, [&](const auto& other) { return other.get() == surface; });
++}
++
++void CColorRepresentationProtocol::getSurface(CWpColorRepresentationManagerV1* manager, uint32_t id, SP<CWLSurfaceResource> surface) {
++    if (std::ranges::any_of(m_surfaces, [&](const auto& other) { return other->m_surface == surface; })) {
++        manager->error(WP_COLOR_REPRESENTATION_MANAGER_V1_ERROR_SURFACE_EXISTS, "color representation surface already exists");
++        return;
++    }
++
++    const auto RESOURCE =
++        m_surfaces.emplace_back(makeUnique<CColorRepresentationSurface>(makeUnique<CWpColorRepresentationSurfaceV1>(manager->client(), manager->version(), id), surface)).get();
++
++    if UNLIKELY (!RESOURCE->good()) {
++        manager->noMemory();
++        m_surfaces.pop_back();
++    }
++}
+diff --git a/src/protocols/ColorRepresentation.hpp b/src/protocols/ColorRepresentation.hpp
+new file mode 100644
+index 00000000000..f3a29be3ca3
+--- /dev/null
++++ b/src/protocols/ColorRepresentation.hpp
+@@ -0,0 +1,50 @@
++#pragma once
++
++#include <vector>
++#include "WaylandProtocol.hpp"
++#include "color-representation-v1.hpp"
++#include "../helpers/signal/Signal.hpp"
++#include "../helpers/cm/ColorRepresentation.hpp"
++
++class CWLSurfaceResource;
++
++class CColorRepresentationSurface {
++  public:
++    CColorRepresentationSurface(UP<CWpColorRepresentationSurfaceV1>&& resource, SP<CWLSurfaceResource> surface);
++
++    bool                   good();
++
++    WP<CWLSurfaceResource> m_surface;
++
++  private:
++    UP<CWpColorRepresentationSurfaceV1> m_resource;
++
++    void                                destroy();
++    void                                setPending(const NColorManagement::SColorRepresentation& representation);
++    void                                onPrecommit();
++
++    struct {
++        CHyprSignalListener surfacePrecommit;
++    } m_listeners;
++};
++
++class CColorRepresentationProtocol : public IWaylandProtocol {
++  public:
++    CColorRepresentationProtocol(const wl_interface* iface, const int& ver, const std::string& name);
++
++    virtual void bindManager(wl_client* client, void* data, uint32_t ver, uint32_t id);
++
++  private:
++    void                                             destroyManager(CWpColorRepresentationManagerV1* manager);
++    void                                             destroySurface(CColorRepresentationSurface* surface);
++    void                                             getSurface(CWpColorRepresentationManagerV1* manager, uint32_t id, SP<CWLSurfaceResource> surface);
++
++    std::vector<UP<CWpColorRepresentationManagerV1>> m_managers;
++    std::vector<UP<CColorRepresentationSurface>>     m_surfaces;
++
++    friend class CColorRepresentationSurface;
++};
++
++namespace PROTO {
++    inline UP<CColorRepresentationProtocol> colorRepresentation;
++};
+diff --git a/tests/protocols/ColorRepresentation.cpp b/tests/protocols/ColorRepresentation.cpp
+new file mode 100644
+index 00000000000..1cd8769a611
+--- /dev/null
++++ b/tests/protocols/ColorRepresentation.cpp
+@@ -0,0 +1,251 @@
++#include <Compositor.hpp>
++#include <event/EventBus.hpp>
++#include <managers/eventLoop/EventLoopManager.hpp>
++#include <protocols/ColorRepresentation.hpp>
++#include <protocols/PresentationTime.hpp>
++#include <protocols/core/Compositor.hpp>
++#include <state/MonitorState.hpp>
++
++#include <gtest/gtest.h>
++#include <array>
++#include <initializer_list>
++#include <memory>
++#include <optional>
++#include <sys/socket.h>
++#include <vector>
++
++using namespace Hyprutils::OS;
++using namespace NColorManagement;
++
++class CColorRepresentationTestBuffer : public IHLBuffer {
++  public:
++    Aquamarine::eBufferCapability caps() override {
++        return Aquamarine::BUFFER_CAPABILITY_NONE;
++    }
++    Aquamarine::eBufferType type() override {
++        return Aquamarine::BUFFER_TYPE_MISC;
++    }
++    void update(const CRegion&) override {
++        ADD_FAILURE();
++    }
++    bool isSynchronous() override {
++        return false;
++    }
++    bool good() override {
++        return true;
++    }
++};
++
++// Dispatch real requests on an isolated server, without a renderer or GPU.
++class CColorRepresentationTest : public ::testing::Test {
++  protected:
++    void SetUp() override {
++        m_display.reset(wl_display_create());
++        ASSERT_TRUE(m_display);
++        std::array<int, 2> sockets = {
++            -1,
++            -1,
++        };
++        ASSERT_EQ(socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, sockets.data()), 0);
++        CFileDescriptor server{sockets[0]};
++        m_socket = CFileDescriptor{sockets[1]};
++        m_client = wl_client_create(m_display.get(), server.get());
++        ASSERT_NE(m_client, nullptr);
++        server.take();
++
++        m_previousCompositor          = std::move(g_pCompositor);
++        m_previousEventLoop           = std::move(g_pEventLoopManager);
++        m_previousMonitorState        = std::move(State::monitorState());
++        m_previousEventBus            = std::move(Event::bus());
++        m_previousPresentation        = std::move(PROTO::presentation);
++        m_previousCoreCompositor      = std::move(PROTO::compositor);
++        m_previousColorRepresentation = std::move(PROTO::colorRepresentation);
++        m_installedGlobals            = true;
++
++        Event::bus()               = makeUnique<Event::CEventBus>();
++        State::monitorState()      = makeUnique<State::CMonitorStateTracker>();
++        g_pCompositor              = makeUnique<CCompositor>(true);
++        g_pCompositor->m_wlDisplay = m_display.get();
++        g_pEventLoopManager        = makeUnique<CEventLoopManager>(m_display.get(), wl_display_get_event_loop(m_display.get()));
++        PROTO::presentation        = makeUnique<CPresentationProtocol>(&wp_presentation_interface, 2, "color-representation-test-presentation");
++        PROTO::compositor          = makeUnique<CWLCompositorProtocol>(&wl_compositor_interface, 6, "color-representation-test-compositor");
++        PROTO::colorRepresentation = makeUnique<CColorRepresentationProtocol>(&wp_color_representation_manager_v1_interface, 1, "color-representation-test");
++
++        PROTO::colorRepresentation->bindManager(m_client, nullptr, 1, m_manager);
++    }
++
++    void TearDown() override {
++        if (m_display)
++            wl_display_destroy_clients(m_display.get());
++        if (!m_installedGlobals)
++            return;
++
++        PROTO::colorRepresentation = std::move(m_previousColorRepresentation);
++        PROTO::compositor          = std::move(m_previousCoreCompositor);
++        PROTO::presentation        = std::move(m_previousPresentation);
++        g_pEventLoopManager        = std::move(m_previousEventLoop);
++        g_pCompositor              = std::move(m_previousCompositor);
++        State::monitorState()      = std::move(m_previousMonitorState);
++        Event::bus()               = std::move(m_previousEventBus);
++    }
++
++    SP<CWLSurfaceResource> surface() {
++        auto surface          = makeShared<CWLSurfaceResource>(makeShared<CWlSurface>(m_client, 6, m_nextID++));
++        surface->m_self       = surface;
++        surface->m_stateQueue = CSurfaceStateQueue{surface};
++        return surface;
++    }
++
++    SP<CColorRepresentationTestBuffer> buffer() {
++        auto buffer                  = makeShared<CColorRepresentationTestBuffer>();
++        buffer->m_resource           = CWLBufferResource::create(makeShared<CWlBuffer>(m_client, 1, m_nextID++));
++        buffer->m_resource->m_buffer = buffer;
++        buffer->size                 = {16, 16};
++        return buffer;
++    }
++
++    uint32_t representation(SP<CWLSurfaceResource> surface) {
++        const auto id = m_nextID++;
++        request(m_manager, 1, {id, surface->id()}); // wp_color_representation_manager_v1.get_surface
++        return id;
++    }
++
++    void request(uint32_t id, uint32_t opcode, std::initializer_list<uint32_t> args = {}) {
++        std::vector<uint32_t> message = {
++            id,
++            sc<uint32_t>((args.size() + 2) * sizeof(uint32_t) << 16) | opcode,
++        };
++        message.insert(message.end(), args);
++        const auto size = message.size() * sizeof(uint32_t);
++        ASSERT_EQ(send(m_socket.get(), message.data(), size, MSG_NOSIGNAL), sc<ssize_t>(size));
++        ASSERT_EQ(wl_event_loop_dispatch(wl_display_get_event_loop(m_display.get()), 0), 0);
++    }
++
++    void commit(SP<CWLSurfaceResource> surface) {
++        request(surface->id(), 6); // wl_surface.commit
++    }
++
++    // returns {object, code} of wl_display.error, skipping the events sent before it
++    std::optional<std::pair<uint32_t, uint32_t>> protocolError() {
++        wl_display_flush_clients(m_display.get());
++
++        std::vector<uint32_t> words(4096);
++        const auto            received = recv(m_socket.get(), words.data(), words.size() * sizeof(uint32_t), MSG_DONTWAIT);
++        if (received <= 0)
++            return std::nullopt;
++
++        words.resize(received / sizeof(uint32_t));
++        for (size_t i = 0; i + 3 < words.size();) {
++            const auto SIZE = words[i + 1] >> 16;
++            if (SIZE < 8)
++                break;
++
++            if (words[i] == 1 && (words[i + 1] & 0xFFFF) == 0) // wl_display.error
++                return std::pair{words[i + 2], words[i + 3]};
++
++            i += SIZE / sizeof(uint32_t);
++        }
++
++        return std::nullopt;
++    }
++
++    wl_client* m_client  = nullptr; // Owned by m_display.
++    uint32_t   m_manager = 2;
++    uint32_t   m_nextID  = 3;
++
++  private:
++    std::unique_ptr<wl_display, decltype(&wl_display_destroy)> m_display{nullptr, wl_display_destroy};
++    CFileDescriptor                                            m_socket;
++    bool                                                       m_installedGlobals = false;
++    UP<CCompositor>                                            m_previousCompositor;
++    UP<CEventLoopManager>                                      m_previousEventLoop;
++    UP<State::CMonitorStateTracker>                            m_previousMonitorState;
++    UP<Event::CEventBus>                                       m_previousEventBus;
++    UP<CPresentationProtocol>                                  m_previousPresentation;
++    UP<CWLCompositorProtocol>                                  m_previousCoreCompositor;
++    UP<CColorRepresentationProtocol>                           m_previousColorRepresentation;
++};
++
++TEST_F(CColorRepresentationTest, StateAppliesOnCommit) {
++    auto       surf = surface();
++    const auto id   = representation(surf);
++
++    request(id, 2, {WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT2020, WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_LIMITED});
++    request(id, 3, {WP_COLOR_REPRESENTATION_SURFACE_V1_CHROMA_LOCATION_TYPE_2});
++    EXPECT_EQ(surf->m_current.colorRepresentation, SColorRepresentation{});
++
++    commit(surf);
++    EXPECT_EQ(surf->m_current.colorRepresentation, (SColorRepresentation{CM_YCBCR_COEFFICIENTS_BT2020, CM_YCBCR_RANGE_LIMITED, CM_CHROMA_LOCATION_TYPE_2}));
++    EXPECT_FALSE(protocolError());
++}
++
++TEST_F(CColorRepresentationTest, DestroyUnsetsOnCommit) {
++    auto       surf = surface();
++    const auto id   = representation(surf);
++
++    request(id, 2, {WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT709, WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_FULL});
++    commit(surf);
++    ASSERT_NE(surf->m_current.colorRepresentation, SColorRepresentation{});
++
++    request(id, 0); // destroy
++    EXPECT_NE(surf->m_current.colorRepresentation, SColorRepresentation{});
++
++    commit(surf);
++    EXPECT_EQ(surf->m_current.colorRepresentation, SColorRepresentation{});
++
++    // the surface can get a new one now
++    representation(surf);
++    EXPECT_FALSE(protocolError());
++}
++
++TEST_F(CColorRepresentationTest, SecondObjectForSurfaceIsAnError) {
++    auto surf = surface();
++    representation(surf);
++    representation(surf);
++    EXPECT_EQ(protocolError(), std::pair(m_manager, sc<uint32_t>(WP_COLOR_REPRESENTATION_MANAGER_V1_ERROR_SURFACE_EXISTS)));
++}
++
++TEST_F(CColorRepresentationTest, OnlyPremultipliedElectricalAlpha) {
++    auto       surf = surface();
++    const auto id   = representation(surf);
++    request(id, 1, {WP_COLOR_REPRESENTATION_SURFACE_V1_ALPHA_MODE_PREMULTIPLIED_ELECTRICAL});
++    EXPECT_FALSE(protocolError());
++
++    request(id, 1, {WP_COLOR_REPRESENTATION_SURFACE_V1_ALPHA_MODE_STRAIGHT});
++    EXPECT_EQ(protocolError(), std::pair(id, sc<uint32_t>(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_ALPHA_MODE)));
++}
++
++TEST_F(CColorRepresentationTest, UnadvertisedCoefficientsAreAnError) {
++    auto       surf = surface();
++    const auto id   = representation(surf);
++    request(id, 2, {WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_ICTCP, WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_LIMITED});
++    EXPECT_EQ(protocolError(), std::pair(id, sc<uint32_t>(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_COEFFICIENTS)));
++}
++
++TEST_F(CColorRepresentationTest, InvalidChromaLocationIsAnError) {
++    auto       surf = surface();
++    const auto id   = representation(surf);
++    request(id, 3, {WP_COLOR_REPRESENTATION_SURFACE_V1_CHROMA_LOCATION_TYPE_5 + 1});
++    EXPECT_EQ(protocolError(), std::pair(id, sc<uint32_t>(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_CHROMA_LOCATION)));
++}
++
++TEST_F(CColorRepresentationTest, NonYUVBufferIsAnError) {
++    auto       surf = surface();
++    auto       buf  = buffer();
++    const auto id   = representation(surf);
++
++    request(id, 2, {WP_COLOR_REPRESENTATION_SURFACE_V1_COEFFICIENTS_BT709, WP_COLOR_REPRESENTATION_SURFACE_V1_RANGE_LIMITED});
++    request(surf->id(), 1, {wl_resource_get_id(buf->m_resource->getResource()), 0, 0}); // wl_surface.attach
++    commit(surf);
++    EXPECT_EQ(protocolError(), std::pair(id, sc<uint32_t>(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_PIXEL_FORMAT)));
++    EXPECT_EQ(surf->m_current.colorRepresentation, SColorRepresentation{});
++}
++
++TEST_F(CColorRepresentationTest, RequestsAfterSurfaceDestructionAreAnError) {
++    auto       surf = surface();
++    const auto id   = representation(surf);
++
++    surf.reset();
++    request(id, 1, {WP_COLOR_REPRESENTATION_SURFACE_V1_ALPHA_MODE_PREMULTIPLIED_ELECTRICAL});
++    EXPECT_EQ(protocolError(), std::pair(id, sc<uint32_t>(WP_COLOR_REPRESENTATION_SURFACE_V1_ERROR_INERT)));
++}
