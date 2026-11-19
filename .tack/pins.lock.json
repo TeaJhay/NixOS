@@ -74,9 +74,10 @@
     "type": "github",
     "owner": "hyprwm",
     "repo": "Hyprland",
-    "rev": "8487b4a3086272cdbe2c7fa2331ddc64bcdc244e",
-    "narHash": "sha256-eZPaOzs/CplrqbhBIqrN3X8Sdpg57Kz/Y0hRXQMwi48=",
-    "lastModified": 1795105539
+    "rev": "49b566a9780413a2498b7e8b925337ddb41a41a7",
+    "narHash": "sha256-mZ3HOZXL6SZ+nl+IqFym+ZZQxKfhJOgE0e4UlbYf390=",
+    "lastModified": 1795106254,
+    "public": true
   },
   "import-tree": {
     "type": "github",
@@ -136,7 +137,7 @@
   },
   "nixpkgs": {
     "type": "tarball",
-    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1122823.04906337b6d5/nixexprs.tar.xz?rev=04906337b6d53e8bb0eaf0470ae9f070a4d4eb55&lastModified=1794890597",
+    "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1122823.04906337b6d5/nixexprs.tar.xz?lastModified=1794890597&rev=04906337b6d53e8bb0eaf0470ae9f070a4d4eb55",
     "rev": "04906337b6d53e8bb0eaf0470ae9f070a4d4eb55",
     "narHash": "sha256-vJoAj1xon3Mhfc8FZ5uBrPyZee9Eqa05gG/taXv6iZ8=",
     "lastModified": 1794890597
