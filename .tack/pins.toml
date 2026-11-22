@@ -80,9 +80,6 @@ exclude_follow = ["nixpkgs"]
 url = "github:hyprwm/Hyprland"
 group = "Graphical Environment"
 exclude_follow = ["nixpkgs"]
-patches = [
-"https://patch-diff.githubusercontent.com/raw/hyprwm/Hyprland/pull/17048.patch",
-]
 [inputs.KvLibadwaita]
 url  = "github:GabePoel/KvLibadwaita"
 type = "fetch"
