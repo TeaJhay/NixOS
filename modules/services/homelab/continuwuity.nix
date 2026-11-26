@@ -126,7 +126,7 @@ in {
           	}
           }
           # Do the same for thumbnails, but redirect to media.discordapp.net (which is Discord's thumbnailing server, and happens to use similar width/height params as Matrix)
-          /* Alternatively, you can point this at cdn.discordapp.com too. Clients shouldn't mind even if they get a bigger image than they asked for. */
+          # Alternatively, you can point this at cdn.discordapp.com too. Clients shouldn't mind even if they get a bigger image than they asked for.
           handle /_matrix/media/*/thumbnail/discord-media.doesntcompute.site/* {
           	header Access-Control-Allow-Origin *
           	route {
