@@ -9,7 +9,6 @@
   cfg = config.homelab.caddy;
   host = config.sys.services;
   secrets = config.security.nix-secrets.secrets;
-  url = cfg.subDomain + "." + cfg.baseDomain;
 in {
   config = mkMerge [
     (mkIf (host.caddy.enable or false) {
@@ -134,7 +133,7 @@ in {
       };
     })
     {
-      services.caddy.virtualHosts.${url}.extraConfig = ''
+      services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
         reverse_proxy ${cfg.ipv4}:${cfg.port}
       '';
     }
