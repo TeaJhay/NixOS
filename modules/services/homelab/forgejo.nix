@@ -23,7 +23,6 @@ in {
             ROOT_URL = "https://${cfg.url}/";
             HTTP_PORT = cfg.port;
             OFFLINE_MODE = true;
-            LFS_JWT_SECRET_URI = secrets."${hostName}/lfsJwtSecret".path;
             ALLOW_DOMAIN_3RD_PARTY = true;
           };
           repository = {
@@ -51,27 +50,31 @@ in {
           openid = {
             ENABLE_OPENID_SIGNIN = true;
           };
-          oauth2 = {
-            JWT_SECRET_URI = secrets."${hostName}/jwtSecret".path;
-          };
           oauth2_client = {
             USERNAME = "email";
           };
-          security = {
-            INTERNAL_TOKEN_URI = secrets."${hostName}/InternalToken".path;
-          };
+
           mailer = {
             ENABLED = true;
             FROM = "git@${cfg.baseDomain}";
             PROTOCOL = "smtp+starttls";
           };
-          secrets = {
-            mailer = {
-              SMTP_ADDR = secrets."${hostName}/smtpAddr".path;
-              SMTP_PORT = secrets."${hostName}/smtpPort".path;
-              USER = secrets."${hostName}/user";
-              PASSWD = secrets."${hostName}/passwd".path;
-            };
+        };
+        secrets = {
+          mailer = {
+            PASSWD = secrets."${hostName}/passwd".path;
+            SMTP_ADDR = secrets."${hostName}/smtpAddr".path;
+            SMTP_PORT = secrets."${hostName}/smtpPort".path;
+            USER = secrets."${hostName}/user".path;
+          };
+          security = {
+            INTERNAL_TOKEN = lib.mkForce secrets."${hostName}/InternalToken".path;
+          };
+          oauth2 = {
+            JWT_SECRET = lib.mkForce secrets."${hostName}/jwtSecret".path;
+          };
+          server = {
+            LFS_JWT_SECRET = lib.mkForce secrets."${hostName}/lfsJwtSecret".path;
           };
         };
       };
