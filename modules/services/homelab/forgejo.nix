@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   hostName,
   ...
@@ -13,6 +14,7 @@ in {
     (mkIf (host.forgejo.enable or false) {
       services.forgejo = {
         enable = true;
+        package = pkgs.forgejo;
         lfs.enable = true;
         database.type = "sqlite3";
         settings = {
@@ -79,7 +81,7 @@ in {
         };
       };
       networking.firewall = {
-        allowedTCPPorts = [22 80 443];
+        allowedTCPPorts = [22 80 443 cfg.port];
       };
     })
     {
