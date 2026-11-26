@@ -96,10 +96,10 @@ in {
     })
     {
       services.caddy.virtualHosts = {
-        discord-media.${cfg.baseDomain} = ''
+        "discord-media.${cfg.baseDomain}".extraConfig = ''
           reverse_proxy ${cfg.ipv4}:29334
         '';
-        mautrix-discord.${cfg.baseDomain} = ''
+        "mautrix-discord.${cfg.baseDomain}".extraConfig = ''
           reverse_proxy ${cfg.ipv4}:29334
         '';
         ${url}.extraConfig = ''
