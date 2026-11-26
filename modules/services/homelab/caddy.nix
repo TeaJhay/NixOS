@@ -23,7 +23,7 @@ in {
             "github.com/mholt/caddy-l4@v0.1.2"
           ];
           # TODO: INVESTIGATE HASH
-          hash = "sha256-eGv+I4CceOEqWrMs5fTWPrTF3DBXtB+0vu3Ndw4yArE=";
+          hash = "sha256-1ftAjenq1tao74sKdzm+zIsYx+EFDlgWvS6TpUUDiew=";
         };
         logFormat = lib.mkForce "level  INFO";
         globalConfig = ''
