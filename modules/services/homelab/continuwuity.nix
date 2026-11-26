@@ -138,7 +138,7 @@ in {
 
           @public path /_matrix/federation/* /_matrix/key/* /_matrix/client/* /_matrix/media/* /_matrix/server/* /_continuwuity/*
           handle @public {
-          	reverse_proxy ${cfg.ipv4}:${cfg.port} {
+          	reverse_proxy ${cfg.ipv4}:${toString cfg.port}{
           		header_down Access-Control-Allow-Origin *
           		header_down Access-Control-Expose-Headers "Content-Length, Content-Range, Content-Disposition"
           	}

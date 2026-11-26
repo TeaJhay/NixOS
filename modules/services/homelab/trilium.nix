@@ -25,7 +25,7 @@ in {
     })
     {
       services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
-        reverse_proxy ${cfg.ipv4}:${cfg.port}
+        reverse_proxy ${cfg.ipv4}:${toString cfg.port}
       '';
     }
   ];

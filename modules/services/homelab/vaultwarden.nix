@@ -55,7 +55,7 @@ in {
         	Referrer-Policy "strict-origin-when-cross-origin"
         }
         # NPM: "WebSockets Support" is enabled here automatically
-        reverse_proxy ${cfg.ipv4}:${cfg.port} {
+        reverse_proxy ${cfg.ipv4}:${toString cfg.port} {
         	header_up X-Real-IP {http.request.remote.host}
         }
       '';

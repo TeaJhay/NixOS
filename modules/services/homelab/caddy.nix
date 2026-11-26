@@ -56,7 +56,7 @@ in {
           containers = {
             caddy-ui-backend = {
               environment = {
-                CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${cfg.port}";
+                CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${toString cfg.port}";
                 TZ = "Australia/Brisbane";
               };
               image = "docker.io/zackwag/caddy-ui-backend:latest";
@@ -134,7 +134,7 @@ in {
     })
     {
       services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
-        reverse_proxy ${cfg.ipv4}:${cfg.port}
+        reverse_proxy ${cfg.ipv4}:${toString cfg.port}
       '';
     }
   ];

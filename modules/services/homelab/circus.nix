@@ -122,11 +122,11 @@ in {
 
         handle @nix {
         	rewrite * /nix-cache{uri}
-        	reverse_proxy ${cfg.ipv4}:${cfg.port}
+        	reverse_proxy ${cfg.ipv4}:${toString cfg.port}
         }
 
         handle {
-        	reverse_proxy ${cfg.ipv4}:${cfg.port}
+        	reverse_proxy ${cfg.ipv4}:${toString cfg.port}
         }
       '';
     }
