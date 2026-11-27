@@ -123,4 +123,61 @@ in {
       inherit baseDomain;
     };
   };
+  services.caddy.virtualHosts = {
+    baseDomain.extraConfig = ''
+      	handle /.well-known/matrix/* {
+        	reverse_proxy 10.0.1.109:8008
+        }
+
+        handle {
+        	import lan_only
+        	reverse_proxy 10.0.1.117:4000
+        }
+    '';
+    "vpn.${baseDomain}".extraConfig = ''
+      import lan_only
+      import security_headers
+      reverse_proxy 10.0.1.105:10086
+    '';
+    "glances.${baseDomain}".extraConfig = ''
+      import lan_only
+      import security_headers
+      reverse_proxy 10.0.1.1:61208
+    '';
+    "homeassistant.${baseDomain}".extraConfig = ''
+      import lan_only
+      import security_headers
+      reverse_proxy 10.0.1.206:8123
+    '';
+    "nas.${baseDomain}".extraConfig = ''
+      import lan_only
+      import security_headers
+      reverse_proxy 10.0.1.200:80
+    '';
+    "pve.${baseDomain}".extraConfig = ''
+      import lan_only
+      import security_headers
+      reverse_proxy https://10.0.1.1:8006 {
+        transport http {
+          tls
+          tls_insecure_skip_verify
+        }
+      }
+    '';
+    "portainer.${baseDomain}".extraConfig = ''
+      import lan_only
+      import security_headers
+      reverse_proxy https://10.0.1.103:9443 {
+        transport http {
+          tls
+          tls_insecure_skip_verify
+        }
+      }
+    '';
+    "pxe.${baseDomain}".extraConfig = ''
+      	import lan_only
+      	import security_headers
+      	reverse_proxy 10.0.1.107:26000
+    '';
+  };
 }

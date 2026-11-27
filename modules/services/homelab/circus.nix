@@ -118,6 +118,8 @@ in {
     })
     {
       services.caddy.virtualHosts.${url}.extraConfig = ''
+        import lan_only
+        import security_headers
         @nix path /nix-cache-info /*.narinfo /nar/* /log/* /realisations/*
 
         handle @nix {

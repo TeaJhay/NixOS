@@ -25,7 +25,14 @@ in {
           # TODO: INVESTIGATE HASH
           hash = "sha256-1ftAjenq1tao74sKdzm+zIsYx+EFDlgWvS6TpUUDiew=";
         };
-        logFormat = lib.mkForce "level  INFO";
+        logFormat = lib.mkForce ''
+           output file /var/log/caddy/access.log {
+             roll_size 50mb
+          	  roll_keep 5
+           }
+           format console
+           level  INFO
+        '';
         globalConfig = ''
           metrics
           	admin 0.0.0.0:2019
@@ -134,6 +141,8 @@ in {
     })
     {
       services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
+        import lan_only
+        import security_headers
         reverse_proxy ${cfg.ipv4}:${toString cfg.port}
       '';
     }

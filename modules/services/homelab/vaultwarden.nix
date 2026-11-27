@@ -50,6 +50,7 @@ in {
     })
     {
       services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
+        import lan_only
         header {
         	X-Content-Type-Options "nosniff"
         	Referrer-Policy "strict-origin-when-cross-origin"

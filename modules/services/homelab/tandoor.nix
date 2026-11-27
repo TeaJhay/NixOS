@@ -22,6 +22,8 @@ in {
     })
     {
       services.caddy.virtualHosts.${cfg.url}.extraConfig = ''
+        import lan_only
+        import security_headers
         reverse_proxy ${cfg.ipv4}:${toString cfg.port}
       '';
     }
