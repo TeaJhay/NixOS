@@ -15,7 +15,7 @@ in {
       inherit baseDomain;
     };
     caddy = {
-      ipv4 = "10.0.1.10";
+      ipv4 = "10.0.1.102";
       port = 9877;
       subDomain = "caddy";
       inherit baseDomain;
