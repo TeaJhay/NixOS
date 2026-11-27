@@ -124,7 +124,7 @@ in {
     };
   };
   services.caddy.virtualHosts = {
-    baseDomain.extraConfig = ''
+    ${baseDomain}.extraConfig = ''
       	handle /.well-known/matrix/* {
         	reverse_proxy 10.0.1.109:8008
         }
