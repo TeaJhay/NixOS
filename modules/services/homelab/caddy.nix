@@ -63,7 +63,7 @@ in {
           containers = {
             caddy-ui-backend = {
               environment = {
-                CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${toString cfg.port}";
+                CADDY_UI_EXTERNAL_URL = "http://${cfg.ipv4}:${toString cfg.port}, https://${cfg.url}";
                 TZ = "Australia/Brisbane";
               };
               image = "docker.io/zackwag/caddy-ui-backend:latest";
