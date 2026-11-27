@@ -22,7 +22,7 @@ in {
     };
     technitium = {
       ipv4 = "10.0.1.101";
-      port = 53443;
+      port = 5380;
       subDomain = "dns";
       inherit baseDomain;
     };
@@ -45,7 +45,7 @@ in {
       inherit baseDomain;
     };
     forgejo = {
-      ipv4 = "10.0.1.181";
+      ipv4 = "10.0.1.108";
       port = 3000;
       subDomain = "git";
       inherit baseDomain;
