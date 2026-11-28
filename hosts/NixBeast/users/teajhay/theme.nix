@@ -46,6 +46,7 @@
     environment.sessionVariables = {
       # mate-polkit seems to read from this env var. maybe other apps too
       GTK_THEME = "adw-gtk3-dark:dark";
+      QT_QPA_PLATFORMTHEME = "qt6ct";
     };
   };
   programs.dconf.profiles.user.databases = [
@@ -66,6 +67,10 @@
         "org/gnome/desktop/wm/preferences" = {
           # hide all title bar buttons on gtk apps
           button-layout = ":";
+        };
+        "com/stremio/stremio" = {
+          # hide window decor in stremio-linux-shell
+          no-window-decorations = true;
         };
       };
     }
