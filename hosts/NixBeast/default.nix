@@ -49,5 +49,40 @@ _: {
         Domains = ["doesntcompute.site"];
       };
     };
+    services = {
+      modprobed.enable = true;
+      openLinkHub.enable = true;
+      ssh.enable = true;
+      udisk2.enable = true;
+    };
+    # TODO: change options from ``category.xyz.enable`` to ``category.xyz = true/false`` or ``category = []``
+    cli = {
+      p7z.enable = true;
+      bat.enable = true;
+      btop.enable = true;
+      eza.enable = true;
+      fd.enable = true;
+      fzf.enable = true;
+      kitty.enable = true;
+      ripgrep.enable = true;
+      starship.enable = true;
+      tealdeer.enable = true;
+      trash.enable = true;
+      zoxide.enable = true;
+      zsh.enable = true;
+    };
+    apps = {
+      ios.enable = true;
+      music.enable = true;
+      photo.enable = true;
+      onlyOffice.enable = true;
+      stremio.enable = true;
+      thunderbird.enable = true;
+      zenBrowser.enable = true;
+    };
+    gaming = {
+      general.enable = true;
+      prismLauncher.enable = true;
+    };
   };
 }

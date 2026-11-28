@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   lib,
   ...
@@ -8,7 +7,6 @@
   user = baseNameOf ./.;
   cfg = config.host.system.impermanence;
 in {
-  imports = [inputs.nixos-core.nixosModules.default];
   config = mkIf cfg.enable {
     sys.impermanence = {
       inherit user;
