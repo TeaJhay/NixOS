@@ -4,7 +4,6 @@ Make this an option where users can be declared in a list, and then map each use
 */
 {
   lib,
-  pkgs,
   config,
   inputs,
   self,
@@ -76,28 +75,6 @@ in {
       cfg.users;
     #hostPlatform
     nixpkgs.hostPlatform = cfg.platform;
-    nix.settings = {
-      experimental-features = [
-        "flakes"
-        "nix-command"
-        "pipe-operators"
-      ];
-    };
-    programs = {
-      nh = {
-        enable = true;
-        package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
-        clean = {
-          enable = true;
-          extraArgs = "--keep-since 5d --keep 20";
-        };
-        flake = "/persistent/home/teajhay/nixos"; # sets NH_OS_FLAKE variable for you
-      };
-      tack = {
-        enable = true;
-        nixConfTokens = true;
-      };
-    };
 
     # Hjem files
     hjem = {
