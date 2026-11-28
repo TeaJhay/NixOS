@@ -76,6 +76,13 @@ in {
       cfg.users;
     #hostPlatform
     nixpkgs.hostPlatform = cfg.platform;
+    nix.settings = {
+      experimental-features = [
+        "flakes"
+        "nix-command"
+        "pipe-operators"
+      ];
+    };
     programs = {
       nh = {
         enable = true;
