@@ -64,9 +64,6 @@ exclude_follow = ["nixpkgs"]
 group = "homelab"
 
 #NOTE: Extra utilities
-[inputs.nix-flatpak]
-url = "gh:gmodena/nix-flatpak"
-group = "Extra"
 [inputs.nixos-hardware]
 url = "gh:NixOS/nixos-hardware/master"
 group = "Extra"
