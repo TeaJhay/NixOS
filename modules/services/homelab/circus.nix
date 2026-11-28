@@ -41,7 +41,7 @@ in {
             favicon_url = "https://avatars.githubusercontent.com/u/287464793?s=200&v=4";
           };
           evaluator = {
-            allow_ifd = false;
+            allow_ifd = true;
             strict_errors = true;
             restrict_eval = false;
             nix_timeout = 43200;
