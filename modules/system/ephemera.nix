@@ -103,7 +103,7 @@ in {
           "/var/log"
           "/var/lib/OpenLinkHub"
           {
-            directory = "/etc/nixos";
+            target = "/etc/nixos";
             group = "wheel";
             mode = "0775";
           }
@@ -114,6 +114,9 @@ in {
         };
       };
     };
+    systemd.user.tmpfiles.users.${cfg.user}.rules = [
+      "L %h/.nix-profile - - - - %h/.local/state/nix/profiles/profile"
+    ];
     security.sudo.extraConfig = "Defaults lecture=never";
     systemd.suppressedSystemUnits = ["systemd-machine-id-commit.service"];
   };
