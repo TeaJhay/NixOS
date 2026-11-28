@@ -17,7 +17,7 @@ hl.monitor({
   --disabled = true,
   sdr_min_luminance = 0.005,
   sdr_max_luminance = 203,
-  sdrbrightness = 0.5,
+  sdrbrightness = 0.3,
   sdrsaturation = 1.02,
 })
 

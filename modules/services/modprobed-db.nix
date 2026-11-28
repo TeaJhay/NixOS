@@ -1,32 +1,38 @@
 # NOTE: Should be used with ".local/share/modprobed-db/modprobed.db" persisted
 {
   lib,
-  pkgs,
   config,
+  pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption;
-  inherit (lib.modules) mkIf;
+  inherit (lib) mkDefault mkIf mkMerge;
   cfg = config.sys.services.modprobed;
 in {
-  #options.sys.services.modprobed.enable = mkEnableOption "modprobed-db: kernel module logging service";
-  config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.modprobed-db];
-    systemd.services.modprobed-db-store = {
-      description = "Snapshot currently loaded kernel modules for modprobed-db";
-      path = [pkgs.getent pkgs.gawk];
-      serviceConfig = {
-        ExecStart = "${pkgs.modprobed-db}/bin/modprobed-db storesilent";
-        Type = "oneshot";
+  config = mkMerge [
+    {
+      sys.services.modprobed.enable = mkDefault false;
+    }
+
+    (mkIf cfg.enable {
+      environment.systemPackages = [pkgs.modprobed-db];
+
+      systemd.user.services.modprobed-db-store = {
+        description = "Snapshot currently loaded kernel modules for modprobed-db";
+        path = [pkgs.getent pkgs.gawk];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.modprobed-db}/bin/modprobed-db storesilent";
+        };
       };
-    };
-    systemd.timers.modprobed-db-store = {
-      description = "Timer for modprobed-db snapshot";
-      timerConfig = {
-        OnBootSec = "1min";
-        OnUnitActiveSec = "5min";
+
+      systemd.user.timers.modprobed-db-store = {
+        description = "Timer for modprobed-db snapshot";
+        wantedBy = ["timers.target"];
+        timerConfig = {
+          OnStartupSec = "1min";
+          OnUnitActiveSec = "5min";
+        };
       };
-      wantedBy = ["timers.target"];
-    };
-  };
+    })
+  ];
 }

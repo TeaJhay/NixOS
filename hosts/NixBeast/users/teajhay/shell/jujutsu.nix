@@ -46,7 +46,7 @@
             '';
           };
           revsets = {
-            sign-on-push = true;
+            git-sign-on-push = "~signed() & mine()";
             log = "present(@) | ancestors(immutable_heads().., 10) | trunk()";
           };
           ui = {

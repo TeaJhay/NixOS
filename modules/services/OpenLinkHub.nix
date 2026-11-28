@@ -18,48 +18,51 @@
         cp *.rules $out/lib/udev/rules.d/
       '';
   });
-  inherit (lib) mkEnableOption;
-  inherit (lib.modules) mkIf;
+  inherit (lib) mkDefault mkIf mkMerge;
   cfg = config.sys.services.openLinkHub;
 in {
-  #options.sys.services.openLinkHub.enable = mkEnableOption "OpenLinkHub: Desktop LED manager";
-  config = mkIf cfg.enable {
-    users.users.openlinkhub = {
-      isSystemUser = true;
-      group = "openlinkhub";
-    };
-    users.groups.openlinkhub = {};
-
-    systemd.services.OpenLinkHub = {
-      description = "Open source interface for Corsair iCUE LINK hubs, fans, and AIOs";
-      after = ["sleep.target"];
-      wantedBy = ["multi-user.target"];
-      script = ''
-        for dir in database static web; do
-          if ! [[ -d "$dir" ]]; then
-            echo "Copying static $dir to working directory..."
-            cp -r ${openlinkhub-with-static}/share/OpenLinkHub/$dir .
-            chmod -R u+w $dir
-          fi
-        done
-        exec ${lib.getExe openlinkhub-with-static}
-      '';
-
-      serviceConfig = {
-        User = "openlinkhub";
-        Group = "openlinkhub";
-        RestartSec = 5;
-        StateDirectory = "OpenLinkHub";
-        WorkingDirectory = "/var/lib/OpenLinkHub";
-        ReadWritePaths = ["/var/lib/OpenLinkHub"];
-        Restart = "on-failure";
+  config = mkMerge [
+    {
+      sys.services.openLinkHub.enable = mkDefault false;
+    }
+    (mkIf cfg.enable {
+      users.users.openlinkhub = {
+        isSystemUser = true;
+        group = "openlinkhub";
       };
-      path = [pkgs.pciutils];
-    };
+      users.groups.openlinkhub = {};
 
-    environment.systemPackages = [
-      openlinkhub-with-static
-    ];
-    services.udev.packages = [openlinkhub-with-static];
-  };
+      systemd.services.OpenLinkHub = {
+        description = "Open source interface for Corsair iCUE LINK hubs, fans, and AIOs";
+        after = ["sleep.target"];
+        wantedBy = ["multi-user.target"];
+        script = ''
+          for dir in database static web; do
+            if ! [[ -d "$dir" ]]; then
+              echo "Copying static $dir to working directory..."
+              cp -r ${openlinkhub-with-static}/share/OpenLinkHub/$dir .
+              chmod -R u+w $dir
+            fi
+          done
+          exec ${lib.getExe openlinkhub-with-static}
+        '';
+
+        serviceConfig = {
+          User = "openlinkhub";
+          Group = "openlinkhub";
+          RestartSec = 5;
+          StateDirectory = "OpenLinkHub";
+          WorkingDirectory = "/var/lib/OpenLinkHub";
+          ReadWritePaths = ["/var/lib/OpenLinkHub"];
+          Restart = "on-failure";
+        };
+        path = [pkgs.pciutils];
+      };
+
+      environment.systemPackages = [
+        openlinkhub-with-static
+      ];
+      services.udev.packages = [openlinkhub-with-static];
+    })
+  ];
 }
