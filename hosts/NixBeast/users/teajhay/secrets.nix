@@ -24,7 +24,10 @@ in {
 
     # Add your secrets here...
     secrets = {
-      password.recipients = ["teajhay"];
+      "teajhay/password" = {
+        recipients = ["teajhay"];
+        neededForUsers = true;
+      };
       #teajhay-password.recipients = [ "teajhay" ]; # Per user passwords? but I don't need to have every users secrets on every users machien, only the actual enabledUsers.
       githubSSH = {
         recipients = ["teajhay"];

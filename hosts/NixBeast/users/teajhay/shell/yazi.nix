@@ -7,7 +7,7 @@
   termfilechooser = pkgs.xdg-desktop-portal-termfilechooser;
   filemanager = pkgs.org-freedesktop-filemanager1-common;
 in {
-  environment.systemPackages = [pkgs.xdg-desktop-portal-termfilechooser];
+  environment.systemPackages = [pkgs.yazi pkgs.xdg-desktop-portal-termfilechooser];
   xdg.portal = {
     enable = true;
     # https://github.com/NixOS/nixpkgs/issues/160923

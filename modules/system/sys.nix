@@ -4,6 +4,7 @@ Make this an option where users can be declared in a list, and then map each use
 */
 {
   lib,
+  pkgs,
   config,
   inputs,
   self,
@@ -13,7 +14,7 @@ Make this an option where users can be declared in a list, and then map each use
   inherit (lib.types) enum attrsOf submodule;
   inherit (inputs.findFiles) findFiles;
   cfg = config.sys;
-
+  secrets = config.security.nix-secrets.secrets;
   getUserDotfiles = username: let
     # declares the function "getUserDotfiles" and parameter "username"
     dotfilesDir = "${self}/hosts/${config.system.name}/users/${username}/xdg/"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
@@ -67,13 +68,29 @@ in {
   config = mkIf cfg.enable {
     #System users
     users.users =
-      mapAttrs (_: user: {
+      mapAttrs (name: user: {
         isNormalUser = true;
         extraGroups = lib.optional (user.role == "admin") "wheel";
+        hashedPasswordFile = secrets."${name}/password".path;
       })
       cfg.users;
     #hostPlatform
     nixpkgs.hostPlatform = cfg.platform;
+    programs = {
+      nh = {
+        enable = true;
+        package = inputs.nh.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        clean = {
+          enable = true;
+          extraArgs = "--keep-since 5d --keep 20";
+        };
+        flake = "/persistent/home/teajhay/nixos"; # sets NH_OS_FLAKE variable for you
+      };
+      tack = {
+        enable = true;
+        nixConfTokens = true;
+      };
+    };
 
     # Hjem files
     hjem = {
