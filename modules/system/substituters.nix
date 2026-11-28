@@ -20,9 +20,9 @@ _: let
     }
     {
       # ncro
-      url = "https://ci.manic.systems/nix-cache";
+      url = "https://cache.manic.systems";
       priority = 30;
-      public_key = "ci.manic.systems-1:5EoSMEa0D55JxnmC0yr2L7/2eHr/nHH0XWupc+Z9z88=";
+      public_key = "cache.manic.systems-1:s6OZanN8Us8vRi0jVivP3qlMn0cYHBjBALKrNe5nH8s=";
     }
     # circus
     {

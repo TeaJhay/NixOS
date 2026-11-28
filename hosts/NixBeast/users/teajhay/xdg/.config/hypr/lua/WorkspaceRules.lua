@@ -13,15 +13,14 @@
 -- to trigger an app to be started when a workspace is created, add the workspace ID and exec_cmd command to the table.
 hl.on("workspace.created", function(ws)
   local workspace_programs = {
-    { "special:Vesktop", "vesktop" },
-    { "special:mailbox", "thunderbird" },
-    { "special:Dropdown", "kitty" },
-    { "special:btop", "[tag:specialbtop] kitty btop" },
+    ["special:Vesktop"] = { cmd = "vesktop", opts = nil },
+    ["special:mailbox"] = { cmd = "thunderbird", opts = nil },
+    ["special:Dropdown"] = { cmd = "kitty", opts = nil },
+    ["special:btop"] = { cmd = "kitty btop", opts = { tag = "specialbtop" } },
   }
-  for _, program in ipairs(workspace_programs) do
-    if ws.name == program[1] and ws.is_empty then
-      hl.exec_cmd(program[2])
-    end
+  local program = workspace_programs[ws.name]
+  if program and ws.is_empty then
+    hl.exec_cmd(program.cmd, program.opts)
   end
 end)
 

@@ -17,7 +17,7 @@ Make this an option where users can be declared in a list, and then map each use
   secrets = config.security.nix-secrets.secrets;
   getUserDotfiles = username: let
     # declares the function "getUserDotfiles" and parameter "username"
-    dotfilesDir = "${self}/hosts/${config.system.name}/users/${username}/xdg/"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
+    dotfilesDir = "${self}/hosts/${config.system.name}/users/${username}/xdg"; # sets the users dotfilees directory using the previously declared usersDir plus the structured path with their username as the parameter given by calling function.
   in
     if builtins.pathExists dotfilesDir # checks if the path exists
     then findFiles dotfilesDir # uses findFiles to return every file in the users dotfiles directory
@@ -114,7 +114,7 @@ in {
           impure = {
             enable = true;
             dotsDir = "${self}/hosts/${config.system.name}/users/${name}/xdg";
-            dotsDirImpure = "${self}/hosts/${config.system.name}/users/${name}/xdg";
+            dotsDirImpure = "/persistent/home/teajhay/nixos/hosts/${config.system.name}/users/${name}/xdg";
           };
           clobberFiles = true;
           rum.programs = {
