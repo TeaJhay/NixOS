@@ -26,7 +26,7 @@ _: let
     }
     # circus
     {
-      url = "https://cache.doesntcompute.site";
+      url = "https://cache.doesntcompute.site/nix-cache";
       priority = 60;
       public_key = "cache.doesntcompute.site-1:cTv/ePA602QGzUci4rMdYGkuS4LA0NzEjoWnaHAwvAg=";
     }

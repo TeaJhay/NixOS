@@ -26,7 +26,6 @@ in {
           [
             {config.networking.hostName = host;}
             (self + "/modules")
-            (self + "/Temp")
           ]
           ++ (
             assimilate (self + "/hosts/${host}")

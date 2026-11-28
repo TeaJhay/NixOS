@@ -57,7 +57,7 @@ in {
       description = "Allow unfree software on this host";
     };
     services = mkOption {
-      description = "Users on this host";
+      description = "Services on this host";
       type = attrsOf (submodule {
         options.enable = mkEnableOption "Enable this service";
       });
@@ -93,6 +93,15 @@ in {
             dotsDirImpure = "${self}/hosts/${config.system.name}/users/${name}/xdg";
           };
           clobberFiles = true;
+          rum.programs = {
+            direnv = {
+              enable = true;
+              integrations = {
+                zsh.enable = true;
+                nix-direnv.enable = true;
+              };
+            };
+          };
         })
         cfg.users;
     };
